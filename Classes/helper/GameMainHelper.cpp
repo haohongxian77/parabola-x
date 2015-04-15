@@ -1,0 +1,275 @@
+//
+//  GameMainHelper.cpp
+//  GWPJUMP
+//
+//  Created by 易水流年 on 3/22/15.
+//
+//
+
+#include "GameMainHelper.h"
+#include "gamescene/GameMainLayer.h"
+#include "CalculateHelper.h"
+#include <stdlib.h>
+#include <time.h>
+#define minHei 2
+#define maxHei 5
+#define SCREEN_DE_COUNT 8   //屏幕划分的单位
+
+
+#define MAX_TOUCH_W 5
+#define MIN_TOUCH_W 2   //抛物线点击点和起始点最大具体和最小具体   以柱子宽为单位
+
+#define MAX_TOUCH_H 7 //  抛物线点得最高点
+#define MIN_TOUCH_H 0.5f  //  抛物线点 距离起始点 最小的距离差
+
+GameMainHelper* GameMainHelper::mainHelper = NULL;
+
+GameMainHelper::GameMainHelper()
+{
+}
+
+GameMainHelper::~GameMainHelper(){
+    if (m_posts) {
+        CC_SAFE_RELEASE_NULL(m_posts);
+    }
+}
+
+GameMainHelper* GameMainHelper::getInstance(){
+    if (!mainHelper) {
+        mainHelper = new GameMainHelper();
+        mainHelper->initDate();
+        
+    }
+    return  mainHelper;
+}
+
+void GameMainHelper::initDate(){
+    Size winSize = Director::getInstance()->getWinSize();
+    srand((unsigned)time(NULL));
+    
+    m_spilesNode = Node::create();
+    m_spilesNode->setAnchorPoint(Vec2(0,0));
+    m_spilesNode->setPosition(Vec2(0, 0));
+    
+    m_unitH = winSize.height/SCREEN_DE_COUNT;
+    Texture2D* tex = Director::getInstance()->getTextureCache()->addImage("spile.png");
+    m_unitW = tex->getContentSize().width;
+    
+    m_posts = __Array::create();
+    m_posts->retain();
+    
+}
+void GameMainHelper::initJumpDate(){
+    if (m_collectIndex == -1) {
+        m_startIndex =0;
+    }else{
+        m_startIndex = m_collectIndex;
+    }
+}
+void GameMainHelper::initPosts(){
+    float posX = 0.0f;
+    Size winSize = Director::getInstance()->getWinSize();
+    if (m_posts->count() == 0) {
+        posX = -1*m_Layer->getPositionX()+100;
+    }else{
+        Sprite* sp = (Sprite*)m_posts->getLastObject();
+        posX = sp->getPositionX();
+    }
+    while (posX+m_Layer->getPositionX()<winSize.width*3) {
+    //while (m_posts->count()<50) {
+        Point curPos = addPosts(posX);
+        posX = curPos.x;
+        
+    }
+}
+int GameMainHelper::getEarthH(){
+    return m_EarthH;
+}
+MonsterSpile* GameMainHelper::getCollectSp(){
+    if (m_collectIndex == -1) {
+        return NULL;
+    }
+    return (MonsterSpile*)m_posts->getObjectAtIndex(m_collectIndex);
+}
+Point GameMainHelper::addPosts(float perPointX){
+    MonsterSpile* monspile = MonsterSpile::create(0);
+  
+    monspile->setAnchorPoint(Vec2(0,1));
+    //m_Layer->addChild(monspile);
+    Size spSize = monspile->getContentSize();
+
+    Size winSize = Director::getInstance()->getWinSize();
+    
+    Point pos;
+
+    
+    if (m_posts->count()==0) {
+        float x = 30.0f;
+         int Hregion = rand()%(maxHei-minHei+1)+minHei;
+        int randHeiInregion = rand()%((int)winSize.height/SCREEN_DE_COUNT); //
+         pos= Point(x,randHeiInregion+Hregion*winSize.height/SCREEN_DE_COUNT);
+       
+    }else{
+        Sprite* perSp = (Sprite*)m_posts->getObjectAtIndex(m_posts->count()-1);
+        
+        pos = getNextPoint(perSp->getPosition());
+        
+    }
+//    int randY =rand();
+//    float y = m_minHeight+randY%(m_maxHeight- m_minHeight+1);
+//     //
+//    Point pos = Vec2(perPointX+x, y- spSize.height);
+    monspile->setPosition(pos);
+    CCLOG("x ======%f   y =====%f",pos.x,pos.y);
+    m_spilesNode->addChild(monspile);
+    m_posts->addObject(monspile);
+    return pos;
+}
+
+//Point GameMainHelper::getTouchPoint(Point beginPoint){
+//    float Dx = rand()%(MAX_Touch_W*m_unitW-MIN_Touch_W*m_unitW+1)+MIN_Touch_W*m_unitW;
+//    int maxDH = m_unitH*MAX_Touch_H - beginPoint.y;
+//    int randY = rand();
+//    int  paramY= MAX(abs(maxDH-MIN_Touch_H*m_unitH+1),1);
+//    float Dy =randY%paramY+MIN_Touch_H*m_unitH;
+//    CCLOG("getTouchPoint========%f  ============%f",beginPoint.x+Dx,beginPoint.y+Dy);
+//    return Point(beginPoint.x+Dx,beginPoint.y+Dy);
+//    
+//    
+//}
+Point GameMainHelper::getNextPoint(Point perPoint){
+    Point touPoint = getTouchPoint(perPoint);
+    //获取抛物线参数
+    std::vector<float> params = CalculateHelper::getPathParametersXABC(Vec2(0,0), Vec2(touPoint.x-perPoint.x,touPoint.y-perPoint.y));
+    //下一个点的位置
+    CCLOG("参数＝＝＝＝＝%f＝＝＝%f＝＝＝%f",params[0],params[1],params[2]);
+    CCLOG("触摸点＝＝＝＝＝%f＝＝＝%f",touPoint.x,touPoint.y);
+    CCLOG("前一个点＝＝＝＝＝%f＝＝＝%f",perPoint.x,perPoint.y);
+    
+    float x = getNextPointX(touPoint,perPoint);
+    float dy = CalculateHelper::getPathABC(x-perPoint.x, params);
+    float y = dy+perPoint.y;
+    
+    if (m_posts->count()>=2) {
+        Sprite* perSp2 = (Sprite*)m_posts->getObjectAtIndex(m_posts->count()-2);
+        if (perPoint.y == perSp2->getPositionY()) {
+            while (perSp2->getPositionY() == y) {
+                x = getNextPointX(touPoint, perPoint);
+                dy = CalculateHelper::getPathABC(x-perPoint.x, params);
+                y = dy+perPoint.y;
+                CCLOG("前有两个相同高的点＝＝＝＝＝%f＝＝＝%f===%f",x,y,dy);
+            }
+        }
+    }
+    CCLOG("两个点＝＝＝%f＝＝＝%f",x,y);
+    if (y>maxHei*m_unitH||y<minHei*m_unitH) {
+        CCLOG("高出了范围＝＝＝＝＝%f＝＝＝%f",x,y);
+        return getNextPoint(perPoint);
+    }
+    CCLOG("正常输出一个***************************%f***********************%f",x,y);
+    return Point(x, y);
+}
+float GameMainHelper::getNextPointX(Point touchPoint, Point perPoint){
+    int DW = (touchPoint.x-perPoint.x)/m_unitW+1;//距离起始点的单位宽
+    int perRegion = MAX(perPoint.y/m_unitH+1,minHei);
+    int touchRegion = MAX(touchPoint.y/m_unitH+1, minHei);
+    
+    
+    int maxDw = (touchRegion-perRegion)+2*DW;
+    
+    float dx = rand()%(int)(maxDw*m_unitW-DW*m_unitW+1)+DW*m_unitW;
+    CCLOG("dx====%f   maxDw===%d  DW====%d   m_unitW===%d  m_unitH=%d",dx,maxDw,DW,m_unitW,m_unitH);
+    return perPoint.x+dx;
+}
+Point GameMainHelper::getTouchPoint(Point perPoint){
+    float DX = rand()%((int)(MAX_TOUCH_W*m_unitW-MIN_TOUCH_W*m_unitW+1))+MIN_TOUCH_W*m_unitW;
+    float y = rand()%(int)(MAX_TOUCH_H*m_unitH-(perPoint.y+MIN_TOUCH_H*m_unitH)+1)+perPoint.y+MIN_TOUCH_H*m_unitH;
+    
+    return Point(perPoint.x+DX, y);
+    
+    
+}
+
+void GameMainHelper::atachLayer(GameMainLayer *layer){
+    m_Layer = layer;
+    m_Layer->addChild(m_spilesNode);
+}
+CollisionType GameMainHelper::isCollisionPosts(){
+    CollisionType c_Type = Collision_None;
+    for (int i=0; i<m_posts->count(); i++) {
+       
+        CCLOG("=======================================%d",i);
+        MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
+        Point heroPoint  = m_Hero->getPosition();
+        Size heroSize = m_Hero->getContentSize();
+        //如果具体远不做碰撞检测
+        if (i==m_startIndex||abs(sp->getPositionX()-heroPoint.x)>heroSize.width*2) {
+            continue;
+        }
+        
+        
+        Rect heroRect = Rect(heroPoint.x-heroSize.width/2, heroPoint.y-heroSize.height/2, heroSize.width, heroSize.height/8);
+        c_Type =  sp->getValid(heroRect);
+        if(c_Type == Collision_None){
+            
+        }else {
+            m_collectIndex = i;
+            return c_Type;
+        }
+    }
+                                             
+    return c_Type;
+}
+void GameMainHelper::setHero(HeroFrog *hero){
+    m_Hero = hero;
+    Size s = Director::getInstance()->getWinSize();
+    //m_spilesNode->runAction(Follow::create(hero,Rect(0, 0, 0, s.height)));
+}
+bool GameMainHelper::updateHelper(float dt,Point ds){
+    Size s= Director::getInstance()->getWinSize();
+    if (m_Hero->getPositionX()+m_Layer->getPositionX()>s.width*3/4&&m_Layer->getNumberOfRunningActions()==0) {
+        movingLayer();
+    }
+    CollisionType m_Type = isCollisionPosts();
+    if (m_Type == Collision_valid) {
+        m_Hero->setHeroStatus(frogFall);
+        
+    }else if(m_Type == Collision_Dead ){
+        m_Hero->setHeroStatus(frogDead1);
+    }else if(m_Hero->getPositionY()<10){
+        m_Hero->setHeroStatus(frogDead2);
+    }else{
+        return true;
+        
+    }
+    return false;
+    
+}
+void GameMainHelper::movingLayer(){
+    float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-30;
+    MoveBy* moveBY = MoveBy::create(4, Vec2(-dx, 0));
+    m_Layer->runAction(moveBY);
+    
+    
+}
+void GameMainHelper::managePost(){
+    for (long int i=m_posts->count()-1; i>0; i--) {
+        Sprite* curSp =(Sprite*)m_posts->getObjectAtIndex(i);
+        Point postPoint = curSp->getPosition();
+        if (postPoint.x+m_Layer->getPositionX()<0) {
+            m_posts->removeObject(curSp);
+        }
+        
+    }
+    initPosts();
+}
+
+
+
+
+
+
+
+
+
+
