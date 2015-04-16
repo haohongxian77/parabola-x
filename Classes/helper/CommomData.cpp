@@ -7,3 +7,5 @@
 //
 
 #include "CommomData.h"
+#define TouchDeMenu   -99
+

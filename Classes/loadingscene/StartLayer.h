@@ -26,21 +26,17 @@ private:
     Sprite* m_spG = NULL;
     Sprite* m_spW = NULL;
     Sprite* m_spS = NULL;
-    Node* m_spGWSNode = NULL;
+    //Node* m_spGWSNode = NULL;
     
     Sprite* m_spHero = NULL;
     Sprite* m_spGWS = NULL;
 
 private:
-    void acFirstSp();
-    void acSecondSp();
-    void acThirdSp();
-    void acHeroSp();
     void acGWSSp();
     
     void changeScene();
-    Action* getFallDownAC(Action* ac);
-    void getShakeAction();
+//    Action* getFallDownAC(Action* ac);
+//    void getShakeAction();
     
 public:
     virtual void onEnter();

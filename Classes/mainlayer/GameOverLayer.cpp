@@ -7,3 +7,9 @@
 //
 
 #include "GameOverLayer.h"
+bool GameOverLayer::init(){
+    if (Layer::init()) {
+        return true;
+    }
+    return false;
+}

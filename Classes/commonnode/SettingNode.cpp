@@ -7,6 +7,7 @@
 //
 
 #include "SettingNode.h"
+#include "commonnode/HMenu.h"
 SettingNode::SettingNode(){
 }
 SettingNode::~SettingNode(){
@@ -31,10 +32,17 @@ void SettingNode::initBg(){
 void SettingNode::initMenu(){
     Size size = bg->getContentSize();
     
-    auto item1 = MenuItemImage::create("menu/menu_open.png", "menu/menu_open.png", CC_CALLBACK_1(SettingNode::menuMusic, this) );
+    auto item1 = MenuItemToggle::createWithCallback( CC_CALLBACK_1(SettingNode::menuMusic, this),
+                HMenu::create("menu_close.png","menu_open.png"),
+                HMenu::create("menu_close.png","menu_open.png"), nullptr );
+    
+//    auto item1 = MenuItemImage::create("menu_close.png", "menu_open.png", CC_CALLBACK_1(SettingNode::menuMusic, this) );
     item1->setAnchorPoint(Vec2(1,0.5));
     item1->setPosition(Vec2(size.width*3/4-5, size.height*3/4-10));
-    auto item2 = MenuItemImage::create("menu/menu_open.png", "menu/menu_open.png", CC_CALLBACK_1(SettingNode::menuSound, this) );
+    auto item2 = MenuItemToggle::createWithCallback( CC_CALLBACK_1(SettingNode::menuSound, this),
+                HMenu::create("menu_close.png","menu_open.png"),
+                HMenu::create("menu_close.png","menu_open.png"), nullptr );
+//    auto item2 = MenuItemImage::create("menu_close.png", "menu_open.png", CC_CALLBACK_1(SettingNode::menuSound, this) );
     item2->setAnchorPoint(Vec2(1,0.5));
     item2->setPosition(Vec2(size.width*3/4-5, size.height/4+10));
     
