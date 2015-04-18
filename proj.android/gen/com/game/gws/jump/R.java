@@ -15,5 +15,11 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f030000;
+        public static final int weibosdk__not_support_api_hint=0x7f030004;
+        public static final int weibosdk_toast_share_canceled=0x7f030003;
+        public static final int weibosdk_toast_share_failed=0x7f030002;
+        /**  sina  start 
+         */
+        public static final int weibosdk_toast_share_success=0x7f030001;
     }
 }
