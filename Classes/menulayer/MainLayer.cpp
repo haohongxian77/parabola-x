@@ -10,6 +10,7 @@
 #include "commonnode/SettingNode.h"
 #include "commonnode/ShareNode.h"
 #include "commonnode/HMenu.h"
+#include "helper/CommomData.h"
 #define menuStartTag 1
 MainLayer::MainLayer(){
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("menus.plist", "menus.png");
@@ -29,6 +30,9 @@ MainLayer* MainLayer::create(gameStatus status){
     
     return NULL;
 }
+bool MainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
+    return  true;
+}
 void MainLayer::initOtherMenu(gameStatus status){
     if (status == Tag_GameStart) {
         m_logoLayer = GameMainLogoLayer::create();
@@ -44,19 +48,38 @@ bool MainLayer::init(){
         
         initBg();
         initMenu();
-//        initHero();
-//        initLogo();
-        
-//        acHero();
-//        acLogo();
-        
         return true;
     }
     return false;
 }
+void MainLayer::onEnter(){
+    Layer::onEnter();
+    auto listener = EventListenerTouchOneByOne::create();
+    listener->setSwallowTouches(true);
+    listener->onTouchBegan = CC_CALLBACK_2(MainLayer::onTouchBegan, this);
+    _eventDispatcher->addEventListenerWithSceneGraphPriority  (listener,this );
+    
+    Size winSize = Director::getInstance()->getWinSize();
+    this->setPositionY(winSize.height);
+    MoveTo* moveTo = MoveTo::create(0.5f,
+                                    Point(
+                                          this->getPositionX(),
+                                          this->getPositionY() -winSize.height-70));
+    MoveTo* moveTo2 = MoveTo::create(0.2f,
+                                    Point(
+                                          this->getPositionX(),
+                                          0));
+    EaseSineIn* easeBack = EaseSineIn::create(moveTo);
+    Sequence* seq = Sequence::create(easeBack,moveTo2, NULL);
+    this->runAction(seq);
+}
+void MainLayer::onExit(){
+    _eventDispatcher->removeEventListenersForTarget(this);
+}
+
 void MainLayer::initBg(){
     Size size = Director::getInstance()->getWinSize();
-    LayerColor* layerCol = LayerColor::create(Color4B(169,169,169,125));
+    LayerColor* layerCol = LayerColor::create(Color4B(0,0,0,125));
     this->addChild(layerCol);
     
 }
@@ -92,32 +115,23 @@ void MainLayer::initMenu(){
     m_menu->setPosition(Vec2(0,0));
     
 }
-//void MainLayer::acHero(){
-//    Size winSize = Director::getInstance()->getWinSize();
-//    MoveTo* moveTo = MoveTo::create(0.4, Point(m_hero->getPositionX(), m_hero->getContentSize().height/2));
-//    Sequence* seq = Sequence::create(DelayTime::create(0.5),moveTo,CallFunc::create(CC_CALLBACK_0(MainLayer::acMenu, this)), NULL);
-//    m_hero->runAction(seq);
-//    
-//    
-//}
-//void MainLayer::acLogo(){
-//    Size winSize = Director::getInstance()->getWinSize();
-//    MoveTo* moveTo = MoveTo::create(0.1, Point(m_logo->getPositionX(),winSize.height-m_logo->getContentSize().height*3/4));
-//    Sequence* seq = Sequence::create(DelayTime::create(0.8), moveTo, NULL);
-//    m_logo->runAction(seq);
-//}
-//void MainLayer::acMenu(){
-//    Node* startMenu = m_menu->getChildByTag(menuStartTag);
-//    MoveTo* moveTo = MoveTo::create(0.4, Point(m_hero->getPositionX(),startMenu->getPositionY()+ m_hero->getContentSize().height/2/0.7));
-//    m_hero->runAction(moveTo);
-//    
-//    MoveTo* moveTo2 = MoveTo::create(0.4, Point(0,0));
-//    m_menu->runAction(moveTo2);
-//    
-//    
-//}
+
 void MainLayer::menuStart(Ref* sender){
-    log("开始");
+    Size winSize = Director::getInstance()->getWinSize();
+    MoveTo* moveTo2 = MoveTo::create(0.2f,
+                                    Point(
+                                          this->getPositionX(),
+                                          -70));
+    MoveTo* moveTo = MoveTo::create(0.5f,
+                                        Point(
+                                                this->getPositionX(),
+                                                winSize.height));
+    EaseSineOut* easeBack = EaseSineOut::create(moveTo);
+    Sequence* seq = Sequence::create(moveTo2,easeBack,DelayTime::create(0.5f),CallFunc::create(CC_CALLBACK_0(MainLayer::callback, this)), NULL);
+    this->runAction(seq);
+}
+void MainLayer::callback(){
+    this->removeFromParentAndCleanup(true);
 }
 void MainLayer::menuShare(cocos2d::Ref *sender){
     if (m_shareNode) {

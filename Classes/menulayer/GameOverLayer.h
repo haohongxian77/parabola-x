@@ -13,7 +13,10 @@
 #include "cocos2d.h"
 using namespace cocos2d;
 class GameOverLayer :public Layer{
+private:
     bool init();
+    void initBg();
+    void initScore();
 public:
     CREATE_FUNC(GameOverLayer);
 };

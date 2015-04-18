@@ -7,7 +7,7 @@
 //
 
 #include "StartLayer.h"
-#include "mainlayer/MainLayer.h"
+#include "gamelayer/GameMainLayer.h"
 #include "gamescene/GameMainScene.h"
 #define speed 0.05f
 #define wordDelayTime 0.1
@@ -98,8 +98,8 @@ void StartLayer::acGWSSp(){
 void StartLayer::changeScene(){
     Size winSize = Director::getInstance()->getWinSize();
     Scene* sc = GameMainScene::createWithTag(Tag_GameStart);
-    TransitionSlideInT *transitionScene = TransitionSlideInT::create(0.25,sc);
-    Director::getInstance()->pushScene(transitionScene);
+    //TransitionSlideInT *transitionScene = TransitionSlideInT::create(0.25,sc);
+    Director::getInstance()->replaceScene(sc);
 }
 void StartLayer::initHero(){
     Size winSize = Director::getInstance()->getWinSize();

@@ -10,7 +10,8 @@
 #define __GWPJUMP__CommomData__
 
 #include <stdio.h>
-#define TOUCHLEV_TOPLAYER -99
+#define TOUCHLEV_GAME -1
+#define TouchLEV_Menu   -10
 class CommomData{
     
 };
