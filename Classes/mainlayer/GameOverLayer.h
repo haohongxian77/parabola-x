@@ -10,5 +10,12 @@
 #define __GWPJUMP__GameOverLayer__
 
 #include <stdio.h>
+#include "cocos2d.h"
+using namespace cocos2d;
+class GameOverLayer :public Layer{
+    bool init();
+public:
+    CREATE_FUNC(GameOverLayer);
+};
 
 #endif /* defined(__GWPJUMP__GameOverLayer__) */

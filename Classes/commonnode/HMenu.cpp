@@ -95,17 +95,17 @@ bool HMenu::initWithNormalImage(const std::string& normalImage, const std::strin
     
     if (normalImage.size() >0)
     {
-        normalSprite = Sprite::create(normalImage);
+        normalSprite = Sprite::createWithSpriteFrameName(normalImage);
     }
     
     if (selectedImage.size() >0)
     {
-        selectedSprite = Sprite::create(selectedImage);
+        selectedSprite = Sprite::createWithSpriteFrameName(selectedImage);
     }
     
     if(disabledImage.size() >0)
     {
-        disabledSprite = Sprite::create(disabledImage);
+        disabledSprite = Sprite::createWithSpriteFrameName(disabledImage);
     }
     return initWithNormalSprite(normalSprite, selectedSprite, disabledSprite, callback);
 }

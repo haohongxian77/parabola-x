@@ -11,18 +11,25 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
+#include "mainlayer/GameMainLogoLayer.h"
+#include "mainlayer/GameOverLayer.h"
 using namespace cocos2d;
+typedef enum{
+    Tag_GameStart,
+    Tag_GameOver,
+    
+}gameStatus;
 class MainLayer :public Layer{
     MainLayer();
     ~MainLayer();
 public:
-    CREATE_FUNC(MainLayer);
+    static MainLayer* create(gameStatus status);
+    //CREATE_FUNC(MainLayer);
     bool init();
 private:
+    void initOtherMenu(gameStatus status);
     void initBg();
-    void initLogo();
     void initMenu();
-    void initHero();
     
     
 //    void acLogo();
@@ -38,6 +45,9 @@ private:
     Sprite* m_hero = NULL;
     Node* m_menu = NULL;
     Node* m_shareNode = NULL;
+    
+    GameMainLogoLayer* m_logoLayer;
+    GameOverLayer* m_gameOverLayer;
 };
 
 #endif /* defined(__GWPJUMP__MainLayer__) */

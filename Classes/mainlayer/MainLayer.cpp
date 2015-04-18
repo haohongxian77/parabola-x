@@ -12,24 +12,40 @@
 #include "commonnode/HMenu.h"
 #define menuStartTag 1
 MainLayer::MainLayer(){
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("menus.plist", "menus.png");
 
 }
 MainLayer::~MainLayer(){
 
     SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("loadinglayer.plist");
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("menus.plist");
 }
-//Scene* MainLayer::createMainScene(){
-//    Scene* scene_ = Scene::create();
-//    MainLayer* mLayer = MainLayer::create();
-//    scene_->addChild(mLayer);
-//    return scene_;
-//}
+MainLayer* MainLayer::create(gameStatus status){
+    MainLayer* layer = new MainLayer();
+    if (layer->init()) {
+        layer->initOtherMenu(status);
+        return layer;
+    }
+    
+    return NULL;
+}
+void MainLayer::initOtherMenu(gameStatus status){
+    if (status == Tag_GameStart) {
+        m_logoLayer = GameMainLogoLayer::create();
+        this->addChild(m_logoLayer,1);
+        
+    }else if (status == Tag_GameOver){
+        m_gameOverLayer = GameOverLayer::create();
+        this->addChild(m_gameOverLayer,1);
+    }
+}
 bool MainLayer::init(){
     if (Layer::init()) {
+        
         initBg();
         initMenu();
-        initHero();
-        initLogo();
+//        initHero();
+//        initLogo();
         
 //        acHero();
 //        acLogo();
@@ -40,42 +56,31 @@ bool MainLayer::init(){
 }
 void MainLayer::initBg(){
     Size size = Director::getInstance()->getWinSize();
-    
-    Sprite* spBg_ = Sprite::create("main_bg.jpg");
-    spBg_ ->setPosition(size.width/2, size.height/2);
-    addChild(spBg_);
+    LayerColor* layerCol = LayerColor::create(Color4B(169,169,169,125));
+    this->addChild(layerCol);
     
 }
-void MainLayer::initHero(){
-    Size size = Director::getInstance()->getWinSize();
-    
-    m_hero = Sprite::createWithSpriteFrameName("loading_hero.png");
-//    m_hero ->setPosition(size.width/2, size.height+m_hero->getContentSize().height/2);
-    Node* startMenu = m_menu->getChildByTag(menuStartTag);
-    m_hero ->setPosition(size.width/2,startMenu->getPositionY()+ m_hero->getContentSize().height/2/0.8);
-        m_hero->setScale(0.7f);
-    addChild(m_hero);
-}
-void MainLayer::initLogo(){
-    Size size = Director::getInstance()->getWinSize();
-    
-    m_logo = Sprite::create("main_gamename.png");
-    m_logo->setAnchorPoint(Vec2(0.5f, 0.5f));
-//    m_logo ->setPosition(size.width/2, size.height+m_logo->getContentSize().height/2);
-    m_logo ->setPosition(size.width/2, size.height-m_logo->getContentSize().height*3/4);
-    addChild(m_logo);
-}
+//void MainLayer::initHero(){
+//    Size size = Director::getInstance()->getWinSize();
+//    
+//    m_hero = Sprite::createWithSpriteFrameName("loading_hero.png");
+////    m_hero ->setPosition(size.width/2, size.height+m_hero->getContentSize().height/2);
+//    Node* startMenu = m_menu->getChildByTag(menuStartTag);
+//    m_hero ->setPosition(size.width/2,startMenu->getPositionY()+ m_hero->getContentSize().height/2/0.8);
+//        m_hero->setScale(0.7f);
+//    addChild(m_hero);
+//}
 void MainLayer::initMenu(){
     Size size = Director::getInstance()->getWinSize();
  
-    auto item1 = HMenu::create("menu/main_rank.png", "menu/main_rank1.png", CC_CALLBACK_1(MainLayer::menuRank, this) );
+    auto item1 = HMenu::create("main_rank.png", "main_rank1.png", CC_CALLBACK_1(MainLayer::menuRank, this) );
     item1->getNormalImage()->setAnchorPoint(Vec2(0.5f, 0.5f));
     item1->setPosition(Vec2(size.width/4+item1->getContentSize().width, size.height/4+item1->getContentSize().height/4));
-    auto item2 = HMenu::create("menu/main_setting.png", "menu/main_setting1.png", CC_CALLBACK_1(MainLayer::menuSet, this) );
+    auto item2 = HMenu::create("main_setting.png", "main_setting1.png", CC_CALLBACK_1(MainLayer::menuSet, this) );
     item2->setPosition(Vec2(size.width/2, size.height/4+item2->getContentSize().height/4));
-    auto item3 = HMenu::create("menu/main_share.png", "menu/main_share1.png", CC_CALLBACK_1(MainLayer::menuShare, this) );
+    auto item3 = HMenu::create("main_share.png", "main_share1.png", CC_CALLBACK_1(MainLayer::menuShare, this) );
     item3->setPosition(Vec2(size.width*3/4-item3->getContentSize().width, size.height/4+item3->getContentSize().height/4));
-    auto item4 = HMenu::create("menu/main_start.png", "menu/main_start1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
+    auto item4 = HMenu::create("main_start.png", "main_start1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
     item4->setTag(menuStartTag);
     item4->setPosition(Vec2(size.width/2, size.height/2+item4->getContentSize().height/4));
     
