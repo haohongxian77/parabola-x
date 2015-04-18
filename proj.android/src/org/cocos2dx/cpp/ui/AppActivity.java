@@ -27,6 +27,7 @@ THE SOFTWARE.
 package org.cocos2dx.cpp.ui;
 
 import org.cocos2dx.cpp.share.SinaClient;
+import org.cocos2dx.cpp.share.TencentClient;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
@@ -38,18 +39,20 @@ import com.sina.weibo.sdk.api.share.IWeiboHandler;
 public class AppActivity extends Cocos2dxActivity implements
 		IWeiboHandler.Response {
 	/**
-	 * 分享 qq,不需要确定包名和签名 wx,需要确定包名和签名 facebook需要确定包名和签名（测试签名和正式签名）
+	 * wx,需要确定包名和签名 facebook需要确定包名和签名（测试签名和正式签名）
 	 */
 	private SinaClient sinaClient;
+	private TencentClient tencentClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		sinaClient = new SinaClient(this);
-		if (null != savedInstanceState) {
-			sinaClient.handleWeiboResponse(getIntent(), this);
-		}
+		// if (null != savedInstanceState) {
+		// sinaClient.handleWeiboResponse(getIntent(), this);
+		// }
+		tencentClient = new TencentClient(this);
 	}
 
 	@Override
@@ -98,6 +101,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
+		tencentClient.onActivityResult(requestCode, resultCode, data);
 	}
 
 }

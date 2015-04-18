@@ -6,5 +6,7 @@
 	<classpathentry kind="src" path="cocos"/>
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
+	<classpathentry kind="lib" path="libs/open_sdk.jar"/>
+	<classpathentry kind="lib" path="libs/mta-sdk-1.0.0.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
