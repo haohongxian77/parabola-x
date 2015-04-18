@@ -33,16 +33,22 @@ import android.os.Bundle;
 
 import com.game.gws.jump.share.SinaClient;
 import com.game.gws.jump.share.TencentClient;
+import com.game.gws.jump.share.WxClient;
+import com.game.gws.jump.wxapi.WXManager;
+import com.game.gws.jump.wxapi.WXManager.OnWxListener;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
+import com.tencent.mm.sdk.modelbase.BaseReq;
+import com.tencent.mm.sdk.modelbase.BaseResp;
 
 public class AppActivity extends Cocos2dxActivity implements
-		IWeiboHandler.Response {
+		IWeiboHandler.Response, OnWxListener {
 	/**
 	 * wx,需要确定包名和签名 facebook需要确定包名和签名（测试签名和正式签名）
 	 */
 	private SinaClient sinaClient;
 	private TencentClient tencentClient;
+	private WxClient wxClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +59,8 @@ public class AppActivity extends Cocos2dxActivity implements
 		// sinaClient.handleWeiboResponse(getIntent(), this);
 		// }
 		tencentClient = new TencentClient(this);
+		wxClient = new WxClient(this);
+		WXManager.getInstance().registerWxListener(this);
 	}
 
 	@Override
@@ -85,6 +93,13 @@ public class AppActivity extends Cocos2dxActivity implements
 	}
 
 	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		WXManager.getInstance().unRegisterWxListener(this);
+	}
+
+	@Override
 	protected void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
@@ -102,6 +117,24 @@ public class AppActivity extends Cocos2dxActivity implements
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
 		tencentClient.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	public void onResp(BaseResp resp) {
+		// TODO Auto-generated method stub
+		wxClient.handleResp(resp);
+	}
+
+	@Override
+	public void onReq(BaseReq req) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public boolean shouldUnRegisterAfterResp() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }

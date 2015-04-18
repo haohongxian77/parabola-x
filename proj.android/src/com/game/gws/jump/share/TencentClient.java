@@ -65,7 +65,8 @@ public class TencentClient {
 				@Override
 				public void onComplete(Object arg0) {
 					// TODO Auto-generated method stub
-
+					Toast.makeText(mActivity.getApplicationContext(), "分享成功",
+							Toast.LENGTH_SHORT).show();
 				}
 
 				@Override
