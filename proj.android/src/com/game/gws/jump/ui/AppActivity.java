@@ -24,15 +24,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  ****************************************************************************/
-package org.cocos2dx.cpp.ui;
+package com.game.gws.jump.ui;
 
-import org.cocos2dx.cpp.share.SinaClient;
-import org.cocos2dx.cpp.share.TencentClient;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.game.gws.jump.share.SinaClient;
+import com.game.gws.jump.share.TencentClient;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 

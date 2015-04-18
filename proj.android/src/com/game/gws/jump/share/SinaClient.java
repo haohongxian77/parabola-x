@@ -6,7 +6,7 @@
  * @date 2015年4月18日 上午10:59:01 
  * @version V1.0.0   
  */
-package org.cocos2dx.cpp.share;
+package com.game.gws.jump.share;
 
 import android.app.Activity;
 import android.content.Intent;
