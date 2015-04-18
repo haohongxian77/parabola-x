@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GwsJump</string>
+    <!-- sina  start -->
+    <string name="weibosdk_toast_share_success">分享成功</string>
+    <string name="weibosdk_toast_share_failed">分享失败</string>
+    <string name="weibosdk_toast_share_canceled">取消分享</string>
+    <string name="weibosdk__not_support_api_hint">微博客户端不支持 SDK 分享或微博客户端未安装或微博客户端是非官方版本。</string>
+    <!-- sina  end -->
 </resources>
