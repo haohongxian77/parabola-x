@@ -10,6 +10,7 @@
 #define __GwsJump__HPlatformHelper__
 
 #include <stdio.h>
+#include "cocos2d.h"
 class HPlatformHelper {
     HPlatformHelper();
     ~HPlatformHelper();

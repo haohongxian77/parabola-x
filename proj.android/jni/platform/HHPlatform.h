@@ -35,22 +35,16 @@ public:
 	HHIAPServiceDelegate() {}
 
     ~HHIAPServiceDelegate() {}
-
-//	virtual void OnHHPurchaseNotify(int errorCode,std::string errorInfos,PurchaseInfo purInfo){};
-//	virtual void OnHHLoginNotify(){};
-//	virtual void OnHHInitGoogle(){};       //��ʼ���ȸ����
-//	virtual void OnHHPurchaseFinish(){};     //�������
 };
 
-class HHPlatform :public CCObject ,public HHIAPServiceDelegate
+class HHPlatform :public CCObject
 {
 public:
 	HHPlatform(){
 		setVM();
-		registerDelegate(this);
 	};
 	~HHPlatform(){
-       unRegisterDelegate(this);
+
 		};
 	static HHPlatform* m_pInst;
 
@@ -60,12 +54,6 @@ private :
 public :
 	static HHPlatform* GetInstance();
 	void setVM();
-	void registerDelegate(HHIAPServiceDelegate* delegate);
-	void unRegisterDelegate(HHIAPServiceDelegate* delegate);
-    set<HHIAPServiceDelegate*> getDelegateSet();
-
-	void notifyPayObserver(int errorCode,std::string errorInfos,PurchaseInfo purInfo);
-	void notifyLoginObserver(UserInfo  loginUser);
 
 	void share(std::string absPath);
 };

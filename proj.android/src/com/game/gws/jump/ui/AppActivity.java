@@ -70,7 +70,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
-		psClient.connect();
+		// psClient.connect();
 	}
 
 	@Override

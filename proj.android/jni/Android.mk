@@ -11,26 +11,27 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
-                   platform/HHPlatform.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/commonnode/SettingNode.cpp \
                    ../../Classes/commonnode/HMenu.cpp \
                    ../../Classes/commonnode/ShareNode.cpp \
-                   ../../Classes/gamescene/GameMainLayer.cpp \
+                   ../../Classes/gamelayer/GameBgLayer.cpp \
+                   ../../Classes/gamelayer/GameMainLayer.cpp \
                    ../../Classes/gamescene/GameMainScene.cpp \
-                   ../../Classes/gamescene/GameSpileLayer.cpp \
                    ../../Classes/gamesprite/HeroFrog.cpp \
                    ../../Classes/gamesprite/MonsterSpile.cpp \
                    ../../Classes/gamesprite/TouchNode.cpp \
                    ../../Classes/helper/CalculateHelper.cpp \
                    ../../Classes/helper/GameMainHelper.cpp \
+                   ../../Classes/helper/HPlatformHelper.cpp \
                    ../../Classes/loadingscene/StartLayer.cpp \
                    ../../Classes/loadingscene/StartScene.cpp \
-                   ../../Classes/loadingscene/GameMainLogoLayer.cpp \
-                   ../../Classes/loadingscene/GameOverLayer.cpp \
-                   ../../Classes/mainlayer/MainLayer.cpp 
+                   ../../Classes/menulayer/GameMainLogoLayer.cpp \
+                   ../../Classes/menulayer/GameOverLayer.cpp \
+                   ../../Classes/menulayer/MainLayer.cpp
 
-LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes \
+                   
 
 # _COCOS_HEADER_ANDROID_BEGIN
 # _COCOS_HEADER_ANDROID_END

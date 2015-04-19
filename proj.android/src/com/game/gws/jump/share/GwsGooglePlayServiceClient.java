@@ -37,6 +37,7 @@ public class GwsGooglePlayServiceClient implements
 
 	public GwsGooglePlayServiceClient(Activity mActivity) {
 		super();
+		this.mActivity = mActivity;
 		mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
 				.addConnectionCallbacks(this)
 				.addOnConnectionFailedListener(this).addApi(Games.API)
@@ -66,6 +67,7 @@ public class GwsGooglePlayServiceClient implements
 							R.string.leaderboard_worldrank), score);
 			return true;
 		} else {
+
 			return false;
 		}
 

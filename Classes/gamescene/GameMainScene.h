@@ -3,7 +3,7 @@
 
 #include "cocos2d.h"
 #include "menulayer/MainLayer.h"
-#include "GameMainLayer.h"
+#include "gamelayer/GameMainLayer.h"
 class GameMainScene : public cocos2d::Scene
 {
 private:
