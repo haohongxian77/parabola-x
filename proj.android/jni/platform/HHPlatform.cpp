@@ -39,7 +39,7 @@ JNIEXPORT void JNICALL Java_com_nextmv_hero_googlekr_HHPayClientActivity_OnPurch
 			HHPlatform::GetInstance()->notifyPayObserver(errorCode,errorInfo,purchaseInfo);
 }
 
-static jclass m_processTohelper;
+static jclass m_shareSina;
 HHPlatform* HHPlatform::m_pInst;
 
 
@@ -55,22 +55,11 @@ void HHPlatform::setVM(){
 	    m_pVM = JniHelper::getJavaVM();
 	    JNIEnv *env;
 	    m_pVM->AttachCurrentThread(&env, NULL);
-	    //m_delegate = new HHIAPServiceDelegate();
 
-	    jclass cls_All = env->FindClass("com/game/korea/purchase/helper/KRPlatformHelper");
-	    m_processTohelper = (jclass) env->NewGlobalRef(cls_All);
+	    jclass cls_All = env->FindClass("com/game/gws/jump/share/SinaClient");
+	    m_shareSina = (jclass) env->NewGlobalRef(cls_All);
 	    env->DeleteLocalRef(cls_All);
-	    //jclass cls_pay = env->FindClass("com/nextmv/hero/naver/HHPayClientActivity");
-	    jclass cls_pay = env->FindClass("com/game/korea/purchase/helper/KRPayHelper");
-	    m_processToPayhander = (jclass) env->NewGlobalRef(cls_pay);
-	   	env->DeleteLocalRef(cls_pay);
 
-	    try {
-	    	jclass cls_login01 = env->FindClass("com/nextmv/hero/tstore/QHero");
-	    	m_processToTStoreQhero = (jclass) env->NewGlobalRef(cls_login01);
-	    	env->DeleteLocalRef(cls_login01);
-	    	} catch (std::exception e) {
-	    	}
 }
 void HHPlatform::registerDelegate(HHIAPServiceDelegate* delegate){
 	CCLog("HHPlatform::registerDelegate %s",delegate);
@@ -83,8 +72,6 @@ void HHPlatform::unRegisterDelegate(HHIAPServiceDelegate* delegate){
  std::set<HHIAPServiceDelegate*> HHPlatform::getDelegateSet(){
 	return  __delegate_list;
 }
-
-void HHPlatform::
 void HHPlatform::notifyLoginObserver(UserInfo  loginUser){
 	m_LoginUser = loginUser;
     std::set<HHIAPServiceDelegate *> __set;
@@ -116,5 +103,19 @@ void HHPlatform::notifyPayObserver(int errorCode,std::string errorInfos,Purchase
 			(*it)->OnHHPurchaseNotify(errorCode,errorInfos,purInfo);
 		}
 	//m_delegate->OnHHPurchaseNotify();
+
+}
+void HHPlatform::share(std::string absPath){
+	   JNIEnv *env;
+		m_pVM->AttachCurrentThread(&env, NULL);
+
+		jmethodID m_shareImage = env->GetStaticMethodID(m_shareSina,
+			         "shareImgAndContent",
+			            "(Ljava/lang/String;Ljava/lang/String)V");
+		jstring jstrImagePath = env->NewStringUTF(absPath.c_str());
+		jstring jstrContent = env->NewStringUTF("content");
+		env->CallStaticVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+		env->DeleteLocalRef(jstrImagePath);
+		env->DeleteLocalRef(jstrContent);
 
 }

@@ -115,7 +115,7 @@ public class WxClient {
 		}
 	}
 
-	public static byte[] bmpToByteArray(final Bitmap bmp,
+	private static byte[] bmpToByteArray(final Bitmap bmp,
 			final boolean needRecycle) {
 		ByteArrayOutputStream output = new ByteArrayOutputStream();
 		bmp.compress(CompressFormat.PNG, 100, output);

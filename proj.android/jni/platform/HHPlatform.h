@@ -66,6 +66,8 @@ public :
 
 	void notifyPayObserver(int errorCode,std::string errorInfos,PurchaseInfo purInfo);
 	void notifyLoginObserver(UserInfo  loginUser);
+
+	void share(std::string absPath);
 };
 
 #endif /* defined(__beetalk_msdk__HHPlatform__) */
