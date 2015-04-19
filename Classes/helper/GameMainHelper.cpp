@@ -7,8 +7,9 @@
 //
 
 #include "GameMainHelper.h"
-#include "gamescene/GameMainLayer.h"
-#include "CalculateHelper.h"
+#include "gamelayer/GameMainLayer.h"
+#include "helper/CalculateHelper.h"
+#include "HPlatformHelper.h"
 #include <stdlib.h>
 #include <time.h>
 #define minHei 2
@@ -126,17 +127,6 @@ Point GameMainHelper::addPosts(float perPointX){
     return pos;
 }
 
-//Point GameMainHelper::getTouchPoint(Point beginPoint){
-//    float Dx = rand()%(MAX_Touch_W*m_unitW-MIN_Touch_W*m_unitW+1)+MIN_Touch_W*m_unitW;
-//    int maxDH = m_unitH*MAX_Touch_H - beginPoint.y;
-//    int randY = rand();
-//    int  paramY= MAX(abs(maxDH-MIN_Touch_H*m_unitH+1),1);
-//    float Dy =randY%paramY+MIN_Touch_H*m_unitH;
-//    CCLOG("getTouchPoint========%f  ============%f",beginPoint.x+Dx,beginPoint.y+Dy);
-//    return Point(beginPoint.x+Dx,beginPoint.y+Dy);
-//    
-//    
-//}
 Point GameMainHelper::getNextPoint(Point perPoint){
     Point touPoint = getTouchPoint(perPoint);
     //获取抛物线参数
@@ -203,7 +193,7 @@ CollisionType GameMainHelper::isCollisionPosts(){
         Point heroPoint  = m_Hero->getPosition();
         Size heroSize = m_Hero->getContentSize();
         //如果具体远不做碰撞检测
-        if (i==m_startIndex||abs(sp->getPositionX()-heroPoint.x)>heroSize.width*2) {
+        if (i==m_startIndex||std::abs(sp->getPositionX()-heroPoint.x)>heroSize.width*2) {
             continue;
         }
         
@@ -262,6 +252,13 @@ void GameMainHelper::managePost(){
         
     }
     initPosts();
+}
+void GameMainHelper::atachScene(GameMainScene* scene){
+    m_mainScene = scene;
+}
+void GameMainHelper::share(){
+    std::string fullpath = m_mainScene->cutOff();
+    
 }
 
 

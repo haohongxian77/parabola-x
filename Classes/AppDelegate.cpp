@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "gamescene/GameMainScene.h"
-#include "loadingscene/StartLayer.h"
+#include "loadingscene/StartScene.h"
 
 USING_NS_CC;
 

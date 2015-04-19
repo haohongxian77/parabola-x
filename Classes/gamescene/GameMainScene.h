@@ -2,7 +2,7 @@
 #define __GameMain_SCENE_H__
 
 #include "cocos2d.h"
-#include "mainlayer/MainLayer.h"
+#include "menulayer/MainLayer.h"
 #include "GameMainLayer.h"
 class GameMainScene : public cocos2d::Scene
 {
@@ -20,7 +20,7 @@ public:
     static GameMainScene* createWithTag(gameStatus gameS);
     void startGame();
     void gameOver();
-    
+    std::string cutOff();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

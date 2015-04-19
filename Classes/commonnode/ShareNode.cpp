@@ -7,6 +7,8 @@
 //
 
 #include "ShareNode.h"
+#include "helper/GameMainHelper.h"
+#include "commonnode/HMenu.h"
 ShareNode::ShareNode(){
 }
 ShareNode::~ShareNode(){
@@ -20,16 +22,16 @@ bool ShareNode::init(){
 }
 void ShareNode::initMenu(){
     Size size = Director::getInstance()->getWinSize();
-    auto item1 = MenuItemImage::create("menu/share_qq.png", "menu/share_qq1.png", CC_CALLBACK_1(ShareNode::shareQQ, this) );
+    auto item1 = HMenu::create("share_qq.png", "share_qq1.png", CC_CALLBACK_1(ShareNode::shareQQ, this) );
     item1->setAnchorPoint(Vec2(0.5f, 0.5f));
     item1->setPosition(Vec2(size.width*3/4, size.height*3/8+item1->getContentSize().height*5/2));
-    auto item2 = MenuItemImage::create("menu/share_wx.png", "menu/share_wx1.png", CC_CALLBACK_1(ShareNode::shareWX, this) );
+    auto item2 = HMenu::create("share_wx.png", "share_wx1.png", CC_CALLBACK_1(ShareNode::shareWX, this) );
     item2->setAnchorPoint(Vec2(0.5f, 0.5f));
     item2->setPosition(Vec2(size.width*3/4, size.height*3/8+item2->getContentSize().height));
-    auto item3 = MenuItemImage::create("menu/share_xl.png", "menu/share_xl1.png", CC_CALLBACK_1(ShareNode::shareXL, this) );
+    auto item3 = HMenu::create("share_xl.png", "share_xl1.png", CC_CALLBACK_1(ShareNode::shareXL, this) );
     item3->setAnchorPoint(Vec2(0.5f, 0.5f));
     item3->setPosition(Vec2(size.width*3/4, size.height*3/8-item3->getContentSize().height/2));
-    auto item4 = MenuItemImage::create("menu/share_fb.png", "menu/share_fb1.png", CC_CALLBACK_1(ShareNode::shareFB, this) );
+    auto item4 = HMenu::create("share_fb.png", "share_fb1.png", CC_CALLBACK_1(ShareNode::shareFB, this) );
     item4->setAnchorPoint(Vec2(0.5f, 0.5f));
     item4->setPosition(Vec2(size.width*3/4, size.height*3/8-item4->getContentSize().height*2));
     
@@ -43,10 +45,14 @@ void ShareNode::initMenu(){
 
 }
 void ShareNode::shareQQ(cocos2d::Ref *obj){
+     GameMainHelper::getInstance()->share();
 }
 void ShareNode::shareWX(cocos2d::Ref *obj){
+     GameMainHelper::getInstance()->share();
 }
 void ShareNode::shareXL(cocos2d::Ref *obj){
+     GameMainHelper::getInstance()->share();
 }
 void ShareNode::shareFB(cocos2d::Ref *obj){
+     GameMainHelper::getInstance()->share();
 }

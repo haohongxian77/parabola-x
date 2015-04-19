@@ -8,6 +8,7 @@
 
 #include "SettingNode.h"
 #include "commonnode/HMenu.h"
+
 SettingNode::SettingNode(){
 }
 SettingNode::~SettingNode(){
@@ -59,6 +60,7 @@ void SettingNode::acNode(){
     bg->runAction(seq);
 }
 void SettingNode::menuSound(cocos2d::Ref *obj){
+   
 }
 void SettingNode::menuMusic(cocos2d::Ref *obj){
 }

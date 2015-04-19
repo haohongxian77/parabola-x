@@ -10,6 +10,7 @@
 #include "helper/CalculateHelper.h"
 #include "helper/GameMainHelper.h"
 #include "gamesprite/MonsterSpile.h"
+#include "helper/CommomData.h"
 #define Gravity  100//9.9
 #define DPixelTo 28
 
@@ -29,6 +30,7 @@ void GameMainLayer::registerTouchDispatcher(){
     listener->onTouchBegan = CC_CALLBACK_2(GameMainLayer::onTouchBegan, this);
     listener->onTouchMoved = CC_CALLBACK_2(GameMainLayer::onTouchMoved, this);
     listener->onTouchEnded = CC_CALLBACK_2(GameMainLayer::onTouchEnded, this);
+   // _eventDispatcher->addEventListenerWithFixedPriority(listener, TOUCHLEV_GAME);
     _eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);//事件调度器
     
 }

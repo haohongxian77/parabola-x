@@ -13,3 +13,9 @@ bool GameOverLayer::init(){
     }
     return false;
 }
+void GameOverLayer::initBg(){
+    Sprite* spBg = Sprite::create("gameover_mainbg.png");
+   // spBg->setPosition(ccp)
+}
+void GameOverLayer::initScore(){
+}

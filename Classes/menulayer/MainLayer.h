@@ -11,8 +11,8 @@
 
 #include <stdio.h>
 #include "cocos2d.h"
-#include "mainlayer/GameMainLogoLayer.h"
-#include "mainlayer/GameOverLayer.h"
+#include "menulayer/GameMainLogoLayer.h"
+#include "menulayer/GameOverLayer.h"
 using namespace cocos2d;
 typedef enum{
     Tag_GameStart,
@@ -30,6 +30,8 @@ private:
     void initOtherMenu(gameStatus status);
     void initBg();
     void initMenu();
+    void onEnter();
+    void onExit();
     
     
 //    void acLogo();
@@ -40,6 +42,9 @@ public:
     void menuRank(Ref* sender);
     void menuShare(Ref* sender);
     void menuStart(Ref* sender);
+    void callback();
+    
+     bool onTouchBegan(Touch* touch, Event  *event);
 private:
     Sprite* m_logo = NULL;
     Sprite* m_hero = NULL;

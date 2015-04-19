@@ -13,6 +13,7 @@
 #include "cocos2d.h"
 #include "gamesprite/HeroFrog.h"
 #include "gamesprite/MonsterSpile.h"
+#include "gamescene/GameMainScene.h"
 
 class GameMainLayer;
 using namespace cocos2d;
@@ -25,15 +26,18 @@ public:
     static GameMainHelper* getInstance();
     
     void atachLayer(GameMainLayer* layer);
+     void atachScene(GameMainScene* scene);
     void setHero(HeroFrog* hero);
     bool updateHelper(float dt,Point ds);
     
-    CollisionType isCollisionPosts();
+    CollisionType isCollisionPosts();   //碰撞检测
     void initPosts();
     void managePost();
     int getEarthH();
     MonsterSpile* getCollectSp();
     void initJumpDate();
+public:
+    void share();
 public:
     __Array* m_posts;
     //std::vector<Sprite*>  posts;   //存放所有的柱子
@@ -61,6 +65,8 @@ private:
     int m_EarthH = 0;
     int m_collectIndex = -1;
     int m_startIndex = -1;
+    
+    GameMainScene* m_mainScene = NULL;
     
     
 };
