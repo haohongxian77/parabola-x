@@ -13,13 +13,11 @@
 #include "helper/CommomData.h"
 #define menuStartTag 1
 MainLayer::MainLayer(){
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("menus.plist", "menus.png");
+   
 
 }
 MainLayer::~MainLayer(){
 
-    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("loadinglayer.plist");
-    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("menus.plist");
 }
 MainLayer* MainLayer::create(gameStatus status){
     MainLayer* layer = new MainLayer();

@@ -5,8 +5,16 @@ USING_NS_CC;
 
 GameMainScene::GameMainScene():
 m_gamemainLayer(NULL),
-m_mianMenuLayer(NULL)
+m_mianMenuLayer(NULL),
+m_bgLayer(NULL)
 {
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("menus.plist", "menus.png");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("game_item.plist", "game_item.png");
+}
+GameMainScene::~GameMainScene(){
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("loadinglayer.plist");
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("menus.plist");
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("game_item.plist");
 }
 bool GameMainScene::init()
 {
@@ -28,10 +36,15 @@ void GameMainScene::initGameAlertLayer(gameStatus gameS){
     this->addChild(m_mianMenuLayer,1);
    
 }
+void GameMainScene::initGameBgLayer(){
+    m_bgLayer = GameBgLayer::create();
+    this->addChild(m_bgLayer);
+}
 GameMainScene* GameMainScene::createWithTag(gameStatus gameS){
     GameMainScene* sc = new GameMainScene();
     if (sc->init()) {
         GameMainHelper::getInstance()->atachScene(sc);
+        sc->initGameBgLayer();
         sc->initMainLayer();
         sc->initGameAlertLayer(gameS);
         return sc;
@@ -84,6 +97,13 @@ std::string GameMainScene::cutOff(){
     // 恢复屏幕尺寸
     
     return fullPath;
+}
+void GameMainScene::onEnter(){
+    Scene::onEnter();
+}
+void GameMainScene::onExit(){
+    Scene::onExit();
+   
 }
 
 

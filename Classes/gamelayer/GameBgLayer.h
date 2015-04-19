@@ -16,12 +16,25 @@ class GameBgLayer :public Layer{
     GameBgLayer();
     ~GameBgLayer();
 private:
-    Sprite* bg1 = NULL;
-    Sprite* bg2 = NULL;
+    Sprite* m_bg1 = NULL;
+    Sprite* m_bg2 = NULL;
+    
+    Sprite* m_Cloud1 = NULL;
+    Sprite* m_Cloud2 = NULL;
+    Sprite* m_Cloud3 = NULL;
     
     bool init();
     void initBg();
+    void initClound();
 public:
     CREATE_FUNC(GameBgLayer);
+    void update(float dx);
+    void initClound1Pos();
+    void initClound2Pos();
+    void initClound3Pos();
+public:
+    void clound1AC();
+    void clound2AC();
+    void clound3AC();
 };
 #endif /* defined(__GwsJump__GameBgLayer__) */
