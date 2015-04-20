@@ -47,7 +47,7 @@ public class GwsGooglePlayServiceClient implements
 				.build();
 	}
 
-	public void connect() {
+	public static void connect() {
 		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
 			mGoogleApiClient.connect();
 		}
