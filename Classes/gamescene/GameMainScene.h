@@ -20,7 +20,9 @@ public:
     static GameMainScene* createWithTag(gameStatus gameS);
     void startGame();
     void gameOver();
-    std::string cutOff();
+    std::string cutOff(int shareType);
+private:
+    int m_shareType = 0;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

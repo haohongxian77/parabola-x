@@ -256,8 +256,8 @@ void GameMainHelper::managePost(){
 void GameMainHelper::atachScene(GameMainScene* scene){
     m_mainScene = scene;
 }
-void GameMainHelper::share(){
-    std::string fullpath = m_mainScene->cutOff();
+void GameMainHelper::share(ShareStatus status){
+    std::string fullpath = m_mainScene->cutOff(status);
     
 }
 

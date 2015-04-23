@@ -7,6 +7,9 @@
 //
 
 #include "HPlatformHelper.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "platform/HHPlatform.h"
+#endif
 HPlatformHelper* HPlatformHelper::platfromHelper = NULL;
 HPlatformHelper* HPlatformHelper::getInstance(){
     if (platfromHelper == NULL) {
@@ -18,8 +21,10 @@ HPlatformHelper::HPlatformHelper(){
 }
 HPlatformHelper::~HPlatformHelper(){
 }
-void HPlatformHelper::share(std::string fullPath){
+void HPlatformHelper::share(int shareType,std::string fullPath){
+
+
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    
+	HHPlatform::GetInstance()->share(shareType,fullPath);
 #endif
 }

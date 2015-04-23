@@ -36,7 +36,12 @@ public:
 
     ~HHIAPServiceDelegate() {}
 };
-
+typedef enum{
+    Share_SINA=0,
+	Share_QQ,
+	Share_WX,
+	Share_FB,
+}ShareStatus;
 class HHPlatform :public CCObject
 {
 public:
@@ -55,7 +60,7 @@ public :
 	static HHPlatform* GetInstance();
 	void setVM();
 
-	void share(std::string absPath);
+	void share(int shareType,std::string absPath);
 };
 
 #endif /* defined(__beetalk_msdk__HHPlatform__) */

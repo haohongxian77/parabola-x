@@ -17,7 +17,9 @@
 
 class GameMainLayer;
 using namespace cocos2d;
-
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "platform/HHPlatform.h"
+#endif
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();
@@ -37,7 +39,7 @@ public:
     MonsterSpile* getCollectSp();
     void initJumpDate();
 public:
-    void share();
+    void share(ShareStatus status);
 public:
     __Array* m_posts;
     //std::vector<Sprite*>  posts;   //存放所有的柱子

@@ -1,4 +1,8 @@
 LOCAL_PATH := $(call my-dir)
+include $(CLEAR_VARS)
+LOCAL_MODULE  :=weibosdkcore
+LOCAL_SRC_FILES := prebuilt/libweibosdkcore.so
+include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
@@ -11,6 +15,7 @@ LOCAL_MODULE := cocos2dcpp_shared
 LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
+                   platform/HHPlatform.cpp \
                    ../../Classes/AppDelegate.cpp \
                    ../../Classes/commonnode/SettingNode.cpp \
                    ../../Classes/commonnode/HMenu.cpp \
