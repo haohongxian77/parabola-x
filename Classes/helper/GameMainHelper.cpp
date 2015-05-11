@@ -278,10 +278,13 @@ void GameMainHelper::startGame(){
 void GameMainHelper::atachScene(GameMainScene* scene){
     m_mainScene = scene;
 }
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){
     std::string fullpath = m_mainScene->cutOff(status);
     
 }
+#endif
+
 
 
 

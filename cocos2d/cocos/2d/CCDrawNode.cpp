@@ -481,7 +481,7 @@ void DrawNode::drawPoints(const Vec2 *position, unsigned int numberOfPoints, con
 
 void DrawNode::drawLine(const Vec2 &origin, const Vec2 &destination, const Color4F &color)
 {
-    ensureCapacityGLLine(2);
+    ensureCapacityGLLine(10);
     
     V2F_C4B_T2F *point = (V2F_C4B_T2F*)(_bufferGLLine + _bufferCountGLLine);
     

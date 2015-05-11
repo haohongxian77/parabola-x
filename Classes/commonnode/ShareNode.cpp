@@ -45,14 +45,29 @@ void ShareNode::initMenu(){
 
 }
 void ShareNode::shareQQ(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share(Share_QQ);
-}
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    GameMainHelper::getInstance()->share(Share_QQ);
+
+#endif
+     }
 void ShareNode::shareWX(cocos2d::Ref *obj){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
      GameMainHelper::getInstance()->share(Share_WX);
+    
+#endif
+    
 }
 void ShareNode::shareXL(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share(Share_SINA);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+   GameMainHelper::getInstance()->share(Share_SINA);
+    
+#endif
+    
 }
 void ShareNode::shareFB(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share(Share_FB);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    GameMainHelper::getInstance()->share(Share_FB);
+    
+#endif
+    
 }
