@@ -31,6 +31,7 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.game.gws.jump.share.GwsGooglePlayServiceClient;
 import com.game.gws.jump.share.SinaClient;
 import com.game.gws.jump.share.TencentClient;
 import com.game.gws.jump.share.WxClient;
@@ -49,6 +50,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	private SinaClient sinaClient;
 	private TencentClient tencentClient;
 	private WxClient wxClient;
+	private GwsGooglePlayServiceClient psClient;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +62,15 @@ public class AppActivity extends Cocos2dxActivity implements
 		// }
 		tencentClient = new TencentClient(this);
 		wxClient = new WxClient(this);
+		psClient = new GwsGooglePlayServiceClient(this);
 		WXManager.getInstance().registerWxListener(this);
+	}
+
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		// psClient.connect();
 	}
 
 	@Override
@@ -96,6 +106,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		psClient.disConnect();
 		WXManager.getInstance().unRegisterWxListener(this);
 	}
 
@@ -116,7 +127,13 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		tencentClient.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == GwsGooglePlayServiceClient.SIGN_IN_REQ
+				|| requestCode == GwsGooglePlayServiceClient.LEADERBOARDER_SHOW_REQ) {
+			psClient.onActivityResult(requestCode, resultCode, data);
+		} else {
+			tencentClient.onActivityResult(requestCode, resultCode, data);
+		}
+
 	}
 
 	@Override

@@ -30,7 +30,14 @@
         <meta-data
             android:name="android.app.lib_name"
             android:value="cocos2dcpp" />
-
+        <!-- google play service start -->
+        <meta-data
+            android:name="com.google.android.gms.games.APP_ID"
+            android:value="@string/app_id" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <!-- google play service end -->
         <activity
             android:name=".ui.AppActivity"
             android:configChanges="orientation"
@@ -78,9 +85,10 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- qq share end -->
         <!-- wx start -->
-        <activity android:name=".wxapi.WXEntryActivity" 
-            android:label="@string/app_name"
-            android:exported="true">
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name" >
         </activity>
         <!-- wx end -->
     </application>

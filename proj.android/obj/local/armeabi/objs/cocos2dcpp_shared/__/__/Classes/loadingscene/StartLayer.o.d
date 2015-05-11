@@ -1,23 +1,23 @@
 obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/loadingscene/StartLayer.o: \
  jni/../../Classes/loadingscene/StartLayer.cpp \
  jni/../../Classes/loadingscene/StartLayer.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/stdio.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/cdefs.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/cdefs_elf.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/android/api-level.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/stdint.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/_types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/_types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/_wchar_limits.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/posix_types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/stddef.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/compiler.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/posix_types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/kernel.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/sysmacros.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdio.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/api-level.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdint.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/_wchar_limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
  jni/../../cocos2d/cocos/3d/../cocos2d.h \
  jni/../../cocos2d/cocos/3d/../base/ccConfig.h \
  jni/../../cocos2d/cocos/3d/../platform/CCPlatformConfig.h \
@@ -26,40 +26,40 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/loadingscene/StartLayer.o
  jni/../../cocos2d/cocos/3d/../base/ccConfig.h \
  jni/../../cocos2d/cocos/3d/../platform/CCPlatformDefine.h \
  jni/../../cocos2d/cocos/3d/../platform/android/CCPlatformDefine-android.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/android/log.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/log.h \
  jni/../../cocos2d/cocos/3d/../base/CCRefPtr.h \
  jni/../../cocos2d/cocos/3d/../base/CCRef.h \
  jni/../../cocos2d/cocos/3d/../base/ccMacros.h \
  jni/../../cocos2d/cocos/3d/../base/CCConsole.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/select.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/time.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/time.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/signal.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/limits.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/limits.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/limits.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/internal_types.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/limits.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/syslimits.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/page.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/string.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/malloc.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/signal.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm-generic/signal.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/sigcontext.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/siginfo.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm-generic/siginfo.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/select.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/time.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/time.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/signal.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/internal_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/syslimits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/page.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/string.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/malloc.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/signal.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/siginfo.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/thread \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/map \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex \
  jni/../../cocos2d/cocos/3d/../platform/CCStdC.h \
  jni/../../cocos2d/cocos/3d/../platform/android/CCStdC-android.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/math.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/stdlib.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/alloca.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/strings.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/memory.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/math.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdlib.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/alloca.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/strings.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/memory.h \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert \
  jni/../../cocos2d/cocos/3d/../base/ccRandom.h \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/random \
@@ -92,10 +92,10 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/loadingscene/StartLayer.o
  jni/../../cocos2d/cocos/3d/../base/ccTypes.h \
  jni/../../cocos2d/cocos/3d/../platform/CCGL.h \
  jni/../../cocos2d/cocos/3d/../platform/android/CCGL-android.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/GLES2/gl2platform.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/KHR/khrplatform.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/GLES2/gl2.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/GLES2/gl2ext.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
  jni/../../cocos2d/cocos/3d/../base/CCConfiguration.h \
  jni/../../cocos2d/cocos/3d/../base/CCValue.h \
  jni/../../cocos2d/cocos/3d/../base/CCDirector.h \
@@ -118,14 +118,14 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/loadingscene/StartLayer.o
  jni/../../cocos2d/cocos/3d/../base/CCScheduler.h \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/set \
  jni/../../cocos2d/cocos/3d/../base/uthash.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/inttypes.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/inttypes.h \
  jni/../../cocos2d/cocos/3d/../base/base64.h \
  jni/../../cocos2d/cocos/3d/../base/ZipUtils.h \
  jni/../../cocos2d/cocos/3d/../platform/android/CCFileUtils-android.h \
  jni/../../cocos2d/cocos/3d/../platform/CCFileUtils.h \
  jni/../../cocos2d/cocos/3d/../base/CCData.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/jni.h \
- D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/android/asset_manager.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/jni.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/asset_manager.h \
  jni/../../cocos2d/cocos/3d/../base/CCProfiling.h \
  jni/../../cocos2d/cocos/3d/../base/CCMap.h \
  jni/../../cocos2d/cocos/3d/../base/CCConsole.h \
@@ -351,43 +351,49 @@ obj/local/armeabi/objs/cocos2dcpp_shared/__/__/Classes/loadingscene/StartLayer.o
  jni/../../cocos2d/cocos/3d/../deprecated/CCString.h \
  jni/../../cocos2d/cocos/3d/../deprecated/CCNotificationCenter.h \
  jni/../../cocos2d/cocos/3d/../deprecated/CCDeprecated.h \
- jni/../../Classes/mainlayer/MainLayer.h
+ jni/../../Classes/gamelayer/GameMainLayer.h \
+ jni/../../Classes/gamesprite/TouchNode.h \
+ jni/../../Classes/gamesprite/HeroFrog.h \
+ jni/../../Classes/gamescene/GameMainScene.h \
+ jni/../../Classes/menulayer/MainLayer.h \
+ jni/../../Classes/menulayer/GameMainLogoLayer.h \
+ jni/../../Classes/menulayer/GameOverLayer.h
 
 jni/../../Classes/loadingscene/StartLayer.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/stdio.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdio.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/cdefs.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/cdefs_elf.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/android/api-level.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/api-level.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/stdint.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdint.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/_types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/_types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/_wchar_limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/_wchar_limits.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/posix_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/stddef.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/compiler.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/posix_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/kernel.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/sysmacros.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
 
 jni/../../cocos2d/cocos/3d/../cocos2d.h:
 
@@ -405,7 +411,7 @@ jni/../../cocos2d/cocos/3d/../platform/CCPlatformDefine.h:
 
 jni/../../cocos2d/cocos/3d/../platform/android/CCPlatformDefine-android.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/android/log.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/log.h:
 
 jni/../../cocos2d/cocos/3d/../base/CCRefPtr.h:
 
@@ -415,41 +421,41 @@ jni/../../cocos2d/cocos/3d/../base/ccMacros.h:
 
 jni/../../cocos2d/cocos/3d/../base/CCConsole.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/select.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/select.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/time.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/time.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/time.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/time.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/signal.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/signal.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/limits.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/limits.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/linux/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/limits.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/internal_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/internal_types.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/machine/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/limits.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/sys/syslimits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/syslimits.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/page.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/page.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/string.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/string.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/malloc.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/malloc.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/signal.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/signal.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm-generic/signal.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/sigcontext.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm/siginfo.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/siginfo.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/asm-generic/siginfo.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h:
 
 D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/thread:
 
@@ -463,15 +469,15 @@ jni/../../cocos2d/cocos/3d/../platform/CCStdC.h:
 
 jni/../../cocos2d/cocos/3d/../platform/android/CCStdC-android.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/math.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/math.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/stdlib.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdlib.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/alloca.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/alloca.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/strings.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/strings.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/memory.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/memory.h:
 
 D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert:
 
@@ -537,13 +543,13 @@ jni/../../cocos2d/cocos/3d/../platform/CCGL.h:
 
 jni/../../cocos2d/cocos/3d/../platform/android/CCGL-android.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/GLES2/gl2platform.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/KHR/khrplatform.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/GLES2/gl2.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/GLES2/gl2ext.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
 
 jni/../../cocos2d/cocos/3d/../base/CCConfiguration.h:
 
@@ -589,7 +595,7 @@ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/set:
 
 jni/../../cocos2d/cocos/3d/../base/uthash.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/inttypes.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/inttypes.h:
 
 jni/../../cocos2d/cocos/3d/../base/base64.h:
 
@@ -601,9 +607,9 @@ jni/../../cocos2d/cocos/3d/../platform/CCFileUtils.h:
 
 jni/../../cocos2d/cocos/3d/../base/CCData.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/jni.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/jni.h:
 
-D:/AndroidTool/android-ndk-r9d/platforms/android-12/arch-arm/usr/include/android/asset_manager.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/asset_manager.h:
 
 jni/../../cocos2d/cocos/3d/../base/CCProfiling.h:
 
@@ -1055,4 +1061,16 @@ jni/../../cocos2d/cocos/3d/../deprecated/CCNotificationCenter.h:
 
 jni/../../cocos2d/cocos/3d/../deprecated/CCDeprecated.h:
 
-jni/../../Classes/mainlayer/MainLayer.h:
+jni/../../Classes/gamelayer/GameMainLayer.h:
+
+jni/../../Classes/gamesprite/TouchNode.h:
+
+jni/../../Classes/gamesprite/HeroFrog.h:
+
+jni/../../Classes/gamescene/GameMainScene.h:
+
+jni/../../Classes/menulayer/MainLayer.h:
+
+jni/../../Classes/menulayer/GameMainLogoLayer.h:
+
+jni/../../Classes/menulayer/GameOverLayer.h:
