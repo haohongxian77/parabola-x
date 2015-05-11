@@ -24,12 +24,26 @@ class HeroFrog :public Sprite{
     HeroFrog();
     ~HeroFrog();
 public:
-    CC_SYNTHESIZE(FrogStatus, m_heroStatus, HeroStatus);
+    FrogStatus m_heroStatus;
+    FrogStatus getHeroStatus();
+    void setHeroStatus(FrogStatus heroStatus);
 public:
     CREATE_FUNC(HeroFrog);
+    Rect getFootRect();
+    Rect getBodyRect();
 private:
     bool init();
+    void initData();
+    void initAnimation();
+    void runStaticAnimation();
     void setPos(Point pos);
+    void update();
+    void setHeroStatic();
+private:
+    float downSpeed = 0;
+    DrawNode* drawNode;
+    virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
+    
 };
 
 #endif /* defined(__GWPJUMP__HeroFrog__) */

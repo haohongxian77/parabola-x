@@ -13,12 +13,8 @@
 #include "cocos2d.h"
 #include "menulayer/GameMainLogoLayer.h"
 #include "menulayer/GameOverLayer.h"
+#include "helper/CommomData.h"
 using namespace cocos2d;
-typedef enum{
-    Tag_GameStart,
-    Tag_GameOver,
-    
-}gameStatus;
 class MainLayer :public Layer{
     MainLayer();
     ~MainLayer();

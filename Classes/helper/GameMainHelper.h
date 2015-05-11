@@ -26,45 +26,48 @@ public:
     static GameMainHelper* getInstance();
     
     void atachLayer(GameMainLayer* layer);
-     void atachScene(GameMainScene* scene);
+    void atachScene(GameMainScene* scene);
     void setHero(HeroFrog* hero);
-    bool updateHelper(float dt,Point ds);
+    void updateHelper(float dt);
     
     CollisionType isCollisionPosts();   //碰撞检测
     void initPosts();
     void managePost();
-    int getEarthH();
-    MonsterSpile* getCollectSp();
+    Sprite* getCollectSp();
     void initJumpDate();
 public:
     void share();
+    void gameOver();
+    void startGame();
+    void jumpOver();
 public:
+    CC_SYNTHESIZE(gameStatus, m_gameStatus, GameStaus);
+    CC_SYNTHESIZE(int, m_earthH, EarthH);
+    CC_SYNTHESIZE(int, m_curScore, CurScore);
     __Array* m_posts;
-    //std::vector<Sprite*>  posts;   //存放所有的柱子
+    Sprite* m_curHeroPost;
     GameMainLayer* m_Layer;
     Node* m_spilesNode;
     HeroFrog* m_Hero;
 private:
     void initDate();
     
+    
     Point addPosts(float perPointX);
     Point getTouchPoint(Point perPoint);
     float getNextPointX(Point touchPoint,Point perPoint);
     Point getNextPoint(Point perPoint);
-    //Point getTouchPoint(Point beginPoint);
-    //Point getCurSpilePoint(Point perPoint,std::vector<float> params);
-    //float getDx(int dH,float spileW);
-    //int getHregion();
     
     void movingLayer();
+    
     
     
 private:
     int m_unitH = 0;
     int m_unitW = 0;
-    int m_EarthH = 0;
-    int m_collectIndex = -1;
+   // int m_collectIndex = -1;
     int m_startIndex = -1;
+    
     
     GameMainScene* m_mainScene = NULL;
     

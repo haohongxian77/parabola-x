@@ -14,30 +14,26 @@ TouchNode::~TouchNode(){
 }
 TouchNode* TouchNode::create(){
     TouchNode* touch = new TouchNode();
-    touch->initWithFile("CloseNormal.png");
-    touch->initData();
+    touch->initWithSpriteFrameName("touch_normal.png");
+    //touch->initWithFile("CloseNormal.png");
     return touch;
-}
-void TouchNode::initData(){
-        Director::getInstance()->getTextureCache()->addImage("CloseSelected.png");
-        Director::getInstance()->getTextureCache()->addImage("CloseNormal.png");
 }
 void TouchNode::setPos(Point curP, float heroP){
     TouchType touchType_;
-    Texture2D* tex = NULL;
+    SpriteFrame* frame = NULL;
     this->setPosition(curP);
     if (curP.y>heroP) {
-        tex=Director::getInstance()->getTextureCache()->addImage("CloseNormal.png");
+        frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_normal.png");
         touchType_ = TOUCH_Enable;
     }else{
-     tex=Director::getInstance()->getTextureCache()->addImage("CloseSelected.png");
+     frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_unnormal.png");
     touchType_ = TOUCH_Disable;
     }
     
     if (m_type == touchType_)
         return;
     m_type = touchType_;
-    this->setTexture(tex);
+    this->setSpriteFrame(frame);
     
 }
 TouchType TouchNode::getCurType(){

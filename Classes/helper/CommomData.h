@@ -12,6 +12,11 @@
 #include <stdio.h>
 #define TOUCHLEV_GAME -1
 #define TouchLEV_Menu   -10
+typedef enum{
+    Tag_None,
+    Tag_GameStart,
+    Tag_GameOver,
+}gameStatus;
 class CommomData{
     
 };

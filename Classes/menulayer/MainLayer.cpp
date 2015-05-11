@@ -11,6 +11,7 @@
 #include "commonnode/ShareNode.h"
 #include "commonnode/HMenu.h"
 #include "helper/CommomData.h"
+#include "helper/GameMainHelper.h"
 #define menuStartTag 1
 MainLayer::MainLayer(){
    
@@ -32,7 +33,7 @@ bool MainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
     return  true;
 }
 void MainLayer::initOtherMenu(gameStatus status){
-    if (status == Tag_GameStart) {
+    if (status == Tag_GameStart||status == Tag_None) {
         m_logoLayer = GameMainLogoLayer::create();
         this->addChild(m_logoLayer,1);
         
@@ -81,29 +82,26 @@ void MainLayer::initBg(){
     this->addChild(layerCol);
     
 }
-//void MainLayer::initHero(){
-//    Size size = Director::getInstance()->getWinSize();
-//    
-//    m_hero = Sprite::createWithSpriteFrameName("loading_hero.png");
-////    m_hero ->setPosition(size.width/2, size.height+m_hero->getContentSize().height/2);
-//    Node* startMenu = m_menu->getChildByTag(menuStartTag);
-//    m_hero ->setPosition(size.width/2,startMenu->getPositionY()+ m_hero->getContentSize().height/2/0.8);
-//        m_hero->setScale(0.7f);
-//    addChild(m_hero);
-//}
 void MainLayer::initMenu(){
     Size size = Director::getInstance()->getWinSize();
  
     auto item1 = HMenu::create("main_rank.png", "main_rank1.png", CC_CALLBACK_1(MainLayer::menuRank, this) );
     item1->getNormalImage()->setAnchorPoint(Vec2(0.5f, 0.5f));
-    item1->setPosition(Vec2(size.width/4+item1->getContentSize().width, size.height/4+item1->getContentSize().height/4));
+    item1->setPosition(Vec2(size.width/4+item1->getContentSize().width, size.height/5+item1->getContentSize().height/4));
     auto item2 = HMenu::create("main_setting.png", "main_setting1.png", CC_CALLBACK_1(MainLayer::menuSet, this) );
-    item2->setPosition(Vec2(size.width/2, size.height/4+item2->getContentSize().height/4));
+    item2->setPosition(Vec2(size.width/2, size.height/5+item2->getContentSize().height/4));
     auto item3 = HMenu::create("main_share.png", "main_share1.png", CC_CALLBACK_1(MainLayer::menuShare, this) );
-    item3->setPosition(Vec2(size.width*3/4-item3->getContentSize().width, size.height/4+item3->getContentSize().height/4));
+    item3->setPosition(Vec2(size.width*3/4-item3->getContentSize().width, size.height/5+item3->getContentSize().height/4));
     auto item4 = HMenu::create("main_start.png", "main_start1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
+    if (GameMainHelper::getInstance()->getGameStaus() == Tag_GameOver) {
+        item4 = HMenu::create("main_restart.png", "main_restart1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
+        item4->setPosition(Vec2(size.width/2, size.height*2/5));
+    }else{
+        item4 = HMenu::create("main_start.png", "main_start1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
+        item4->setPosition(Vec2(size.width/2, size.height/2+item4->getContentSize().height/4));
+    }
     item4->setTag(menuStartTag);
-    item4->setPosition(Vec2(size.width/2, size.height/2+item4->getContentSize().height/4));
+    
     
     
     m_menu = Menu::create(item1, item2, item3,item4, nullptr);
@@ -129,7 +127,7 @@ void MainLayer::menuStart(Ref* sender){
     this->runAction(seq);
 }
 void MainLayer::callback(){
-    this->removeFromParentAndCleanup(true);
+    GameMainHelper::getInstance()->startGame();
 }
 void MainLayer::menuShare(cocos2d::Ref *sender){
     if (m_shareNode) {

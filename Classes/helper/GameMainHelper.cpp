@@ -25,7 +25,9 @@
 
 GameMainHelper* GameMainHelper::mainHelper = NULL;
 
-GameMainHelper::GameMainHelper()
+GameMainHelper::GameMainHelper():
+m_gameStatus(Tag_None),
+m_curHeroPost(NULL)
 {
 }
 
@@ -61,10 +63,10 @@ void GameMainHelper::initDate(){
     
 }
 void GameMainHelper::initJumpDate(){
-    if (m_collectIndex == -1) {
+    if (m_curHeroPost == NULL) {
         m_startIndex =0;
     }else{
-        m_startIndex = m_collectIndex;
+        m_startIndex = (int)m_posts->getIndexOfObject(m_curHeroPost);
     }
 }
 void GameMainHelper::initPosts(){
@@ -82,15 +84,11 @@ void GameMainHelper::initPosts(){
         posX = curPos.x;
         
     }
+    m_curHeroPost =dynamic_cast<Sprite*>(m_posts->getObjectAtIndex(0));
+    
 }
-int GameMainHelper::getEarthH(){
-    return m_EarthH;
-}
-MonsterSpile* GameMainHelper::getCollectSp(){
-    if (m_collectIndex == -1) {
-        return NULL;
-    }
-    return (MonsterSpile*)m_posts->getObjectAtIndex(m_collectIndex);
+Sprite* GameMainHelper::getCollectSp(){
+        return m_curHeroPost;
 }
 Point GameMainHelper::addPosts(float perPointX){
     MonsterSpile* monspile = MonsterSpile::create(0);
@@ -105,7 +103,7 @@ Point GameMainHelper::addPosts(float perPointX){
 
     
     if (m_posts->count()==0) {
-        float x = 30.0f;
+        float x = winSize.width/5;
          int Hregion = rand()%(maxHei-minHei+1)+minHei;
         int randHeiInregion = rand()%((int)winSize.height/SCREEN_DE_COUNT); //
          pos= Point(x,randHeiInregion+Hregion*winSize.height/SCREEN_DE_COUNT);
@@ -190,20 +188,16 @@ CollisionType GameMainHelper::isCollisionPosts(){
        
         CCLOG("=======================================%d",i);
         MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
-        Point heroPoint  = m_Hero->getPosition();
         Size heroSize = m_Hero->getContentSize();
         //如果具体远不做碰撞检测
-        if (i==m_startIndex||std::abs(sp->getPositionX()-heroPoint.x)>heroSize.width*2) {
+        if (i==m_startIndex||std::abs(sp->getPositionX()-m_Hero->getPositionX())>heroSize.width/2) {
             continue;
         }
-        
-        
-        Rect heroRect = Rect(heroPoint.x-heroSize.width/2, heroPoint.y-heroSize.height/2, heroSize.width, heroSize.height/8);
-        c_Type =  sp->getValid(heroRect);
+        c_Type =  sp->getValid(m_Hero->getFootRect(),m_Hero->getBodyRect());
         if(c_Type == Collision_None){
             
         }else {
-            m_collectIndex = i;
+            m_curHeroPost = sp;
             return c_Type;
         }
     }
@@ -215,43 +209,71 @@ void GameMainHelper::setHero(HeroFrog *hero){
     Size s = Director::getInstance()->getWinSize();
     //m_spilesNode->runAction(Follow::create(hero,Rect(0, 0, 0, s.height)));
 }
-bool GameMainHelper::updateHelper(float dt,Point ds){
+void GameMainHelper::updateHelper(float dt){
     Size s= Director::getInstance()->getWinSize();
+    if (m_Hero->getHeroStatus() == frogStatic || m_Hero->getHeroStatus() == frogFall ||m_Hero->getHeroStatus() == frogDead1 ||
+        m_Hero->getHeroStatus() == frogDead2) {
+        return;
+    }
     if (m_Hero->getPositionX()+m_Layer->getPositionX()>s.width*3/4&&m_Layer->getNumberOfRunningActions()==0) {
         movingLayer();
     }
     CollisionType m_Type = isCollisionPosts();
     if (m_Type == Collision_valid) {
         m_Hero->setHeroStatus(frogFall);
+        jumpOver();
+        CCLOG("安全掉落");
         
     }else if(m_Type == Collision_Dead ){
         m_Hero->setHeroStatus(frogDead1);
-    }else if(m_Hero->getPositionY()<10){
+        CCLOG("碰柱子死亡");
+        gameOver();
+    }else if(m_Hero->getPositionY()<m_earthH){
         m_Hero->setHeroStatus(frogDead2);
-    }else{
-        return true;
+        CCLOG("落地死亡");
         
+        gameOver();
     }
-    return false;
     
+}
+void GameMainHelper::jumpOver(){
+     movingLayer();
+     managePost();
+    m_mainScene->changeScore();
 }
 void GameMainHelper::movingLayer(){
-    float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-30;
-    MoveBy* moveBY = MoveBy::create(4, Vec2(-dx, 0));
-    m_Layer->runAction(moveBY);
+    Size size = Director::getInstance()->getWinSize();
     
-    
+    float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-size.width/5;
+    m_Layer->setMoveXDistance(-1*dx);
 }
 void GameMainHelper::managePost(){
-    for (long int i=m_posts->count()-1; i>0; i--) {
-        Sprite* curSp =(Sprite*)m_posts->getObjectAtIndex(i);
+    for (long int i=m_posts->count()-1; i>=0; i--) {
+        MonsterSpile* curSp =(MonsterSpile*)m_posts->getObjectAtIndex(i);
         Point postPoint = curSp->getPosition();
-        if (postPoint.x+m_Layer->getPositionX()<0) {
+        if (postPoint.x<m_curHeroPost->getPositionX()) {
+            curSp->moveOver();
             m_posts->removeObject(curSp);
+            m_curScore ++;
         }
         
     }
     initPosts();
+}
+void GameMainHelper::gameOver(){
+    setGameStaus(Tag_GameOver);
+    m_mainScene->gameOver();
+    m_Layer->setMoveXDistance(0);
+}
+void GameMainHelper::startGame(){
+    Size winSize  = Director::getInstance()->getWinSize();
+    m_mainScene->startGame();
+    m_Layer->reloadData();
+    m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
+    int posX = m_curHeroPost->getPositionX()-winSize.width/5;
+    m_Layer->setPositionX(-posX);
+    m_curScore = 0;
+    m_Layer->initHeroBeginPoint();
 }
 void GameMainHelper::atachScene(GameMainScene* scene){
     m_mainScene = scene;

@@ -19,22 +19,14 @@ private:
     Sprite* m_bg1 = NULL;
     Sprite* m_bg2 = NULL;
     
-    Sprite* m_Cloud1 = NULL;
-    Sprite* m_Cloud2 = NULL;
-    Sprite* m_Cloud3 = NULL;
     
     bool init();
     void initBg();
-    void initClound();
+    void initClound(Sprite* node);
 public:
     CREATE_FUNC(GameBgLayer);
-    void update(float dx);
-    void initClound1Pos();
-    void initClound2Pos();
-    void initClound3Pos();
-public:
-    void clound1AC();
-    void clound2AC();
-    void clound3AC();
+    void update(float dt,float bgMoveSpeed);
+private:
+    void updateBg(float dX);
 };
 #endif /* defined(__GwsJump__GameBgLayer__) */

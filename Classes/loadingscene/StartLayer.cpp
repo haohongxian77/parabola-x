@@ -9,15 +9,18 @@
 #include "StartLayer.h"
 #include "gamelayer/GameMainLayer.h"
 #include "gamescene/GameMainScene.h"
+#include "helper/CommomData.h"
 #define speed 0.05f
 #define wordDelayTime 0.1
 #define kScaleNum 2
 
 StartLayer::StartLayer(){
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("loadinglayer.plist", "loadinglayer.png");
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("load_hero.plist", "load_hero.png");
      
 }
 StartLayer::~StartLayer(){
+    SpriteFrameCache::getInstance()->removeSpriteFramesFromFile("load_hero.plist");
     
 }
 bool StartLayer::init(){
@@ -45,11 +48,6 @@ void StartLayer::initBg(){
 }
 void StartLayer::initGWSsmall(){
     Size winSize = Director::getInstance()->getWinSize();
-//    m_spGWSNode = Sprite::createWithSpriteFrameName("loading_gwsk.png");
-//    m_spGWSNode->setAnchorPoint(Vec2(0.5f, 0.5f));
-//    m_spGWSNode->setPosition(Vec2(winSize.width/2,winSize.height*3/4));
-//    Size nodeSize = m_spGWSNode->getContentSize();
-//    this->addChild(m_spGWSNode,1);
     
     m_spG = Sprite::createWithSpriteFrameName("loading_1.png");
     m_spG ->setAnchorPoint(Vec2(0, 0.5f));
@@ -97,14 +95,29 @@ void StartLayer::acGWSSp(){
 }
 void StartLayer::changeScene(){
     Size winSize = Director::getInstance()->getWinSize();
-    Scene* sc = GameMainScene::createWithTag(Tag_GameStart);
+    Scene* sc = GameMainScene::create();
     //TransitionSlideInT *transitionScene = TransitionSlideInT::create(0.25,sc);
     Director::getInstance()->replaceScene(sc);
 }
 void StartLayer::initHero(){
     Size winSize = Director::getInstance()->getWinSize();
     m_spHero = Sprite::createWithSpriteFrameName("loading_hero.png");
-//    m_spHero ->setPosition(Vec2(winSize.width/2, winSize.height+m_spHero->getContentSize().height/2));
+    
+    auto animation = Animation::create();
+    for( int i=1;i<8;i++)
+    {
+        char szName[100] = {0};
+        sprintf(szName, "hero_load_%d.png", i);
+        SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(szName);
+        animation->addSpriteFrame(frame);
+    }
+    // should last 2.8 seconds. And there are 14 frames.
+    animation->setDelayPerUnit(2.1f / 14.0f);
+    animation->setRestoreOriginalFrame(true);
+    
+    auto action = Animate::create(animation);
+    m_spHero->runAction(RepeatForever::create(action));
+
     m_spHero ->setPosition(Vec2(winSize.width/2, winSize.height/4+m_spGWS->getContentSize().height/4+m_spHero->getContentSize().height/2));
     
     addChild(m_spHero);
@@ -113,9 +126,23 @@ void StartLayer::initGWSBig(){
     Size winSize = Director::getInstance()->getWinSize();
     m_spGWS = Sprite::createWithSpriteFrameName("loading_word.png");
     m_spGWS ->setAnchorPoint(Vec2(0.5f, 1));
-//    m_spGWS ->setPosition(Vec2(winSize.width/2, -m_spGWS->getContentSize().height));
+    //    m_spGWS ->setPosition(Vec2(winSize.width/2, -m_spGWS->getContentSize().height));
     m_spGWS ->setPosition(Vec2(winSize.width/2, winSize.height/4-m_spGWS->getContentSize().height/2));
     
     addChild(m_spGWS);
+    
+//    auto left = ProgressTimer::create(Sprite::createWithSpriteFrameName("loading_word1.png"));
+//    left->setType(ProgressTimer::Type::BAR);
+//    left->setAnchorPoint(Vec2(0.5f, 1));
+//    //    Setup for a bar starting from the left since the midpoint is 0 for the x
+//    left->setMidpoint(Vec2(0,0));
+//    //    Setup for a horizontal bar since the bar change rate is 0 for y meaning no vertical change
+//    left->setBarChangeRate(Vec2(1, 0));
+//    addChild(left);
+//    left->setPosition(winSize.width/2,winSize.height/4-left->getContentSize().height/2);
+//    
+//    left->runAction(  ProgressTo::create(2, 100));
+
+    
     
 }

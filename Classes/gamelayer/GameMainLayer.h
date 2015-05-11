@@ -13,43 +13,43 @@
 #include "cocos2d.h"
 #include "gamesprite/TouchNode.h"
 #include "gamesprite/HeroFrog.h"
+#include "helper/CommomData.h"
 
 using namespace cocos2d;
-class GameMainHelper;
 class GameMainLayer :public Layer{
     GameMainLayer();
     ~GameMainLayer();
 private:
     bool init();
-    virtual void update(float dt);
+    
 private:
     HeroFrog * m_hero;
     TouchNode * touNode;
-    
-    
-//    float beginY = 0;
-//    bool isDown = false;
-//    float speedY = 0;
-//    float movingTime = 0;
-    
+    DrawNode* drawNode;
+       
     double speedX = 0.0;          //水平速度
     std::vector<float> params;    //完美曲线参数
     std::vector<Point>  movingPoints;   //移动的点；
     Point highestPoint;
-    
-    GameMainHelper* m_helper;
 private:
+    void initData();
     void inittestSp();
     void initHelper();
-    void initHeroBeginPoint();
+    float moveXDistance;
+public:
+    void setMoveXDistance(int distance);
+    void reloadData();
     
 public:
     virtual void onEnter();
+    void update(float dt);
+    void updatePosition(float dt);
     CREATE_FUNC(GameMainLayer);
     void registerTouchDispatcher();
     bool onTouchBegan(Touch* touch, Event  *event);
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(Touch* touch, Event  *event);
+    void initHeroBeginPoint();
 private:  //划线相关
     Point perPos;
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;

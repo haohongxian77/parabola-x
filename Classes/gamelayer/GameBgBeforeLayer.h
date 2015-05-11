@@ -10,5 +10,23 @@
 #define __GwsJump__GameBgBeforeLayer__
 
 #include <stdio.h>
+#include "cocos2d.h"
+using namespace cocos2d;
+class GameBgBeforeLayer :public Layer{
+    GameBgBeforeLayer();
+    ~GameBgBeforeLayer();
+private:
+    Sprite* m_bg1 = NULL;
+    Sprite* m_bg2 = NULL;
+    
+    
+    bool init();
+    void initBg();
+public:
+    CREATE_FUNC(GameBgBeforeLayer);
+    void update(float dt,float bgMoveSpeed);
+private:
+    void updateBg(float dX);
+};
 
 #endif /* defined(__GwsJump__GameBgBeforeLayer__) */

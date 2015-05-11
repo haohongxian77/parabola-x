@@ -10,11 +10,13 @@
 #include "helper/CalculateHelper.h"
 #include "helper/GameMainHelper.h"
 #include "gamesprite/MonsterSpile.h"
-#include "helper/CommomData.h"
-#define Gravity  100//9.9
+#define Gravity  720//9.9
 #define DPixelTo 28
 
-GameMainLayer::GameMainLayer(){
+#define LAYERMOVESPEED 480.0
+GameMainLayer::GameMainLayer():
+moveXDistance(0)
+{
     registerTouchDispatcher();
 }
 
@@ -22,7 +24,7 @@ GameMainLayer::~GameMainLayer(){
 }
 void GameMainLayer::onEnter(){
     Layer::onEnter();
-    scheduleUpdate();
+    //scheduleUpdate();
 }
 void GameMainLayer::registerTouchDispatcher(){
     
@@ -43,33 +45,43 @@ bool GameMainLayer::init(){
     initHeroBeginPoint();
     return true;
 }
+void GameMainLayer::initData(){
+     Size size = Director::getInstance()->getWinSize();
+    moveXDistance = 0;
+}
 void GameMainLayer::inittestSp(){
     Size size = Director::getInstance()->getWinSize();
     
     m_hero = HeroFrog::create();
-    m_hero ->setAnchorPoint(Vec2(0.5,0.5f));
+    m_hero ->setAnchorPoint(Vec2(0.5,0));
     m_hero->setPosition(Vec2(10,10));
-    addChild(m_hero);
+    addChild(m_hero,2);
     
   
     touNode = TouchNode::create();
     touNode->setVisible(false);
-    addChild(touNode);
+    addChild(touNode,3);
+    
+    drawNode = DrawNode::create();
+    addChild(drawNode, 1);
+}
+void GameMainLayer::reloadData(){
+    params.clear();
 }
 void GameMainLayer::initHelper(){
-    m_helper=GameMainHelper::getInstance();
-    m_helper->atachLayer(this);
-    m_helper->initPosts();
-    m_helper->setHero(m_hero);
+    GameMainHelper::getInstance()->atachLayer(this);
+    GameMainHelper::getInstance()->initPosts();
+    GameMainHelper::getInstance()->setHero(m_hero);
     
 }
 void GameMainLayer::initHeroBeginPoint(){
-    if (m_helper->m_posts->count()>0) {
-        Sprite* firtPost= (Sprite*)m_helper->m_posts->getObjectAtIndex(0);
+    m_hero->setHeroStatus(frogStatic);
+    if (GameMainHelper::getInstance()->m_posts->count()>0) {
+        Sprite* firtPost= (Sprite*)GameMainHelper::getInstance()->m_posts->getObjectAtIndex(0);
         Point firstP = firtPost->getPosition();
         
         Point beginPoint =Vec2(firstP.x+firtPost->getContentSize().width/2,
-                               firstP.y+m_hero->getContentSize().height/2);
+                               firstP.y);
         m_hero->setPosition(beginPoint);
     }
 }
@@ -90,16 +102,12 @@ void GameMainLayer::onTouchMoved(Touch *touch, Event *event){
     Point curP= this->convertTouchToNodeSpace(touch);
     Point heroP = m_hero->getPosition();
     touNode->setPos(curP, heroP.y);
-    if (touNode->getCurType() == TOUCH_Enable) {
-        m_hero->setHeroStatus(frogTakeoff);
-    }else{
-        m_hero->setHeroStatus(frogStatic);
-    }
-    
+    m_hero->setHeroStatus(frogTakeoff);
     
 }
 void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     if (touNode->getCurType() == TOUCH_Disable) {
+        m_hero->setHeroStatus(frogStatic);
         return;
     }
     Point curPos = m_hero->getPosition();
@@ -112,27 +120,40 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     m_hero->setHeroStatus(frogJumpUp);
     movingPoints.clear();
     highestPoint = highPoint;
-    m_helper->initJumpDate();
+    GameMainHelper::getInstance()->initJumpDate();
     
 }
 void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) {
     if(movingPoints.size() == 0)
         return;
-
-    DrawPrimitives::setDrawColor4F(255,228,0,125);
-    glLineWidth(5);
-    for (int i=0; i<movingPoints.size()-1; i++) {
-        if((i/10)%2==0)
-            continue;
-        Point p1= movingPoints[i];
-        Point p2 = movingPoints[i+1];
-        ccDrawLine(p1,p2);
+    drawNode->clear();
+    for (int i=1 ; i<movingPoints.size(); i+=2) {
+        Point point1 = movingPoints[i-1];
+        Point point2 = movingPoints[i];
+        
+        drawNode->drawLine(point1, point2, Color4F(255, 186, 0, 1));
     }
     
    
 }
+void GameMainLayer::setMoveXDistance(int distance){
+    moveXDistance = distance;
+}
+void GameMainLayer::updatePosition(float dt){
+    
+    float dis = LAYERMOVESPEED*dt;
+    if (moveXDistance != 0 ) {
+        dis = MIN(dis, -moveXDistance);
+        moveXDistance += dis;
+        
+        this->setPositionX(this->getPositionX()-dis);
+    }
+    
+    
+}
 
 void GameMainLayer::update(float dt){
+    updatePosition(dt);
     if (params.size()==3) {
         perPos = m_hero->getPosition();
         movingPoints.push_back(perPos);
@@ -141,7 +162,7 @@ void GameMainLayer::update(float dt){
         float curY  = CalculateHelper::getPathABC(curX, params);
         CCLOG("dx:%f=============dy:%f",curX-perPos.x,curY-perPos.y);
         
-        if(m_helper->updateHelper(dt, Vec2(curX,curY))){
+        if(m_hero->getHeroStatus() == frogJumpUp||m_hero->getHeroStatus() == frogJumpDown){
             m_hero->setPosition(Vec2(curX,curY));
             if (curX>highestPoint.x) {
                 m_hero->setHeroStatus(frogJumpDown);
@@ -150,13 +171,10 @@ void GameMainLayer::update(float dt){
         if (m_hero->getHeroStatus() == frogFall) {  //跳到柱子上
             params.clear();
             touNode->setVisible(false);
-            m_helper->managePost();
 
         }else if (m_hero->getHeroStatus() == frogDead1||m_hero->getHeroStatus() == frogDead2){   //游戏结束
             params.clear();
             touNode->setVisible(false);
-            m_helper->managePost();
-            unscheduleUpdate();
         }
     }
 }
