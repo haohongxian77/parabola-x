@@ -17,7 +17,9 @@
 
 class GameMainLayer;
 using namespace cocos2d;
-
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "platform/HHPlatform.h"
+#endif
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();
@@ -36,10 +38,13 @@ public:
     Sprite* getCollectSp();
     void initJumpDate();
 public:
-    void share();
     void gameOver();
     void startGame();
     void jumpOver();
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    void share(ShareStatus status);
+#endif
+   
 public:
     CC_SYNTHESIZE(gameStatus, m_gameStatus, GameStaus);
     CC_SYNTHESIZE(int, m_earthH, EarthH);

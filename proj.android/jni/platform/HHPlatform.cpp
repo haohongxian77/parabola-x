@@ -16,7 +16,11 @@ JNIEXPORT void JNICALL Java_com_nextmv_hero_googlekr_HHPayClientActivity_OnPurch
 
 }
 
+static jclass m_shareQQ;
+static jclass m_shareWX;
 static jclass m_shareSina;
+static jclass m_shareFB;
+
 HHPlatform* HHPlatform::m_pInst;
 
 
@@ -24,6 +28,7 @@ HHPlatform* HHPlatform::GetInstance() {
 	if (m_pInst == NULL) {
 		CCLog("HHPlatform::GetInstance");
 		m_pInst = new HHPlatform();
+		m_pInst->retain();
 	}
 	return m_pInst;
 }
@@ -33,21 +38,59 @@ void HHPlatform::setVM(){
 	    JNIEnv *env;
 	    m_pVM->AttachCurrentThread(&env, NULL);
 
-	    jclass cls_All = env->FindClass("com/game/gws/jump/share/SinaClient");
-	    m_shareSina = (jclass) env->NewGlobalRef(cls_All);
-	    env->DeleteLocalRef(cls_All);
+	    jclass cls_Sina = env->FindClass("com/game/gws/jump/share/SinaClient");
+	    m_shareSina = (jclass) env->NewGlobalRef(cls_Sina);
+	    env->DeleteLocalRef(cls_Sina);
+
+	    jclass cls_QQ = env->FindClass("com/game/gws/jump/share/TencentClient");
+	    m_shareQQ = (jclass) env->NewGlobalRef(cls_QQ);
+	    env->DeleteLocalRef(cls_QQ);
+
+	   jclass cls_WX = env->FindClass("com/game/gws/jump/share/WxClient");
+	   m_shareWX = (jclass) env->NewGlobalRef(cls_WX);
+	   env->DeleteLocalRef(cls_WX);
+
+	  jclass cls_FB = env->FindClass("com/game/gws/jump/share/SinaClient");
+	  m_shareFB = (jclass) env->NewGlobalRef(cls_FB);
+	  env->DeleteLocalRef(cls_FB);
 
 }
-void HHPlatform::share(std::string absPath){
+void HHPlatform::share(int shareType,std::string absPath){
 	   JNIEnv *env;
 		m_pVM->AttachCurrentThread(&env, NULL);
-
-		jmethodID m_shareImage = env->GetStaticMethodID(m_shareSina,
-			         "shareImgAndContent",
-			            "(Ljava/lang/String;Ljava/lang/String)V");
+		jmethodID m_shareImage;
 		jstring jstrImagePath = env->NewStringUTF(absPath.c_str());
 		jstring jstrContent = env->NewStringUTF("content");
-		env->CallStaticVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+		CCLOG("----------------------------%d",shareType);
+       switch(shareType){
+       case Share_SINA:
+    	   m_shareImage = env->GetStaticMethodID(m_shareSina,
+    	   			         "shareImgAndContent",
+    	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
+    	   env->CallStaticVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+    	   break;
+       case Share_QQ:
+    	   m_shareImage = env->GetStaticMethodID(m_shareQQ,
+    	      	   			         "shareImg",
+    	      	   			            "(Ljava/lang/String;)V");
+    	   env->CallStaticVoidMethod(m_shareQQ, m_shareImage,jstrImagePath);
+    	   break;
+       case Share_WX:
+    	   m_shareImage = env->GetStaticMethodID(m_shareWX,
+    	      	   			         "shareImg",
+    	      	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
+    	   env->CallStaticVoidMethod(m_shareWX, m_shareImage,jstrImagePath,jstrContent);
+    	   break;
+       case Share_FB:
+    	   m_shareImage = env->GetStaticMethodID(m_shareSina,
+    	      	   			         "shareImgAndContent",
+    	      	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
+    	   env->CallStaticVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+    	   break;
+
+       }
+
+
 		env->DeleteLocalRef(jstrImagePath);
 		env->DeleteLocalRef(jstrContent);
 

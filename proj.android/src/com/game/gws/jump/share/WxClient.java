@@ -29,7 +29,7 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
  * @author czj
- * @Description: 用于处理微信的第三方事物
+ * @Description: 用于处理微信的第三方事物(必须安装微信客户端)
  * @date 2015年4月18日 上午11:00:50
  */
 public class WxClient {
@@ -56,6 +56,10 @@ public class WxClient {
 	 * @param imgAbsPath
 	 */
 	public static void shareImg(String imgAbsPath, String content) {
+		if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
+			Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG).show();
+			return;
+		}
 		WXImageObject imgObj = new WXImageObject();
 		imgObj.setImagePath(imgAbsPath);
 

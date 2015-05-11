@@ -49,14 +49,12 @@ public:
     void showAlertView();
     void changeScore();
     
-    
-    
-    
-    std::string cutOff();
-    
     void onEnter();
     void onExit();
     void update(float dt);
+    std::string cutOff(int shareType);
+private:
+    int m_shareType = 0;
 };
 
 #endif // __HELLOWORLD_SCENE_H__

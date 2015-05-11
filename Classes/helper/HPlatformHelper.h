@@ -17,6 +17,6 @@ class HPlatformHelper {
 public:
     static HPlatformHelper* platfromHelper;
     static HPlatformHelper* getInstance();
-    void share(std::string fullPath);
+    void share(int shareType,std::string fullPath);
 };
 #endif /* defined(__GwsJump__HPlatformHelper__) */

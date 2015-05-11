@@ -45,14 +45,14 @@ void ShareNode::initMenu(){
 
 }
 void ShareNode::shareQQ(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share();
+     GameMainHelper::getInstance()->share(Share_QQ);
 }
 void ShareNode::shareWX(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share();
+     GameMainHelper::getInstance()->share(Share_WX);
 }
 void ShareNode::shareXL(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share();
+     GameMainHelper::getInstance()->share(Share_SINA);
 }
 void ShareNode::shareFB(cocos2d::Ref *obj){
-     GameMainHelper::getInstance()->share();
+     GameMainHelper::getInstance()->share(Share_FB);
 }
