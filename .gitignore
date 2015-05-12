@@ -1,2 +1,7 @@
 /proj.android/
 /proj.android/bin/
+*/bin/
+*/gen/
+.settings
+*.class
+*/.settings
