@@ -34,6 +34,16 @@ public class GwsGooglePlayServiceClient implements
 	private boolean mResolvingConnectionFailure = false;
 	private boolean mAutoStartSignInflow = true;
 	private boolean mSignInClicked = false;
+	private static int curScore;
+	private static ConnectRequestType curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
+
+	public enum ConnectRequestType {
+		CONNECT_REQUEST_NULL,
+		/** 为提交分数而连接 **/
+		CONNECT_REQUEST_SCORE_COMMIT,
+		/** 为进入排行榜而连接 **/
+		CONNECT_REQUEST_SCORE_BOARD;
+	}
 
 	public GwsGooglePlayServiceClient(Activity mActivity) {
 		super();
@@ -61,24 +71,39 @@ public class GwsGooglePlayServiceClient implements
 
 	public static boolean commitScore(int score) {
 		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
+
 			Games.Leaderboards.submitScoreImmediate(
 					mGoogleApiClient,
 					mActivity.getApplicationContext().getString(
 							R.string.leaderboard_worldrank), score);
 			return true;
 		} else {
-
+			curScore = score;
+			curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT;
+			connect();
 			return false;
 		}
 
 	}
 
 	public static void showLeaderBoards() {
-		mActivity.startActivityForResult(Games.Leaderboards
-				.getLeaderboardIntent(mGoogleApiClient,
-						mActivity.getApplicationContext().getResources()
-								.getString(R.string.leaderboard_worldrank)),
-				LEADERBOARDER_SHOW_REQ);
+		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
+			mActivity
+					.startActivityForResult(
+							Games.Leaderboards
+									.getLeaderboardIntent(
+											mGoogleApiClient,
+											mActivity
+													.getApplicationContext()
+													.getResources()
+													.getString(
+															R.string.leaderboard_worldrank)),
+							LEADERBOARDER_SHOW_REQ);
+		} else {
+			curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD;
+			connect();
+		}
+
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -136,7 +161,12 @@ public class GwsGooglePlayServiceClient implements
 	@Override
 	public void onConnected(Bundle arg0) {
 		// TODO Auto-generated method stub
-
+		if (curRequestType == ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD) {
+			showLeaderBoards();
+		} else if (curRequestType == ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT) {
+			commitScore(curScore);
+		}
+		curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
 	}
 
 	@Override

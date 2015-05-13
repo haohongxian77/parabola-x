@@ -1,7 +1,7 @@
 LOCAL_PATH := $(call my-dir)
 include $(CLEAR_VARS)
 LOCAL_MODULE  :=weibosdkcore
-LOCAL_SRC_FILES := prebuilt/libweibosdkcore.so
+LOCAL_SRC_FILES := prebuil/libweibosdkcore.so
 include $(PREBUILT_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
@@ -22,6 +22,8 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/commonnode/ShareNode.cpp \
                    ../../Classes/gamelayer/GameBgLayer.cpp \
                    ../../Classes/gamelayer/GameMainLayer.cpp \
+                   ../../Classes/gamelayer/GameBgBeforeLayer.cpp \
+                   ../../Classes/gamelayer/GameUIlayer.cpp \
                    ../../Classes/gamescene/GameMainScene.cpp \
                    ../../Classes/gamesprite/HeroFrog.cpp \
                    ../../Classes/gamesprite/MonsterSpile.cpp \

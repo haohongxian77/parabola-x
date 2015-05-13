@@ -7,11 +7,11 @@
             <key>loading_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{257,171},{22,23}}</string>
+                <string>{{376,117},{22,23}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{22,23}}</string>
                 <key>sourceSize</key>
@@ -20,11 +20,11 @@
             <key>loading_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1154,96},{93,117}}</string>
+                <string>{{404,2},{93,117}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{93,117}}</string>
                 <key>sourceSize</key>
@@ -33,7 +33,7 @@
             <key>loading_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1007,96},{145,113}}</string>
+                <string>{{257,2},{145,113}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>loading_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1273,96},{71,117}}</string>
+                <string>{{257,117},{71,117}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -55,19 +55,6 @@
                 <string>{{0,0},{71,117}}</string>
                 <key>sourceSize</key>
                 <string>{71,117}</string>
-            </dict>
-            <key>loading_gwsk.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{257,2},{748,167}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{748,167}}</string>
-                <key>sourceSize</key>
-                <string>{748,167}</string>
             </dict>
             <key>loading_hero.png</key>
             <dict>
@@ -85,11 +72,37 @@
             <key>loading_word.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1007,2},{613,92}}</string>
+                <string>{{2,214},{613,92}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{613,92}}</string>
+                <key>sourceSize</key>
+                <string>{613,92}</string>
+            </dict>
+            <key>loading_word1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{257,190},{613,92}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{613,92}}</string>
+                <key>sourceSize</key>
+                <string>{613,92}</string>
+            </dict>
+            <key>loading_word2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{401,121},{613,92}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{613,92}}</string>
                 <key>sourceSize</key>
@@ -103,9 +116,9 @@
             <key>realTextureFileName</key>
             <string>loadinglayer.png</string>
             <key>size</key>
-            <string>{1622,214}</string>
+            <string>{512,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:f592893bfbd16e5d1c73a5dd9f32117e:0f4db816f73931b824dc09e9c118cb35:db4f8a1151caee72b09dbd967efe447d$</string>
+            <string>$TexturePacker:SmartUpdate:de35a67f53cf82fa1131886433860317$</string>
             <key>textureFileName</key>
             <string>loadinglayer.png</string>
         </dict>

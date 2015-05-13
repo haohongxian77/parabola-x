@@ -11,12 +11,15 @@ package com.game.gws.jump.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 
 import com.game.gws.jump.share.WxClient;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
  * @author czj
@@ -24,14 +27,16 @@ import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
  * @date 2015年4月18日 下午1:42:02
  */
 public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
+	public static final String TAG = WXEntryActivity.class.getSimpleName();
 	private boolean isTopActivity = true;
-	private WxClient wxClient;
+	private IWXAPI weixinApi;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		Log.e(TAG, "onCreate");
 		Intent intent = getIntent();
 		Bundle bundle = null;
 		if (intent != null) {
@@ -40,8 +45,11 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		if (bundle == null) {
 			return;
 		}
-		wxClient = new WxClient(this);
-		wxClient.handleIntent(getIntent(), this);
+		// 初始化微信api对象
+		weixinApi = WXAPIFactory.createWXAPI(this, WxClient.APP_ID, false);
+		weixinApi.registerApp(WxClient.APP_ID);
+
+		weixinApi.handleIntent(getIntent(), this);
 
 	}
 
@@ -66,9 +74,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		isTopActivity = true;
-		if (null != wxClient) {
-			wxClient.unregisterApp();
-		}
 	}
 
 	@Override
@@ -83,8 +88,8 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		if (bundle == null) {
 			return;
 		}
-		if (wxClient != null) {
-			wxClient.handleIntent(intent, this);
+		if (weixinApi != null) {
+			weixinApi.handleIntent(intent, this);
 		}
 	}
 

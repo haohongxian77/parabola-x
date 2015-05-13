@@ -353,9 +353,13 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  jni/../../Classes/menulayer/MainLayer.h \
  jni/../../Classes/menulayer/GameMainLogoLayer.h \
  jni/../../Classes/menulayer/GameOverLayer.h \
+ jni/../../Classes/helper/CommomData.h \
  jni/../../Classes/gamelayer/GameMainLayer.h \
  jni/../../Classes/gamesprite/TouchNode.h \
  jni/../../Classes/gamesprite/HeroFrog.h \
+ jni/../../Classes/gamelayer/GameBgLayer.h \
+ jni/../../Classes/gamelayer/GameBgBeforeLayer.h \
+ jni/../../Classes/gamelayer/GameUIlayer.h \
  jni/../../Classes/loadingscene/StartScene.h
 
 jni/../../Classes/AppDelegate.h:
@@ -1066,10 +1070,18 @@ jni/../../Classes/menulayer/GameMainLogoLayer.h:
 
 jni/../../Classes/menulayer/GameOverLayer.h:
 
+jni/../../Classes/helper/CommomData.h:
+
 jni/../../Classes/gamelayer/GameMainLayer.h:
 
 jni/../../Classes/gamesprite/TouchNode.h:
 
 jni/../../Classes/gamesprite/HeroFrog.h:
+
+jni/../../Classes/gamelayer/GameBgLayer.h:
+
+jni/../../Classes/gamelayer/GameBgBeforeLayer.h:
+
+jni/../../Classes/gamelayer/GameUIlayer.h:
 
 jni/../../Classes/loadingscene/StartScene.h:

@@ -23,6 +23,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
+        android:name="com.game.gws.jump.system.MyApp"
         android:icon="@drawable/icon"
         android:label="@string/app_name" >
 
@@ -86,9 +87,9 @@
         <!-- qq share end -->
         <!-- wx start -->
         <activity
-            android:name=".wxapi.WXEntryActivity"
+            android:name="com.game.gws.jump.wxapi.WXEntryActivity"
             android:exported="true"
-            android:label="@string/app_name" >
+            android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
         <!-- wx end -->
     </application>
