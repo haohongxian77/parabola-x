@@ -64,6 +64,7 @@ private:
     Point getNextPoint(Point perPoint);
     
     void movingLayer();
+   
     
     
     
