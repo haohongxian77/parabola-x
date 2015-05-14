@@ -1,4 +1,6 @@
 proj.android/bin/
-proj.android/bin
 */bin/
-.gitignore
+proj.android/gen/
+*/gen/
+.settings
+*.class
