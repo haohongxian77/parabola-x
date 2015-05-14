@@ -1,4 +1,4 @@
-/proj.android/bin/
-/proj.android/bin
+proj.android/bin/
+proj.android/bin
 */bin/
 .gitignore
