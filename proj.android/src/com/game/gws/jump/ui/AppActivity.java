@@ -45,7 +45,7 @@ import com.tencent.mm.sdk.modelbase.BaseResp;
 public class AppActivity extends Cocos2dxActivity implements
 		IWeiboHandler.Response, OnWxListener {
 	/**
-	 * wx,需要确定包名和签名 facebook需要确定包名和签名（测试签名和正式签名）
+	 * facebook需要确定包名和签名（测试签名和正式签名）
 	 */
 	private SinaClient sinaClient;
 	private TencentClient tencentClient;
