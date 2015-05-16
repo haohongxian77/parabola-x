@@ -10,7 +10,7 @@
 #include "helper/CalculateHelper.h"
 #include "helper/GameMainHelper.h"
 #include "gamesprite/MonsterSpile.h"
-#define Gravity  720//9.9
+#define Gravity  1440//9.9
 #define DPixelTo 28
 
 #define LAYERMOVESPEED 480.0
@@ -116,7 +116,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     
     params = CalculateHelper::getPathParametersXABC(curPos, highPoint);
     double upTime = sqrt(2.0*dY/Gravity);
-    speedX = (highPoint.x-curPos.x)/upTime;
+    speedX = (highPoint.x-curPos.x)/upTime;//300;
     m_hero->setHeroStatus(frogJumpUp);
     movingPoints.clear();
     highestPoint = highPoint;

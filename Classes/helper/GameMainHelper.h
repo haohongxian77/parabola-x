@@ -64,6 +64,8 @@ private:
     Point getNextPoint(Point perPoint);
     
     void movingLayer();
+    void initPathPoints(std::vector<float> params,int SpeedX);
+   
     
     
     
@@ -75,6 +77,7 @@ private:
     
     
     GameMainScene* m_mainScene = NULL;
+    std::list<Point> m_heroPaths;
     
     
 };
