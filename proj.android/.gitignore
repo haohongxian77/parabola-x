@@ -2,3 +2,6 @@
 */gen/
 .settings
 *.class
+*/cocos/
+*/cocos2d/
+*/obj/

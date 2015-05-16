@@ -64,10 +64,13 @@ void HHPlatform::share(int shareType,std::string absPath){
 		CCLOG("----------------------------%d",shareType);
        switch(shareType){
        case Share_SINA:
-    	   m_shareImage = env->GetStaticMethodID(m_shareSina,
-    	   			         "shareImgAndContent",
+    	   CCLOG("share    Share_SINA---------------------1");
+    	   m_shareImage = env->GetMethodID(m_shareSina,
+    	   			         "callShare",
     	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   env->CallStaticVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+    	   CCLOG("share    Share_SINA---------------------2");
+    	   env->CallVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+    	   CCLOG("share    Share_SINA---------------------3");
     	   break;
        case Share_QQ:
     	   m_shareImage = env->GetStaticMethodID(m_shareQQ,

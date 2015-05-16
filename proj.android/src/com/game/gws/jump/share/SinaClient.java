@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.game.gws.jump.R;
@@ -36,17 +37,29 @@ import com.sina.weibo.sdk.exception.WeiboException;
  * @date 2015年4月18日 上午10:59:01
  */
 public class SinaClient {
-	private static Activity mActivity;
-	public static final String APP_KEY_SINA = "3893042256"; // 应用的APP_KEY
-	public static final String REDIRECT_URL_SINA = "http://www.sina.com";// 应用的回调页
-	public static final String SCOPE_SINA = // 应用申请的高级权限
+	private static final String TAG = SinaClient.class.getSimpleName();
+	private static SinaClient INSTANCE;
+	private Activity mActivity;
+	public final String APP_KEY_SINA = "3893042256"; // 应用的APP_KEY
+	public final String REDIRECT_URL_SINA = "http://www.sina.com";// 应用的回调页
+	public final String SCOPE_SINA = // 应用申请的高级权限
 	"email,direct_messages_read,direct_messages_write,"
 			+ "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
 			+ "follow_app_official_microblog," + "invitation_write";
 	private static IWeiboShareAPI mWeiboShareAPI;
 
-	public SinaClient(Activity mActivity) {
+	public static SinaClient getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new SinaClient();
+		}
+		return INSTANCE;
+	}
+
+	public SinaClient() {
 		super();
+	}
+
+	public void registerApp(Activity mActivity) {
 		this.mActivity = mActivity;
 		mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(mActivity, APP_KEY_SINA);
 		mWeiboShareAPI.registerApp();
@@ -57,7 +70,7 @@ public class SinaClient {
 	 * @param shareText
 	 * @return 文本消息
 	 */
-	private static TextObject getTextObj(String shareText) {
+	private TextObject getTextObj(String shareText) {
 		TextObject textObject = new TextObject();
 		textObject.text = shareText;
 		return textObject;
@@ -69,10 +82,15 @@ public class SinaClient {
 	 * @return 图片消息
 	 */
 
-	private static ImageObject getImgObj(String absPath) {
+	private ImageObject getImgObj(String absPath) {
 		ImageObject imageObject = new ImageObject();
 		imageObject.setImageObject(BitmapFactory.decodeFile(absPath));
 		return imageObject;
+	}
+
+	public void callShare(String imgAbsPath, String content) {
+		Log.e(TAG, "callShare   :" + imgAbsPath + "/" + content);
+		SinaClient.getInstance().shareImgAndContent(imgAbsPath, content);
 	}
 
 	/**
@@ -82,7 +100,7 @@ public class SinaClient {
 	 *            图片的绝对路径
 	 * @param content
 	 */
-	public static void shareImgAndContent(String imgAbsPath, String content) {
+	public void shareImgAndContent(String imgAbsPath, String content) {
 		// 1. 初始化微博的分享消息
 		WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
 		if (!TextUtils.isEmpty(content)) {

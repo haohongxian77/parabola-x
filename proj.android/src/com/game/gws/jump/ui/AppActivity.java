@@ -47,7 +47,6 @@ public class AppActivity extends Cocos2dxActivity implements
 	/**
 	 * facebook需要确定包名和签名（测试签名和正式签名）
 	 */
-	private SinaClient sinaClient;
 	private TencentClient tencentClient;
 	private WxClient wxClient;
 	private GwsGooglePlayServiceClient psClient;
@@ -56,10 +55,10 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		sinaClient = new SinaClient(this);
 		// if (null != savedInstanceState) {
 		// sinaClient.handleWeiboResponse(getIntent(), this);
 		// }
+		SinaClient.getInstance().registerApp(this);
 		tencentClient = new TencentClient(this);
 		wxClient = new WxClient(this);
 		psClient = new GwsGooglePlayServiceClient(this);
@@ -113,13 +112,13 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
-		sinaClient.handleWeiboResponse(intent, this);
+		SinaClient.getInstance().handleWeiboResponse(intent, this);
 	}
 
 	@Override
 	public void onResponse(BaseResponse arg0) {
 		// TODO Auto-generated method stub
-		sinaClient.onResponse(arg0);
+		SinaClient.getInstance().onResponse(arg0);
 	}
 
 	@Override
