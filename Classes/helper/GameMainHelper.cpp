@@ -278,6 +278,24 @@ void GameMainHelper::startGame(){
 void GameMainHelper::atachScene(GameMainScene* scene){
     m_mainScene = scene;
 }
+void GameMainHelper::initPathPoints(std::vector<float> params, int SpeedX){
+    Point startPoint = m_Hero->getPosition();
+    
+    while (isCollisionPosts() == Collision_None) {
+        float x = 0;
+        if (m_heroPaths.size() == 0) {
+            x = startPoint.x + SpeedX*1.0f/60;
+        }else{
+            Point endPoint = m_heroPaths.back();
+            x = endPoint.x +SpeedX*1.0f/60;
+        }
+        
+        float y = CalculateHelper::getPathABC(x, params);
+        m_heroPaths.push_back(Point(x,y));
+        
+        
+    }
+}
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){
     std::string fullpath = m_mainScene->cutOff(status);
