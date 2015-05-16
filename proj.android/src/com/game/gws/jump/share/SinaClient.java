@@ -88,8 +88,9 @@ public class SinaClient {
 		return imageObject;
 	}
 
-	public void callShare(String imgAbsPath, String content) {
-		Log.e(TAG, "callShare   :" + imgAbsPath + "/" + content);
+	public void callShare(String imgAbsPath, String content) {//
+		Log.e(TAG, "callShare   :====================");// + imgAbsPath + "/" +
+														// content);
 		SinaClient.getInstance().shareImgAndContent(imgAbsPath, content);
 	}
 

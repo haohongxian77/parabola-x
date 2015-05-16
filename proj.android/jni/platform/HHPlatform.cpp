@@ -59,18 +59,25 @@ void HHPlatform::share(int shareType,std::string absPath){
 	   JNIEnv *env;
 		m_pVM->AttachCurrentThread(&env, NULL);
 		jmethodID m_shareImage;
+		jobject obj;
+//		jmethodID shareClient;
 		jstring jstrImagePath = env->NewStringUTF(absPath.c_str());
 		jstring jstrContent = env->NewStringUTF("content");
 		CCLOG("----------------------------%d",shareType);
        switch(shareType){
        case Share_SINA:
-    	   CCLOG("share    Share_SINA---------------------1");
+//    	   shareClient = env->GetStaticMethodID(m_shareSina,
+// 			         "getInstance",
+// 			            "()V");
+    	   CCLOG("Share_SINA ----------------------------1");
+    	   obj =getInstanceObj(env,m_shareSina);// CallStaticObjectMethod(m_shareSina,shareClient);
+    	   CCLOG("Share_SINA ----------------------------2");
     	   m_shareImage = env->GetMethodID(m_shareSina,
     	   			         "callShare",
     	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   CCLOG("share    Share_SINA---------------------2");
-    	   env->CallVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
-    	   CCLOG("share    Share_SINA---------------------3");
+    	   CCLOG("Share_SINA ----------------------------3%s",obj);
+    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath,jstrContent);
+    	   CCLOG("Share_SINA ----------------------------4");
     	   break;
        case Share_QQ:
     	   m_shareImage = env->GetStaticMethodID(m_shareQQ,
@@ -97,4 +104,10 @@ void HHPlatform::share(int shareType,std::string absPath){
 		env->DeleteLocalRef(jstrImagePath);
 		env->DeleteLocalRef(jstrContent);
 
+}
+jobject HHPlatform::getInstanceObj(JNIEnv* env, jclass obj_class)
+{
+    jmethodID construction_id = env->GetMethodID(obj_class, "<init>", "()V");
+    jobject obj = env->NewObject(obj_class, construction_id);
+    return obj;
 }
