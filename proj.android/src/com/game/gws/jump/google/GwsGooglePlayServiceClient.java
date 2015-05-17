@@ -27,15 +27,18 @@ import com.google.example.games.basegameutils.BaseGameUtils;
 public class GwsGooglePlayServiceClient implements
 		GoogleApiClient.ConnectionCallbacks,
 		GoogleApiClient.OnConnectionFailedListener {
-	private static GoogleApiClient mGoogleApiClient;
-	private static Activity mActivity;
+	public static final String TAG = GwsGooglePlayServiceClient.class
+			.getSimpleName();
+	private static GwsGooglePlayServiceClient INSTANCE;
+	private GoogleApiClient mGoogleApiClient;
+	private Activity mActivity;
 	public static int SIGN_IN_REQ = 9001;
 	public static int LEADERBOARDER_SHOW_REQ = 9002;
 	private boolean mResolvingConnectionFailure = false;
 	private boolean mAutoStartSignInflow = true;
 	private boolean mSignInClicked = false;
-	private static int curScore;
-	private static ConnectRequestType curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
+	private int curScore;
+	private ConnectRequestType curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
 
 	public enum ConnectRequestType {
 		CONNECT_REQUEST_NULL,
@@ -45,8 +48,18 @@ public class GwsGooglePlayServiceClient implements
 		CONNECT_REQUEST_SCORE_BOARD;
 	}
 
-	public GwsGooglePlayServiceClient(Activity mActivity) {
+	public static GwsGooglePlayServiceClient getInstance() {
+		if (INSTANCE == null) {
+			INSTANCE = new GwsGooglePlayServiceClient();
+		}
+		return INSTANCE;
+	}
+
+	public GwsGooglePlayServiceClient() {
 		super();
+	}
+
+	public void registerApp(Activity mActivity) {
 		this.mActivity = mActivity;
 		mGoogleApiClient = new GoogleApiClient.Builder(mActivity)
 				.addConnectionCallbacks(this)
@@ -57,7 +70,7 @@ public class GwsGooglePlayServiceClient implements
 				.build();
 	}
 
-	public static void connect() {
+	public void connect() {
 		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
 			mGoogleApiClient.connect();
 		}
@@ -69,7 +82,7 @@ public class GwsGooglePlayServiceClient implements
 		}
 	}
 
-	public static boolean commitScore(int score) {
+	public boolean commitScore(int score) {
 		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
 
 			Games.Leaderboards.submitScoreImmediate(
@@ -86,7 +99,7 @@ public class GwsGooglePlayServiceClient implements
 
 	}
 
-	public static void showLeaderBoards() {
+	public void showLeaderBoards() {
 		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
 			mActivity
 					.startActivityForResult(

@@ -46,8 +46,6 @@ import com.tencent.mm.sdk.modelbase.BaseResp;
 
 public class AppActivity extends Cocos2dxActivity implements
 		IWeiboHandler.Response, OnWxListener {
-	private GwsGooglePlayServiceClient psClient;
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -60,7 +58,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		WxClient.getInstance().registerApp(this);
 		FaceBookClient.getInstance().registerApp(this);
 
-		psClient = new GwsGooglePlayServiceClient(this);
+		GwsGooglePlayServiceClient.getInstance().registerApp(this);
 		WXManager.getInstance().registerWxListener(this);
 	}
 
@@ -103,7 +101,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		psClient.disConnect();
+		GwsGooglePlayServiceClient.getInstance().disConnect();
 		WXManager.getInstance().unRegisterWxListener(this);
 	}
 
@@ -126,7 +124,8 @@ public class AppActivity extends Cocos2dxActivity implements
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == GwsGooglePlayServiceClient.SIGN_IN_REQ
 				|| requestCode == GwsGooglePlayServiceClient.LEADERBOARDER_SHOW_REQ) {
-			psClient.onActivityResult(requestCode, resultCode, data);
+			GwsGooglePlayServiceClient.getInstance().onActivityResult(
+					requestCode, resultCode, data);
 		} else {
 			TencentClient.getInstance().onActivityResult(requestCode,
 					resultCode, data);
