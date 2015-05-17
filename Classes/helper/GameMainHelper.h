@@ -32,7 +32,7 @@ public:
     void setHero(HeroFrog* hero);
     void updateHelper(float dt);
     
-    CollisionType isCollisionPosts();   //碰撞检测
+    CollisionType isCollisionPosts(Point curPoint);   //碰撞检测
     void initPosts();
     void managePost();
     Sprite* getCollectSp();

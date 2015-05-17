@@ -50,7 +50,7 @@ void HHPlatform::setVM(){
 	   m_shareWX = (jclass) env->NewGlobalRef(cls_WX);
 	   env->DeleteLocalRef(cls_WX);
 
-	  jclass cls_FB = env->FindClass("com/game/gws/jump/share/SinaClient");
+	  jclass cls_FB = env->FindClass("com/game/gws/jump/share/FaceBookClient");
 	  m_shareFB = (jclass) env->NewGlobalRef(cls_FB);
 	  env->DeleteLocalRef(cls_FB);
 
@@ -66,36 +66,32 @@ void HHPlatform::share(int shareType,std::string absPath){
 		CCLOG("----------------------------%d",shareType);
        switch(shareType){
        case Share_SINA:
-//    	   shareClient = env->GetStaticMethodID(m_shareSina,
-// 			         "getInstance",
-// 			            "()V");
-    	   CCLOG("Share_SINA ----------------------------1");
-    	   obj =getInstanceObj(env,m_shareSina);// CallStaticObjectMethod(m_shareSina,shareClient);
-    	   CCLOG("Share_SINA ----------------------------2");
+    	   obj =getInstanceObj(env,m_shareSina);
     	   m_shareImage = env->GetMethodID(m_shareSina,
     	   			         "callShare",
     	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   CCLOG("Share_SINA ----------------------------3%s",obj);
     	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath,jstrContent);
-    	   CCLOG("Share_SINA ----------------------------4");
     	   break;
        case Share_QQ:
-    	   m_shareImage = env->GetStaticMethodID(m_shareQQ,
+    	   obj =getInstanceObj(env,m_shareQQ);
+    	   m_shareImage = env->GetMethodID(m_shareQQ,
     	      	   			         "shareImg",
     	      	   			            "(Ljava/lang/String;)V");
-    	   env->CallStaticVoidMethod(m_shareQQ, m_shareImage,jstrImagePath);
+    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath);
     	   break;
        case Share_WX:
-    	   m_shareImage = env->GetStaticMethodID(m_shareWX,
+    	   obj =getInstanceObj(env,m_shareWX);
+    	   m_shareImage = env->GetMethodID(m_shareWX,
     	      	   			         "shareImg",
     	      	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   env->CallStaticVoidMethod(m_shareWX, m_shareImage,jstrImagePath,jstrContent);
+    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath,jstrContent);
     	   break;
        case Share_FB:
-    	   m_shareImage = env->GetStaticMethodID(m_shareSina,
-    	      	   			         "shareImgAndContent",
+    	   obj =getInstanceObj(env,m_shareFB);
+    	   m_shareImage = env->GetMethodID(m_shareFB,
+    	      	   			         "shareImg",
     	      	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   env->CallStaticVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
+    	   env->CallVoidMethod(m_shareSina, m_shareImage,jstrImagePath,jstrContent);
     	   break;
 
        }
@@ -107,7 +103,7 @@ void HHPlatform::share(int shareType,std::string absPath){
 }
 jobject HHPlatform::getInstanceObj(JNIEnv* env, jclass obj_class)
 {
-    jmethodID construction_id = env->GetMethodID(obj_class, "<init>", "()V");
+    jmethodID construction_id = env->GetStaticMethodID(obj_class, "getInstance", "()V");
     jobject obj = env->NewObject(obj_class, construction_id);
     return obj;
 }

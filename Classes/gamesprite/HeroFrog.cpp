@@ -145,13 +145,13 @@ void HeroFrog::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags){
     drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*3/4, heroSize.height/8), Color4F(186, 186, 186, 1));
     drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*7/8, heroSize.height), Color4F(255, 255, 0, 1));
 }
-Rect HeroFrog::getFootRect(){
+Rect HeroFrog::getFootRect(Point curPoint){
     Size heroSize = this->getContentSize();
     
-    return Rect(getPositionX()-heroSize.width/4, getPositionY(), heroSize.width/2, heroSize.height/8);
+    return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width/2, heroSize.height/8);
 }
-Rect HeroFrog::getBodyRect(){
+Rect HeroFrog::getBodyRect(Point curPoint){
     Size heroSize = this->getContentSize();
-    return Rect(getPositionX()-heroSize.width/4, getPositionY(), heroSize.width*5/8, heroSize.height);
+    return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width*5/8, heroSize.height);
 }
 

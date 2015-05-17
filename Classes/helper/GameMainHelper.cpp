@@ -182,7 +182,7 @@ void GameMainHelper::atachLayer(GameMainLayer *layer){
     m_Layer = layer;
     m_Layer->addChild(m_spilesNode);
 }
-CollisionType GameMainHelper::isCollisionPosts(){
+CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
     CollisionType c_Type = Collision_None;
     for (int i=0; i<m_posts->count(); i++) {
        
@@ -193,7 +193,7 @@ CollisionType GameMainHelper::isCollisionPosts(){
         if (i==m_startIndex||std::abs(sp->getPositionX()-m_Hero->getPositionX())>heroSize.width/2) {
             continue;
         }
-        c_Type =  sp->getValid(m_Hero->getFootRect(),m_Hero->getBodyRect());
+        c_Type =  sp->getValid(m_Hero->getFootRect(curPoint),m_Hero->getBodyRect(curPoint));
         if(c_Type == Collision_None){
             
         }else {
@@ -218,7 +218,7 @@ void GameMainHelper::updateHelper(float dt){
     if (m_Hero->getPositionX()+m_Layer->getPositionX()>s.width*3/4&&m_Layer->getNumberOfRunningActions()==0) {
         movingLayer();
     }
-    CollisionType m_Type = isCollisionPosts();
+    CollisionType m_Type = isCollisionPosts(m_Hero->getPosition());
     if (m_Type == Collision_valid) {
         m_Hero->setHeroStatus(frogFall);
         jumpOver();
@@ -280,8 +280,9 @@ void GameMainHelper::atachScene(GameMainScene* scene){
 }
 void GameMainHelper::initPathPoints(std::vector<float> params, int SpeedX){
     Point startPoint = m_Hero->getPosition();
+    Point curPoint = startPoint;
     
-    while (isCollisionPosts() == Collision_None) {
+    while (isCollisionPosts(curPoint) == Collision_None) {
         float x = 0;
         if (m_heroPaths.size() == 0) {
             x = startPoint.x + SpeedX*1.0f/60;
@@ -292,7 +293,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, int SpeedX){
         
         float y = CalculateHelper::getPathABC(x, params);
         m_heroPaths.push_back(Point(x,y));
-        
+        curPoint = Point(x,y);
         
     }
 }

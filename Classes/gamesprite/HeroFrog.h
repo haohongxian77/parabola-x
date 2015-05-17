@@ -29,8 +29,8 @@ public:
     void setHeroStatus(FrogStatus heroStatus);
 public:
     CREATE_FUNC(HeroFrog);
-    Rect getFootRect();
-    Rect getBodyRect();
+    Rect getFootRect(Point curPoint);
+    Rect getBodyRect(Point curPoint);
 private:
     bool init();
     void initData();

@@ -26,10 +26,6 @@
 			<triggers>clean,full,incremental,</triggers>
 			<arguments>
 				<dictionary>
-					<key>?children?</key>
-					<value>?children?=?name?=entry\\\\\\\|\\\|\|?name?=outputEntries\||</value>
-				</dictionary>
-				<dictionary>
 					<key>?name?</key>
 					<value></value>
 				</dictionary>
@@ -43,7 +39,7 @@
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildArguments</key>
-					<value>${ProjDirPath}/build_native.py -b release</value>
+					<value>${ProjDirPath}/build_native.py -b debug</value>
 				</dictionary>
 				<dictionary>
 					<key>org.eclipse.cdt.make.core.buildCommand</key>
@@ -116,7 +112,7 @@
 		<link>
 			<name>cocos</name>
 			<type>2</type>
-			<location>D:/gws/GwsJump/cocos2d/cocos/platform/android/java/src</location>
+			<locationURI>gws/cocos2d/cocos/platform/android/java/src</locationURI>
 		</link>
 		<link>
 			<name>cocos2d</name>
@@ -129,4 +125,10 @@
 			<locationURI>PARENT-1-PROJECT_LOC/cocos2d/cocos/platform/android/java/src</locationURI>
 		</link>
 	</linkedResources>
+	<variableList>
+		<variable>
+			<name>gws</name>
+			<value>file:/Users/kakuhongxian/Documents/cocosd/gws/parabola-x</value>
+		</variable>
+	</variableList>
 </projectDescription>
