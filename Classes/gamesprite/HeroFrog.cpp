@@ -8,7 +8,7 @@
 
 #include "HeroFrog.h"
 #include "helper/GameMainHelper.h"
-int animationCount[7] = {8,4,4,4,2,3,3};
+int animationCount[7] = {8,4,2,6,2,3,3};
                    //idel,起跳，上跳，下跳，落地，死亡撞柱子，死亡
 std::string animaFrameName[7] = {"hero_static_%d.png","hero_jpstart_%d.png",
                             "hero_jpup_%d.png","hero_jpdown_%d.png",
@@ -57,9 +57,40 @@ void HeroFrog::initAnimation(){
     setHeroStatus(frogStatic);
  
 }
-void HeroFrog::setPos(Point pos){
-
+void HeroFrog::setCurPosition(Point pos){
+    setPosition(pos);
+    if (pos.x == downPoint.x && pos.y == downPoint.y) {
+        setHeroStatus(frogJumpDown);
+    }
 }
+void HeroFrog::setHeroMoveOver(){
+    switch (pathoverStatus) {
+        case frogFall:
+            setHeroStatus(frogFall);
+            GameMainHelper::getInstance()->jumpOver();
+            break;
+        case frogDead1:
+            setHeroStatus(frogDead1);
+            GameMainHelper::getInstance()->gameOver();
+            break;
+        case frogDead2:
+            setHeroStatus(frogDead2);
+            GameMainHelper::getInstance()->gameOver();
+            break;
+            
+        default:
+            break;
+    }
+}
+bool HeroFrog::setHeroFall(){
+    if (pathoverStatus == frogFall){
+        setHeroStatus(frogFall);
+        GameMainHelper::getInstance()->jumpOver();
+        return true;
+    }
+    return false;
+}
+
 void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     if (m_heroStatus == heroStatus) {
         return;
@@ -78,7 +109,10 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     float time;
     SpriteFrame* deadFrame ;
     Spawn* sp;
+    
     MoveTo* mvTo;
+    Point targetPoint;
+    
     CCLOG("---------设置hero状态-----------");
     switch (heroStatus) {
         case frogStatic:
@@ -97,25 +131,33 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             
             break;
         case frogJumpDown:
-            ani->setDelayPerUnit(2); //--------待计算
+            ani->setDelayPerUnit(downAnimSpeed); //--------待计算
             ac= Animate::create(ani);
             runAction(ac);
             break;
         case frogFall:
+            ani->setDelayPerUnit(downAnimSpeed);
             ac= Animate::create(ani);
-            seq = Sequence::create(ac,CCCallFunc::create(CC_CALLBACK_0(HeroFrog::setHeroStatic, this)) , NULL);
+            targetPoint = GameMainHelper::getInstance()->getHeroPostPoint();
+            time =ani->getDelayPerUnit();
+            mvTo = MoveTo::create(downAnimSpeed,targetPoint);
+            sp = Spawn::create(ac,mvTo, NULL);
+            seq = Sequence::create(sp,CCCallFunc::create(CC_CALLBACK_0(HeroFrog::setHeroStatic, this)) , NULL);
             runAction(seq);
             break;
         case frogDead1:
             deadFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName("hero_dead2.png");
             this->setDisplayFrame(deadFrame);
              ac= Animate::create(ani);
-            y = GameMainHelper::getInstance()->getEarthH();
+            y = MIN(GameMainHelper::getInstance()->getEarthH(),getPositionY());
+            targetPoint = GameMainHelper::getInstance()->getHeroPostPoint();
+            this->setPositionX(targetPoint.x-getContentSize().width/2+5);
             dis = getPositionY()-y;
             time = dis/downSpeed;
-            mvTo = MoveTo::create(time,Point(getPositionX(),y));
-            sp = Spawn::create(RepeatForever::create(ac),mvTo, NULL);
-            seq = Sequence::create(DelayTime::create(0.5), mvTo,NULL);
+            targetPoint = Point(getPositionX(),y);
+            mvTo = MoveTo::create(time,targetPoint);
+            sp = Spawn::create(Repeat::create(ac,10),mvTo, NULL);
+            seq = Sequence::create(DelayTime::create(0.5), sp,NULL);
      
             runAction(seq);
             break;
@@ -142,16 +184,20 @@ void HeroFrog::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags){
         return;
     drawNode->clear();
      Size heroSize = this->getContentSize();
-    drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*3/4, heroSize.height/8), Color4F(186, 186, 186, 1));
+    drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*3/4, heroSize.height/4), Color4F(186, 186, 186, 1));
     drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*7/8, heroSize.height), Color4F(255, 255, 0, 1));
 }
 Rect HeroFrog::getFootRect(Point curPoint){
     Size heroSize = this->getContentSize();
     
-    return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width/2, heroSize.height/8);
+    return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width/2, heroSize.height/4);
 }
 Rect HeroFrog::getBodyRect(Point curPoint){
     Size heroSize = this->getContentSize();
     return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width*5/8, heroSize.height);
 }
-
+void HeroFrog::setHeroMoveParam(Point downPoint, float downAniSpeed, FrogStatus status){
+    this->downPoint = downPoint;
+    this->downAnimSpeed = downAniSpeed;
+    this->pathoverStatus = status;
+}

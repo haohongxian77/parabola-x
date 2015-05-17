@@ -6,49 +6,129 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Classes/gamesprite/HeroFrog.cpp"
-            timestampString = "453046987.798072"
+            filePath = "../Classes/gamelayer/GameMainLayer.cpp"
+            timestampString = "453545163.037967"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
+            landmarkName = "GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/gamelayer/GameMainLayer.cpp"
+            timestampString = "453545175.640391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "120"
             endingLineNumber = "120"
-            landmarkName = "HeroFrog::setHeroStatus(FrogStatus heroStatus)"
+            landmarkName = "GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Classes/gamesprite/HeroFrog.cpp"
-            timestampString = "453046987.798072"
+            filePath = "../Classes/helper/GameMainHelper.cpp"
+            timestampString = "453567283.381425"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "HeroFrog::setHeroStatus(FrogStatus heroStatus)"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "GameMainHelper::movingLayer()"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Classes/gamesprite/MonsterSpile.cpp"
-            timestampString = "453126534.891661"
+            filePath = "../Classes/helper/GameMainHelper.cpp"
+            timestampString = "453567785.921076"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "MonsterSpile::getValid(Rect heroFootRect,Rect heroBodyRect)"
+            startingLineNumber = "246"
+            endingLineNumber = "246"
+            landmarkName = "GameMainHelper::jumpOver()"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/helper/GameMainHelper.cpp"
+            timestampString = "453567805.388286"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "GameMainHelper::updateHelper(float dt)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Classes/gamelayer/GameMainLayer.cpp"
+            timestampString = "453568167.565885"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "GameMainLayer::draw(Renderer *renderer, const Mat4 &amp;transform, uint32_t flags)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameMainLayer::draw(cocos2d::Renderer*, cocos2d::Mat4 const&amp;, unsigned int)"
+                  moduleName = "GwsJump Mac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kakuhongxian/Documents/cocosd/gws/parabola-x/Classes/gamelayer/GameMainLayer.cpp"
+                  timestampString = "453568215.430495"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "394">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "GameMainLayer::draw(cocos2d::Renderer*, cocos2d::Mat4 const&amp;, unsigned int)"
+                  moduleName = "GwsJump Mac"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kakuhongxian/Documents/cocosd/gws/parabola-x/Classes/gamelayer/GameMainLayer.cpp"
+                  timestampString = "453568215.43096"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "138"
+                  endingLineNumber = "138"
+                  offsetFromSymbolStart = "403">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

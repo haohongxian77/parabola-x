@@ -36,7 +36,9 @@ public:
     void initPosts();
     void managePost();
     Sprite* getCollectSp();
-    void initJumpDate();
+    void initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY);
+    
+    Point getHeroPostPoint();
 public:
     void gameOver();
     void startGame();
@@ -64,8 +66,9 @@ private:
     Point getNextPoint(Point perPoint);
     
     void movingLayer();
-    void initPathPoints(std::vector<float> params,int SpeedX);
-   
+    void initPathPoints(std::vector<float> params,float SpeedX,float highY , float curY);
+    
+    float getCurSpeed(float speed,float totalDis,float curDis);
     
     
     
@@ -76,8 +79,12 @@ private:
     int m_startIndex = -1;
     
     
+    
     GameMainScene* m_mainScene = NULL;
-    std::list<Point> m_heroPaths;
+    //hero 路径
+    std::vector<Point> m_heroPaths;
+    int m_heroPathIndex = 0;
+    
     
     
 };

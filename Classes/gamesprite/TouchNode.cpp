@@ -22,7 +22,8 @@ void TouchNode::setPos(Point curP, float heroP){
     TouchType touchType_;
     SpriteFrame* frame = NULL;
     this->setPosition(curP);
-    if (curP.y>heroP) {
+    Size  size = Director::getInstance()->getWinSize();
+    if (curP.y - heroP > size.height/8) {
         frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_normal.png");
         touchType_ = TOUCH_Enable;
     }else{

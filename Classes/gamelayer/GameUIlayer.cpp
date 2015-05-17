@@ -24,7 +24,7 @@ bool GameUIlayer::init(){
         
         
         Size contentSize = m_scoreBg->getContentSize();
-         m_scoreLabel = LabelAtlas::create("10808547", "fonts/game_frontoverhigh.png",  23.4, 28, '0');
+         m_scoreLabel = LabelAtlas::create("0", "fonts/game_frontoverhigh.png",  23.4, 28, '0');
         m_scoreLabel->setAnchorPoint(Vec2(0.5,0.5));
         m_scoreLabel->setPosition(Vec2(contentSize.width/2,contentSize.height/2));
         m_scoreBg->addChild(m_scoreLabel);

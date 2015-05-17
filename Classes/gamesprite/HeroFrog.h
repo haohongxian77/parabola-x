@@ -27,6 +27,10 @@ public:
     FrogStatus m_heroStatus;
     FrogStatus getHeroStatus();
     void setHeroStatus(FrogStatus heroStatus);
+    void setHeroMoveParam(Point downPoint,float downAniSpeed, FrogStatus status);
+    void setCurPosition(Point pos);
+    void setHeroMoveOver();
+    bool setHeroFall();
 public:
     CREATE_FUNC(HeroFrog);
     Rect getFootRect(Point curPoint);
@@ -36,13 +40,23 @@ private:
     void initData();
     void initAnimation();
     void runStaticAnimation();
-    void setPos(Point pos);
     void update();
     void setHeroStatic();
+    
+    
 private:
     float downSpeed = 0;
     DrawNode* drawNode;
+    //最高点动作转换的动画
+    Point downPoint;
+    float downAnimSpeed;
+    FrogStatus pathoverStatus;
+    
+    
+    
+    
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
+    
     
 };
 

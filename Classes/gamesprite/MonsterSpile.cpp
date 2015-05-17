@@ -56,7 +56,7 @@ CollisionType MonsterSpile::getValid(Rect heroFootRect,Rect heroBodyRect){
     CollisionType _cType= Collision_None;
     Point _point = this->getPosition();
     Size  size = this->getContentSize();
-    Rect rec = Rect(_point.x,_point.y-10,size.width,10);
+    Rect rec = Rect(_point.x,_point.y-30,size.width,30);
     Rect recText = Rect(_point.x,_point.y-size.height,size.width,size.height);
 //    CCLOG("英雄的位置======%f=====%f=====%f=====%f ",heroRect.origin.x,heroRect.origin.y,heroRect.size.width,heroRect.size.height);
 //     CCLOG("可站立的位置======%f=====%f=====%f=====%f ",rec.origin.x,rec.origin.y,rec.size.width,rec.size.height);

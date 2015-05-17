@@ -10,7 +10,7 @@
 #include "helper/CalculateHelper.h"
 #include "helper/GameMainHelper.h"
 #include "gamesprite/MonsterSpile.h"
-#define Gravity  1440//9.9
+#define Gravity  1980//9.9
 #define DPixelTo 28
 
 #define LAYERMOVESPEED 480.0
@@ -117,10 +117,13 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     params = CalculateHelper::getPathParametersXABC(curPos, highPoint);
     double upTime = sqrt(2.0*dY/Gravity);
     speedX = (highPoint.x-curPos.x)/upTime;//300;
+    speedX = MAX(300.0, speedX);
+    speedX = MIN(600.0,speedX);
+    
     m_hero->setHeroStatus(frogJumpUp);
     movingPoints.clear();
     highestPoint = highPoint;
-    GameMainHelper::getInstance()->initJumpDate();
+    GameMainHelper::getInstance()->initJumpDate(params,speedX,highPoint.y,curPos.y);
     
 }
 void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) {
@@ -137,7 +140,8 @@ void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t fla
    
 }
 void GameMainLayer::setMoveXDistance(int distance){
-    moveXDistance = distance;
+
+    moveXDistance = MIN(distance,0);
 }
 void GameMainLayer::updatePosition(float dt){
     
@@ -158,17 +162,18 @@ void GameMainLayer::update(float dt){
         perPos = m_hero->getPosition();
         movingPoints.push_back(perPos);
         
-        float curX = perPos.x+speedX*dt;//1;
-        float curY  = CalculateHelper::getPathABC(curX, params);
-        CCLOG("dx:%f=============dy:%f",curX-perPos.x,curY-perPos.y);
         
-        if(m_hero->getHeroStatus() == frogJumpUp||m_hero->getHeroStatus() == frogJumpDown){
-            m_hero->setPosition(Vec2(curX,curY));
-            if (curX>highestPoint.x) {
-                m_hero->setHeroStatus(frogJumpDown);
-            }
-        }
-        if (m_hero->getHeroStatus() == frogFall) {  //跳到柱子上
+        
+//        float curX = perPos.x+speedX*dt;//1;
+//        float curY  = CalculateHelper::getPathABC(curX, params);
+//        CCLOG("dx:%f=============dy:%f",curX-perPos.x,curY-perPos.y);
+//        if(m_hero->getHeroStatus() == frogJumpUp||m_hero->getHeroStatus() == frogJumpDown){
+//            m_hero->setPosition(Vec2(curX,curY));
+//            if (curX>highestPoint.x) {
+//                m_hero->setHeroStatus(frogJumpDown);
+//            }
+//        }
+        if (m_hero->getHeroStatus() == frogStatic) {  //跳到柱子上
             params.clear();
             touNode->setVisible(false);
 
