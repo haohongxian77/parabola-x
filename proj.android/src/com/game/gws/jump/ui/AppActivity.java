@@ -47,8 +47,6 @@ public class AppActivity extends Cocos2dxActivity implements
 	/**
 	 * facebook需要确定包名和签名（测试签名和正式签名）
 	 */
-	private TencentClient tencentClient;
-	private WxClient wxClient;
 	private GwsGooglePlayServiceClient psClient;
 
 	@Override
@@ -59,8 +57,9 @@ public class AppActivity extends Cocos2dxActivity implements
 		// sinaClient.handleWeiboResponse(getIntent(), this);
 		// }
 		SinaClient.getInstance().registerApp(this);
-		tencentClient = new TencentClient(this);
-		wxClient = new WxClient(this);
+		TencentClient.getInstance().registerApp(this);
+		WxClient.getInstance().registerApp(this);
+
 		psClient = new GwsGooglePlayServiceClient(this);
 		WXManager.getInstance().registerWxListener(this);
 	}
@@ -129,7 +128,8 @@ public class AppActivity extends Cocos2dxActivity implements
 				|| requestCode == GwsGooglePlayServiceClient.LEADERBOARDER_SHOW_REQ) {
 			psClient.onActivityResult(requestCode, resultCode, data);
 		} else {
-			tencentClient.onActivityResult(requestCode, resultCode, data);
+			TencentClient.getInstance().onActivityResult(requestCode,
+					resultCode, data);
 		}
 
 	}
@@ -137,7 +137,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	@Override
 	public void onResp(BaseResp resp) {
 		// TODO Auto-generated method stub
-		wxClient.handleResp(resp);
+		WxClient.getInstance().handleResp(resp);
 	}
 
 	@Override

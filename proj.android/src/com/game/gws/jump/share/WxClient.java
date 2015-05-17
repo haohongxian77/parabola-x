@@ -38,18 +38,29 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
  */
 public class WxClient {
 	public static final String TAG = WxClient.class.getSimpleName();
-	private static final int THUMB_SIZE = 150;
+	public static WxClient INSTANCE;
+	private final int THUMB_SIZE = 150;
 	public static final String APP_ID = "wx644a5864a554f4f2";
-	public static final String APP_SECRET = "b7a42c91be34da26fd9f2843bf7d6371";
-	public static final String APP_TRANSATION = "wx_transaction";
-	private static String mImgAbsPath = "";
-	private static String mContent = "";
+	public final String APP_SECRET = "b7a42c91be34da26fd9f2843bf7d6371";
+	public final String APP_TRANSATION = "wx_transaction";
+	private String mImgAbsPath = "";
+	private String mContent = "";
 	/** IWXAPI 是第三方app和微信通信的openapi接口 **/
-	private static IWXAPI iwxapi;
-	private static Activity mActivity;
+	private IWXAPI iwxapi;
+	private Activity mActivity;
 
-	public WxClient(Activity mActivity) {
+	public static WxClient getInstance() {
+		if (null == INSTANCE) {
+			INSTANCE = new WxClient();
+		}
+		return INSTANCE;
+	}
+
+	public WxClient() {
 		super();
+	}
+
+	public void registerApp(Activity mActivity) {
 		if (null != mActivity) {
 			this.mActivity = mActivity;
 			iwxapi = WXAPIFactory.createWXAPI(mActivity, APP_ID);
@@ -62,7 +73,7 @@ public class WxClient {
 	 * 
 	 * @param imgAbsPath
 	 */
-	public static void shareImg(String imgAbsPath, final String content) {
+	public void shareImg(String imgAbsPath, final String content) {
 		Log.e(TAG, "shareImg:" + imgAbsPath);
 		mImgAbsPath = Environment.getExternalStorageDirectory()
 				.getAbsolutePath()

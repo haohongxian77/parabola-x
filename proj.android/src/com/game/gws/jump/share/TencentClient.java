@@ -30,14 +30,25 @@ import com.tencent.tauth.UiError;
  */
 public class TencentClient {
 	public static final String TAG = TencentClient.class.getSimpleName();
+	public static TencentClient INSTANCE;
 	private final String APP_ID = "1104440171";
 	private final String APP_KEY = "xVJqmHS1g1orgU8g";
-	private static final String APP_NAME = "完美抛物线";
-	private static Activity mActivity;
-	private static Tencent mTencent;
+	private final String APP_NAME = "完美抛物线";
+	private Activity mActivity;
+	private Tencent mTencent;
 
-	public TencentClient(Activity mActivity) {
+	public static TencentClient getInstance() {
+		if (null == INSTANCE) {
+			INSTANCE = new TencentClient();
+		}
+		return INSTANCE;
+	}
+
+	public TencentClient() {
 		super();
+	}
+
+	public void registerApp(Activity mActivity) {
 		this.mActivity = mActivity;
 		mTencent = Tencent.createInstance(APP_ID,
 				mActivity.getApplicationContext());
@@ -49,7 +60,7 @@ public class TencentClient {
 	 * @param imgAbsPath
 	 *            本地绝对路径
 	 */
-	public static void shareImg(String imgAbsPath) {
+	public void shareImg(String imgAbsPath) {
 		Log.e(TAG, "shareImg:" + imgAbsPath);
 		imgAbsPath = Environment.getExternalStorageDirectory()
 				.getAbsolutePath()
