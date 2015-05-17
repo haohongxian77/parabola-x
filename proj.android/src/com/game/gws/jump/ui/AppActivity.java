@@ -30,8 +30,12 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.WindowManager;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.facebook.appevents.AppEventsLogger;
+import com.game.gws.jump.google.AdsClient;
 import com.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.game.gws.jump.share.FaceBookClient;
 import com.game.gws.jump.share.SinaClient;
@@ -50,22 +54,31 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		// if (null != savedInstanceState) {
-		// sinaClient.handleWeiboResponse(getIntent(), this);
-		// }
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		SinaClient.getInstance().registerApp(this);
 		TencentClient.getInstance().registerApp(this);
 		WxClient.getInstance().registerApp(this);
 		FaceBookClient.getInstance().registerApp(this);
 
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
+		AdsClient.getInstance().initWithActivityOnCreate(this);
+
 		WXManager.getInstance().registerWxListener(this);
+		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+		RelativeLayout containerView = new RelativeLayout(this);
+		addContentView(containerView, lp);
+		RelativeLayout.LayoutParams adLp = new RelativeLayout.LayoutParams(
+				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+		adLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		containerView.addView(AdsClient.getInstance().getAdView(), adLp);
 	}
 
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+		GwsGooglePlayServiceClient.getInstance().connect();
 	}
 
 	@Override
@@ -80,6 +93,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		/**
 		 * facebook end
 		 */
+		AdsClient.getInstance().onResume();
 	}
 
 	@Override
@@ -94,6 +108,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		/**
 		 * facebook end
 		 */
+		AdsClient.getInstance().onPause();
 
 	}
 
@@ -101,6 +116,7 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		AdsClient.getInstance().onDestroy();
 		GwsGooglePlayServiceClient.getInstance().disConnect();
 		WXManager.getInstance().unRegisterWxListener(this);
 	}
