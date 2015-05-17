@@ -56,5 +56,9 @@
     <string name="sign_in_to_upload_this_score">Sign in now to upload this score, save your achievements and share your progress with friends.</string>
     <string name="signin_other_error">There was an issue with sign in.  Please try again later.</string>
     <!-- google play service end -->
+    <!-- facebook start -->
+    <string name="facebook_app_id">372222629651523</string>
+    <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>
+    <!-- facebook end -->
 
 </resources>

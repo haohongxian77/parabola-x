@@ -31,7 +31,9 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.game.gws.jump.share.GwsGooglePlayServiceClient;
+import com.facebook.appevents.AppEventsLogger;
+import com.game.gws.jump.google.GwsGooglePlayServiceClient;
+import com.game.gws.jump.share.FaceBookClient;
 import com.game.gws.jump.share.SinaClient;
 import com.game.gws.jump.share.TencentClient;
 import com.game.gws.jump.share.WxClient;
@@ -44,9 +46,6 @@ import com.tencent.mm.sdk.modelbase.BaseResp;
 
 public class AppActivity extends Cocos2dxActivity implements
 		IWeiboHandler.Response, OnWxListener {
-	/**
-	 * facebook需要确定包名和签名（测试签名和正式签名）
-	 */
 	private GwsGooglePlayServiceClient psClient;
 
 	@Override
@@ -59,6 +58,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		SinaClient.getInstance().registerApp(this);
 		TencentClient.getInstance().registerApp(this);
 		WxClient.getInstance().registerApp(this);
+		FaceBookClient.getInstance().registerApp(this);
 
 		psClient = new GwsGooglePlayServiceClient(this);
 		WXManager.getInstance().registerWxListener(this);
@@ -78,7 +78,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		 * facebook start
 		 */
 		// Logs 'install' and 'app activate' App Events.
-		// AppEventsLogger.activateApp(this);
+		AppEventsLogger.activateApp(this);
 		/**
 		 * facebook end
 		 */
@@ -92,7 +92,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		 * facebook start
 		 */
 		// Logs 'app deactivate' App Event.
-		// AppEventsLogger.deactivateApp(this);
+		AppEventsLogger.deactivateApp(this);
 		/**
 		 * facebook end
 		 */
@@ -129,6 +129,8 @@ public class AppActivity extends Cocos2dxActivity implements
 			psClient.onActivityResult(requestCode, resultCode, data);
 		} else {
 			TencentClient.getInstance().onActivityResult(requestCode,
+					resultCode, data);
+			FaceBookClient.getInstance().onActivityResult(requestCode,
 					resultCode, data);
 		}
 

@@ -21,7 +21,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.game.gws.jump.system.MyApp;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX.Resp;
@@ -84,39 +83,31 @@ public class WxClient {
 		mContent = content;
 		Log.e(TAG, "imgAbsPath:" + mImgAbsPath);
 
-		MyApp.getInstance().runOnUiThread(new Runnable() {
+		if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
+			Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG).show();
+			return;
+		}
+		WXImageObject imgObj = new WXImageObject();
+		imgObj.setImagePath(mImgAbsPath);
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
-					Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG)
-							.show();
-					return;
-				}
-				WXImageObject imgObj = new WXImageObject();
-				imgObj.setImagePath(mImgAbsPath);
+		WXMediaMessage msg = new WXMediaMessage();
+		msg.mediaObject = imgObj;
+		msg.description = content;
 
-				WXMediaMessage msg = new WXMediaMessage();
-				msg.mediaObject = imgObj;
-				msg.description = content;
+		Bitmap bmp = BitmapFactory.decodeFile(mImgAbsPath);
+		Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
+				THUMB_SIZE, true);
+		bmp.recycle();
+		msg.thumbData = bmpToByteArray(thumbBmp, true);
 
-				Bitmap bmp = BitmapFactory.decodeFile(mImgAbsPath);
-				Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
-						THUMB_SIZE, true);
-				bmp.recycle();
-				msg.thumbData = bmpToByteArray(thumbBmp, true);
-
-				SendMessageToWX.Req req = new SendMessageToWX.Req();
-				req.transaction = APP_TRANSATION;
-				req.message = msg;
-				req.scene = SendMessageToWX.Req.WXSceneTimeline;
-				if (null == iwxapi) {
-					return;
-				}
-				iwxapi.sendReq(req);
-			}
-		});
+		SendMessageToWX.Req req = new SendMessageToWX.Req();
+		req.transaction = APP_TRANSATION;
+		req.message = msg;
+		req.scene = SendMessageToWX.Req.WXSceneTimeline;
+		if (null == iwxapi) {
+			return;
+		}
+		iwxapi.sendReq(req);
 
 	}
 
