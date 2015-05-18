@@ -295,21 +295,28 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
     float aniSpeed = 1.0f/60;
     float dis = highY-curY;
     
+    float sX = params[1];
+    float gravity = params[0];
+    float sY = params[2];
+    
     
     Point curPoint = startPoint;
     CollisionType curType = Collision_None;
     bool isFirstDown = true;
+    float totalTime = 0.0;
     while (curType == Collision_None) {
+        totalTime =totalTime+ (1.0f/60);
         float x = 0;
         if (m_heroPaths.size() == 0) {
-            x = startPoint.x + SpeedX*1.0f/60;
+            x = startPoint.x + SpeedX*totalTime;
         }else{
-            float speed_ = getCurSpeed(SpeedX, dis, highY-curPoint.y);
-            Point endPoint = m_heroPaths[m_heroPaths.size()-1];
-            x = endPoint.x +speed_*1.0f/60;
+            
+           
+            x = startPoint.x +sX*totalTime;
         }
         
-        float y = CalculateHelper::getPathABC(x, params);
+        float y = sY*totalTime-gravity*totalTime*totalTime/2;
+        y = startPoint.y+y;
        
         //添加最高点的动画
         if (curPoint.y>y&&isFirstDown) {
@@ -332,11 +339,22 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
             break;
         }
     }
+    
+   
+    
     FrogStatus overStatus = frogStatic;
     
     if (curType == Collision_valid) {
         overStatus = frogFall;
         //jumpOver();
+        Point endPoint = getHeroPostPoint();
+        float dx = endPoint.x - (curPoint.x);
+        float dy = endPoint.y - curPoint.y;
+        int totalCount = m_heroPaths.size();
+        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
+            CCLOG("安全掉落      %d",i);
+            m_heroPaths[i] = Point(m_heroPaths[i].x+dx*2/totalCount,m_heroPaths[i].y+dy*2/totalCount);
+        }
         CCLOG("安全掉落");
         
     }else if(curType == Collision_Dead ){

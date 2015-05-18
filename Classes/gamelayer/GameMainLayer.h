@@ -28,6 +28,7 @@ private:
     DrawNode* drawNode;
        
     double speedX = 0.0;          //水平速度
+   
     std::vector<float> params;    //完美曲线参数
     std::vector<Point>  movingPoints;   //移动的点；
     Point highestPoint;
