@@ -112,7 +112,7 @@
 		<link>
 			<name>cocos</name>
 			<type>2</type>
-			<locationURI>gws/cocos2d/cocos/platform/android/java/src</locationURI>
+			<location>D:/gws/GwsJump/cocos2d/cocos/platform/android/java/src</location>
 		</link>
 		<link>
 			<name>cocos2d</name>
