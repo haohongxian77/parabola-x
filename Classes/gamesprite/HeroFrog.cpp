@@ -184,8 +184,9 @@ void HeroFrog::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags){
         return;
     drawNode->clear();
      Size heroSize = this->getContentSize();
-    drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*3/4, heroSize.height/4), Color4F(186, 186, 186, 1));
+    drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*2/4, heroSize.height/4), Color4F(186, 186, 186, 1));
     drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*7/8, heroSize.height), Color4F(255, 255, 0, 1));
+    drawNode->drawRect(Vec2(0,0),Vec2(heroSize.width, heroSize.height), Color4F(255, 255, 0, 1));
 }
 Rect HeroFrog::getFootRect(Point curPoint){
     Size heroSize = this->getContentSize();
@@ -194,7 +195,7 @@ Rect HeroFrog::getFootRect(Point curPoint){
 }
 Rect HeroFrog::getBodyRect(Point curPoint){
     Size heroSize = this->getContentSize();
-    return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width*5/8, heroSize.height);
+    return Rect(curPoint.x-heroSize.width/4, curPoint.y, heroSize.width*3/8, heroSize.height);
 }
 void HeroFrog::setHeroMoveParam(Point downPoint, float downAniSpeed, FrogStatus status){
     this->downPoint = downPoint;

@@ -7,7 +7,7 @@
 //
 
 #include "GameMainLayer.h"
-#include "helper/CalculateHelper.h"
+//#include "helper/CalculateHelper.h"
 #include "helper/GameMainHelper.h"
 #include "gamesprite/MonsterSpile.h"
 #define Gravity  1980//9.9
@@ -114,11 +114,22 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     Point highPoint = this->convertTouchToNodeSpace(touch);
     float dY = highPoint.y- curPos.y;
     
-    params = CalculateHelper::getPathParametersXABC(curPos, highPoint);
-    double upTime = sqrt(2.0*dY/Gravity);
-    speedX = (highPoint.x-curPos.x)/upTime;//300;
-    speedX = MAX(300.0, speedX);
-    speedX = MIN(600.0,speedX);
+    float dis = curPos.distance(highPoint);
+    float dtime = dis/600;
+    
+    float gravity = 2*dY/dtime/dtime;
+    float startSpeedY = gravity*dtime;
+    speedX = (highPoint.x-curPos.x)/dtime;
+    params.push_back(gravity);
+    params.push_back(speedX);
+    params.push_back(startSpeedY);
+    
+    
+//    params = CalculateHelper::getPathParametersXABC(curPos, highPoint);
+//    double upTime = sqrt(2.0*dY/Gravity);
+//    speedX = (highPoint.x-curPos.x)/upTime;//300;
+//    speedX = MAX(300.0, speedX);
+//    speedX = MIN(600.0,speedX);
     
     m_hero->setHeroStatus(frogJumpUp);
     movingPoints.clear();

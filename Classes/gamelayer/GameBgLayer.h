@@ -22,11 +22,18 @@ private:
     
     bool init();
     void initBg();
-    void initClound(Sprite* node);
+    void initClound1();
+    void initClound2();
 public:
     CREATE_FUNC(GameBgLayer);
     void update(float dt,float bgMoveSpeed);
 private:
     void updateBg(float dX);
+    void initClound11Position();
+    void initClound12Position();
+    void initClound13Position();
+    void initClound21Position();
+    void initClound22Position();
+    void initClound23Position();
 };
 #endif /* defined(__GwsJump__GameBgLayer__) */
