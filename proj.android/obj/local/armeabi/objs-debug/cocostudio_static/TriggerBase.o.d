@@ -4,65 +4,65 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CocoStudio.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCActionFrame.h \
  jni/../../cocos2d/cocos/./math/CCGeometry.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/math.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/api-level.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/stdint.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/_types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/_types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/limits.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/limits.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/limits.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/internal_types.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/limits.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/syslimits.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/page.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/math.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/api-level.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdint.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/posix_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/stddef.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/compiler.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/posix_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/kernel.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/internal_types.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/limits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/syslimits.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/page.h \
  jni/../../cocos2d/cocos/./platform/CCPlatformMacros.h \
  jni/../../cocos2d/cocos/./base/ccConfig.h \
  jni/../../cocos2d/cocos/./platform/CCPlatformConfig.h \
  jni/../../cocos2d/cocos/./platform/CCPlatformDefine.h \
  jni/../../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/log.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/log.h \
  jni/../../cocos2d/cocos/./base/ccMacros.h \
  jni/../../cocos2d/cocos/./base/CCConsole.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/select.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/time.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/time.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/signal.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/string.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/malloc.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/signal.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/siginfo.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/thread \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/map \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/select.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/time.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/time.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/signal.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/string.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/malloc.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/signal.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/siginfo.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/thread \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/vector \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/map \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex \
  jni/../../cocos2d/cocos/./base/CCRef.h \
  jni/../../cocos2d/cocos/./platform/CCStdC.h \
  jni/../../cocos2d/cocos/./platform/android/CCStdC-android.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/stdlib.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/alloca.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/strings.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/memory.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdlib.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/alloca.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/strings.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/memory.h \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert \
  jni/../../cocos2d/cocos/./base/ccRandom.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/random \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/random \
  jni/../../cocos2d/cocos/./math/CCMath.h \
  jni/../../cocos2d/cocos/./math/Vec2.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm \
  jni/../../cocos2d/cocos/./math/CCMathBase.h \
  jni/../../cocos2d/cocos/./math/Vec2.inl \
  jni/../../cocos2d/cocos/./math/Vec2.h \
@@ -81,7 +81,7 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/./2d/CCAction.h \
  jni/../../cocos2d/cocos/./2d/CCAnimation.h \
  jni/../../cocos2d/cocos/./base/CCValue.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map \
  jni/../../cocos2d/cocos/./base/CCVector.h \
  jni/../../cocos2d/cocos/./2d/CCSpriteFrame.h \
  jni/../../cocos2d/cocos/./2d/CCNode.h \
@@ -89,10 +89,10 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/./base/ccTypes.h \
  jni/../../cocos2d/cocos/./platform/CCGL.h \
  jni/../../cocos2d/cocos/./platform/android/CCGL-android.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
  jni/../../cocos2d/cocos/./renderer/CCTexture2D.h \
  jni/../../cocos2d/cocos/./base/CCScriptSupport.h \
  jni/../../cocos2d/cocos/./platform/CCCommon.h \
@@ -100,7 +100,7 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/./base/CCEventTouch.h \
  jni/../../cocos2d/cocos/./base/CCEvent.h \
  jni/../../cocos2d/cocos/./base/CCEventKeyboard.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
  jni/../../cocos2d/cocos/./math/CCAffineTransform.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CocosStudioExport.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCActionFrameEasing.h \
@@ -111,11 +111,11 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/external/flatbuffers/../json/document.h \
  jni/../../cocos2d/external/flatbuffers/../json/reader.h \
  jni/../../cocos2d/external/flatbuffers/../json/rapidjson.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/cstring \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/inttypes.h \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cstring \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/inttypes.h \
  jni/../../cocos2d/external/flatbuffers/../json/internal/pow10.h \
  jni/../../cocos2d/external/flatbuffers/../json/internal/stack.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/csetjmp \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/csetjmp \
  jni/../../cocos2d/external/flatbuffers/../json/internal/strfunc.h \
  jni/../../cocos2d/cocos/./2d/CCActionInstant.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCArmature.h \
@@ -132,7 +132,7 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCDisplayManager.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCBatchNode.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCArmatureAnimation.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/queue \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/queue \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCSpriteFrameCacheHelper.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCArmatureDataManager.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCSkin.h \
@@ -145,7 +145,7 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/./renderer/CCGLProgramState.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCDataReaderHelper.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/DictionaryHelper.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCTransformHelp.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCUtilMath.h \
  jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCComBase.h \
@@ -183,19 +183,19 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/./base/ccTypes.h \
  jni/../../cocos2d/cocos/./base/CCConfiguration.h \
  jni/../../cocos2d/cocos/./base/CCDirector.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/stack \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack \
  jni/../../cocos2d/cocos/./2d/CCScene.h \
  jni/../../cocos2d/cocos/./platform/CCGLView.h \
  jni/../../cocos2d/cocos/./base/CCScheduler.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/set \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/set \
  jni/../../cocos2d/cocos/./base/uthash.h \
  jni/../../cocos2d/cocos/./base/base64.h \
  jni/../../cocos2d/cocos/./base/ZipUtils.h \
  jni/../../cocos2d/cocos/./platform/android/CCFileUtils-android.h \
  jni/../../cocos2d/cocos/./platform/CCFileUtils.h \
  jni/../../cocos2d/cocos/./base/CCData.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/jni.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/asset_manager.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/jni.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/asset_manager.h \
  jni/../../cocos2d/cocos/./base/CCProfiling.h \
  jni/../../cocos2d/cocos/./base/CCConsole.h \
  jni/../../cocos2d/cocos/./base/ccUTF8.h \
@@ -393,7 +393,7 @@ obj/local/armeabi/objs-debug/cocostudio_static/TriggerBase.o: \
  jni/../../cocos2d/cocos/./deprecated/CCArray.h \
  jni/../../cocos2d/cocos/./base/CCDataVisitor.h \
  jni/../../cocos2d/cocos/./deprecated/CCString.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream \
  jni/../../cocos2d/cocos/./deprecated/CCArray.h \
  jni/../../cocos2d/cocos/./deprecated/CCSet.h \
  jni/../../cocos2d/cocos/./deprecated/CCInteger.h \
@@ -427,51 +427,51 @@ jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCActionFrame.h:
 
 jni/../../cocos2d/cocos/./math/CCGeometry.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/math.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/math.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/cdefs_elf.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/api-level.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/api-level.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/stdint.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdint.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/_types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/_types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/posix_types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/stddef.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/compiler.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/posix_types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/kernel.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/sysmacros.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/limits.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/limits.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/limits.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/internal_types.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/internal_types.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/machine/limits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/machine/limits.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/syslimits.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/syslimits.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/page.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/page.h:
 
 jni/../../cocos2d/cocos/./platform/CCPlatformMacros.h:
 
@@ -483,41 +483,41 @@ jni/../../cocos2d/cocos/./platform/CCPlatformDefine.h:
 
 jni/../../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/log.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/log.h:
 
 jni/../../cocos2d/cocos/./base/ccMacros.h:
 
 jni/../../cocos2d/cocos/./base/CCConsole.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/select.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/select.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/sys/time.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/sys/time.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/linux/time.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/linux/time.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/signal.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/signal.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/string.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/string.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/malloc.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/malloc.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/signal.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/signal.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/signal.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/sigcontext.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm/siginfo.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm/siginfo.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/asm-generic/siginfo.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/thread:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/thread:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/vector:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/vector:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/map:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/map:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/mutex:
 
 jni/../../cocos2d/cocos/./base/CCRef.h:
 
@@ -525,25 +525,25 @@ jni/../../cocos2d/cocos/./platform/CCStdC.h:
 
 jni/../../cocos2d/cocos/./platform/android/CCStdC-android.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/stdlib.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/stdlib.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/alloca.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/alloca.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/strings.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/strings.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/memory.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/memory.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cassert:
 
 jni/../../cocos2d/cocos/./base/ccRandom.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/random:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/random:
 
 jni/../../cocos2d/cocos/./math/CCMath.h:
 
 jni/../../cocos2d/cocos/./math/Vec2.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/algorithm:
 
 jni/../../cocos2d/cocos/./math/CCMathBase.h:
 
@@ -581,7 +581,7 @@ jni/../../cocos2d/cocos/./2d/CCAnimation.h:
 
 jni/../../cocos2d/cocos/./base/CCValue.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_map:
 
 jni/../../cocos2d/cocos/./base/CCVector.h:
 
@@ -597,13 +597,13 @@ jni/../../cocos2d/cocos/./platform/CCGL.h:
 
 jni/../../cocos2d/cocos/./platform/android/CCGL-android.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2platform.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/KHR/khrplatform.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h:
 
 jni/../../cocos2d/cocos/./renderer/CCTexture2D.h:
 
@@ -619,7 +619,7 @@ jni/../../cocos2d/cocos/./base/CCEvent.h:
 
 jni/../../cocos2d/cocos/./base/CCEventKeyboard.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
 
 jni/../../cocos2d/cocos/./math/CCAffineTransform.h:
 
@@ -641,15 +641,15 @@ jni/../../cocos2d/external/flatbuffers/../json/reader.h:
 
 jni/../../cocos2d/external/flatbuffers/../json/rapidjson.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/cstring:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/cstring:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/inttypes.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/inttypes.h:
 
 jni/../../cocos2d/external/flatbuffers/../json/internal/pow10.h:
 
 jni/../../cocos2d/external/flatbuffers/../json/internal/stack.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/csetjmp:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/csetjmp:
 
 jni/../../cocos2d/external/flatbuffers/../json/internal/strfunc.h:
 
@@ -683,7 +683,7 @@ jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCBatchNode.h:
 
 jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCArmatureAnimation.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/queue:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/queue:
 
 jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCSpriteFrameCacheHelper.h:
 
@@ -709,7 +709,7 @@ jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCDataReaderHelp
 
 jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/DictionaryHelper.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable:
 
 jni/../../cocos2d/cocos/editor-support/cocostudio/../cocostudio/CCTransformHelp.h:
 
@@ -785,7 +785,7 @@ jni/../../cocos2d/cocos/./base/CCConfiguration.h:
 
 jni/../../cocos2d/cocos/./base/CCDirector.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/stack:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack:
 
 jni/../../cocos2d/cocos/./2d/CCScene.h:
 
@@ -793,7 +793,7 @@ jni/../../cocos2d/cocos/./platform/CCGLView.h:
 
 jni/../../cocos2d/cocos/./base/CCScheduler.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/set:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/set:
 
 jni/../../cocos2d/cocos/./base/uthash.h:
 
@@ -807,9 +807,9 @@ jni/../../cocos2d/cocos/./platform/CCFileUtils.h:
 
 jni/../../cocos2d/cocos/./base/CCData.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/jni.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/jni.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/asset_manager.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/asset_manager.h:
 
 jni/../../cocos2d/cocos/./base/CCProfiling.h:
 
@@ -1205,7 +1205,7 @@ jni/../../cocos2d/cocos/./base/CCDataVisitor.h:
 
 jni/../../cocos2d/cocos/./deprecated/CCString.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream:
 
 jni/../../cocos2d/cocos/./deprecated/CCArray.h:
 

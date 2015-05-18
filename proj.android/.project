@@ -112,7 +112,7 @@
 		<link>
 			<name>cocos</name>
 			<type>2</type>
-			<location>D:/gws/GwsJump/cocos2d/cocos/platform/android/java/src</location>
+			<locationURI>PARENT-1-PROJECT_LOC/cocos2d/cocos/platform/android/java/src</locationURI>
 		</link>
 		<link>
 			<name>cocos2d</name>
@@ -125,10 +125,4 @@
 			<locationURI>PARENT-1-PROJECT_LOC/cocos2d/cocos/platform/android/java/src</locationURI>
 		</link>
 	</linkedResources>
-	<variableList>
-		<variable>
-			<name>gws</name>
-			<value>file:/Users/kakuhongxian/Documents/cocosd/gws/parabola-x</value>
-		</variable>
-	</variableList>
 </projectDescription>
