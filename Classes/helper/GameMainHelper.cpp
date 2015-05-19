@@ -352,16 +352,28 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         float dy = endPoint.y - curPoint.y;
         int totalCount = m_heroPaths.size();
         for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
-            CCLOG("安全掉落      %d",i);
-            m_heroPaths[i] = Point(m_heroPaths[i].x+dx*2/totalCount,m_heroPaths[i].y+dy*2/totalCount);
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y+dy*2*(i-totalCount/2)/totalCount);
         }
         CCLOG("安全掉落");
         
     }else if(curType == Collision_Dead ){
         overStatus =frogDead1;
+        Size  postSize = m_curHeroPost->getContentSize();
+        Point endPoint = getHeroPostPoint();
+        float dx = endPoint.x-postSize.width/4 - (curPoint.x);
+        int totalCount = m_heroPaths.size();
+        
+        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y);
+        }
         CCLOG("碰柱子死亡");
     }else if(curPoint.y<m_earthH){
         overStatus = frogDead2;
+        float dY = m_earthH-curPoint.y;
+        int totalCount = m_heroPaths.size();
+        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
+            m_heroPaths[i] = Point(m_heroPaths[i].x,m_heroPaths[i].y+dY*2*(i-totalCount/2)/totalCount);
+        }
         CCLOG("落地死亡");
     }
     m_heroPathIndex = 0;

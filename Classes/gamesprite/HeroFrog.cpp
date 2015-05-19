@@ -150,8 +150,6 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             this->setDisplayFrame(deadFrame);
              ac= Animate::create(ani);
             y = MIN(GameMainHelper::getInstance()->getEarthH(),getPositionY());
-            targetPoint = GameMainHelper::getInstance()->getHeroPostPoint();
-            this->setPositionX(targetPoint.x-getContentSize().width/2+5);
             dis = getPositionY()-y;
             time = dis/downSpeed;
             targetPoint = Point(getPositionX(),y);

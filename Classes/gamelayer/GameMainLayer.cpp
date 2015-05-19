@@ -63,7 +63,7 @@ void GameMainLayer::inittestSp(){
     addChild(touNode,3);
     
     drawNode = DrawNode::create();
-    addChild(drawNode, 1);
+    addChild(drawNode, 10);
 }
 void GameMainLayer::reloadData(){
     params.clear();
@@ -145,7 +145,7 @@ void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t fla
         Point point1 = movingPoints[i-1];
         Point point2 = movingPoints[i];
         
-        drawNode->drawLine(point1, point2, Color4F(255, 186, 0, 1));
+        drawNode->drawSegment(point1, point2, 3,Color4F::ORANGE);
     }
     
    
