@@ -12,6 +12,7 @@
 #include "commonnode/HMenu.h"
 #include "helper/CommomData.h"
 #include "helper/GameMainHelper.h"
+#include "helper/HPlatformHelper.h"
 #define menuStartTag 1
 MainLayer::MainLayer(){
    
@@ -134,6 +135,7 @@ void MainLayer::menuShare(cocos2d::Ref *sender){
         addChild(m_shareNode);
 }
 void MainLayer::menuRank(cocos2d::Ref *sender){
+    HPlatformHelper::getInstance()->showRank();
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
     SettingNode* node = SettingNode::create();
