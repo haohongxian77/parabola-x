@@ -281,6 +281,7 @@ void GameMainHelper::startGame(){
     m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
     int posX = m_curHeroPost->getPositionX()-winSize.width/5;
     m_Layer->setPositionX(-posX);
+    setGameStaus(Tag_GameStart);
     
     m_Layer->initHeroBeginPoint();
     
@@ -391,7 +392,12 @@ float GameMainHelper::getCurSpeed(float speed,float totalDis, float curDis){
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){
-    std::string fullpath = m_mainScene->cutOff(status);
+    if(m_gameStatus == Tag_None){
+        HPlatformHelper::getInstance()->share(m_shareType,-1);
+    }else{
+        HPlatformHelper::getInstance()->share(m_shareType,1);
+    }
+    //std::string fullpath = m_mainScene->cutOff(status);
     
 }
 #endif
