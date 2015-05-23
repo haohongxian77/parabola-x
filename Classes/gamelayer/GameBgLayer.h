@@ -19,11 +19,10 @@ private:
     Sprite* m_bg1 = NULL;
     Sprite* m_bg2 = NULL;
     
-    
     bool init();
     void initBg();
-    void initClound1();
-    void initClound2();
+    void initClound();
+
 public:
     CREATE_FUNC(GameBgLayer);
     void update(float dt,float bgMoveSpeed);
@@ -32,8 +31,5 @@ private:
     void initClound11Position();
     void initClound12Position();
     void initClound13Position();
-    void initClound21Position();
-    void initClound22Position();
-    void initClound23Position();
 };
 #endif /* defined(__GwsJump__GameBgLayer__) */

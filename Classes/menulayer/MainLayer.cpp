@@ -131,13 +131,8 @@ void MainLayer::callback(){
     GameMainHelper::getInstance()->startGame();
 }
 void MainLayer::menuShare(cocos2d::Ref *sender){
-    if (m_shareNode) {
-        m_shareNode ->removeFromParentAndCleanup(true);
-        m_shareNode = NULL;
-    }else{
         m_shareNode = ShareNode::create();
         addChild(m_shareNode);
-    }
 }
 void MainLayer::menuRank(cocos2d::Ref *sender){
 	 HPlatformHelper::getInstance()->showRank();

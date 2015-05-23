@@ -61,6 +61,8 @@
 		A70100D11AED1290006AD956 /* game_bgBefore_3.png in Resources */ = {isa = PBXBuildFile; fileRef = A70100C81AED1290006AD956 /* game_bgBefore_3.png */; };
 		A70100D21AED1290006AD956 /* game_bgBefore_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A70100C91AED1290006AD956 /* game_bgBefore_4.png */; };
 		A70100D31AED1290006AD956 /* game_bgBefore_4.png in Resources */ = {isa = PBXBuildFile; fileRef = A70100C91AED1290006AD956 /* game_bgBefore_4.png */; };
+		A74ACA821B0A245300D9E8CC /* CalculateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC271AE2527900E1776A /* CalculateHelper.cpp */; };
+		A74ACA831B0A245300D9E8CC /* CalculateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC271AE2527900E1776A /* CalculateHelper.cpp */; };
 		A750ABD61AE200C700E1776A /* gameover_mainbg.png in Resources */ = {isa = PBXBuildFile; fileRef = A750ABD51AE200C700E1776A /* gameover_mainbg.png */; };
 		A750AC011AE2523500E1776A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750ABFF1AE2523500E1776A /* AppDelegate.cpp */; };
 		A750AC021AE2523500E1776A /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750ABFF1AE2523500E1776A /* AppDelegate.cpp */; };
@@ -78,8 +80,6 @@
 		A750AC241AE2526D00E1776A /* MonsterSpile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC1D1AE2526D00E1776A /* MonsterSpile.cpp */; };
 		A750AC251AE2526D00E1776A /* TouchNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC1F1AE2526D00E1776A /* TouchNode.cpp */; };
 		A750AC261AE2526D00E1776A /* TouchNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC1F1AE2526D00E1776A /* TouchNode.cpp */; };
-		A750AC2E1AE2527900E1776A /* CalculateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC271AE2527900E1776A /* CalculateHelper.cpp */; };
-		A750AC2F1AE2527900E1776A /* CalculateHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC271AE2527900E1776A /* CalculateHelper.cpp */; };
 		A750AC301AE2527900E1776A /* GameMainHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC2A1AE2527900E1776A /* GameMainHelper.cpp */; };
 		A750AC311AE2527900E1776A /* GameMainHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC2A1AE2527900E1776A /* GameMainHelper.cpp */; };
 		A750AC321AE2527900E1776A /* HPlatformHelper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A750AC2C1AE2527900E1776A /* HPlatformHelper.cpp */; };
@@ -756,6 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A750AC3A1AE2528E00E1776A /* StartScene.cpp in Sources */,
+				A74ACA821B0A245300D9E8CC /* CalculateHelper.cpp in Sources */,
 				A750AC5E1AE256F500E1776A /* GameBgLayer.cpp in Sources */,
 				503AE10017EB989F00D1A890 /* AppController.mm in Sources */,
 				A750AC5A1AE2565000E1776A /* GameMainLayer.cpp in Sources */,
@@ -767,7 +768,6 @@
 				A750AC381AE2528E00E1776A /* StartLayer.cpp in Sources */,
 				A750AC011AE2523500E1776A /* AppDelegate.cpp in Sources */,
 				A750AC171AE2525600E1776A /* GameMainScene.cpp in Sources */,
-				A750AC2E1AE2527900E1776A /* CalculateHelper.cpp in Sources */,
 				503AE10217EB989F00D1A890 /* RootViewController.mm in Sources */,
 				A750AC541AE2563C00E1776A /* GameOverLayer.cpp in Sources */,
 				503AE10117EB989F00D1A890 /* main.m in Sources */,
@@ -802,8 +802,8 @@
 				A750AC531AE2563C00E1776A /* GameMainLogoLayer.cpp in Sources */,
 				503AE10517EB98FF00D1A890 /* main.cpp in Sources */,
 				A750AC221AE2526D00E1776A /* HeroFrog.cpp in Sources */,
-				A750AC2F1AE2527900E1776A /* CalculateHelper.cpp in Sources */,
 				A750AC0C1AE2524000E1776A /* SettingNode.cpp in Sources */,
+				A74ACA831B0A245300D9E8CC /* CalculateHelper.cpp in Sources */,
 				A750AC391AE2528E00E1776A /* StartLayer.cpp in Sources */,
 				A750AC0E1AE2524000E1776A /* ShareNode.cpp in Sources */,
 			);

@@ -281,6 +281,7 @@ void GameMainHelper::startGame(){
     m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
     int posX = m_curHeroPost->getPositionX()-winSize.width/5;
     m_Layer->setPositionX(-posX);
+    setGameStaus(Tag_GameStart);
     
     m_Layer->initHeroBeginPoint();
     
@@ -352,16 +353,28 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         float dy = endPoint.y - curPoint.y;
         int totalCount = m_heroPaths.size();
         for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
-            CCLOG("安全掉落      %d",i);
-            m_heroPaths[i] = Point(m_heroPaths[i].x+dx*2/totalCount,m_heroPaths[i].y+dy*2/totalCount);
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y+dy*2*(i-totalCount/2)/totalCount);
         }
         CCLOG("安全掉落");
         
     }else if(curType == Collision_Dead ){
         overStatus =frogDead1;
+        Size  postSize = m_curHeroPost->getContentSize();
+        Point endPoint = getHeroPostPoint();
+        float dx = endPoint.x-postSize.width/4 - (curPoint.x);
+        int totalCount = m_heroPaths.size();
+        
+        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y);
+        }
         CCLOG("碰柱子死亡");
     }else if(curPoint.y<m_earthH){
         overStatus = frogDead2;
+        float dY = m_earthH-curPoint.y;
+        int totalCount = m_heroPaths.size();
+        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
+            m_heroPaths[i] = Point(m_heroPaths[i].x,m_heroPaths[i].y+dY*2*(i-totalCount/2)/totalCount);
+        }
         CCLOG("落地死亡");
     }
     m_heroPathIndex = 0;
@@ -379,7 +392,12 @@ float GameMainHelper::getCurSpeed(float speed,float totalDis, float curDis){
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){
-    std::string fullpath = m_mainScene->cutOff(status);
+    if(m_gameStatus == Tag_None){
+        HPlatformHelper::getInstance()->share(m_shareType,-1);
+    }else{
+        HPlatformHelper::getInstance()->share(m_shareType,1);
+    }
+    //std::string fullpath = m_mainScene->cutOff(status);
     
 }
 #endif
