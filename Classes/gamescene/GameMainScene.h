@@ -52,6 +52,8 @@ public:
     void onEnter();
     void onExit();
     void update(float dt);
+    void gotoShare(int type);
+    void share(Node* node,int type);
 //    std::string cutOff(int shareType);
 private:
     int m_shareType = 0;

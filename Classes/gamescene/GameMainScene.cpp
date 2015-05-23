@@ -105,6 +105,18 @@ void GameMainScene::onExit(){
     Scene::onExit();
    
 }
+void GameMainScene::gotoShare(int type){
+    
+    Sequence* seq = Sequence::create(DelayTime::create(0.2f), CallFuncN::create(CC_CALLBACK_1(GameMainScene::share, this,type)),NULL);
+    this->runAction(seq);
+}
+void GameMainScene::share(cocos2d::Node *node, int type){
+    if(GameMainHelper::getInstance()->getGameStaus() == Tag_None){
+        HPlatformHelper::getInstance()->share(m_shareType,-1);
+    }else{
+        HPlatformHelper::getInstance()->share(m_shareType,1);
+    }
+}
 //std::string GameMainScene::cutOff(int shareType){
 //	CCLOG("GameMainHelper========================%d",shareType);
 //	m_shareType = shareType;
