@@ -392,12 +392,8 @@ float GameMainHelper::getCurSpeed(float speed,float totalDis, float curDis){
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){
-    if(m_gameStatus == Tag_None){
-        HPlatformHelper::getInstance()->share(m_shareType,-1);
-    }else{
-        HPlatformHelper::getInstance()->share(m_shareType,1);
-    }
-    //std::string fullpath = m_mainScene->cutOff(status);
+    
+    m_mainScene->gotoShare(status);
     
 }
 #endif
