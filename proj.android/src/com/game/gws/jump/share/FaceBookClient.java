@@ -29,6 +29,7 @@ import com.game.gws.jump.system.MyApp;
 /**
  * @author czj
  * @Description: 使用facebook进行分享 {facebook 需要确定包名和签名（测试签名和正式签名）}
+ *               分享的图片无要求必须放置到sdcard
  * @date 2015年5月17日 上午10:42:55
  */
 public class FaceBookClient {
@@ -87,10 +88,14 @@ public class FaceBookClient {
 	 * 
 	 * @param imgAbsPath
 	 */
-	public void shareImg(String imgAbsPath) {
-		Log.e(TAG, "shareImg:" + imgAbsPath);
-		Bitmap image = BitmapFactory.decodeResource(mActivity.getResources(),
-				R.drawable.icon);
+	public void shareImg(int status) {
+		Bitmap image;
+		if (status == -1) {
+			image = BitmapFactory.decodeResource(mActivity.getResources(),
+					R.drawable.icon);
+		} else {
+			image = ShareUtil.getScreenShot(mActivity);
+		}
 		// Bitmap image=BitmapFactory.decodeFile(imgAbsPath);
 		SharePhoto photo = new SharePhoto.Builder().setBitmap(image).build();
 		SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(

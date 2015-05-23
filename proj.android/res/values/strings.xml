@@ -182,5 +182,6 @@
     <string name="unregister_from_weixin">从微信反注册</string>
     <string name="show_from_wx_tip">这个界面用于显示微信向第三方app请求显示的信息</string>
     <!-- wx end -->
+    <string name="share_sdcard_error">分享失败，请插入sdcard</string>
 
 </resources>

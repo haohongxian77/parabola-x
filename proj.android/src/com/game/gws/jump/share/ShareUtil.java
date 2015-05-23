@@ -66,7 +66,7 @@ public class ShareUtil {
 	}
 
 	/**
-	 * 保存截屏文件
+	 * 保存图片到sdcard
 	 * 
 	 * @param curType
 	 * @param bmp

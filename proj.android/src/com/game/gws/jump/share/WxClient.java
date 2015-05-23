@@ -22,6 +22,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.game.gws.jump.R;
+import com.game.gws.jump.share.ShareUtil.ScreenShotType;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX.Resp;
@@ -33,7 +34,7 @@ import com.tencent.mm.sdk.openapi.WXAPIFactory;
 
 /**
  * @author czj
- * @Description: 用于处理微信的第三方事物(必须安装微信客户端) wx,需要确定包名和签名
+ * @Description: 用于处理微信的第三方事物(必须安装微信客户端) wx,需要确定包名和签名; 分享的图片无要求必须放置到sdcard
  * @date 2015年4月18日 上午11:00:50
  */
 public class WxClient {
@@ -71,7 +72,30 @@ public class WxClient {
 	 * 
 	 * @param imgAbsPath
 	 */
-	public void shareImg(String imgAbsPath, final String content) {
+	public void shareImg(int status, final String content) {
+
+		if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
+			Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG).show();
+			return;
+		}
+		Bitmap bitmap;
+		if (status == -1) {
+			bitmap = BitmapFactory.decodeResource(mActivity.getResources(),
+					R.drawable.icon);
+		} else {
+			bitmap = ShareUtil.getScreenShot(mActivity);
+		}
+		boolean flag = ShareUtil.saveScreenShot(
+				status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+						: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
+		if (!flag) {
+			Toast.makeText(mActivity, R.string.share_sdcard_error,
+					Toast.LENGTH_LONG).show();
+			return;
+		}
+		String imgAbsPath = ShareUtil
+				.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+						: ScreenShotType.SCORE_SCREEN_SHOT);
 		Log.e(TAG, "shareImg:" + imgAbsPath);
 		mImgAbsPath = Environment.getExternalStorageDirectory()
 				.getAbsolutePath()
@@ -81,11 +105,6 @@ public class WxClient {
 				+ "test.png";
 		mContent = content;
 		Log.e(TAG, "imgAbsPath:" + mImgAbsPath);
-
-		if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
-			Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG).show();
-			return;
-		}
 		WXImageObject imgObj = new WXImageObject();
 		imgObj.setImagePath(mImgAbsPath);
 

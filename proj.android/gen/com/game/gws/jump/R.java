@@ -981,6 +981,9 @@ containing a value of this type.
         public static final int share_appdata_to_weixin=0x7f0600b2;
         public static final int share_music_to_weixin=0x7f0600b0;
         public static final int share_pic_to_weixin=0x7f0600af;
+        /**  wx end 
+         */
+        public static final int share_sdcard_error=0x7f0600b7;
         public static final int share_text_default=0x7f0600ad;
         public static final int share_text_to_weixin=0x7f0600ac;
         public static final int share_url_to_weixin=0x7f0600ae;
