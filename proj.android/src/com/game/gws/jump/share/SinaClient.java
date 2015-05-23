@@ -96,10 +96,10 @@ public class SinaClient {
 	 *            -1分享本地图片;1分享截屏
 	 * @param content
 	 */
-	public void callShare(int status, String content) {//
+	public void callShare(int status) {//
 		Log.e(TAG, "callShare   :====================");// + imgAbsPath + "/" +
 														// content);
-		SinaClient.getInstance().shareImgAndContent(status, content);
+		SinaClient.getInstance().shareImgAndContent(status);
 	}
 
 	/**
@@ -109,8 +109,9 @@ public class SinaClient {
 	 *            -1,本地图片;1,截屏
 	 * @param content
 	 */
-	public void shareImgAndContent(int status, String content) {
+	public void shareImgAndContent(int status) {
 		// 1. 初始化微博的分享消息
+		String content = mActivity.getString(R.string.challenge_me);
 		WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
 		if (!TextUtils.isEmpty(content)) {
 			weiboMessage.textObject = getTextObj(content);

@@ -60,7 +60,7 @@ void HHPlatform::setVM(){
 	  	  env->DeleteLocalRef(cls_google);
 
 }
-void HHPlatform::share(int shareType,std::string absPath){
+void HHPlatform::share(int shareType,int shareFrom){
 	   JNIEnv *env;
 		m_pVM->AttachCurrentThread(&env, NULL);
 		jmethodID construction_id;
@@ -68,8 +68,8 @@ void HHPlatform::share(int shareType,std::string absPath){
 		jobject obj;
 //		jmethodID shareClient;
 
-		jstring jstrImagePath = env->NewStringUTF(absPath.c_str());
-		jstring jstrContent = env->NewStringUTF("content");
+		//jint shareFrom = env->NewStringUTF(absPath.c_str());
+		//jstring jstrContent = env->NewStringUTF("content");
 		CCLOG("----------------------------%d",shareType);
        switch(shareType){
        case Share_SINA:
@@ -78,8 +78,8 @@ void HHPlatform::share(int shareType,std::string absPath){
 //    	   obj =getInstanceObj(env,m_shareSina);
     	   m_shareImage = env->GetMethodID(m_shareSina,
     	   			         "callShare",
-    	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath,jstrContent);
+    	   			            "(I)V");
+    	   env->CallVoidMethod(obj, m_shareImage,shareFrom);
     	   break;
        case Share_QQ:
     	   construction_id = env->GetStaticMethodID(m_shareQQ, "getInstance", "()Lcom/game/gws/jump/share/TencentClient;");
@@ -87,8 +87,8 @@ void HHPlatform::share(int shareType,std::string absPath){
 //    	   obj =getInstanceObj(env,m_shareQQ);
     	   m_shareImage = env->GetMethodID(m_shareQQ,
     	      	   			         "shareImg",
-    	      	   			            "(Ljava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath);
+    	      	   			            "(I)V");
+    	   env->CallVoidMethod(obj, m_shareImage,shareFrom);
     	   break;
        case Share_WX:
     	   construction_id = env->GetStaticMethodID(m_shareWX, "getInstance", "()Lcom/game/gws/jump/share/WxClient;");
@@ -96,8 +96,8 @@ void HHPlatform::share(int shareType,std::string absPath){
 //    	   obj =getInstanceObj(env,m_shareWX);
     	   m_shareImage = env->GetMethodID(m_shareWX,
     	      	   			         "shareImg",
-    	      	   			            "(Ljava/lang/String;Ljava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath,jstrContent);
+    	      	   			            "(I)V");
+    	   env->CallVoidMethod(obj, m_shareImage,shareFrom);
     	   break;
        case Share_FB:
     	   construction_id = env->GetStaticMethodID(m_shareFB, "getInstance", "()Lcom/game/gws/jump/share/FaceBookClient;");
@@ -105,15 +105,15 @@ void HHPlatform::share(int shareType,std::string absPath){
 //    	   obj =getInstanceObj(env,m_shareFB);
     	   m_shareImage = env->GetMethodID(m_shareFB,
     	      	   			         "shareImg",
-    	      	   			            "(Ljava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,jstrImagePath);
+    	      	   			            "(I)V");
+    	   env->CallVoidMethod(obj, m_shareImage,shareFrom);
     	   break;
 
        }
 
 
-		env->DeleteLocalRef(jstrImagePath);
-		env->DeleteLocalRef(jstrContent);
+//		env->DeleteLocalRef(jstrImagePath);
+//		env->DeleteLocalRef(jstrContent);
 
 }
 void HHPlatform::showRank(){

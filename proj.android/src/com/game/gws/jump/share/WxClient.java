@@ -9,14 +9,12 @@
 package com.game.gws.jump.share;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -72,8 +70,8 @@ public class WxClient {
 	 * 
 	 * @param imgAbsPath
 	 */
-	public void shareImg(int status, final String content) {
-
+	public void shareImg(int status) {
+		String content = mActivity.getString(R.string.challenge_me);
 		if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
 			Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG).show();
 			return;
@@ -97,14 +95,6 @@ public class WxClient {
 				.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
 						: ScreenShotType.SCORE_SCREEN_SHOT);
 		Log.e(TAG, "shareImg:" + imgAbsPath);
-		mImgAbsPath = Environment.getExternalStorageDirectory()
-				.getAbsolutePath()
-				+ File.separator
-				+ "czj"
-				+ File.separator
-				+ "test.png";
-		mContent = content;
-		Log.e(TAG, "imgAbsPath:" + mImgAbsPath);
 		WXImageObject imgObj = new WXImageObject();
 		imgObj.setImagePath(mImgAbsPath);
 

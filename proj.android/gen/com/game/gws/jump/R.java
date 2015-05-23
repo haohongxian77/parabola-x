@@ -780,6 +780,7 @@ containing a value of this type.
         /**  applet 
          */
         public static final int applet_secimg_title=0x7f06007e;
+        public static final int challenge_me=0x7f0600b8;
         public static final int check_timeline_supported=0x7f060097;
         public static final int choose_difficulty=0x7f060062;
         public static final int clear=0x7f060060;
