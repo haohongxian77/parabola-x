@@ -131,7 +131,6 @@ std::string GameMainScene::cutOff(int shareType){
         this->setAnchorPoint(ancPos);
 //        ssize_t pSize_ = 0;
 //        unsigned char* data_ = FileUtils::getInstance()->getFileData(path.c_str(), "rb", &pSize_);
-        CCLOG("GameMainHelper========================%s",m_shareType);
         HPlatformHelper::getInstance()->share(m_shareType,path);
     };
     renderTexture->saveToFile(fileName_->getCString(), Image::Format::JPG, true, callback);

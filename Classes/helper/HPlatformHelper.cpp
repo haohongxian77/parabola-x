@@ -28,3 +28,10 @@ void HPlatformHelper::share(int shareType,std::string fullPath){
 	HHPlatform::GetInstance()->share(shareType,fullPath);
 #endif
 }
+void HPlatformHelper::showRank(){
+
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	HHPlatform::GetInstance()->showRank();
+#endif
+}

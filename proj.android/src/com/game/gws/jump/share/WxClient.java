@@ -21,6 +21,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.game.gws.jump.R;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX.Resp;
@@ -45,7 +46,7 @@ public class WxClient {
 	private String mImgAbsPath = "";
 	private String mContent = "";
 	/** IWXAPI 是第三方app和微信通信的openapi接口 **/
-	private IWXAPI iwxapi;
+	private static IWXAPI iwxapi;
 	private Activity mActivity;
 
 	public static WxClient getInstance() {
@@ -60,11 +61,9 @@ public class WxClient {
 	}
 
 	public void registerApp(Activity mActivity) {
-		if (null != mActivity) {
-			this.mActivity = mActivity;
-			iwxapi = WXAPIFactory.createWXAPI(mActivity, APP_ID);
-			iwxapi.registerApp(APP_ID);
-		}
+		this.mActivity = mActivity;
+		iwxapi = WXAPIFactory.createWXAPI(mActivity, APP_ID);
+		iwxapi.registerApp(APP_ID);
 	}
 
 	/***
@@ -142,8 +141,24 @@ public class WxClient {
 				&& transation.equalsIgnoreCase(APP_TRANSATION)
 				&& resp instanceof SendMessageToWX.Resp) {
 			SendMessageToWX.Resp response = (Resp) resp;
-			Toast.makeText(mActivity.getApplicationContext(), response.errStr,
-					Toast.LENGTH_LONG).show();
+			int result = 0;
+
+			switch (resp.errCode) {
+			case BaseResp.ErrCode.ERR_OK:
+				result = R.string.errcode_success;
+				break;
+			case BaseResp.ErrCode.ERR_USER_CANCEL:
+				result = R.string.errcode_cancel;
+				break;
+			case BaseResp.ErrCode.ERR_AUTH_DENIED:
+				result = R.string.errcode_deny;
+				break;
+			default:
+				result = R.string.errcode_unknown;
+				break;
+			}
+
+			Toast.makeText(mActivity, result, Toast.LENGTH_LONG).show();
 		}
 	}
 

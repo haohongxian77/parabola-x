@@ -61,8 +61,7 @@ public :
 	void setVM();
 
 	void share(int shareType,std::string absPath);
-private:
-	jobject getInstanceObj(JNIEnv* env, jclass obj_class);
+	void showRank();
 };
 
 #endif /* defined(__beetalk_msdk__HHPlatform__) */

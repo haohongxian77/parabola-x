@@ -11,6 +11,7 @@ package com.game.gws.jump.google;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.game.gws.jump.R;
 import com.google.android.gms.common.ConnectionResult;
@@ -30,15 +31,15 @@ public class GwsGooglePlayServiceClient implements
 	public static final String TAG = GwsGooglePlayServiceClient.class
 			.getSimpleName();
 	private static GwsGooglePlayServiceClient INSTANCE;
-	private GoogleApiClient mGoogleApiClient;
-	private Activity mActivity;
+	private static GoogleApiClient mGoogleApiClient;
+	private static Activity mActivity;
 	public static int SIGN_IN_REQ = 9001;
 	public static int LEADERBOARDER_SHOW_REQ = 9002;
 	private boolean mResolvingConnectionFailure = false;
 	private boolean mAutoStartSignInflow = true;
 	private boolean mSignInClicked = false;
 	private int curScore;
-	private ConnectRequestType curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
+	private static ConnectRequestType curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
 
 	public enum ConnectRequestType {
 		CONNECT_REQUEST_NULL,
@@ -100,6 +101,7 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void showLeaderBoards() {
+		Log.e(TAG, "showLeaderBoards------------");
 		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
 			mActivity
 					.startActivityForResult(
