@@ -1,14 +1,14 @@
 obj/local/armeabi/objs-debug/cocos2dx_internal_static/base/allocator/CCAllocatorDiagnostics.o: \
  jni/../../cocos2d/cocos/./base/allocator/CCAllocatorDiagnostics.cpp \
  jni/../../cocos2d/cocos/./base/allocator/CCAllocatorDiagnostics.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set \
  jni/../../cocos2d/cocos/./base/allocator/CCAllocatorMacros.h \
  jni/../../cocos2d/cocos/./base/ccConfig.h \
  jni/../../cocos2d/cocos/./platform/CCPlatformConfig.h \
  jni/../../cocos2d/cocos/./platform/CCPlatformMacros.h \
  jni/../../cocos2d/cocos/./platform/CCPlatformDefine.h \
  jni/../../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h \
- /Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/log.h \
+ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/log.h \
  jni/../../cocos2d/cocos/./base/allocator/CCAllocatorMutex.h \
  jni/../../cocos2d/cocos/./base/allocator/CCAllocatorBase.h \
  jni/../../cocos2d/cocos/./base/allocator/CCAllocatorGlobal.h \
@@ -16,7 +16,7 @@ obj/local/armeabi/objs-debug/cocos2dx_internal_static/base/allocator/CCAllocator
 
 jni/../../cocos2d/cocos/./base/allocator/CCAllocatorDiagnostics.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set:
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/unordered_set:
 
 jni/../../cocos2d/cocos/./base/allocator/CCAllocatorMacros.h:
 
@@ -30,7 +30,7 @@ jni/../../cocos2d/cocos/./platform/CCPlatformDefine.h:
 
 jni/../../cocos2d/cocos/./platform/android/CCPlatformDefine-android.h:
 
-/Users/kakuhongxian/Documents/eclipse/android-ndk-r9/platforms/android-14/arch-arm/usr/include/android/log.h:
+D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/android/log.h:
 
 jni/../../cocos2d/cocos/./base/allocator/CCAllocatorMutex.h:
 
