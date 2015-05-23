@@ -2,6 +2,7 @@
 */gen/
 .settings
 *.class
+*.classpath
 */cocos/
 */cocos2d/
 */obj/

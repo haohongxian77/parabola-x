@@ -135,7 +135,7 @@ void MainLayer::menuShare(cocos2d::Ref *sender){
         addChild(m_shareNode);
 }
 void MainLayer::menuRank(cocos2d::Ref *sender){
-    HPlatformHelper::getInstance()->showRank();
+	 HPlatformHelper::getInstance()->showRank();
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
     SettingNode* node = SettingNode::create();

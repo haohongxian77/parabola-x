@@ -8,6 +8,15 @@
 package com.game.gws.jump;
 
 public final class R {
+    public static final class array {
+        public static final int send_appdata_item=0x7f0b0004;
+        public static final int send_emoji_item=0x7f0b0005;
+        public static final int send_emoji_item_format=0x7f0b0006;
+        public static final int send_img_item=0x7f0b0000;
+        public static final int send_music_item=0x7f0b0001;
+        public static final int send_video_item=0x7f0b0002;
+        public static final int send_webpage_item=0x7f0b0003;
+    }
     public static final class attr {
         /** 
     The size of the ad. It must be one of BANNER, FULL_BANNER, LEADERBOARD,
@@ -744,9 +753,34 @@ containing a value of this type.
         public static final int achievement_leet_toast_text=0x7f060051;
         public static final int achievement_prime_toast_text=0x7f06004e;
         public static final int achievements_not_available=0x7f06004a;
+        /**  facebook end 
+ wx start 
+         */
+        public static final int app_back=0x7f060070;
+        public static final int app_cancel=0x7f060072;
+        public static final int app_continue=0x7f060073;
+        public static final int app_delete=0x7f060078;
+        public static final int app_edit=0x7f06007d;
+        public static final int app_find=0x7f06007c;
+        public static final int app_finish=0x7f06007b;
         public static final int app_id=0x7f06003f;
         public static final int app_misconfigured=0x7f06002b;
         public static final int app_name=0x7f060041;
+        public static final int app_nextstep=0x7f060079;
+        public static final int app_ok=0x7f060071;
+        public static final int app_prevstep=0x7f06007a;
+        public static final int app_save=0x7f060077;
+        public static final int app_send=0x7f060075;
+        public static final int app_set=0x7f060076;
+        public static final int app_share=0x7f060092;
+        public static final int app_tip=0x7f060074;
+        public static final int applet_seccode_fail_tip=0x7f060081;
+        public static final int applet_seccode_tip=0x7f060080;
+        public static final int applet_secimg_change=0x7f06007f;
+        /**  applet 
+         */
+        public static final int applet_secimg_title=0x7f06007e;
+        public static final int check_timeline_supported=0x7f060097;
         public static final int choose_difficulty=0x7f060062;
         public static final int clear=0x7f060060;
         public static final int com_facebook_image_download_unknown_error=0x7f06003c;
@@ -882,25 +916,78 @@ containing a value of this type.
         public static final int digit9=0x7f06005f;
         public static final int easy=0x7f060063;
         public static final int easy_mode_explanation=0x7f06004c;
+        public static final int enter=0x7f060093;
+        public static final int errcode_cancel=0x7f06009c;
+        public static final int errcode_deny=0x7f06009d;
+        public static final int errcode_success=0x7f06009b;
+        public static final int errcode_unknown=0x7f06009e;
         /**  google play service end 
  facebook start 
          */
         public static final int facebook_app_id=0x7f06006e;
         public static final int facebook_app_secret=0x7f06006f;
+        public static final int fmt_afternoon=0x7f06008d;
+        /**  format 
+         */
+        public static final int fmt_date=0x7f060083;
+        public static final int fmt_datetime=0x7f060085;
+        public static final int fmt_dawn=0x7f06008a;
+        public static final int fmt_evening=0x7f06008e;
+        public static final int fmt_iap_err=0x7f060090;
+        public static final int fmt_in60min=0x7f060088;
+        public static final int fmt_justnow=0x7f060089;
+        public static final int fmt_longdate=0x7f060084;
+        public static final int fmt_longtime=0x7f060087;
+        public static final int fmt_morning=0x7f06008b;
+        public static final int fmt_noon=0x7f06008c;
+        public static final int fmt_patime=0x7f060086;
+        public static final int fmt_pre_yesterday=0x7f06008f;
         public static final int gamehelper_app_misconfigured=0x7f060027;
         public static final int gamehelper_license_failed=0x7f060028;
         public static final int gamehelper_sign_in_failed=0x7f060026;
         public static final int gamehelper_unknown_error=0x7f060029;
+        public static final int get_from_wx_title=0x7f060099;
+        public static final int get_token_from_weixin=0x7f0600b4;
+        public static final int goto_send=0x7f060095;
         public static final int hard=0x7f060064;
         public static final int hard_mode_explanation=0x7f06004d;
+        public static final int hello=0x7f060091;
         public static final int initial_input=0x7f060055;
+        public static final int is_timeline=0x7f0600a1;
+        public static final int launch_wx=0x7f060096;
         public static final int leaderboard_worldrank=0x7f060040;
         public static final int leaderboards_not_available=0x7f06004b;
         public static final int license_failed=0x7f06002c;
         public static final int messenger_send_button_text=0x7f06002e;
         public static final int ok=0x7f060061;
+        public static final int receive=0x7f0600a0;
+        public static final int reg=0x7f060094;
+        public static final int register_as_weixin_app_sender=0x7f0600b3;
         public static final int see_your_progress=0x7f060065;
+        /**  WXMediaMessage 
+         */
+        public static final int send=0x7f06009f;
+        public static final int send_appdata=0x7f0600aa;
+        public static final int send_emoji=0x7f0600ab;
+        public static final int send_img=0x7f0600a4;
+        public static final int send_img_file_not_exist=0x7f0600a5;
+        public static final int send_music=0x7f0600a7;
+        public static final int send_pic=0x7f0600a6;
+        public static final int send_text=0x7f0600a2;
+        public static final int send_text_default=0x7f0600a3;
+        public static final int send_to_wx_title=0x7f060098;
+        public static final int send_video=0x7f0600a8;
+        public static final int send_webpage=0x7f0600a9;
+        public static final int share_appdata_to_weixin=0x7f0600b2;
+        public static final int share_music_to_weixin=0x7f0600b0;
+        public static final int share_pic_to_weixin=0x7f0600af;
+        public static final int share_text_default=0x7f0600ad;
+        public static final int share_text_to_weixin=0x7f0600ac;
+        public static final int share_url_to_weixin=0x7f0600ae;
+        public static final int share_video_to_weixin=0x7f0600b1;
         public static final int show_achievements=0x7f060066;
+        public static final int show_from_wx_tip=0x7f0600b6;
+        public static final int show_from_wx_title=0x7f06009a;
         public static final int show_leaderboards=0x7f060067;
         /**  sina  end 
  game service start 
@@ -920,6 +1007,10 @@ containing a value of this type.
         public static final int store_picture_title=0x7f060003;
         public static final int title_activity_main=0x7f060048;
         public static final int unknown_error=0x7f06002d;
+        public static final int unregister_from_weixin=0x7f0600b5;
+        /**  verify 
+         */
+        public static final int verify_password_null_tip=0x7f060082;
         /**  Text on a placeholder buy button when Google Play services is not
          available or up-to-date 
          */
