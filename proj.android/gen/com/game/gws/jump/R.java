@@ -780,6 +780,7 @@ containing a value of this type.
         /**  applet 
          */
         public static final int applet_secimg_title=0x7f06007e;
+        public static final int challenge_me=0x7f0600b8;
         public static final int check_timeline_supported=0x7f060097;
         public static final int choose_difficulty=0x7f060062;
         public static final int clear=0x7f060060;
@@ -981,6 +982,9 @@ containing a value of this type.
         public static final int share_appdata_to_weixin=0x7f0600b2;
         public static final int share_music_to_weixin=0x7f0600b0;
         public static final int share_pic_to_weixin=0x7f0600af;
+        /**  wx end 
+         */
+        public static final int share_sdcard_error=0x7f0600b7;
         public static final int share_text_default=0x7f0600ad;
         public static final int share_text_to_weixin=0x7f0600ac;
         public static final int share_url_to_weixin=0x7f0600ae;
