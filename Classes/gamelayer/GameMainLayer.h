@@ -40,7 +40,7 @@ private:
 public:
     void setMoveXDistance(int distance);
     void reloadData();
-    
+    void startGame(float dx);
 public:
     virtual void onEnter();
     void update(float dt);

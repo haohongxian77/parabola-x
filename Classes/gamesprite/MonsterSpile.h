@@ -28,12 +28,13 @@ public:
     CollisionType getValid(Rect heroFootRect,Rect heroBodyRect);
     void moveOver();
     void disapear();
+    void changeSprite(int bgIndex);
     
     static MonsterSpile* create(int spileType);
 private:
     void initDraw();
     DrawNode* drawNode;
-    virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
+//    virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
     
     
     

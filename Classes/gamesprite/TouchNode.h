@@ -13,20 +13,24 @@
 #include "cocos2d.h"
 using namespace cocos2d;
 typedef enum {
-    TOUCH_Enable =0, //没有碰撞
-    TOUCH_Disable     //有效碰撞 hero站在上边
+    TOUCH_DISABLE = 0,
+    TOUCH_ENABLE_UP ,
+    TOUCH_DISABLE_UP ,
+    TOUCH_ENALBE_DOWN , //没有碰撞
+    TOUCH_DISABLE_DOWN,     //有效碰撞 hero站在上边
     
 }TouchType;
+#define TOUCH_DISABLE_DIS 50
 class TouchNode :public Sprite{
 private:
     TouchNode();
     ~TouchNode();
-    TouchType m_type = TOUCH_Enable;
+    TouchType m_type = TOUCH_ENABLE_UP;
     void initData();
 public:
     static TouchNode* create();
     
-    void setPos(Point curP,float heroP);
+    void setPos(Touch * curP,Point heroP);
     TouchType getCurType();
     
 };

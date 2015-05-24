@@ -25,6 +25,7 @@ private:
 public:
     CREATE_FUNC(GameBgBeforeLayer);
     void update(float dt,float bgMoveSpeed);
+    void changeSprite();
 private:
     void updateBg(float dX);
 };

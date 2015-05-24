@@ -28,7 +28,8 @@ GameMainHelper* GameMainHelper::mainHelper = NULL;
 GameMainHelper::GameMainHelper():
 m_gameStatus(Tag_None),
 m_curHeroPost(NULL),
-m_curScore(NULL)
+m_curScore(NULL),
+m_curBgIndex(0)
 {
 }
 
@@ -275,16 +276,26 @@ void GameMainHelper::gameOver(){
     m_heroPathIndex = 0;
 }
 void GameMainHelper::startGame(){
+    int nextBgIndex = m_curBgIndex;
+    while (nextBgIndex == m_curBgIndex) {
+        nextBgIndex = rand()%(5);
+    }
+    m_curBgIndex = nextBgIndex;
     Size winSize  = Director::getInstance()->getWinSize();
-    m_mainScene->startGame();  //主scene准备开始游戏
-    m_Layer->reloadData();        //主layer 重新设置位置
-    m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
-    int posX = m_curHeroPost->getPositionX()-winSize.width/5;
-    m_Layer->setPositionX(-posX);
     setGameStaus(Tag_GameStart);
+    m_mainScene->startGame();  //主scene准备开始游戏
+    m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
+    m_Layer->startGame(m_curHeroPost->getPositionX()-winSize.width/5);
+    changePostsSprite();
     
-    m_Layer->initHeroBeginPoint();
     
+    
+}
+void GameMainHelper::changePostsSprite(){
+    for (int i=0; i<m_posts->count(); i++) {
+        MonsterSpile* spile = dynamic_cast<MonsterSpile*> (m_posts->getObjectAtIndex(i));
+        spile->changeSprite(m_curBgIndex);
+    }
 }
 void GameMainHelper::atachScene(GameMainScene* scene){
     m_mainScene = scene;
@@ -294,7 +305,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
     //下落动画播放的开始位置
     Point downPoint ;
     float aniSpeed = 1.0f/60;
-    float dis = highY-curY;
+    //float dis = highY-curY;
     
     float sX = params[1];
     float gravity = params[0];
@@ -326,7 +337,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
                 downPoint = m_heroPaths[m_heroPaths.size() - 2];
                 
             }else {
-                downPoint = m_heroPaths[0];
+                downPoint = startPoint;
                 aniSpeed = aniSpeed/2;
             }
             
@@ -361,7 +372,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         overStatus =frogDead1;
         Size  postSize = m_curHeroPost->getContentSize();
         Point endPoint = getHeroPostPoint();
-        float dx = endPoint.x-postSize.width/4 - (curPoint.x);
+        float dx = endPoint.x-postSize.width - (curPoint.x);
         int totalCount = m_heroPaths.size();
         
         for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {

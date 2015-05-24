@@ -55,9 +55,9 @@ GameMainScene* GameMainScene::create(){
     GameMainScene* sc = new GameMainScene();
     if (sc->init()) {
         sc->initHelper();
+        sc->initGameBgBFLayer();
         sc->initGameBgLayer();
         sc->initMainLayer();
-        sc->initGameBgBFLayer();
         sc->initGameAlertLayer(Tag_None);
         sc->initGameUIlayer();
         return sc;
@@ -70,11 +70,12 @@ void GameMainScene::initHelper(){
 }
 void GameMainScene::startGame(){
     if(m_mianMenuLayer){
-        m_helper->setGameStaus(Tag_GameStart);
         m_mianMenuLayer ->removeFromParentAndCleanup(true);
         m_mianMenuLayer =NULL;
         scheduleUpdate();
     }
+    m_bgLayer->changeSprite();
+    m_bgBfLayer->changeSprite();
 }
 void GameMainScene::gameOver(){
     unscheduleUpdate();

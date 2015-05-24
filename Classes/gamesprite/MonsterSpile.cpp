@@ -13,19 +13,25 @@ MonsterSpile::MonsterSpile():drawNode(NULL){
 MonsterSpile::~MonsterSpile(){
 }
 std::string MonsterSpile::getspriteFileName(int type){
-    return "spile.png";
+    
+    return "game_column1.png";
 }
 MonsterSpile* MonsterSpile::create(int spileType){
     std::string fileName = getspriteFileName(spileType);
     MonsterSpile* sp = new MonsterSpile();
     
-    //sp->initWithSpriteFrameName(fileName);
-    sp->initWithFile(fileName);
+    sp->initWithSpriteFrameName(fileName);
+   // sp->initWithFile(fileName);
     sp->setAnchorPoint(Vec2(0,1));
     sp->initDraw();
     
     
     return  sp;
+}
+void MonsterSpile::changeSprite(int bgIndex){
+    __String* str = __String::createWithFormat("game_column%d.png",bgIndex+1);
+    SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str->getCString());
+    setDisplayFrame(frame);
 }
 void MonsterSpile::moveOver(){
     Size size = this->getContentSize();
@@ -41,22 +47,22 @@ void MonsterSpile::initDraw(){
     drawNode = DrawNode::create();
     this->addChild(drawNode,100);
 }
-void MonsterSpile::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags){
-    Sprite::draw(renderer,transform,flags);
-    if (!drawNode) {
-        return;
-    }
-    drawNode->clear();
-    Point _point = this->getPosition();
-    Size  size = this->getContentSize();
-    drawNode->drawRect(Vec2(0,-10), Vec2(size.width,0), Color4F(255, 0, 255, 1));
-    drawNode->drawRect(Vec2(0, -size.height), Vec2(size.width,0), Color4F(0, 255, 255, 1));
-}
+//void MonsterSpile::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transform, uint32_t flags){
+//    Sprite::draw(renderer,transform,flags);
+//    if (!drawNode) {
+//        return;
+//    }
+//    drawNode->clear();
+//    Point _point = this->getPosition();
+//    Size  size = this->getContentSize();
+//    drawNode->drawRect(Vec2(0,-10), Vec2(size.width,0), Color4F(255, 0, 255, 1));
+//    drawNode->drawRect(Vec2(0, -size.height), Vec2(size.width,0), Color4F(0, 255, 255, 1));
+//}
 CollisionType MonsterSpile::getValid(Rect heroFootRect,Rect heroBodyRect){
     CollisionType _cType= Collision_None;
     Point _point = this->getPosition();
     Size  size = this->getContentSize();
-    Rect rec = Rect(_point.x,_point.y-30,size.width,30);
+    Rect rec = Rect(_point.x,_point.y-50,size.width,60);
     Rect recText = Rect(_point.x,_point.y-size.height,size.width,size.height);
 //    CCLOG("英雄的位置======%f=====%f=====%f=====%f ",heroRect.origin.x,heroRect.origin.y,heroRect.size.width,heroRect.size.height);
 //     CCLOG("可站立的位置======%f=====%f=====%f=====%f ",rec.origin.x,rec.origin.y,rec.size.width,rec.size.height);

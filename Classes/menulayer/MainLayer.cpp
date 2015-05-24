@@ -96,7 +96,7 @@ void MainLayer::initMenu(){
     auto item4 = HMenu::create("main_start.png", "main_start1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
     if (GameMainHelper::getInstance()->getGameStaus() == Tag_GameOver) {
         item4 = HMenu::create("main_restart.png", "main_restart1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
-        item4->setPosition(Vec2(size.width/2, size.height*2/5));
+        item4->setPosition(Vec2(size.width/2, size.height/2));
     }else{
         item4 = HMenu::create("main_start.png", "main_start1.png", CC_CALLBACK_1(MainLayer::menuStart, this) );
         item4->setPosition(Vec2(size.width/2, size.height/2+item4->getContentSize().height/4));

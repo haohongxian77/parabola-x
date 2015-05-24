@@ -34,6 +34,7 @@ public:
     
     CollisionType isCollisionPosts(Point curPoint);   //碰撞检测
     void initPosts();
+    void changePostsSprite();
     void managePost();
     Sprite* getCollectSp();
     void initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY);
@@ -51,6 +52,7 @@ public:
     CC_SYNTHESIZE(gameStatus, m_gameStatus, GameStaus);
     CC_SYNTHESIZE(int, m_earthH, EarthH);
     CC_SYNTHESIZE(int, m_curScore, CurScore);
+    CC_SYNTHESIZE(int, m_curBgIndex, CurBgIndex);
     __Array* m_posts;
     Sprite* m_curHeroPost;
     GameMainLayer* m_Layer;

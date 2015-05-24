@@ -74,6 +74,11 @@ void GameMainLayer::initHelper(){
     GameMainHelper::getInstance()->setHero(m_hero);
     
 }
+void GameMainLayer::startGame(float dx){
+    reloadData();
+    setPositionX(-dx);
+    initHeroBeginPoint();
+}
 void GameMainLayer::initHeroBeginPoint(){
     m_hero->setHeroStatus(frogStatic);
     if (GameMainHelper::getInstance()->m_posts->count()>0) {
@@ -88,8 +93,10 @@ void GameMainLayer::initHeroBeginPoint(){
 bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
     if (params.size()==0) {
         Point curP = this->convertTouchToNodeSpace(pTouch);
-        Point heroP = m_hero->getPosition();
-        touNode->setPos(curP, heroP.y);
+         Point heroP = m_hero->getPosition();
+        //Vec2 heroWord = this->convertToWorldSpace(heroP);
+       
+        touNode->setPos(pTouch, heroP);
         touNode->setVisible(true);
         m_hero->setHeroStatus(frogTakeoff);
         return true;
@@ -99,27 +106,72 @@ bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
 
 }
 void GameMainLayer::onTouchMoved(Touch *touch, Event *event){
-    Point curP= this->convertTouchToNodeSpace(touch);
+   // Point curP= this->convertTouchToNodeSpace(touch);
     Point heroP = m_hero->getPosition();
-    touNode->setPos(curP, heroP.y);
+   // Point heroWord = convertToWorldSpace(heroP);
+    
+    touNode->setPos(touch, heroP);
     m_hero->setHeroStatus(frogTakeoff);
     
 }
 void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
-    if (touNode->getCurType() == TOUCH_Disable) {
-        m_hero->setHeroStatus(frogStatic);
-        return;
-    }
+//    if (touNode->getCurType() == TOUCH_Disable) {
+//        m_hero->setHeroStatus(frogStatic);
+//        return;
+//    }
+    
+    
+    Size winSize = Director::getInstance()->getWinSize();
     Point curPos = m_hero->getPosition();
+    //Point heroWord = convertToWorldSpace(curPos);
+    
+    touNode->setPos(touch, curPos);
+    
     Point highPoint = this->convertTouchToNodeSpace(touch);
-    float dY = highPoint.y- curPos.y;
     
-    float dis = curPos.distance(highPoint);
-    float dtime = dis/600;
-    
-    float gravity = 2*dY/dtime/dtime;
-    float startSpeedY = gravity*dtime;
-    speedX = (highPoint.x-curPos.x)/dtime;
+    float dtime = 0;
+    float gravity ;
+    float startSpeedY;
+    switch (touNode->getCurType()) {
+        case TOUCH_ENABLE_UP:
+            dtime = curPos.distance(highPoint)/600;
+            gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
+             startSpeedY= gravity*dtime;
+            speedX = (highPoint.x-curPos.x)/dtime;
+            m_hero->setHeroStatus(frogJumpUp);
+            break;
+        case TOUCH_DISABLE_UP:
+            highPoint.y  = curPos.y+TOUCH_DISABLE_DIS;
+            dtime = curPos.distance(highPoint)/600;
+            gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
+            startSpeedY= gravity*dtime;
+            speedX = (highPoint.x-curPos.x)/dtime;
+            m_hero->setHeroStatus(frogJumpUp);
+            break;
+        case TOUCH_DISABLE_DOWN:
+            highPoint.y  = curPos.y-TOUCH_DISABLE_DIS;
+            dtime = curPos.distance(highPoint)/600;
+            gravity  = 2*(curPos.y-highPoint.y)/dtime/dtime;
+            startSpeedY= 0;
+            speedX = (highPoint.x-curPos.x)/dtime;
+            m_hero->setHeroStatus(frogJumpDown);
+            highestPoint = curPos;
+            break;
+        case TOUCH_ENALBE_DOWN:
+            dtime = curPos.distance(highPoint)/600;
+            gravity  = 2*(curPos.y-highPoint.y)/dtime/dtime;
+            startSpeedY= 0;
+            speedX = (highPoint.x-curPos.x)/dtime;
+            m_hero->setHeroStatus(frogJumpDown);
+            highestPoint = curPos;
+            break;
+            
+        default:
+            break;
+    }
+    if (params.size()!=0)
+        return;
+   // gravity = MIN(gravity,1400);
     params.push_back(gravity);
     params.push_back(speedX);
     params.push_back(startSpeedY);
@@ -130,10 +182,8 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
 //    speedX = (highPoint.x-curPos.x)/upTime;//300;
 //    speedX = MAX(300.0, speedX);
 //    speedX = MIN(600.0,speedX);
-    
-    m_hero->setHeroStatus(frogJumpUp);
     movingPoints.clear();
-    highestPoint = highPoint;
+    
     GameMainHelper::getInstance()->initJumpDate(params,speedX,highPoint.y,curPos.y);
     
 }

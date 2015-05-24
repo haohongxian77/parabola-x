@@ -118,7 +118,7 @@ void StartLayer::initHero(){
     auto action = Animate::create(animation);
     m_spHero->runAction(RepeatForever::create(action));
 
-    m_spHero ->setPosition(Vec2(winSize.width/2, winSize.height/4+m_spGWS->getContentSize().height/4+m_spHero->getContentSize().height/2));
+    m_spHero ->setPosition(Vec2(winSize.width/2, winSize.height/4+m_spGWS->getContentSize().height/2+m_spHero->getContentSize().height/2));
     
     addChild(m_spHero);
 }

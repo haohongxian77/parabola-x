@@ -8,6 +8,7 @@
 
 #include "TouchNode.h"
 
+
 TouchNode::TouchNode(){
 }
 TouchNode::~TouchNode(){
@@ -18,17 +19,30 @@ TouchNode* TouchNode::create(){
     //touch->initWithFile("CloseNormal.png");
     return touch;
 }
-void TouchNode::setPos(Point curP, float heroP){
+void TouchNode::setPos(Touch * touchPoint, Point heroP){
     TouchType touchType_;
     SpriteFrame* frame = NULL;
+    Point curP = this->getParent()->convertTouchToNodeSpace(touchPoint);
+    //Point wordP = touchPoint->getLocationInView();
     this->setPosition(curP);
     Size  size = Director::getInstance()->getWinSize();
-    if (curP.y - heroP > size.height/8) {
+    if(heroP.x-curP.x>0){
+        frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_unnormal.png");
+        touchType_ = TOUCH_DISABLE;
+        return;
+    }
+    if (curP.y-heroP.y> TOUCH_DISABLE_DIS) {
         frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_normal.png");
-        touchType_ = TOUCH_Enable;
-    }else{
+        touchType_ = TOUCH_ENABLE_UP;
+    }else if(curP.y-heroP.y>0){
      frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_unnormal.png");
-    touchType_ = TOUCH_Disable;
+       touchType_ = TOUCH_DISABLE_UP;
+    }else if(curP.y-heroP.y>-1*TOUCH_DISABLE_DIS){
+        frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_unnormal.png");
+        touchType_ = TOUCH_DISABLE_DOWN;
+    }else{
+        frame=SpriteFrameCache::getInstance()->getSpriteFrameByName("touch_normal.png");
+        touchType_ = TOUCH_ENALBE_DOWN;
     }
     
     if (m_type == touchType_)
