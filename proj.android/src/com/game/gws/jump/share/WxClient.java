@@ -42,8 +42,6 @@ public class WxClient {
 	public static final String APP_ID = "wx644a5864a554f4f2";
 	public final String APP_SECRET = "b7a42c91be34da26fd9f2843bf7d6371";
 	public final String APP_TRANSATION = "wx_transaction";
-	private String mImgAbsPath = "";
-	private String mContent = "";
 	/** IWXAPI 是第三方app和微信通信的openapi接口 **/
 	private static IWXAPI iwxapi;
 	private Activity mActivity;
@@ -70,52 +68,60 @@ public class WxClient {
 	 * 
 	 * @param imgAbsPath
 	 */
-	public void shareImg(int status) {
-		String content = mActivity.getString(R.string.challenge_me);
-		if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
-			Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG).show();
-			return;
-		}
-		Bitmap bitmap;
-		if (status == -1) {
-			bitmap = BitmapFactory.decodeResource(mActivity.getResources(),
-					R.drawable.icon);
-		} else {
-			bitmap = ShareUtil.getScreenShot(mActivity);
-		}
-		boolean flag = ShareUtil.saveScreenShot(
-				status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-						: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
-		if (!flag) {
-			Toast.makeText(mActivity, R.string.share_sdcard_error,
-					Toast.LENGTH_LONG).show();
-			return;
-		}
-		String imgAbsPath = ShareUtil
-				.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-						: ScreenShotType.SCORE_SCREEN_SHOT);
-		Log.e(TAG, "shareImg:" + imgAbsPath);
-		WXImageObject imgObj = new WXImageObject();
-		imgObj.setImagePath(mImgAbsPath);
+	public void shareImg(final int status, final String filePath) {
+		mActivity.runOnUiThread(new Runnable() {
 
-		WXMediaMessage msg = new WXMediaMessage();
-		msg.mediaObject = imgObj;
-		msg.description = content;
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				String content = mActivity.getString(R.string.challenge_me);
+				if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
+					Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG)
+							.show();
+					return;
+				}
+				Bitmap bitmap;
+				if (status == -1) {
+					bitmap = BitmapFactory.decodeResource(
+							mActivity.getResources(), R.drawable.icon);
+				} else {
+					bitmap = BitmapFactory.decodeFile(filePath);
+				}
+				boolean flag = ShareUtil.saveScreenShot(
+						status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+								: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
+				if (!flag) {
+					Toast.makeText(mActivity, R.string.share_sdcard_error,
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+				String imgAbsPath = ShareUtil
+						.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+								: ScreenShotType.SCORE_SCREEN_SHOT);
+				Log.e(TAG, "shareImg:" + imgAbsPath);
+				WXImageObject imgObj = new WXImageObject();
+				imgObj.setImagePath(imgAbsPath);
 
-		Bitmap bmp = BitmapFactory.decodeFile(mImgAbsPath);
-		Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
-				THUMB_SIZE, true);
-		bmp.recycle();
-		msg.thumbData = bmpToByteArray(thumbBmp, true);
+				WXMediaMessage msg = new WXMediaMessage();
+				msg.mediaObject = imgObj;
+				msg.description = content;
 
-		SendMessageToWX.Req req = new SendMessageToWX.Req();
-		req.transaction = APP_TRANSATION;
-		req.message = msg;
-		req.scene = SendMessageToWX.Req.WXSceneTimeline;
-		if (null == iwxapi) {
-			return;
-		}
-		iwxapi.sendReq(req);
+				Bitmap bmp = BitmapFactory.decodeFile(imgAbsPath);
+				Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
+						THUMB_SIZE, true);
+				bmp.recycle();
+				msg.thumbData = bmpToByteArray(thumbBmp, true);
+
+				SendMessageToWX.Req req = new SendMessageToWX.Req();
+				req.transaction = APP_TRANSATION;
+				req.message = msg;
+				req.scene = SendMessageToWX.Req.WXSceneTimeline;
+				if (null == iwxapi) {
+					return;
+				}
+				iwxapi.sendReq(req);
+			}
+		});
 
 	}
 

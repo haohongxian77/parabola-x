@@ -88,21 +88,29 @@ public class FaceBookClient {
 	 * 
 	 * @param imgAbsPath
 	 */
-	public void shareImg(int status) {
-		Bitmap image;
-		if (status == -1) {
-			image = BitmapFactory.decodeResource(mActivity.getResources(),
-					R.drawable.icon);
-		} else {
-			image = ShareUtil.getScreenShot(mActivity);
-		}
-		// Bitmap image=BitmapFactory.decodeFile(imgAbsPath);
-		SharePhoto photo = new SharePhoto.Builder().setBitmap(image).build();
-		SharePhotoContent content = new SharePhotoContent.Builder().addPhoto(
-				photo).build();
-		if (shareDialog.canShow(SharePhotoContent.class)) {
-			shareDialog.show(mActivity, content);
-		}
+	public void shareImg(final int status, final String filePath) {
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				Bitmap image;
+				if (status == -1) {
+					image = BitmapFactory.decodeResource(
+							mActivity.getResources(), R.drawable.icon);
+				} else {
+					image = BitmapFactory.decodeFile(filePath);
+				}
+				// Bitmap image=BitmapFactory.decodeFile(imgAbsPath);
+				SharePhoto photo = new SharePhoto.Builder().setBitmap(image)
+						.build();
+				SharePhotoContent content = new SharePhotoContent.Builder()
+						.addPhoto(photo).build();
+				if (shareDialog.canShow(SharePhotoContent.class)) {
+					shareDialog.show(mActivity, content);
+				}
+			}
+		});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {

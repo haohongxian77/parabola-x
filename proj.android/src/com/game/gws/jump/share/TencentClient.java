@@ -8,16 +8,11 @@
  */
 package com.game.gws.jump.share;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.Looper;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.game.gws.jump.R;
@@ -64,65 +59,63 @@ public class TencentClient {
 	 * @param status
 	 *            -1,分享本地图片;1,分享截屏图片
 	 */
-	public void shareImg(int status) {
-		Bitmap bitmap;
-		if (status == -1) {
-			bitmap = BitmapFactory.decodeResource(mActivity.getResources(),
-					R.drawable.icon);
-		} else {
-			bitmap = ShareUtil.getScreenShot(mActivity);
-		}
-		boolean flag = ShareUtil.saveScreenShot(
-				status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-						: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
-		if (!flag) {
-			Toast.makeText(mActivity, R.string.share_sdcard_error,
-					Toast.LENGTH_LONG).show();
-			return;
-		}
-		String imgAbsPath = ShareUtil
-				.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-						: ScreenShotType.SCORE_SCREEN_SHOT);
-		Log.e(TAG, "shareImg:" + imgAbsPath);
-		imgAbsPath = Environment.getExternalStorageDirectory()
-				.getAbsolutePath()
-				+ File.separator
-				+ "czj"
-				+ File.separator
-				+ "test.png";
-		Log.e(TAG, "imgAbsPath:" + imgAbsPath);
-
-		// TODO Auto-generated method stub
-		Looper.prepare();
-		Bundle params = new Bundle();
-		params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE,
-				QQShare.SHARE_TO_QQ_TYPE_IMAGE);
-		params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, imgAbsPath);
-		params.putString(QQShare.SHARE_TO_QQ_APP_NAME, APP_NAME);
-		params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,
-				QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-		mTencent.shareToQQ(mActivity, params, new IUiListener() {
+	public void shareImg(final int status, final String filePath) {
+		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
-			public void onError(UiError error) {
+			public void run() {
 				// TODO Auto-generated method stub
-				Toast.makeText(mActivity.getApplicationContext(),
-						"onError:" + error.errorMessage, Toast.LENGTH_SHORT)
-						.show();
-			}
+				Bitmap bitmap;
+				if (status == -1) {
+					bitmap = BitmapFactory.decodeResource(
+							mActivity.getResources(), R.drawable.icon);
+				} else {
+					bitmap = BitmapFactory.decodeFile(filePath);
+				}
+				boolean flag = ShareUtil.saveScreenShot(
+						status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+								: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
+				if (!flag) {
+					Toast.makeText(mActivity, R.string.share_sdcard_error,
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+				String imgAbsPath = ShareUtil
+						.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+								: ScreenShotType.SCORE_SCREEN_SHOT);
+				// TODO Auto-generated method stub
+				Bundle params = new Bundle();
+				params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE,
+						QQShare.SHARE_TO_QQ_TYPE_IMAGE);
+				params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL,
+						imgAbsPath);
+				params.putString(QQShare.SHARE_TO_QQ_APP_NAME, APP_NAME);
+				params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,
+						QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
+				mTencent.shareToQQ(mActivity, params, new IUiListener() {
 
-			@Override
-			public void onComplete(Object arg0) {
-				// TODO Auto-generated method stub
-				Toast.makeText(mActivity.getApplicationContext(), "分享成功",
-						Toast.LENGTH_SHORT).show();
-			}
+					@Override
+					public void onError(UiError error) {
+						// TODO Auto-generated method stub
+						Toast.makeText(mActivity.getApplicationContext(),
+								"onError:" + error.errorMessage,
+								Toast.LENGTH_SHORT).show();
+					}
 
-			@Override
-			public void onCancel() {
-				// TODO Auto-generated method stub
-				Toast.makeText(mActivity.getApplicationContext(), "cancel",
-						Toast.LENGTH_SHORT).show();
+					@Override
+					public void onComplete(Object arg0) {
+						// TODO Auto-generated method stub
+						Toast.makeText(mActivity.getApplicationContext(),
+								"分享成功", Toast.LENGTH_SHORT).show();
+					}
+
+					@Override
+					public void onCancel() {
+						// TODO Auto-generated method stub
+						Toast.makeText(mActivity.getApplicationContext(),
+								"cancel", Toast.LENGTH_SHORT).show();
+					}
+				});
 			}
 		});
 

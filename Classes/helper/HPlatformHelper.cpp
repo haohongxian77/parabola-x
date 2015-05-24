@@ -21,11 +21,11 @@ HPlatformHelper::HPlatformHelper(){
 }
 HPlatformHelper::~HPlatformHelper(){
 }
-void HPlatformHelper::share(int shareType,int shareFrom){
+void HPlatformHelper::share(int shareType,int shareFrom,std::string path){
 
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-	HHPlatform::GetInstance()->share(shareType,shareFrom);
+	HHPlatform::GetInstance()->share(shareType,shareFrom,path);
 #endif
 }
 void HPlatformHelper::showRank(){

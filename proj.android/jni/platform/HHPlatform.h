@@ -60,7 +60,7 @@ public :
 	static HHPlatform* GetInstance();
 	void setVM();
 
-	void share(int shareType,int shareFrom);
+	void share(int shareType,int shareFrom,std::string filepath);
 	void showRank();
 };
 

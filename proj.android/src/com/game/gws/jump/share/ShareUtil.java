@@ -15,7 +15,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Environment;
-import android.view.Display;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -24,6 +24,8 @@ import android.view.View;
  * @date 2015年5月9日 下午12:23:06
  */
 public class ShareUtil {
+	public static final String TAG = ShareUtil.class.getName();
+
 	public enum ScreenShotType {
 		/** 游戏开始时分享 **/
 		GAME_SCREEN_SHOT,
@@ -31,38 +33,28 @@ public class ShareUtil {
 		SCORE_SCREEN_SHOT;
 	}
 
-	private static final String SHOT_NAME_DIR = "game_shot_dir";
+	private static final String SHOT_NAME_DIR = "GameShotDir";
 	/** 游戏开始时分享的文件名字 **/
-	private static final String SHOT_NAME_GAME = "game_shot_name";
+	private static final String SHOT_NAME_GAME = "GameShotName.png";
 	/** 游戏停止时分享的文件名字 **/
-	private static final String SHOT_NAME_SCORE = "game_shot_score";
+	private static final String SHOT_NAME_SCORE = "GameShotScore.png";
 
 	public static Bitmap getScreenShot(Activity activity) {
-		// 获取windows中最顶层的view
 		View view = activity.getWindow().getDecorView();
-		view.buildDrawingCache();
-
-		// 获取状态栏高度
-		Rect rect = new Rect();
-		view.getWindowVisibleDisplayFrame(rect);
-		int statusBarHeights = rect.top;
-		Display display = activity.getWindowManager().getDefaultDisplay();
-
-		// 获取屏幕宽和高
-		int widths = display.getWidth();
-		int heights = display.getHeight();
-
-		// 允许当前窗口保存缓存信息
 		view.setDrawingCacheEnabled(true);
-
-		// 去掉状态栏
-		Bitmap bmp = Bitmap.createBitmap(view.getDrawingCache(), 0,
-				statusBarHeights, widths, heights - statusBarHeights);
-
-		// 销毁缓存信息
+		view.buildDrawingCache();
+		Bitmap bitmap = view.getDrawingCache();
+		Rect frame = new Rect();
+		activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+		int statusBarHeight = frame.top;
+		int width = activity.getWindowManager().getDefaultDisplay().getWidth();
+		int height = activity.getWindowManager().getDefaultDisplay()
+				.getHeight();
+		// 去掉标题栏
+		Bitmap b = Bitmap.createBitmap(bitmap, 0, statusBarHeight, width,
+				height - statusBarHeight);
 		view.destroyDrawingCache();
-
-		return bmp;
+		return b;
 	}
 
 	/**
@@ -73,24 +65,27 @@ public class ShareUtil {
 	 * @return
 	 */
 	public static boolean saveScreenShot(ScreenShotType curType, Bitmap bmp) {
-		if (!android.os.Environment.getExternalStorageState().equals(
+		if (!Environment.getExternalStorageState().equals(
 				android.os.Environment.MEDIA_MOUNTED)) {
 			return false;
 		}
-		String dirStr = Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + File.separator + SHOT_NAME_DIR;
+		Log.e(TAG, "saveScreenShot  sdcard  MEDIA_MOUNTED");
+		String dirStr = Environment.getExternalStorageDirectory().getPath()
+				+ File.separator + SHOT_NAME_DIR;
 		File fileDir = new File(dirStr);
 		try {
 			if (!fileDir.exists()) {
-				fileDir.createNewFile();
+				Log.e(TAG, "saveScreenShot mkdirs： " + fileDir.mkdirs());
 			}
+			Log.e(TAG, "saveScreenShot  sdcard  MEDIA_MOUNTED");
 			String fileName = "";
 			if (curType == ScreenShotType.GAME_SCREEN_SHOT) {
 				fileName = SHOT_NAME_GAME;
 			} else {
 				fileName = SHOT_NAME_SCORE;
 			}
-			File shotFile = new File(dirStr + File.separator + fileName);
+			Log.e(TAG, "saveScreenShot：" + fileDir.getAbsolutePath());
+			File shotFile = new File(fileDir, fileName);
 			// 判断文件是否存在，不存在则创建
 			if (!shotFile.exists()) {
 				shotFile.createNewFile();
@@ -107,6 +102,7 @@ public class ShareUtil {
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
+			Log.e(TAG, "saveScreenShot Exception:" + e.getMessage());
 			return false;
 		}
 
