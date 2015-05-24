@@ -97,7 +97,7 @@ bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
         //Vec2 heroWord = this->convertToWorldSpace(heroP);
        
         touNode->setPos(pTouch, heroP);
-        touNode->setVisible(true);
+        touNode->setVisible(false);
         m_hero->setHeroStatus(frogTakeoff);
         return true;
     }else {
