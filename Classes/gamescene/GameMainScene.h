@@ -10,7 +10,6 @@
 #include "gamelayer/GameUIlayer.h"
 typedef enum{
     GAMEBGLAYER = -10,      //背景层  背景图（不动） 云（自由动）  山和房屋（慢动）
-  
     GAMEUILAYER,      //游戏UI层
     GAMEMAINLAYER ,       //游戏层
     GAMEBGBEFORELAYER,        //前景层  地表

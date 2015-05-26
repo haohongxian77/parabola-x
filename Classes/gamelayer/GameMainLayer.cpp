@@ -91,6 +91,9 @@ void GameMainLayer::initHeroBeginPoint(){
     }
 }
 bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
+    if (GameMainHelper::getInstance()->getGameStaus() == Tag_GameOver) {
+        return false;
+    }
     movingPoints.clear();
     drawNode->clear();
     if (params.size()==0) {

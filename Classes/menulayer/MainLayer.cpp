@@ -142,8 +142,14 @@ void MainLayer::callback(){
     
 }
 void MainLayer::menuShare(cocos2d::Ref *sender){
+    if (!this->getChildByTag(101) ) {
         m_shareNode = ShareNode::create();
+        m_shareNode->setTag(101);
         addChild(m_shareNode);
+    }else{
+        this->removeChildByTag(101);
+    }
+    
 }
 void MainLayer::menuRank(cocos2d::Ref *sender){
 	 HPlatformHelper::getInstance()->showRank();
