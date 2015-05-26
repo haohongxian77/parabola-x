@@ -282,14 +282,15 @@ void GameMainHelper::startGame(){
     }
     m_curBgIndex = nextBgIndex;
     Size winSize  = Director::getInstance()->getWinSize();
-    setGameStaus(Tag_GameStart);
-    m_mainScene->startGame();  //主scene准备开始游戏
+        m_mainScene->startGame();  //主scene准备开始游戏
     m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
     m_Layer->startGame(m_curHeroPost->getPositionX()-winSize.width/5);
-    changePostsSprite();
-    
-    
-    
+    if (m_gameStatus != Tag_None) {
+         changePostsSprite();
+    }
+   
+    setGameStaus(Tag_GameStart);
+
 }
 void GameMainHelper::changePostsSprite(){
     for (int i=0; i<m_posts->count(); i++) {

@@ -44,6 +44,7 @@ public:
     void gameOver();
     void startGame();
     void jumpOver();
+    //void changeBgIndex();
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     void share(ShareStatus status);
 #endif

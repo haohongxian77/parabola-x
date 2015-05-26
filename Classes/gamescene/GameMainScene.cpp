@@ -69,13 +69,12 @@ void GameMainScene::initHelper(){
     m_helper->atachScene(this);
 }
 void GameMainScene::startGame(){
-    if(m_mianMenuLayer){
-        m_mianMenuLayer ->removeFromParentAndCleanup(true);
-        m_mianMenuLayer =NULL;
-        scheduleUpdate();
+    scheduleUpdate();
+    if (GameMainHelper::getInstance()->getGameStaus() != Tag_None) {
+        m_bgLayer->changeSprite();
+        m_bgBfLayer->changeSprite();
     }
-    m_bgLayer->changeSprite();
-    m_bgBfLayer->changeSprite();
+    
 }
 void GameMainScene::gameOver(){
     unscheduleUpdate();

@@ -79,8 +79,10 @@ void MainLayer::onExit(){
 
 void MainLayer::initBg(){
     Size size = Director::getInstance()->getWinSize();
-    LayerColor* layerCol = LayerColor::create(Color4B(0,0,0,125));
-    this->addChild(layerCol);
+//    LayerColor* layerCol = LayerColor::create(Color4B(0,0,0,125));
+//    layerCol->setContentSize(Size(size.width,size.height+70));
+//    layerCol->setTag(101);
+//    this->addChild(layerCol);
     
 }
 void MainLayer::initMenu(){
@@ -114,21 +116,30 @@ void MainLayer::initMenu(){
 }
 
 void MainLayer::menuStart(Ref* sender){
-    Size winSize = Director::getInstance()->getWinSize();
-    MoveTo* moveTo2 = MoveTo::create(0.2f,
-                                    Point(
-                                          this->getPositionX(),
-                                          -70));
-    MoveTo* moveTo = MoveTo::create(0.5f,
-                                        Point(
-                                                this->getPositionX(),
-                                                winSize.height));
-    EaseSineOut* easeBack = EaseSineOut::create(moveTo);
-    Sequence* seq = Sequence::create(moveTo2,easeBack,DelayTime::create(0.5f),CallFunc::create(CC_CALLBACK_0(MainLayer::callback, this)), NULL);
+    auto action1 = FadeIn::create(1.0f);
+    Sequence* seq = Sequence::create(action1,CallFunc::create(CC_CALLBACK_0(MainLayer::callback, this)), NULL);
     this->runAction(seq);
+}
+void MainLayer::removeThisCallBack(){
+    this->removeFromParentAndCleanup(true);
 }
 void MainLayer::callback(){
     GameMainHelper::getInstance()->startGame();
+    this->stopAllActions();
+    Size winSize = Director::getInstance()->getWinSize();
+    MoveTo* moveTo2 = MoveTo::create(0.2f,
+                                     Point(
+                                           this->getPositionX(),
+                                           -70));
+    MoveTo* moveTo = MoveTo::create(0.5f,
+                                    Point(
+                                          this->getPositionX(),
+                                          winSize.height));
+    EaseSineOut* easeBack = EaseSineOut::create(moveTo);
+    Sequence* seq = Sequence::create(moveTo2,easeBack,DelayTime::create(0.5f),CallFunc::create(CC_CALLBACK_0(MainLayer::removeThisCallBack, this)), NULL);
+    this->runAction(seq);
+
+    
 }
 void MainLayer::menuShare(cocos2d::Ref *sender){
         m_shareNode = ShareNode::create();

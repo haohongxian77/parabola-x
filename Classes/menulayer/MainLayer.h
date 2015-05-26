@@ -39,6 +39,7 @@ public:
     void menuShare(Ref* sender);
     void menuStart(Ref* sender);
     void callback();
+    void removeThisCallBack();
     
      bool onTouchBegan(Touch* touch, Event  *event);
 private:

@@ -51,6 +51,8 @@ public:
     void onTouchMoved(Touch *touch, Event *event);
     void onTouchEnded(Touch* touch, Event  *event);
     void initHeroBeginPoint();
+    void disPlayLine();
+    void clearLine();
 private:  //划线相关
     Point perPos;
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;

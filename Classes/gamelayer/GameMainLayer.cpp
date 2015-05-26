@@ -91,7 +91,10 @@ void GameMainLayer::initHeroBeginPoint(){
     }
 }
 bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
+    movingPoints.clear();
+    drawNode->clear();
     if (params.size()==0) {
+        
         Point curP = this->convertTouchToNodeSpace(pTouch);
          Point heroP = m_hero->getPosition();
         //Vec2 heroWord = this->convertToWorldSpace(heroP);
@@ -119,8 +122,6 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
 //        m_hero->setHeroStatus(frogStatic);
 //        return;
 //    }
-    
-    
     Size winSize = Director::getInstance()->getWinSize();
     Point curPos = m_hero->getPosition();
     //Point heroWord = convertToWorldSpace(curPos);
@@ -182,7 +183,6 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
 //    speedX = (highPoint.x-curPos.x)/upTime;//300;
 //    speedX = MAX(300.0, speedX);
 //    speedX = MIN(600.0,speedX);
-    movingPoints.clear();
     
     GameMainHelper::getInstance()->initJumpDate(params,speedX,highPoint.y,curPos.y);
     
@@ -191,11 +191,12 @@ void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t fla
     if(movingPoints.size() == 0)
         return;
     drawNode->clear();
-    for (int i=1 ; i<movingPoints.size(); i+=2) {
+    for (int i=0 ; i<movingPoints.size(); i++) {
         Point point1 = movingPoints[i-1];
-        Point point2 = movingPoints[i];
-        
-        drawNode->drawSegment(point1, point2, 3,Color4F::ORANGE);
+        //Point point2 = movingPoints[i];
+//        DrawPrimitives::drawCircle(point1, 2, 0, 10, false);
+//        drawNode->drawCircle(point1,2, CC_DEGREES_TO_RADIANS(360), 100, true, Color4F(169,39,22,1));
+        drawNode->drawPoint(point1,5,Color4F(169,49,169,0.7));
     }
     
    
@@ -222,27 +223,28 @@ void GameMainLayer::update(float dt){
     if (params.size()==3) {
         perPos = m_hero->getPosition();
         movingPoints.push_back(perPos);
-        
-        
-        
-//        float curX = perPos.x+speedX*dt;//1;
-//        float curY  = CalculateHelper::getPathABC(curX, params);
-//        CCLOG("dx:%f=============dy:%f",curX-perPos.x,curY-perPos.y);
-//        if(m_hero->getHeroStatus() == frogJumpUp||m_hero->getHeroStatus() == frogJumpDown){
-//            m_hero->setPosition(Vec2(curX,curY));
-//            if (curX>highestPoint.x) {
-//                m_hero->setHeroStatus(frogJumpDown);
-//            }
-//        }
         if (m_hero->getHeroStatus() == frogStatic) {  //跳到柱子上
             params.clear();
+            movingPoints.clear();
+            disPlayLine();
             touNode->setVisible(false);
 
         }else if (m_hero->getHeroStatus() == frogDead1||m_hero->getHeroStatus() == frogDead2){   //游戏结束
             params.clear();
+            movingPoints.clear();
+            disPlayLine();
             touNode->setVisible(false);
         }
     }
+}
+
+void GameMainLayer::disPlayLine(){
+    FadeOut* ac = FadeOut::create(0.8);
+    Sequence* seq = Sequence::create(ac,CallFunc::create(CC_CALLBACK_0(GameMainLayer::clearLine, this)), NULL);
+    drawNode->runAction(seq);
+}
+void GameMainLayer::clearLine(){
+    drawNode->clear();
 }
 
 

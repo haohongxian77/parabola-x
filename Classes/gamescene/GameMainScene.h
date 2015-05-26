@@ -9,11 +9,12 @@
 #include "helper/CommomData.h"
 #include "gamelayer/GameUIlayer.h"
 typedef enum{
-    GAMEBGLAYER = -10,      //背景层  背景图（不懂） 云（自由动）  山和房屋（慢动）
-   // GAMEMidLAYER ,      //中景层     （墙和书）
+    GAMEBGLAYER = -10,      //背景层  背景图（不动） 云（自由动）  山和房屋（慢动）
+  
+    GAMEUILAYER,      //游戏UI层
     GAMEMAINLAYER ,       //游戏层
     GAMEBGBEFORELAYER,        //前景层  地表
-    GAMEUILAYER,      //游戏UI层
+    
     GAMEMENULAYER,          //开始和死亡按钮层
 } LayerIndex;
 class GameMainHelper;

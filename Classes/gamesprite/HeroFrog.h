@@ -31,6 +31,7 @@ public:
     void setCurPosition(Point pos);
     void setHeroMoveOver();
     bool setHeroFall();
+    FrogStatus getPathOverStatus();
 public:
     CREATE_FUNC(HeroFrog);
     Rect getFootRect(Point curPoint);
