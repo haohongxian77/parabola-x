@@ -23,13 +23,15 @@
 #define MAX_TOUCH_H 7 //  抛物线点得最高点
 #define MIN_TOUCH_H 0.5f  //  抛物线点 距离起始点 最小的距离差
 
+
 GameMainHelper* GameMainHelper::mainHelper = NULL;
 
 GameMainHelper::GameMainHelper():
 m_gameStatus(Tag_None),
 m_curHeroPost(NULL),
 m_curScore(NULL),
-m_curBgIndex(0)
+m_curBgIndex(0),
+m_isGoogle(true)
 {
 }
 
@@ -62,6 +64,8 @@ void GameMainHelper::initDate(){
     
     m_posts = __Array::create();
     m_posts->retain();
+    
+    m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
     
 }
 void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY){
@@ -274,6 +278,13 @@ void GameMainHelper::gameOver(){
     m_Layer->setMoveXDistance(0);
     m_heroPaths.clear();
     m_heroPathIndex = 0;
+    showFullAd();
+}
+void GameMainHelper::showFullAd(){
+    int randNum = rand()%(2);
+    if (randNum == 0) {
+        HPlatformHelper::getInstance()->showFullAd();
+    }
 }
 void GameMainHelper::startGame(){
     int nextBgIndex = m_curBgIndex;
@@ -290,6 +301,8 @@ void GameMainHelper::startGame(){
     }
    
     setGameStaus(Tag_GameStart);
+    m_curScore = 0;
+    m_mainScene->changeScore();
 
 }
 void GameMainHelper::changePostsSprite(){
@@ -365,7 +378,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         float dy = endPoint.y - curPoint.y;
         int totalCount = m_heroPaths.size();
         for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
-            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y+dy*2*(i-totalCount/2)/totalCount);
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y);
         }
         CCLOG("安全掉落");
         

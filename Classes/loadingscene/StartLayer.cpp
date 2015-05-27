@@ -89,7 +89,7 @@ void StartLayer::acGWSSp(){
     Size winSize = Director::getInstance()->getWinSize();
     MoveBy* moveBy1 = MoveBy::create(0.4, Vec2(0, winSize.height/4+m_spGWS->getContentSize().height/2));
     MoveBy* moveBY2 = MoveBy::create(0.4, Vec2(0, winSize.height/4+m_spGWS->getContentSize().height/4));
-    Sequence* seq = Sequence::create(moveBy1,DelayTime::create(0.5), CallFunc::create(CC_CALLBACK_0(StartLayer::changeScene,this)), NULL);
+    Sequence* seq = Sequence::create(moveBy1,DelayTime::create(1.2), CallFunc::create(CC_CALLBACK_0(StartLayer::changeScene,this)), NULL);
     m_spGWS->runAction(seq);
     m_spHero->runAction(moveBY2);
 }
@@ -101,7 +101,7 @@ void StartLayer::changeScene(){
 }
 void StartLayer::initHero(){
     Size winSize = Director::getInstance()->getWinSize();
-    m_spHero = Sprite::createWithSpriteFrameName("loading_hero.png");
+    m_spHero = Sprite::createWithSpriteFrameName("hero_load_0.png");
     
     auto animation = Animation::create();
     for( int i=1;i<8;i++)
@@ -126,22 +126,31 @@ void StartLayer::initGWSBig(){
     Size winSize = Director::getInstance()->getWinSize();
     m_spGWS = Sprite::createWithSpriteFrameName("loading_word.png");
     m_spGWS ->setAnchorPoint(Vec2(0.5f, 1));
-    //    m_spGWS ->setPosition(Vec2(winSize.width/2, -m_spGWS->getContentSize().height));
+
     m_spGWS ->setPosition(Vec2(winSize.width/2, winSize.height/4-m_spGWS->getContentSize().height/2));
     
     addChild(m_spGWS);
     
-//    auto left = ProgressTimer::create(Sprite::createWithSpriteFrameName("loading_word1.png"));
-//    left->setType(ProgressTimer::Type::BAR);
-//    left->setAnchorPoint(Vec2(0.5f, 1));
-//    //    Setup for a bar starting from the left since the midpoint is 0 for the x
-//    left->setMidpoint(Vec2(0,0));
-//    //    Setup for a horizontal bar since the bar change rate is 0 for y meaning no vertical change
-//    left->setBarChangeRate(Vec2(1, 0));
-//    addChild(left);
-//    left->setPosition(winSize.width/2,winSize.height/4-left->getContentSize().height/2);
-//    
-//    left->runAction(  ProgressTo::create(2, 100));
+    auto animation = Animation::create();
+    for( int i=1;i<12;i++)
+    {
+        char szName[100] = {0};
+        sprintf(szName, "loading_word%d.png", i);
+        SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(szName);
+        animation->addSpriteFrame(frame);
+    }
+    // should last 2.8 seconds. And there are 14 frames.
+    animation->setDelayPerUnit(0.08);
+    animation->setRestoreOriginalFrame(true);
+    
+    auto action = Animate::create(animation);
+    Sprite* node = Sprite::createWithSpriteFrameName("loading_word0.png");
+    node->setAnchorPoint(Vec2(0.51, 0.51f));
+    node->setPosition(m_spGWS->getContentSize().width/2, m_spGWS->getContentSize().height/2);
+    node->runAction(Repeat::create(action,5));
+    m_spGWS->addChild(node);
+
+
 
     
     

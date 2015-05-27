@@ -1,7 +1,9 @@
 #include "GameMainScene.h"
 #include "helper/GameMainHelper.h"
 #include "helper/HPlatformHelper.h"
+#include "commonnode/ParticleSystemX.h"
 USING_NS_CC;
+#define ParticleSystemXTag 1001
 GameMainScene::GameMainScene():
 m_gamemainLayer(NULL),
 m_mianMenuLayer(NULL),
@@ -96,6 +98,20 @@ void GameMainScene::update(float delta){
 }
 void GameMainScene::changeScore(){
     m_gameUILayer->changeScore(m_helper->getCurScore());
+    //
+    if (m_helper->getCurScore()>m_helper->getHighest()&&m_helper->getHighest()!=0) {
+        m_helper->setHighest(0);
+        Node* par =this->getChildByTag(ParticleSystemXTag);
+        if (par) {
+            ParticleSystemX* p = (ParticleSystemX*)par;
+            p->restartParticle();
+        }else{
+            par= ParticleSystemX::create();
+            par->setTag(ParticleSystemXTag);
+            addChild(par);
+        }
+        
+    }
 }
 
 void GameMainScene::onEnter(){

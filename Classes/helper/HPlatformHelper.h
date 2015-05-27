@@ -19,5 +19,7 @@ public:
     static HPlatformHelper* getInstance();
     void share(int shareType,int shareFrom,std::string path);
     void showRank();
+    void commitScore(int score);
+    void showFullAd();
 };
 #endif /* defined(__GwsJump__HPlatformHelper__) */

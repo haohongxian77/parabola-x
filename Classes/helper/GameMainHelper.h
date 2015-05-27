@@ -20,6 +20,7 @@ using namespace cocos2d;
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 #include "platform/HHPlatform.h"
 #endif
+#define Highest "HIGHESTSCORE"
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();
@@ -53,7 +54,9 @@ public:
     CC_SYNTHESIZE(gameStatus, m_gameStatus, GameStaus);
     CC_SYNTHESIZE(int, m_earthH, EarthH);
     CC_SYNTHESIZE(int, m_curScore, CurScore);
+    CC_SYNTHESIZE(int, m_HighstScore, Highest);
     CC_SYNTHESIZE(int, m_curBgIndex, CurBgIndex);
+    CC_SYNTHESIZE(bool, m_isGoogle, GoogleServer);
     __Array* m_posts;
     Sprite* m_curHeroPost;
     GameMainLayer* m_Layer;
@@ -72,6 +75,7 @@ private:
     void initPathPoints(std::vector<float> params,float SpeedX,float highY , float curY);
     
     float getCurSpeed(float speed,float totalDis,float curDis);
+    void showFullAd();
     
     
     

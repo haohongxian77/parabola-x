@@ -33,3 +33,19 @@ void HPlatformHelper::showRank(){
     HHPlatform::GetInstance()->showRank();
 #endif
 }
+void HPlatformHelper::commitScore(int score){
+}
+void HPlatformHelper::showFullAd(){
+}
+
+
+
+
+
+
+
+
+
+
+
+
