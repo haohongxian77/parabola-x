@@ -69,7 +69,6 @@ void GameMainScene::initGameGuildLayer(){
         GameGuildLayer* guild = GameGuildLayer::create();
         addChild(guild,GAMEGuildLAYER);
     }
-    
 }
 GameMainScene* GameMainScene::create(){
     GameMainScene* sc = new GameMainScene();

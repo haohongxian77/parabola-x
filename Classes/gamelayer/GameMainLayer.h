@@ -53,8 +53,10 @@ public:
     void initHeroBeginPoint();
     void disPlayLine();
     void clearLine();
+    Point getTouchPoint(Point heightPoint,TouchType touchType);
 private:  //划线相关
     Point perPos;
+    FrogStatus m_jumpOverType;
     virtual void draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) override;
     
     

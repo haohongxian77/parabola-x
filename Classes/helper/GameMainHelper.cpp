@@ -194,7 +194,7 @@ void GameMainHelper::atachLayer(GameMainLayer *layer){
     m_Layer = layer;
     m_Layer->addChild(m_spilesNode);
 }
-CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
+CollisionType GameMainHelper::isCollisionPosts(Point prePoint,Point curPoint){
     CollisionType c_Type = Collision_None;
     for (int i=0; i<m_posts->count(); i++) {
        
@@ -202,10 +202,10 @@ CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
         MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
         Size heroSize = m_Hero->getContentSize();
         //如果具体远不做碰撞检测
-        if ((sp->getPositionX() == m_curHeroPost->getPositionX()&& sp->getPositionY() == m_curHeroPost->getPositionY()) ||std::abs(sp->getPositionX()-curPoint.x)>heroSize.width/2) {
+        if ((m_curHeroPost->getPositionX() == sp->getPositionX()&& sp->getPositionY() == m_curHeroPost->getPositionY()) ||std::abs(sp->getPositionX()-curPoint.x)>heroSize.width/2) {
             continue;
         }
-        c_Type =  sp->getValid(m_Hero->getFootRect(curPoint),m_Hero->getBodyRect(curPoint));
+        c_Type =  sp->getValid(prePoint,curPoint);
         if(c_Type == Collision_None){
             
         }else {
@@ -215,6 +215,18 @@ CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
     }
                                              
     return c_Type;
+}
+Node* GameMainHelper::getTouchPosts(Point touchPoint){
+    
+    for (int i=0; i<m_posts->count(); i++) {
+        MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
+        if(sp->isCollickPost(touchPoint))
+        {
+            return sp;
+        }
+    }
+    
+    return NULL;
 }
 void GameMainHelper::setHero(HeroFrog *hero){
     m_Hero = hero;
@@ -330,7 +342,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
     float gravity = params[0];
     float sY = params[2];
     
-    
+    Size winSize = Director::getInstance()->getWinSize();
     Point curPoint = startPoint;
     CollisionType curType = Collision_None;
     bool isFirstDown = true;
@@ -362,10 +374,13 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
             
             
         }
-        
         curPoint = Point(x,y);
-        m_heroPaths.push_back(curPoint);
-        curType=isCollisionPosts(curPoint);
+        if (m_heroPaths.size() != 0) {
+             curType=isCollisionPosts(m_heroPaths[m_heroPaths.size()-1], curPoint);
+        }
+       
+         m_heroPaths.push_back(curPoint);
+        
         if(curPoint.y<m_earthH){
             break;
         }

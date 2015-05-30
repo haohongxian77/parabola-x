@@ -58,20 +58,16 @@ void MonsterSpile::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transf
     drawNode->drawRect(Vec2(0,-10), Vec2(size.width,0), Color4F(255, 0, 255, 1));
     drawNode->drawRect(Vec2(0, -size.height), Vec2(size.width,0), Color4F(0, 255, 255, 1));
 }
-CollisionType MonsterSpile::getValid(Rect heroFootRect,Rect heroBodyRect){
+CollisionType MonsterSpile::getValid(Point prePoint,Point curPoint){
     CollisionType _cType= Collision_None;
-    Point _point = this->getPosition();
-    Size  size = this->getContentSize();
-    Rect rec = Rect(_point.x,_point.y,size.width,10);
-    Rect recText = Rect(_point.x,_point.y-size.height,size.width,size.height);
-//    CCLOG("英雄的位置======%f=====%f=====%f=====%f ",heroRect.origin.x,heroRect.origin.y,heroRect.size.width,heroRect.size.height);
-//     CCLOG("可站立的位置======%f=====%f=====%f=====%f ",rec.origin.x,rec.origin.y,rec.size.width,rec.size.height);
-    CCLOG("柱子的位置======%f=====%f=====%f=====%f ",recText.origin.x,recText.origin.y,recText.size.width,recText.size.height);
-    if (rec.intersectsRect(heroFootRect)) {
-        return Collision_valid;
-        
-    }else if(recText.intersectsRect(heroBodyRect)){
+    
+    if (Vec2::isSegmentIntersect(prePoint, curPoint, this->getPosition(), Point(this->getPositionX(),this->getPositionY()-this->getContentSize().height)) ) {
         return Collision_Dead;
+        
+    }else if(Vec2::isSegmentIntersect(prePoint, curPoint, this->getPosition(), Point(this->getPositionX()+this->getContentSize().width,this->getPositionY())
+        )
+        ){
+        return Collision_valid;
         
     }else{
         return  Collision_None;
@@ -80,3 +76,17 @@ CollisionType MonsterSpile::getValid(Rect heroFootRect,Rect heroBodyRect){
     return _cType;
     
 }
+bool MonsterSpile::isCollickPost(Point pos){
+    Size  size = this->getContentSize();
+     Point _point = this->getPosition();
+    Rect recText = Rect(_point.x,_point.y-size.height,size.width,size.height);
+    if (pos.x>_point.x&&pos.x<_point.x+size.width) {
+        return true;
+    }
+    return false;
+}
+
+
+
+
+

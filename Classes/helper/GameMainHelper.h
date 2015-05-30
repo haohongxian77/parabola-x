@@ -36,7 +36,8 @@ public:
     void setHero(HeroFrog* hero);
     void updateHelper(float dt);
     
-    CollisionType isCollisionPosts(Point curPoint);   //碰撞检测
+    CollisionType isCollisionPosts(Point prePoint,Point curPoint);   //碰撞检测
+    Node* getTouchPosts(Point touchPoint);
     void initPosts();
     void changePostsSprite();
     void managePost();

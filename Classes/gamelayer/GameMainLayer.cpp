@@ -121,10 +121,6 @@ void GameMainLayer::onTouchMoved(Touch *touch, Event *event){
     
 }
 void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
-//    if (touNode->getCurType() == TOUCH_Disable) {
-//        m_hero->setHeroStatus(frogStatic);
-//        return;
-//    }
     Size winSize = Director::getInstance()->getWinSize();
     Point curPos = m_hero->getPosition();
     //Point heroWord = convertToWorldSpace(curPos);
@@ -132,13 +128,14 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     touNode->setPos(touch, curPos);
     
     Point highPoint = this->convertTouchToNodeSpace(touch);
+    highPoint = getTouchPoint(highPoint, touNode->getCurType());
     
     float dtime = 0;
     float gravity ;
     float startSpeedY;
     switch (touNode->getCurType()) {
         case TOUCH_ENABLE_UP:
-            dtime = curPos.distance(highPoint)/600;
+            dtime = curPos.distance(highPoint)/(winSize.width/2);
             gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
              startSpeedY= gravity*dtime;
             speedX = (highPoint.x-curPos.x)/dtime;
@@ -146,7 +143,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             break;
         case TOUCH_DISABLE_UP:
             highPoint.y  = curPos.y+TOUCH_DISABLE_DIS;
-            dtime = curPos.distance(highPoint)/600;
+            dtime = curPos.distance(highPoint)/(winSize.width/2);
             gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
             startSpeedY= gravity*dtime;
             speedX = (highPoint.x-curPos.x)/dtime;
@@ -154,7 +151,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             break;
         case TOUCH_DISABLE_DOWN:
             highPoint.y  = curPos.y-TOUCH_DISABLE_DIS;
-            dtime = curPos.distance(highPoint)/600;
+            dtime = curPos.distance(highPoint)/(winSize.width/2);
             gravity  = 2*(curPos.y-highPoint.y)/dtime/dtime;
             startSpeedY= 0;
             speedX = (highPoint.x-curPos.x)/dtime;
@@ -162,7 +159,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             highestPoint = curPos;
             break;
         case TOUCH_ENALBE_DOWN:
-            dtime = curPos.distance(highPoint)/600;
+            dtime = curPos.distance(highPoint)/(winSize.width/2);
             gravity  = 2*(curPos.y-highPoint.y)/dtime/dtime;
             startSpeedY= 0;
             speedX = (highPoint.x-curPos.x)/dtime;
@@ -181,14 +178,42 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     params.push_back(startSpeedY);
     
     
-//    params = CalculateHelper::getPathParametersXABC(curPos, highPoint);
-//    double upTime = sqrt(2.0*dY/Gravity);
-//    speedX = (highPoint.x-curPos.x)/upTime;//300;
-//    speedX = MAX(300.0, speedX);
-//    speedX = MIN(600.0,speedX);
-    
     GameMainHelper::getInstance()->initJumpDate(params,speedX,highPoint.y,curPos.y);
     
+}
+Point GameMainLayer::getTouchPoint(Point heightPoint,TouchType touchType){
+    Node* sp = GameMainHelper::getInstance()->getTouchPosts(heightPoint);
+    m_jumpOverType = frogFall;
+    if ( sp== NULL) {
+        return heightPoint;
+    }
+    Point heroPoint = m_hero->getPosition();
+    if (touchType == TOUCH_ENABLE_UP|| touchType == TOUCH_DISABLE_UP) {
+         heightPoint = Point(sp->getPositionX()+sp->getContentSize().width/2,heightPoint.y);
+        float touchDH = (sp->getPositionY()-heroPoint.y)/(sp->getPositionX()-heroPoint.x)*(sp->getContentSize().width/2);
+        if (heightPoint.y - sp->getPositionY()>= touchDH) {
+            m_jumpOverType = frogStatic;
+           
+           
+        }else {
+            heightPoint = Point(sp->getPositionX()+sp->getContentSize().width/2,heightPoint.y);
+            m_jumpOverType = frogDead1;
+        }
+         return heightPoint;
+    }else{
+        float touchDH = (heroPoint.y - sp->getPositionY())/(sp->getPositionX()+sp->getContentSize().width-heroPoint.x)*(sp->getPositionX()+ sp->getContentSize().width-heightPoint.x);
+        if (heightPoint.y-sp->getPositionY() >= touchDH) {
+            m_jumpOverType = frogStatic;
+        }else{
+            heightPoint = Point(sp->getPositionX(),sp->getPositionY()-1);
+            m_jumpOverType = frogDead1;
+        }
+        
+        
+        
+         return heightPoint;
+        
+    }
 }
 void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags) {
     if(movingPoints.size() == 0)
