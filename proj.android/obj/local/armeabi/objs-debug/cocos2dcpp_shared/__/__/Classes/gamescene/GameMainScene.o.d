@@ -363,7 +363,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/gamescene/GameMainS
  jni/../../Classes/helper/GameMainHelper.h \
  jni/../../Classes/gamesprite/MonsterSpile.h \
  jni/../../Classes/gamescene/GameMainScene.h jni/platform/HHPlatform.h \
- jni/../../Classes/helper/HPlatformHelper.h
+ jni/../../Classes/helper/HPlatformHelper.h \
+ jni/../../Classes/commonnode/ParticleSystemX.h
 
 jni/../../Classes/gamescene/GameMainScene.h:
 
@@ -1094,3 +1095,5 @@ jni/../../Classes/gamescene/GameMainScene.h:
 jni/platform/HHPlatform.h:
 
 jni/../../Classes/helper/HPlatformHelper.h:
+
+jni/../../Classes/commonnode/ParticleSystemX.h:

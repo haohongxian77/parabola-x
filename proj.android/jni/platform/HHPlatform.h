@@ -62,6 +62,8 @@ public :
 
 	void share(int shareType,int shareFrom,std::string filepath);
 	void showRank();
+	void commitScore(int score);
+	void showFullAD();
 };
 
 #endif /* defined(__beetalk_msdk__HHPlatform__) */

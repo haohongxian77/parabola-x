@@ -20,6 +20,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/commonnode/SettingNode.cpp \
                    ../../Classes/commonnode/HMenu.cpp \
                    ../../Classes/commonnode/ShareNode.cpp \
+                   ../../Classes/commonnode/ParticleSystemX.cpp \
                    ../../Classes/gamelayer/GameBgLayer.cpp \
                    ../../Classes/gamelayer/GameMainLayer.cpp \
                    ../../Classes/gamelayer/GameBgBeforeLayer.cpp \

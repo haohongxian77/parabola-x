@@ -62,8 +62,8 @@ public class AppActivity extends Cocos2dxActivity implements
 
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
 		AdsClient.getInstance().initWithActivityOnCreate(this);
-
 		WXManager.getInstance().registerWxListener(this);
+
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		RelativeLayout containerView = new RelativeLayout(this);
@@ -108,7 +108,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		/**
 		 * facebook end
 		 */
-		AdsClient.getInstance().onPause();
+		// AdsClient.getInstance().onPause();
 
 	}
 

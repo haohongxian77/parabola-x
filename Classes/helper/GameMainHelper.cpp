@@ -282,9 +282,9 @@ void GameMainHelper::gameOver(){
 }
 void GameMainHelper::showFullAd(){
     int randNum = rand()%(2);
-    if (randNum == 0) {
+    //if (randNum == 0) {
         HPlatformHelper::getInstance()->showFullAd();
-    }
+    //}
 }
 void GameMainHelper::startGame(){
     int nextBgIndex = m_curBgIndex;

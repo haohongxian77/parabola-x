@@ -34,8 +34,14 @@ void HPlatformHelper::showRank(){
 #endif
 }
 void HPlatformHelper::commitScore(int score){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    HHPlatform::GetInstance()->commitScore(score);
+#endif
 }
 void HPlatformHelper::showFullAd(){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    HHPlatform::GetInstance()->showFullAD();
+#endif
 }
 
 

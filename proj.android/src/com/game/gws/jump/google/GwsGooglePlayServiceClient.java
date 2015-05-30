@@ -72,39 +72,67 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void connect() {
-		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
-			mGoogleApiClient.connect();
-		}
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
+					mGoogleApiClient.connect();
+				}
+			}
+		});
+
 	}
 
 	public void disConnect() {
-		if (null != mGoogleApiClient) {
-			mGoogleApiClient.disconnect();
-		}
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (null != mGoogleApiClient) {
+					mGoogleApiClient.disconnect();
+				}
+			}
+		});
+
 	}
 
-	public boolean commitScore(int score) {
-		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
+	public void commitScore(final int score) {
+		Log.e(TAG, "commitScore" + score);
+		mActivity.runOnUiThread(new Runnable() {
 
-			Games.Leaderboards.submitScoreImmediate(
-					mGoogleApiClient,
-					mActivity.getApplicationContext().getString(
-							R.string.leaderboard_worldrank), score);
-			return true;
-		} else {
-			curScore = score;
-			curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT;
-			connect();
-			return false;
-		}
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
+
+					Games.Leaderboards.submitScoreImmediate(
+							mGoogleApiClient,
+							mActivity.getApplicationContext().getString(
+									R.string.leaderboard_worldrank), score);
+					// return true;
+				} else {
+					curScore = score;
+					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT;
+					connect();
+					// return false;
+				}
+			}
+		});
 
 	}
 
 	public void showLeaderBoards() {
 		Log.e(TAG, "showLeaderBoards------------");
-		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-			mActivity
-					.startActivityForResult(
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
+					mActivity.startActivityForResult(
 							Games.Leaderboards
 									.getLeaderboardIntent(
 											mGoogleApiClient,
@@ -114,11 +142,12 @@ public class GwsGooglePlayServiceClient implements
 													.getString(
 															R.string.leaderboard_worldrank)),
 							LEADERBOARDER_SHOW_REQ);
-		} else {
-			curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD;
-			connect();
-		}
-
+				} else {
+					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD;
+					connect();
+				}
+			}
+		});
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
