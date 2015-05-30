@@ -229,13 +229,14 @@ void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t fla
     
    
 }
-void GameMainLayer::setMoveXDistance(int distance){
+void GameMainLayer::setMoveXDistance(int distance,float speed){
 
     moveXDistance = MIN(distance,0);
+    m_speedX = MAX(LAYERMOVESPEED, speed);
 }
 void GameMainLayer::updatePosition(float dt){
     
-    float dis = LAYERMOVESPEED*dt;
+    float dis = m_speedX*dt;
     if (moveXDistance != 0 ) {
         dis = MIN(dis, -moveXDistance);
         moveXDistance += dis;

@@ -243,7 +243,12 @@ void GameMainHelper::updateHelper(float dt){
         return;
     }
     if (m_Hero->getPositionX()+m_Layer->getPositionX()>s.width*3/4&&m_Layer->getNumberOfRunningActions()==0) {
-        movingLayer();
+        float heroSpeed = 0;
+        if (m_heroPathIndex>1) {
+            heroSpeed = ( m_heroPaths[m_heroPathIndex].x-m_heroPaths[m_heroPathIndex-1].x)/dt;
+        }
+        
+        movingLayer(heroSpeed);
     }
     if (m_heroPathIndex>=m_heroPaths.size()-2) {
         if (m_Hero->setHeroFall()) {
@@ -264,17 +269,17 @@ Point GameMainHelper::getHeroPostPoint(){
     return Point(postPoint.x+postSize.width/2,postPoint.y);
 }
 void GameMainHelper::jumpOver(){
-     movingLayer();
+     movingLayer(0);
      managePost();
      m_mainScene->changeScore();
     m_heroPathIndex = 0;
     m_heroPaths.clear();
 }
-void GameMainHelper::movingLayer(){
+void GameMainHelper::movingLayer(float speed){
     Size size = Director::getInstance()->getWinSize();
     
     float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-size.width/5;
-    m_Layer->setMoveXDistance(-1*dx);
+    m_Layer->setMoveXDistance(-1*dx,speed);
 }
 void GameMainHelper::managePost(){
     for (long int i=m_posts->count()-1; i>=0; i--) {
@@ -292,7 +297,7 @@ void GameMainHelper::managePost(){
 void GameMainHelper::gameOver(){
     setGameStaus(Tag_GameOver);
     m_mainScene->gameOver();
-    m_Layer->setMoveXDistance(0);
+    m_Layer->setMoveXDistance(0,0);
     m_heroPaths.clear();
     m_heroPathIndex = 0;
     showFullAd();

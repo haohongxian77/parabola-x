@@ -78,7 +78,7 @@ private:
     float getNextPointX(Point touchPoint,Point perPoint);
     Point getNextPoint(Point perPoint);
     
-    void movingLayer();
+    void movingLayer(float speed);
     void initPathPoints(std::vector<float> params,float SpeedX,float highY , float curY);
     
     float getCurSpeed(float speed,float totalDis,float curDis);
