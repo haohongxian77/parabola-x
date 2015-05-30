@@ -2,8 +2,10 @@
 #include "helper/GameMainHelper.h"
 #include "helper/HPlatformHelper.h"
 #include "commonnode/ParticleSystemX.h"
+#include "gamelayer/GameGuildLayer.h"
 USING_NS_CC;
 #define ParticleSystemXTag 1001
+#define SHOWGUILD "SHOWGUILD"
 GameMainScene::GameMainScene():
 m_gamemainLayer(NULL),
 m_mianMenuLayer(NULL),
@@ -41,6 +43,13 @@ void GameMainScene::initGameAlertLayer(gameStatus gameS){
     this->addChild(m_mianMenuLayer,GAMEMENULAYER);
    
 }
+void GameMainScene::showMenu(){
+    if (m_mianMenuLayer) {
+        m_mianMenuLayer->setVisible(true);
+    }else{
+        m_mianMenuLayer->setVisible(false);
+    }
+}
 void GameMainScene::initGameBgLayer(){
     m_bgLayer = GameBgLayer::create();
     this->addChild(m_bgLayer,GAMEBGLAYER);
@@ -53,6 +62,15 @@ void GameMainScene::initGameUIlayer(){
     m_gameUILayer = GameUIlayer::create();
     addChild(m_gameUILayer,GAMEUILAYER);
 }
+void GameMainScene::initGameGuildLayer(){
+    bool guild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
+    if (guild) {
+        UserDefault::getInstance()->setBoolForKey(SHOWGUILD, false);
+        GameGuildLayer* guild = GameGuildLayer::create();
+        addChild(guild,GAMEGuildLAYER);
+    }
+    
+}
 GameMainScene* GameMainScene::create(){
     GameMainScene* sc = new GameMainScene();
     if (sc->init()) {
@@ -62,6 +80,7 @@ GameMainScene* GameMainScene::create(){
         sc->initMainLayer();
         sc->initGameAlertLayer(Tag_None);
         sc->initGameUIlayer();
+        sc->initGameGuildLayer();
         return sc;
     }
     return NULL;

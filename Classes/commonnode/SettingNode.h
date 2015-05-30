@@ -19,14 +19,20 @@ public:
     CREATE_FUNC(SettingNode);
 private:
     Sprite* bg = NULL;
+    Sprite* musicVisible;
+    Sprite* SoundVisible;
+    Sprite* rankVisible;
     
     bool init();
     void initBg();
     void initMenu();
     void acNode();
+    void initSprite();
 public:
     void menuSound(Ref* obj);
     void menuMusic(Ref* obj);
+    void menuRank(Ref* obj);
+    void menuHome(Ref* obj);
     
 };
 

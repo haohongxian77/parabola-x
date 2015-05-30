@@ -156,7 +156,8 @@ void MainLayer::menuRank(cocos2d::Ref *sender){
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
     SettingNode* node = SettingNode::create();
-    addChild(node);
+    this->getParent()->addChild(node);
+    this->setVisible(false);
 }
 
 

@@ -21,6 +21,9 @@ using namespace cocos2d;
 #include "platform/HHPlatform.h"
 #endif
 #define Highest "HIGHESTSCORE"
+#define MUSICKEY "MUSICKEY"
+#define SOUNDKEY "SOUNDKEY"
+#define RANKKEY "RANKKEY"
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();
@@ -57,6 +60,9 @@ public:
     CC_SYNTHESIZE(int, m_HighstScore, Highest);
     CC_SYNTHESIZE(int, m_curBgIndex, CurBgIndex);
     CC_SYNTHESIZE(bool, m_isGoogle, GoogleServer);
+    CC_SYNTHESIZE(int, m_music, Music);
+    CC_SYNTHESIZE(int, m_sound, Sound);
+
     __Array* m_posts;
     Sprite* m_curHeroPost;
     GameMainLayer* m_Layer;

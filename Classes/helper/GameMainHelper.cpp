@@ -31,7 +31,9 @@ m_gameStatus(Tag_None),
 m_curHeroPost(NULL),
 m_curScore(NULL),
 m_curBgIndex(0),
-m_isGoogle(true)
+m_isGoogle(true),
+m_music(true),
+m_sound(true)
 {
 }
 
@@ -66,6 +68,9 @@ void GameMainHelper::initDate(){
     m_posts->retain();
     
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
+    m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
+    m_sound = UserDefault::getInstance()->getBoolForKey(SOUNDKEY, true);
+    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, true);
     
 }
 void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY){
