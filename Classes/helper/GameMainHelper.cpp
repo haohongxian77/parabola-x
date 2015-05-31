@@ -12,6 +12,8 @@
 #include "HPlatformHelper.h"
 #include <stdlib.h>
 #include <time.h>
+#include "audio/include/SimpleAudioEngine.h"
+using namespace CocosDenshion;
 #define minHei 2
 #define maxHei 5
 #define SCREEN_DE_COUNT 8   //屏幕划分的单位
@@ -439,6 +441,10 @@ float GameMainHelper::getCurSpeed(float speed,float totalDis, float curDis){
     }else{
         return speed*3/4;
     }
+}
+void GameMainHelper::playSound(std::string soundName){
+
+    SimpleAudioEngine::getInstance()->playEffect(soundName.c_str(),false, 2, 1, 1);
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){

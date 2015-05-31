@@ -18,7 +18,7 @@ std::string animaName[7] = {"frogStatic","frogTakeoff",
     "frogJumpUp","frogJumpDown",
     "frogFall","frogDead1",
     "frogDead2"};
-HeroFrog::HeroFrog():m_heroStatus(frogStatic),drawNode(NULL){
+HeroFrog::HeroFrog():m_heroStatus(FrogNone),drawNode(NULL){
 }
 HeroFrog::~HeroFrog(){
 }
@@ -116,6 +116,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     CCLOG("---------设置hero状态-----------");
     switch (heroStatus) {
         case frogStatic:
+            GameMainHelper::getInstance()->playSound("hero_jumpover.ogg");
             ac= Animate::create(ani) ;
             runAction(RepeatForever::create(ac));
             
@@ -125,6 +126,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(ac);
             break;
         case frogJumpUp:
+            GameMainHelper::getInstance()->playSound("hero_jump.ogg");
             ani->setDelayPerUnit(2); //--------待计算
             ac= Animate::create(ani);
             runAction(ac);
@@ -146,6 +148,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(seq);
             break;
         case frogDead1:
+            GameMainHelper::getInstance()->playSound("hero_hit.ogg");
             deadFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName("hero_dead2.png");
             this->setDisplayFrame(deadFrame);
              ac= Animate::create(ani);
@@ -160,6 +163,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(seq);
             break;
         case frogDead2:
+            GameMainHelper::getInstance()->playSound("hero_hit.ogg");
             ac= Animate::create(ani) ;
             runAction(RepeatForever::create(ac));
             break;

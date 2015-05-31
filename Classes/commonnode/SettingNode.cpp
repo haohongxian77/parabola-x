@@ -10,6 +10,8 @@
 #include "commonnode/HMenu.h"
 #include "gamescene/GameMainScene.h"
 #include "helper/GameMainHelper.h"
+#include "audio/include/SimpleAudioEngine.h"
+using namespace CocosDenshion;
 
 SettingNode::SettingNode():
 musicVisible(NULL),
@@ -101,21 +103,34 @@ void SettingNode::acNode(){
 void SettingNode::menuSound(cocos2d::Ref *obj){
     SoundVisible->setVisible(!SoundVisible->isVisible());
     GameMainHelper::getInstance()->setSound(SoundVisible->isVisible());
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     UserDefault::getInstance()->setBoolForKey(SOUNDKEY, SoundVisible->isVisible());
+    if (SoundVisible->isVisible()) {
+        SimpleAudioEngine::getInstance()->setEffectsVolume(0.5);
+    }else{
+        SimpleAudioEngine::getInstance()->setEffectsVolume(0);
+    }
    
 }
 void SettingNode::menuMusic(cocos2d::Ref *obj){
     musicVisible->setVisible(!musicVisible->isVisible());
     GameMainHelper::getInstance()->setMusic(musicVisible->isVisible());
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     UserDefault::getInstance()->setBoolForKey(MUSICKEY, musicVisible->isVisible());
+    if (musicVisible->isVisible()) {
+        SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5);
+    }else{
+        SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0);
+    }
 }
 void SettingNode::menuRank(Ref* obj){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     rankVisible->setVisible(!rankVisible->isVisible());
     GameMainHelper::getInstance()->setGoogleServer(rankVisible->isVisible());
     UserDefault::getInstance()->setBoolForKey(RANKKEY, rankVisible->isVisible());
 }
 void SettingNode::menuHome(cocos2d::Ref *obj){
-    
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     GameMainScene* scene = (GameMainScene*) this->getParent();
     scene->showMenu();
     this->removeFromParentAndCleanup(true);

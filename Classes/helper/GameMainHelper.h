@@ -24,6 +24,9 @@ using namespace cocos2d;
 #define MUSICKEY "MUSICKEY"
 #define SOUNDKEY "SOUNDKEY"
 #define RANKKEY "RANKKEY"
+
+#define BTNCLICK "btn_click.ogg"
+#define JUMPOVER "smile1.ogg"
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();
@@ -45,6 +48,7 @@ public:
     void initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY);
     
     Point getHeroPostPoint();
+    void playSound(std::string soundName);
 public:
     void gameOver();
     void startGame();

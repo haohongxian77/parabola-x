@@ -3,7 +3,9 @@
 #include "helper/HPlatformHelper.h"
 #include "commonnode/ParticleSystemX.h"
 #include "gamelayer/GameGuildLayer.h"
+#include "audio/include/SimpleAudioEngine.h"
 USING_NS_CC;
+using namespace CocosDenshion;
 #define ParticleSystemXTag 1001
 #define SHOWGUILD "SHOWGUILD"
 GameMainScene::GameMainScene():
@@ -12,6 +14,7 @@ m_mianMenuLayer(NULL),
 m_bgBfLayer(NULL),
 m_bgLayer(NULL)
 {
+    SimpleAudioEngine::getInstance()->preloadBackgroundMusic("main_bg.mp3");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("menus.plist", "menus.png");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("game_item.plist", "game_item.png");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("hero_anim.plist", "hero_anim.png");
@@ -70,6 +73,21 @@ void GameMainScene::initGameGuildLayer(){
         addChild(guild,GAMEGuildLAYER);
     }
 }
+void GameMainScene::preLoadMusic(){
+    if (m_helper->getMusic()) {
+         SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0.5);
+    }else{
+        SimpleAudioEngine::getInstance()->setBackgroundMusicVolume(0);
+    }
+    
+    if (m_helper->getSound()) {
+        SimpleAudioEngine::getInstance()->setEffectsVolume(1);
+    }else{
+        SimpleAudioEngine::getInstance()->setEffectsVolume(0);
+    }
+   
+    SimpleAudioEngine::getInstance()->playBackgroundMusic("main_bg.mp3",true);
+}
 GameMainScene* GameMainScene::create(){
     GameMainScene* sc = new GameMainScene();
     if (sc->init()) {
@@ -80,6 +98,7 @@ GameMainScene* GameMainScene::create(){
         sc->initGameAlertLayer(Tag_None);
         sc->initGameUIlayer();
         sc->initGameGuildLayer();
+        sc->preLoadMusic();
         return sc;
     }
     return NULL;

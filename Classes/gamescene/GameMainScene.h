@@ -32,6 +32,7 @@ private:
     GameMainHelper* m_helper;
 private:
     void initHelper();
+    void preLoadMusic();
     
     
 public:

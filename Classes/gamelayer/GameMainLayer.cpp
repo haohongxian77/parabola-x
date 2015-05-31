@@ -55,6 +55,7 @@ void GameMainLayer::inittestSp(){
     m_hero = HeroFrog::create();
     m_hero ->setAnchorPoint(Vec2(0.5,0));
     m_hero->setPosition(Vec2(10,10));
+    m_hero->setHeroStatus(frogStatic);
     addChild(m_hero,2);
     
   
