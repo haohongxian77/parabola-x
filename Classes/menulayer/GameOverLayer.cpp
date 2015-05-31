@@ -59,13 +59,12 @@ void GameOverLayer::initScore(){
     
     if (curScore > highestScore) {
         if (GameMainHelper::getInstance()->getGoogleServer()) {
-            //HPlatformHelper::getInstance()->commitScore(curScore);
+            HPlatformHelper::getInstance()->commitScore(curScore);
         }
         highestScore = curScore;
         
         UserDefault::getInstance()->setIntegerForKey(Highest, curScore);
     }
-    HPlatformHelper::getInstance()->commitScore(curScore);
     GameMainHelper::getInstance()->setHighest(highestScore);
      
    LabelAtlas* m_curscoreLabel = LabelAtlas::create(__String::createWithFormat("%d",curScore)->getCString(), "fonts/game_frontovercom.png",  23.4, 28, '0');
