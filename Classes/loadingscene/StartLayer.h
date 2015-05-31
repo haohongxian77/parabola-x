@@ -33,6 +33,7 @@ private:
 
 private:
     void acGWSSp();
+    void showBackWordPro();
     
     void changeScene();
 //    Action* getFallDownAC(Action* ac);

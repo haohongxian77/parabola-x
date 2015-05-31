@@ -45,6 +45,7 @@ void ShareNode::initMenu(){
 
 }
 void ShareNode::shareQQ(cocos2d::Ref *obj){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     this->removeFromParentAndCleanup(true);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     GameMainHelper::getInstance()->share(Share_QQ);
@@ -52,6 +53,7 @@ void ShareNode::shareQQ(cocos2d::Ref *obj){
 #endif
      }
 void ShareNode::shareWX(cocos2d::Ref *obj){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     this->removeFromParentAndCleanup(true);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
      GameMainHelper::getInstance()->share(Share_WX);
@@ -60,6 +62,7 @@ void ShareNode::shareWX(cocos2d::Ref *obj){
     
 }
 void ShareNode::shareXL(cocos2d::Ref *obj){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     this->removeFromParentAndCleanup(true);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
    GameMainHelper::getInstance()->share(Share_SINA);
@@ -68,6 +71,7 @@ void ShareNode::shareXL(cocos2d::Ref *obj){
     
 }
 void ShareNode::shareFB(cocos2d::Ref *obj){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     this->removeFromParentAndCleanup(true);
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
     GameMainHelper::getInstance()->share(Share_FB);

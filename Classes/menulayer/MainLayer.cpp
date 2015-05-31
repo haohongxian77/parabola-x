@@ -116,14 +116,17 @@ void MainLayer::initMenu(){
 }
 
 void MainLayer::menuStart(Ref* sender){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     auto action1 = FadeIn::create(1.0f);
     Sequence* seq = Sequence::create(action1,CallFunc::create(CC_CALLBACK_0(MainLayer::callback, this)), NULL);
     this->runAction(seq);
 }
 void MainLayer::removeThisCallBack(){
+    
     this->removeFromParentAndCleanup(true);
 }
 void MainLayer::callback(){
+    
     GameMainHelper::getInstance()->startGame();
     this->stopAllActions();
     Size winSize = Director::getInstance()->getWinSize();
@@ -142,6 +145,7 @@ void MainLayer::callback(){
     
 }
 void MainLayer::menuShare(cocos2d::Ref *sender){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     if (!this->getChildByTag(101) ) {
         m_shareNode = ShareNode::create();
         m_shareNode->setTag(101);
@@ -152,11 +156,14 @@ void MainLayer::menuShare(cocos2d::Ref *sender){
     
 }
 void MainLayer::menuRank(cocos2d::Ref *sender){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
 	 HPlatformHelper::getInstance()->showRank();
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
+    GameMainHelper::getInstance()->playSound(BTNCLICK);
     SettingNode* node = SettingNode::create();
-    addChild(node);
+    this->getParent()->addChild(node);
+    this->setVisible(false);
 }
 
 

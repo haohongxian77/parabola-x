@@ -25,7 +25,8 @@ private:
     static std::string getspriteFileName(int type);
     Point m_curPoint;
 public:
-    CollisionType getValid(Rect heroFootRect,Rect heroBodyRect);
+    CollisionType getValid(Point prePoint,Point curPoint);
+    bool isCollickPost(Point pos);
     void moveOver();
     void disapear();
     void changeSprite(int bgIndex);

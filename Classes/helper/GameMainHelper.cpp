@@ -12,6 +12,8 @@
 #include "HPlatformHelper.h"
 #include <stdlib.h>
 #include <time.h>
+#include "audio/include/SimpleAudioEngine.h"
+using namespace CocosDenshion;
 #define minHei 2
 #define maxHei 5
 #define SCREEN_DE_COUNT 8   //屏幕划分的单位
@@ -31,7 +33,9 @@ m_gameStatus(Tag_None),
 m_curHeroPost(NULL),
 m_curScore(NULL),
 m_curBgIndex(0),
-m_isGoogle(true)
+m_isGoogle(true),
+m_music(true),
+m_sound(true)
 {
 }
 
@@ -66,6 +70,9 @@ void GameMainHelper::initDate(){
     m_posts->retain();
     
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
+    m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
+    m_sound = UserDefault::getInstance()->getBoolForKey(SOUNDKEY, true);
+    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, true);
     
 }
 void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY){
@@ -189,7 +196,7 @@ void GameMainHelper::atachLayer(GameMainLayer *layer){
     m_Layer = layer;
     m_Layer->addChild(m_spilesNode);
 }
-CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
+CollisionType GameMainHelper::isCollisionPosts(Point prePoint,Point curPoint){
     CollisionType c_Type = Collision_None;
     for (int i=0; i<m_posts->count(); i++) {
        
@@ -197,10 +204,10 @@ CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
         MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
         Size heroSize = m_Hero->getContentSize();
         //如果具体远不做碰撞检测
-        if ((sp->getPositionX() == m_curHeroPost->getPositionX()&& sp->getPositionY() == m_curHeroPost->getPositionY()) ||std::abs(sp->getPositionX()-curPoint.x)>heroSize.width/2) {
+        if ((m_curHeroPost->getPositionX() == sp->getPositionX()&& sp->getPositionY() == m_curHeroPost->getPositionY()) ||std::abs(sp->getPositionX()-curPoint.x)>heroSize.width/2) {
             continue;
         }
-        c_Type =  sp->getValid(m_Hero->getFootRect(curPoint),m_Hero->getBodyRect(curPoint));
+        c_Type =  sp->getValid(prePoint,curPoint);
         if(c_Type == Collision_None){
             
         }else {
@@ -210,6 +217,18 @@ CollisionType GameMainHelper::isCollisionPosts(Point curPoint){
     }
                                              
     return c_Type;
+}
+Node* GameMainHelper::getTouchPosts(Point touchPoint){
+    
+    for (int i=0; i<m_posts->count(); i++) {
+        MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
+        if(sp->isCollickPost(touchPoint))
+        {
+            return sp;
+        }
+    }
+    
+    return NULL;
 }
 void GameMainHelper::setHero(HeroFrog *hero){
     m_Hero = hero;
@@ -226,7 +245,12 @@ void GameMainHelper::updateHelper(float dt){
         return;
     }
     if (m_Hero->getPositionX()+m_Layer->getPositionX()>s.width*3/4&&m_Layer->getNumberOfRunningActions()==0) {
-        movingLayer();
+        float heroSpeed = 0;
+        if (m_heroPathIndex>1) {
+            heroSpeed = ( m_heroPaths[m_heroPathIndex].x-m_heroPaths[m_heroPathIndex-1].x)/dt;
+        }
+        
+        movingLayer(heroSpeed);
     }
     if (m_heroPathIndex>=m_heroPaths.size()-2) {
         if (m_Hero->setHeroFall()) {
@@ -247,17 +271,17 @@ Point GameMainHelper::getHeroPostPoint(){
     return Point(postPoint.x+postSize.width/2,postPoint.y);
 }
 void GameMainHelper::jumpOver(){
-     movingLayer();
+     movingLayer(0);
      managePost();
      m_mainScene->changeScore();
     m_heroPathIndex = 0;
     m_heroPaths.clear();
 }
-void GameMainHelper::movingLayer(){
+void GameMainHelper::movingLayer(float speed){
     Size size = Director::getInstance()->getWinSize();
     
     float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-size.width/5;
-    m_Layer->setMoveXDistance(-1*dx);
+    m_Layer->setMoveXDistance(-1*dx,speed);
 }
 void GameMainHelper::managePost(){
     for (long int i=m_posts->count()-1; i>=0; i--) {
@@ -275,7 +299,7 @@ void GameMainHelper::managePost(){
 void GameMainHelper::gameOver(){
     setGameStaus(Tag_GameOver);
     m_mainScene->gameOver();
-    m_Layer->setMoveXDistance(0);
+    m_Layer->setMoveXDistance(0,0);
     m_heroPaths.clear();
     m_heroPathIndex = 0;
     showFullAd();
@@ -325,7 +349,7 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
     float gravity = params[0];
     float sY = params[2];
     
-    
+    Size winSize = Director::getInstance()->getWinSize();
     Point curPoint = startPoint;
     CollisionType curType = Collision_None;
     bool isFirstDown = true;
@@ -357,10 +381,13 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
             
             
         }
-        
         curPoint = Point(x,y);
-        m_heroPaths.push_back(curPoint);
-        curType=isCollisionPosts(curPoint);
+        if (m_heroPaths.size() != 0) {
+             curType=isCollisionPosts(m_heroPaths[m_heroPaths.size()-1], curPoint);
+        }
+       
+         m_heroPaths.push_back(curPoint);
+        
         if(curPoint.y<m_earthH){
             break;
         }
@@ -414,6 +441,10 @@ float GameMainHelper::getCurSpeed(float speed,float totalDis, float curDis){
     }else{
         return speed*3/4;
     }
+}
+void GameMainHelper::playSound(std::string soundName){
+
+    SimpleAudioEngine::getInstance()->playEffect(soundName.c_str(),false, 2, 1, 1);
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){

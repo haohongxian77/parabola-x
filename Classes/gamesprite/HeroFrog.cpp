@@ -18,7 +18,7 @@ std::string animaName[7] = {"frogStatic","frogTakeoff",
     "frogJumpUp","frogJumpDown",
     "frogFall","frogDead1",
     "frogDead2"};
-HeroFrog::HeroFrog():m_heroStatus(frogStatic),drawNode(NULL){
+HeroFrog::HeroFrog():m_heroStatus(FrogNone),drawNode(NULL){
 }
 HeroFrog::~HeroFrog(){
 }
@@ -116,6 +116,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     CCLOG("---------设置hero状态-----------");
     switch (heroStatus) {
         case frogStatic:
+            GameMainHelper::getInstance()->playSound("hero_jumpover.ogg");
             ac= Animate::create(ani) ;
             runAction(RepeatForever::create(ac));
             
@@ -125,6 +126,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(ac);
             break;
         case frogJumpUp:
+            GameMainHelper::getInstance()->playSound("hero_jump.ogg");
             ani->setDelayPerUnit(2); //--------待计算
             ac= Animate::create(ani);
             runAction(ac);
@@ -146,6 +148,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(seq);
             break;
         case frogDead1:
+            GameMainHelper::getInstance()->playSound("hero_hit.ogg");
             deadFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName("hero_dead2.png");
             this->setDisplayFrame(deadFrame);
              ac= Animate::create(ani);
@@ -160,6 +163,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(seq);
             break;
         case frogDead2:
+            GameMainHelper::getInstance()->playSound("hero_hit.ogg");
             ac= Animate::create(ani) ;
             runAction(RepeatForever::create(ac));
             break;
@@ -181,10 +185,6 @@ void HeroFrog::draw(Renderer *renderer, const Mat4 &transform, uint32_t flags){
     if(!drawNode)
         return;
     drawNode->clear();
-     Size heroSize = this->getContentSize();
-    drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*2/4, heroSize.height/8), Color4F(186, 186, 186, 1));
-    drawNode->drawRect(Vec2(heroSize.width/4,0),Vec2(heroSize.width*7/8, heroSize.height), Color4F(255, 255, 0, 1));
-    drawNode->drawRect(Vec2(0,0),Vec2(heroSize.width, heroSize.height), Color4F(255, 255, 0, 1));
 }
 Rect HeroFrog::getFootRect(Point curPoint){
     Size heroSize = this->getContentSize();

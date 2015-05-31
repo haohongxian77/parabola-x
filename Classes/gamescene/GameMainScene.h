@@ -15,6 +15,7 @@ typedef enum{
     GAMEBGBEFORELAYER,        //前景层  地表
     
     GAMEMENULAYER,          //开始和死亡按钮层
+    GAMEGuildLAYER,          //开始和死亡按钮层
 } LayerIndex;
 class GameMainHelper;
 class GameMainScene : public cocos2d::Scene
@@ -31,6 +32,7 @@ private:
     GameMainHelper* m_helper;
 private:
     void initHelper();
+    void preLoadMusic();
     
     
 public:
@@ -42,6 +44,8 @@ public:
     
     void initGameBgBFLayer();
     void initGameUIlayer();
+    
+    void initGameGuildLayer();
     
     // a selector callback
     //CREATE_FUNC(GameMainScene);
@@ -57,6 +61,7 @@ public:
     void gotoShare(int type);
 //    void share(Node* node,int type);
     std::string cutOff(int shareType);
+    void showMenu();
 private:
     int m_shareType = 0;
 };

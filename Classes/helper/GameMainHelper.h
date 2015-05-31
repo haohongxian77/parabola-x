@@ -21,6 +21,12 @@ using namespace cocos2d;
 #include "platform/HHPlatform.h"
 #endif
 #define Highest "HIGHESTSCORE"
+#define MUSICKEY "MUSICKEY"
+#define SOUNDKEY "SOUNDKEY"
+#define RANKKEY "RANKKEY"
+
+#define BTNCLICK "btn_click.ogg"
+#define JUMPOVER "smile1.ogg"
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();
@@ -33,7 +39,8 @@ public:
     void setHero(HeroFrog* hero);
     void updateHelper(float dt);
     
-    CollisionType isCollisionPosts(Point curPoint);   //碰撞检测
+    CollisionType isCollisionPosts(Point prePoint,Point curPoint);   //碰撞检测
+    Node* getTouchPosts(Point touchPoint);
     void initPosts();
     void changePostsSprite();
     void managePost();
@@ -41,6 +48,7 @@ public:
     void initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY);
     
     Point getHeroPostPoint();
+    void playSound(std::string soundName);
 public:
     void gameOver();
     void startGame();
@@ -57,6 +65,9 @@ public:
     CC_SYNTHESIZE(int, m_HighstScore, Highest);
     CC_SYNTHESIZE(int, m_curBgIndex, CurBgIndex);
     CC_SYNTHESIZE(bool, m_isGoogle, GoogleServer);
+    CC_SYNTHESIZE(int, m_music, Music);
+    CC_SYNTHESIZE(int, m_sound, Sound);
+
     __Array* m_posts;
     Sprite* m_curHeroPost;
     GameMainLayer* m_Layer;
@@ -71,7 +82,7 @@ private:
     float getNextPointX(Point touchPoint,Point perPoint);
     Point getNextPoint(Point perPoint);
     
-    void movingLayer();
+    void movingLayer(float speed);
     void initPathPoints(std::vector<float> params,float SpeedX,float highY , float curY);
     
     float getCurSpeed(float speed,float totalDis,float curDis);

@@ -9,6 +9,7 @@
 #ifndef __GWPJUMP__HeroFrog__
 #define __GWPJUMP__HeroFrog__
 typedef enum{
+    FrogNone = -1,
     frogStatic=0,      //主角静止
     frogTakeoff,       //主角起跳
     frogJumpUp,        //主角上跳

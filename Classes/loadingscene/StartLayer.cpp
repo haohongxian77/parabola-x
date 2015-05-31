@@ -35,7 +35,7 @@ bool StartLayer::init(){
 }
 void StartLayer::onEnter(){
     Layer::onEnter();
-    Sequence* seq = Sequence::create(DelayTime::create(2),CallFunc::create(CC_CALLBACK_0(StartLayer::changeScene, this)), NULL);
+    Sequence* seq = Sequence::create(DelayTime::create(2.5),CallFunc::create(CC_CALLBACK_0(StartLayer::changeScene, this)), NULL);
     this->runAction(seq);
     
 }
@@ -124,34 +124,38 @@ void StartLayer::initHero(){
 }
 void StartLayer::initGWSBig(){
     Size winSize = Director::getInstance()->getWinSize();
-    m_spGWS = Sprite::createWithSpriteFrameName("loading_word.png");
+    m_spGWS = Sprite::create("GWS_1.png");
     m_spGWS ->setAnchorPoint(Vec2(0.5f, 1));
 
     m_spGWS ->setPosition(Vec2(winSize.width/2, winSize.height/4-m_spGWS->getContentSize().height/2));
     
     addChild(m_spGWS);
     
-    auto animation = Animation::create();
-    for( int i=1;i<12;i++)
-    {
-        char szName[100] = {0};
-        sprintf(szName, "loading_word%d.png", i);
-        SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(szName);
-        animation->addSpriteFrame(frame);
-    }
-    // should last 2.8 seconds. And there are 14 frames.
-    animation->setDelayPerUnit(0.08);
-    animation->setRestoreOriginalFrame(true);
+    m_spG->runAction(Sequence::create(DelayTime::create(0.3),CallFunc::create(CC_CALLBACK_0(StartLayer::showBackWordPro, this)), NULL));
     
-    auto action = Animate::create(animation);
-    Sprite* node = Sprite::createWithSpriteFrameName("loading_word0.png");
-    node->setAnchorPoint(Vec2(0.51, 0.51f));
-    node->setPosition(m_spGWS->getContentSize().width/2, m_spGWS->getContentSize().height/2);
-    node->runAction(Repeat::create(action,5));
-    m_spGWS->addChild(node);
-
-
-
+    auto s = Director::getInstance()->getWinSize();
     
+    auto to1 = Sequence::createWithTwoActions(ProgressTo::create(2.5, 100), ProgressTo::create(0, 0));
     
+    auto left = ProgressTimer::create(Sprite::create("GWS_2.png"));
+    left->setType(ProgressTimer::Type::BAR);
+    left->setMidpoint(Vec2(0,0));
+    left->setBarChangeRate(Vec2(1, 0));
+    addChild(left);
+    left->setPosition(Vec2(winSize.width/2, winSize.height/4-m_spGWS->getContentSize().height));
+    left->runAction( RepeatForever::create(to1));
+    
+}
+void StartLayer::showBackWordPro(){
+    Size winSize = Director::getInstance()->getWinSize();
+    auto to2 = Sequence::createWithTwoActions(ProgressTo::create(2.5, 100), ProgressTo::create(0, 0));
+    auto right = ProgressTimer::create(Sprite::create("GWS_1.png"));
+    right->setType(ProgressTimer::Type::BAR);
+    
+    right->setMidpoint(Vec2(0, 0));
+    
+    right->setBarChangeRate(Vec2(1, 0));
+    addChild(right);
+    right->setPosition(Vec2(winSize.width/2, winSize.height/4-m_spGWS->getContentSize().height));
+    right->runAction(  RepeatForever::create(to2));
 }
