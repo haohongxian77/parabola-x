@@ -37,12 +37,14 @@ public:
     CREATE_FUNC(HeroFrog);
     Rect getFootRect(Point curPoint);
     Rect getBodyRect(Point curPoint);
+    void setIsLongJump(bool longJump_);
+    void updateMusic(float dt);
 private:
     bool init();
     void initData();
     void initAnimation();
     void runStaticAnimation();
-    void update();
+
     void setHeroStatic();
     
     
@@ -53,6 +55,8 @@ private:
     Point downPoint;
     float downAnimSpeed;
     FrogStatus pathoverStatus;
+    bool m_isLongJump;
+    float m_dStaticMusicTime;
     
     
     

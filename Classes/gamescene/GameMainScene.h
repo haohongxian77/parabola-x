@@ -33,6 +33,7 @@ private:
 private:
     void initHelper();
     void preLoadMusic();
+    void playGameoverSound();
     
     
 public:

@@ -25,6 +25,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/gamelayer/GameMainLayer.cpp \
                    ../../Classes/gamelayer/GameBgBeforeLayer.cpp \
                    ../../Classes/gamelayer/GameUIlayer.cpp \
+                   ../../Classes/gamelayer/GameGuildLayer.cpp \
                    ../../Classes/gamescene/GameMainScene.cpp \
                    ../../Classes/gamesprite/HeroFrog.cpp \
                    ../../Classes/gamesprite/MonsterSpile.cpp \

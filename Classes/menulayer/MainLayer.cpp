@@ -156,8 +156,10 @@ void MainLayer::menuShare(cocos2d::Ref *sender){
     
 }
 void MainLayer::menuRank(cocos2d::Ref *sender){
+
     GameMainHelper::getInstance()->playSound(BTNCLICK);
-	 HPlatformHelper::getInstance()->showRank();
+    if(GameMainHelper::getInstance()->getGoogleServer())
+	         HPlatformHelper::getInstance()->showRank();
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
     GameMainHelper::getInstance()->playSound(BTNCLICK);

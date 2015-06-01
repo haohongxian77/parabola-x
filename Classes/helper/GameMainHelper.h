@@ -25,8 +25,17 @@ using namespace cocos2d;
 #define SOUNDKEY "SOUNDKEY"
 #define RANKKEY "RANKKEY"
 
-#define BTNCLICK "btn_click.ogg"
-#define JUMPOVER "smile1.ogg"
+#define BGMUSIC "sound/01.mp3"
+#define NEWCAREAR "sound/02.wav"
+
+#define BTNCLICK "sound/03.ogg"
+#define JUMPSTART_0 "sound/04_0.mp3"
+#define JUMPSTART_1 "sound/04_1.mp3"
+#define JUMPOVER "sound/05.wav"
+#define HEROOVER "sound/06.mp3"
+#define HEROSTATIC "sound/07.ogg"
+#define GAMEOVER "sound/08.mp3"
+
 class GameMainHelper :public Ref{
     GameMainHelper();
     ~GameMainHelper();

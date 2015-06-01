@@ -360,7 +360,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/AppDelegate.o: \
  jni/../../Classes/gamelayer/GameBgLayer.h \
  jni/../../Classes/gamelayer/GameBgBeforeLayer.h \
  jni/../../Classes/gamelayer/GameUIlayer.h \
- jni/../../Classes/loadingscene/StartScene.h
+ jni/../../Classes/loadingscene/StartScene.h \
+ jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h \
+ jni/../../cocos2d/cocos/3d/../audio/include/Export.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -1085,3 +1087,7 @@ jni/../../Classes/gamelayer/GameBgBeforeLayer.h:
 jni/../../Classes/gamelayer/GameUIlayer.h:
 
 jni/../../Classes/loadingscene/StartScene.h:
+
+jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h:
+
+jni/../../cocos2d/cocos/3d/../audio/include/Export.h:
