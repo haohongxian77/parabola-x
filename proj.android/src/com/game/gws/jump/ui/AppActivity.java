@@ -40,7 +40,9 @@ import com.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.game.gws.jump.share.FaceBookClient;
 import com.game.gws.jump.share.SinaClient;
 import com.game.gws.jump.share.TencentClient;
+import com.game.gws.jump.share.ToastClient;
 import com.game.gws.jump.share.WxClient;
+import com.game.gws.jump.system.MyApp;
 import com.game.gws.jump.wxapi.WXManager;
 import com.game.gws.jump.wxapi.WXManager.OnWxListener;
 import com.sina.weibo.sdk.api.share.BaseResponse;
@@ -55,6 +57,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		ToastClient.getInstance().registerClient(this, MyApp.PACKAGE_NAME);
 		SinaClient.getInstance().registerApp(this);
 		TencentClient.getInstance().registerApp(this);
 		WxClient.getInstance().registerApp(this);
@@ -62,8 +65,8 @@ public class AppActivity extends Cocos2dxActivity implements
 
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
 		AdsClient.getInstance().initWithActivityOnCreate(this);
-
 		WXManager.getInstance().registerWxListener(this);
+
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		RelativeLayout containerView = new RelativeLayout(this);
@@ -108,7 +111,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		/**
 		 * facebook end
 		 */
-		AdsClient.getInstance().onPause();
+		// AdsClient.getInstance().onPause();
 
 	}
 

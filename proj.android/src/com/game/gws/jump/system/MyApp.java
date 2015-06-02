@@ -18,6 +18,7 @@ import android.os.Handler;
  */
 public class MyApp extends Application {
 	private static MyApp INSTANCE;
+	public static final String PACKAGE_NAME = "com.game.gws.jump";
 	private Thread mUiThread;
 	private Handler handler = new Handler();
 

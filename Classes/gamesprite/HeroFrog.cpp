@@ -18,7 +18,10 @@ std::string animaName[7] = {"frogStatic","frogTakeoff",
     "frogJumpUp","frogJumpDown",
     "frogFall","frogDead1",
     "frogDead2"};
-HeroFrog::HeroFrog():m_heroStatus(FrogNone),drawNode(NULL){
+#define HEROSTATICMUSIC_TIME 5
+HeroFrog::HeroFrog():m_heroStatus(FrogNone),drawNode(NULL)
+		,m_isLongJump(false),
+		m_dStaticMusicTime(0){
 }
 HeroFrog::~HeroFrog(){
 }
@@ -90,7 +93,19 @@ bool HeroFrog::setHeroFall(){
     }
     return false;
 }
+void HeroFrog::updateMusic(float dt){
+	if(m_heroStatus != frogStatic)
+		return;
+	m_dStaticMusicTime-=dt;
+	if(m_dStaticMusicTime <=0){
+     GameMainHelper::getInstance()->playSound(HEROSTATIC);
+     m_dStaticMusicTime = HEROSTATICMUSIC_TIME;
+	}
 
+}
+void HeroFrog::setIsLongJump(bool longJump){
+	m_isLongJump = longJump;
+}
 void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     if (m_heroStatus == heroStatus) {
         return;
@@ -116,7 +131,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     CCLOG("---------设置hero状态-----------");
     switch (heroStatus) {
         case frogStatic:
-            GameMainHelper::getInstance()->playSound("hero_jumpover.ogg");
+            GameMainHelper::getInstance()->playSound(JUMPOVER);
             ac= Animate::create(ani) ;
             runAction(RepeatForever::create(ac));
             
@@ -127,7 +142,10 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(ac);
             break;
         case frogJumpUp:
-            GameMainHelper::getInstance()->playSound("hero_jump.ogg");
+        	if(m_isLongJump)
+               GameMainHelper::getInstance()->playSound(JUMPSTART_1);
+        	else
+        		GameMainHelper::getInstance()->playSound(JUMPSTART_0);
             ani->setDelayPerUnit(2); //--------待计算
             ac= Animate::create(ani);
             runAction(ac);
@@ -149,7 +167,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(seq);
             break;
         case frogDead1:
-            GameMainHelper::getInstance()->playSound("hero_hit.ogg");
+            GameMainHelper::getInstance()->playSound(HEROOVER);
             deadFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName("hero_dead2.png");
             this->setDisplayFrame(deadFrame);
              ac= Animate::create(ani);
@@ -164,7 +182,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(seq);
             break;
         case frogDead2:
-            GameMainHelper::getInstance()->playSound("hero_hit.ogg");
+            GameMainHelper::getInstance()->playSound(HEROOVER);
             ac= Animate::create(ani) ;
             runAction(RepeatForever::create(ac));
             break;

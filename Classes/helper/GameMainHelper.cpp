@@ -74,7 +74,7 @@ void GameMainHelper::initDate(){
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
     m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
     m_sound = UserDefault::getInstance()->getBoolForKey(SOUNDKEY, true);
-    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, true);
+    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, false);
     
 }
 void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY){

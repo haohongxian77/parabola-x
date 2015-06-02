@@ -21,5 +21,6 @@ public:
     void showRank();
     void commitScore(int score);
     void showFullAd();
+    void showToast(std::string content);
 };
 #endif /* defined(__GwsJump__HPlatformHelper__) */

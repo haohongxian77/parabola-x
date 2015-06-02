@@ -14,7 +14,7 @@ m_mianMenuLayer(NULL),
 m_bgBfLayer(NULL),
 m_bgLayer(NULL)
 {
-    SimpleAudioEngine::getInstance()->preloadBackgroundMusic("main_bg.mp3");
+    SimpleAudioEngine::getInstance()->preloadBackgroundMusic(BGMUSIC);
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("menus.plist", "menus.png");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("game_item.plist", "game_item.png");
     SpriteFrameCache::getInstance()->addSpriteFramesWithFile("hero_anim.plist", "hero_anim.png");
@@ -86,7 +86,7 @@ void GameMainScene::preLoadMusic(){
         SimpleAudioEngine::getInstance()->setEffectsVolume(0);
     }
    
-    SimpleAudioEngine::getInstance()->playBackgroundMusic("main_bg.mp3",true);
+    SimpleAudioEngine::getInstance()->playBackgroundMusic(BGMUSIC,true);
 }
 GameMainScene* GameMainScene::create(){
     GameMainScene* sc = new GameMainScene();
@@ -117,9 +117,15 @@ void GameMainScene::startGame(){
 }
 void GameMainScene::gameOver(){
     unscheduleUpdate();
-    Sequence* seq = Sequence::create(DelayTime::create(2),CallFunc::create(CC_CALLBACK_0(GameMainScene::showAlertView, this)), NULL);
+    Sequence* seq = Sequence::create(DelayTime::create(0.5),
+    		CallFunc::create(CC_CALLBACK_0(GameMainScene::playGameoverSound, this)),
+    		DelayTime::create(1.5),
+    		CallFunc::create(CC_CALLBACK_0(GameMainScene::showAlertView, this)), NULL);
     runAction(seq);
     
+}
+void GameMainScene::playGameoverSound(){
+	GameMainHelper::getInstance()->playSound(GAMEOVER);
 }
 void GameMainScene::showAlertView(){
     initGameAlertLayer(Tag_GameOver);
@@ -138,6 +144,7 @@ void GameMainScene::changeScore(){
     //
     if (m_helper->getCurScore()>m_helper->getHighest()&&m_helper->getHighest()!=0) {
         m_helper->setHighest(0);
+        GameMainHelper::getInstance()->playSound(NEWCAREAR);
         Node* par =this->getChildByTag(ParticleSystemXTag);
         if (par) {
             ParticleSystemX* p = (ParticleSystemX*)par;

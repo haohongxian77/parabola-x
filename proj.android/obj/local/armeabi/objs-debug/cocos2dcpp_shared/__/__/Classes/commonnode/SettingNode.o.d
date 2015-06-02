@@ -351,7 +351,22 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/commonnode/SettingN
  jni/../../cocos2d/cocos/3d/../deprecated/CCString.h \
  jni/../../cocos2d/cocos/3d/../deprecated/CCNotificationCenter.h \
  jni/../../cocos2d/cocos/3d/../deprecated/CCDeprecated.h \
- jni/../../Classes/commonnode/HMenu.h
+ jni/../../Classes/commonnode/HMenu.h \
+ jni/../../Classes/gamescene/GameMainScene.h \
+ jni/../../Classes/menulayer/MainLayer.h \
+ jni/../../Classes/menulayer/GameMainLogoLayer.h \
+ jni/../../Classes/menulayer/GameOverLayer.h \
+ jni/../../Classes/helper/CommomData.h \
+ jni/../../Classes/gamelayer/GameMainLayer.h \
+ jni/../../Classes/gamesprite/TouchNode.h \
+ jni/../../Classes/gamesprite/HeroFrog.h \
+ jni/../../Classes/gamelayer/GameBgLayer.h \
+ jni/../../Classes/gamelayer/GameBgBeforeLayer.h \
+ jni/../../Classes/gamelayer/GameUIlayer.h \
+ jni/../../Classes/helper/GameMainHelper.h \
+ jni/../../Classes/gamesprite/MonsterSpile.h jni/platform/HHPlatform.h \
+ jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h \
+ jni/../../cocos2d/cocos/3d/../audio/include/Export.h
 
 jni/../../Classes/commonnode/SettingNode.h:
 
@@ -1056,3 +1071,35 @@ jni/../../cocos2d/cocos/3d/../deprecated/CCNotificationCenter.h:
 jni/../../cocos2d/cocos/3d/../deprecated/CCDeprecated.h:
 
 jni/../../Classes/commonnode/HMenu.h:
+
+jni/../../Classes/gamescene/GameMainScene.h:
+
+jni/../../Classes/menulayer/MainLayer.h:
+
+jni/../../Classes/menulayer/GameMainLogoLayer.h:
+
+jni/../../Classes/menulayer/GameOverLayer.h:
+
+jni/../../Classes/helper/CommomData.h:
+
+jni/../../Classes/gamelayer/GameMainLayer.h:
+
+jni/../../Classes/gamesprite/TouchNode.h:
+
+jni/../../Classes/gamesprite/HeroFrog.h:
+
+jni/../../Classes/gamelayer/GameBgLayer.h:
+
+jni/../../Classes/gamelayer/GameBgBeforeLayer.h:
+
+jni/../../Classes/gamelayer/GameUIlayer.h:
+
+jni/../../Classes/helper/GameMainHelper.h:
+
+jni/../../Classes/gamesprite/MonsterSpile.h:
+
+jni/platform/HHPlatform.h:
+
+jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h:
+
+jni/../../cocos2d/cocos/3d/../audio/include/Export.h:

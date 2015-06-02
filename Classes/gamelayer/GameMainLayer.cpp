@@ -176,6 +176,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     }
     if (params.size()!=0)
         return;
+    m_hero->setIsLongJump((highPoint.x-curPos.x)>(winSize.width/3));
    // gravity = MIN(gravity,1400);
     params.push_back(gravity);
     params.push_back(speedX);
@@ -253,6 +254,7 @@ void GameMainLayer::updatePosition(float dt){
 
 void GameMainLayer::update(float dt){
     updatePosition(dt);
+    m_hero->updateMusic(dt);
     if (params.size()==3) {
         perPos = m_hero->getPosition();
         movingPoints.push_back(perPos);

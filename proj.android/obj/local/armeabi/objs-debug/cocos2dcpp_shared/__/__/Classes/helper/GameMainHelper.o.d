@@ -364,7 +364,9 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/helper/GameMainHelp
  jni/../../Classes/gamelayer/GameBgBeforeLayer.h \
  jni/../../Classes/gamelayer/GameUIlayer.h jni/platform/HHPlatform.h \
  jni/../../Classes/helper/CalculateHelper.h \
- jni/../../Classes/helper/HPlatformHelper.h
+ jni/../../Classes/helper/HPlatformHelper.h \
+ jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h \
+ jni/../../cocos2d/cocos/3d/../audio/include/Export.h
 
 jni/../../Classes/helper/GameMainHelper.h:
 
@@ -1097,3 +1099,7 @@ jni/platform/HHPlatform.h:
 jni/../../Classes/helper/CalculateHelper.h:
 
 jni/../../Classes/helper/HPlatformHelper.h:
+
+jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h:
+
+jni/../../cocos2d/cocos/3d/../audio/include/Export.h:
