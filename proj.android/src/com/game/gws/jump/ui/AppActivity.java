@@ -40,7 +40,7 @@ import com.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.game.gws.jump.share.FaceBookClient;
 import com.game.gws.jump.share.SinaClient;
 import com.game.gws.jump.share.TencentClient;
-import com.game.gws.jump.share.ToastUtils;
+import com.game.gws.jump.share.ToastClient;
 import com.game.gws.jump.share.WxClient;
 import com.game.gws.jump.system.MyApp;
 import com.game.gws.jump.wxapi.WXManager;
@@ -57,7 +57,7 @@ public class AppActivity extends Cocos2dxActivity implements
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-		ToastUtils.initToastPackage(this, MyApp.PACKAGE_NAME);
+		ToastClient.getInstance().registerClient(this, MyApp.PACKAGE_NAME);
 		SinaClient.getInstance().registerApp(this);
 		TencentClient.getInstance().registerApp(this);
 		WxClient.getInstance().registerApp(this);
