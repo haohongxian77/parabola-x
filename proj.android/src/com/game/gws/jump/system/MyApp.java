@@ -11,8 +11,6 @@ package com.game.gws.jump.system;
 import android.app.Application;
 import android.os.Handler;
 
-import com.game.gws.jump.share.ToastUtils;
-
 /**
  * @author czj
  * @Description:
@@ -20,7 +18,7 @@ import com.game.gws.jump.share.ToastUtils;
  */
 public class MyApp extends Application {
 	private static MyApp INSTANCE;
-	private static final String PACKAGE = "com.game.gws.jump";
+	public static final String PACKAGE_NAME = "com.game.gws.jump";
 	private Thread mUiThread;
 	private Handler handler = new Handler();
 
@@ -38,7 +36,6 @@ public class MyApp extends Application {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		mUiThread = Thread.currentThread();
-		ToastUtils.initToast(PACKAGE);
 	}
 
 	public final void runOnUiThread(Runnable action) {

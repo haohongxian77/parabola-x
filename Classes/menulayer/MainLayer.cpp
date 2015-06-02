@@ -159,7 +159,10 @@ void MainLayer::menuRank(cocos2d::Ref *sender){
 
     GameMainHelper::getInstance()->playSound(BTNCLICK);
     if(GameMainHelper::getInstance()->getGoogleServer())
-	         HPlatformHelper::getInstance()->showRank();
+	   HPlatformHelper::getInstance()->showRank();
+    else{
+    	HPlatformHelper::getInstance()->showToast("请在设置中打开排行榜！");
+    }
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
     GameMainHelper::getInstance()->playSound(BTNCLICK);

@@ -43,6 +43,12 @@ void HPlatformHelper::showFullAd(){
     HHPlatform::GetInstance()->showFullAD();
 #endif
 }
+void HPlatformHelper::showToast(std::string m_content){
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+    HHPlatform::GetInstance()->showToast(m_content);
+#endif
+
+}
 
 
 

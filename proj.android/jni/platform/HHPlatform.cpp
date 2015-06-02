@@ -22,6 +22,7 @@ static jclass m_shareSina;
 static jclass m_shareFB;
 static jclass m_googleClient;
 static jclass m_ADClient;
+static jclass m_Toast;
 
 HHPlatform* HHPlatform::m_pInst;
 
@@ -63,8 +64,10 @@ void HHPlatform::setVM(){
 	  jclass cls_AD = env->FindClass("com/game/gws/jump/google/AdsClient");
 	  m_ADClient = (jclass) env->NewGlobalRef(cls_AD);
 
+	  jclass cls_Toast = env->FindClass("com/game/gws/jump/share/ToastUtils");
+	  m_Toast = (jclass) env->NewGlobalRef(cls_Toast);
+
 	  env->DeleteLocalRef(cls_AD);
-	  CCLOG("cls_AD====================2");
 
 }
 void HHPlatform::share(int shareType,int shareFrom,std::string filepath){
@@ -77,7 +80,6 @@ void HHPlatform::share(int shareType,int shareFrom,std::string filepath){
 
 		//jint shareFrom = env->NewStringUTF(absPath.c_str());
 		jstring jstrImagePath = env->NewStringUTF(filepath.c_str());
-		CCLOG("----------------------------%d",shareType);
        switch(shareType){
        case Share_SINA:
     	   construction_id = env->GetStaticMethodID(m_shareSina, "getInstance", "()Lcom/game/gws/jump/share/SinaClient;");
@@ -136,40 +138,36 @@ void HHPlatform::showRank(){
 	   env->CallVoidMethod(obj, googleRank);
 }
 void HHPlatform::showFullAD(){
-	CCLOG("showFullAD====================-1");
 	JNIEnv *env;
-	CCLOG("showFullAD====================0");
 	m_pVM->AttachCurrentThread(&env, NULL);
-	CCLOG("showFullAD====================1");
 	jmethodID construction_id = env->GetStaticMethodID(m_ADClient, "getInstance", "()Lcom/game/gws/jump/google/AdsClient;");
-	CCLOG("showFullAD====================2");
 	jobject   	   obj = env->CallStaticObjectMethod(m_ADClient, construction_id);
-	CCLOG("showFullAD====================3");
 	jmethodID adShow = env->GetMethodID(m_ADClient,
 				    	      	   			         "showInsertAd",
 				    	      	   			            "()V");
-	CCLOG("showFullAD====================4");
 	env->CallVoidMethod(obj, adShow);
 
 }
 void HHPlatform::commitScore(int score){
-	CCLOG("commitScore====================-1");
 	JNIEnv *env;
-	CCLOG("commitScore====================0");
 	m_pVM->AttachCurrentThread(&env, NULL);
-	CCLOG("commitScore====================1");
 	jmethodID construction_id = env->GetStaticMethodID(m_googleClient, "getInstance", "()Lcom/game/gws/jump/google/GwsGooglePlayServiceClient;");
-	CCLOG("commitScore====================2");
 	jobject   	   obj = env->CallStaticObjectMethod(m_googleClient, construction_id);
 	//		jobject obj =getInstanceObj(env,m_googleClient);
-	CCLOG("commitScore====================3");
 	jmethodID googleCommitScore = env->GetMethodID(m_googleClient,
 			    	      	   			         "commitScore",
 			    	      	   			            "(I)V");
-	CCLOG("commitScore====================4");
 	env->CallVoidMethod(obj, googleCommitScore,score);
-	CCLOG("commitScore====================5");
 }
+void HHPlatform::showToast(std::string content){
+	JNIEnv *env;
+	m_pVM->AttachCurrentThread(&env, NULL);
+	jstring jstrContent = env->NewStringUTF(content.c_str());
+	jmethodID toastShow_id = env->GetStaticMethodID(m_Toast, "ToastLong", "(Ljava/lang/String;)V");
+	env->CallStaticVoidMethod(m_Toast, toastShow_id,jstrContent);
+		env->DeleteLocalRef(jstrContent);
+}
+
 
 
 

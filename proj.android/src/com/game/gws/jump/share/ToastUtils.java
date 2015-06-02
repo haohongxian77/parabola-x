@@ -10,6 +10,7 @@ package com.game.gws.jump.share;
 
 import java.util.List;
 
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.ActivityManager.RunningTaskInfo;
 import android.content.Context;
@@ -24,12 +25,14 @@ import android.widget.Toast;
 public class ToastUtils {
 
 	private static Toast toast;
+	private static Activity mActivity;
 	private static String packageName;
 	private static int version = android.os.Build.VERSION.SDK_INT;
 	private static final int MAX_NEED_CANCEL_VERSION = 10;
 
-	public static void initToast(String packageName) {
+	public static void initToastPackage(Activity activity, String packageName) {
 		ToastUtils.packageName = packageName;
+		mActivity = activity;
 	}
 
 	/**
@@ -37,9 +40,9 @@ public class ToastUtils {
 	 * @param context
 	 * @param resId
 	 */
-	public static void ToastShort(Context context, int resId) {
-		initToast(context, resId);
-		showToast(context);
+	public static void ToastShort(int resId) {
+		initToast(resId);
+		showToast();
 	}
 
 	/**
@@ -47,14 +50,29 @@ public class ToastUtils {
 	 * @param context
 	 * @param resId
 	 */
-	public static void ToastShortAnyWhere(Context context, int resId) {
-		initToast(context, resId);
-		toast.show();
+	public static void ToastShortAnyWhere(int resId) {
+		initToast(resId);
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				toast.show();
+			}
+		});
+
 	}
 
-	private static void showToast(Context context) {
-		if (isTopActivity(context, packageName)) {
-			toast.show();
+	private static void showToast() {
+		if (isTopActivity(mActivity, packageName)) {
+			mActivity.runOnUiThread(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					toast.show();
+				}
+			});
 		}
 	}
 
@@ -63,9 +81,9 @@ public class ToastUtils {
 	 * @param context
 	 * @param text
 	 */
-	public static void ToastShort(Context context, String text) {
-		initToast(context, text);
-		showToast(context);
+	public static void ToastShort(String text) {
+		initToast(text);
+		showToast();
 	}
 
 	/**
@@ -73,9 +91,16 @@ public class ToastUtils {
 	 * @param context
 	 * @param text
 	 */
-	public static void ToastShortAnyWhere(Context context, String text) {
-		initToast(context, text);
-		toast.show();
+	public static void ToastShortAnyWhere(String text) {
+		initToast(text);
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				toast.show();
+			}
+		});
 	}
 
 	/**
@@ -83,10 +108,10 @@ public class ToastUtils {
 	 * @param context
 	 * @param resId
 	 */
-	public static void ToastLong(Context context, int resId) {
-		initToast(context, resId);
+	public static void ToastLong(int resId) {
+		initToast(resId);
 		toast.setDuration(Toast.LENGTH_LONG);
-		showToast(context);
+		showToast();
 	}
 
 	/**
@@ -94,10 +119,10 @@ public class ToastUtils {
 	 * @param context
 	 * @param text
 	 */
-	public static void ToastLong(Context context, String text) {
-		initToast(context, text);
+	public static void ToastLong(String text) {
+		initToast(text);
 		toast.setDuration(Toast.LENGTH_LONG);
-		showToast(context);
+		showToast();
 	}
 
 	/**
@@ -115,8 +140,8 @@ public class ToastUtils {
 	 * @param context
 	 * @param resId
 	 */
-	private static void initToast(Context context, int resId) {
-		initToast(context, context.getResources().getString(resId));
+	private static void initToast(int resId) {
+		initToast(mActivity.getResources().getString(resId));
 	}
 
 	/**
@@ -124,10 +149,10 @@ public class ToastUtils {
 	 * @param context
 	 * @param text
 	 */
-	private static void initToast(Context context, String text) {
+	private static void initToast(String text) {
 		if (toast == null) {
-			if (context != null) {
-				toast = Toast.makeText(context, text, Toast.LENGTH_SHORT);
+			if (mActivity != null) {
+				toast = Toast.makeText(mActivity, text, Toast.LENGTH_SHORT);
 			}
 		}
 		toast.setText(text);
