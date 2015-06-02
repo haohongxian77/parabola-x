@@ -29,7 +29,7 @@ MonsterSpile* MonsterSpile::create(int spileType){
     return  sp;
 }
 void MonsterSpile::changeSprite(int bgIndex){
-    __String* str = __String::createWithFormat("game_column%d.png",bgIndex+1);
+    __String* str = __String::createWithFormat("game_column%d.png",1);//bgIndex+1);
     SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str->getCString());
     setDisplayFrame(frame);
 }
@@ -60,6 +60,21 @@ void MonsterSpile::draw(cocos2d::Renderer *renderer, const cocos2d::Mat4 &transf
 }
 CollisionType MonsterSpile::getValid(Point prePoint,Point curPoint){
     CollisionType _cType= Collision_None;
+    if (this->getPositionX()-curPoint.x<10) {
+        
+    }
+    if (prePoint.y == this->getPositionY()) {
+        prePoint.y = prePoint.y+1;
+    }
+    if (curPoint.y == this->getPositionY()) {
+        curPoint.y = curPoint.y-1;
+    }
+    if (prePoint.x == this->getPositionX()) {
+        prePoint.x = prePoint.x-1;
+    }
+    if (curPoint.x == this->getPositionX()) {
+        curPoint.x = curPoint.x+1;
+    }
     
     if (Vec2::isSegmentIntersect(prePoint, curPoint, this->getPosition(), Point(this->getPositionX(),this->getPositionY()-this->getContentSize().height)) ) {
         return Collision_Dead;

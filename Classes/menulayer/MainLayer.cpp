@@ -14,6 +14,7 @@
 #include "helper/GameMainHelper.h"
 #include "helper/HPlatformHelper.h"
 #define menuStartTag 1
+#define layerEndAcTag  1001
 MainLayer::MainLayer(){
    
 
@@ -116,9 +117,16 @@ void MainLayer::initMenu(){
 }
 
 void MainLayer::menuStart(Ref* sender){
+    if (isClickStart) {
+        return;
+    }
+    HMenu* menu = (HMenu*) sender;
+    menu->setEnabled(false);
+    isClickStart = true;
     GameMainHelper::getInstance()->playSound(BTNCLICK);
     auto action1 = FadeIn::create(1.0f);
     Sequence* seq = Sequence::create(action1,CallFunc::create(CC_CALLBACK_0(MainLayer::callback, this)), NULL);
+    seq->setTag(layerEndAcTag);
     this->runAction(seq);
 }
 void MainLayer::removeThisCallBack(){

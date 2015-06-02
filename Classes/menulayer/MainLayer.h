@@ -47,6 +47,7 @@ private:
     Sprite* m_hero = NULL;
     Node* m_menu = NULL;
     Node* m_shareNode = NULL;
+    bool isClickStart = false;
     
     GameMainLogoLayer* m_logoLayer;
     GameOverLayer* m_gameOverLayer;

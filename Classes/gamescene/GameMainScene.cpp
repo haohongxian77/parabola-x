@@ -69,8 +69,8 @@ void GameMainScene::initGameGuildLayer(){
     bool guild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
     if (guild) {
         UserDefault::getInstance()->setBoolForKey(SHOWGUILD, false);
-        GameGuildLayer* guild = GameGuildLayer::create();
-        addChild(guild,GAMEGuildLAYER);
+        GameGuildLayer* guild_ = GameGuildLayer::create();
+        addChild(guild_,GAMEGuildLAYER);
     }
 }
 void GameMainScene::preLoadMusic(){

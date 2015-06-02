@@ -19,7 +19,7 @@ using namespace CocosDenshion;
 #define SCREEN_DE_COUNT 8   //屏幕划分的单位
 
 
-#define MAX_TOUCH_W 5
+#define MAX_TOUCH_W 4
 #define MIN_TOUCH_W 2   //抛物线点击点和起始点最大具体和最小具体   以柱子宽为单位
 
 #define MAX_TOUCH_H 7 //  抛物线点得最高点
@@ -63,8 +63,10 @@ void GameMainHelper::initDate(){
     m_spilesNode->setPosition(Vec2(0, 0));
     
     m_unitH = winSize.height/SCREEN_DE_COUNT;
-    Texture2D* tex = Director::getInstance()->getTextureCache()->addImage("spile.png");
-    m_unitW = tex->getContentSize().width;
+    Sprite* sp = Sprite::createWithSpriteFrameName("game_column1.png");
+    //Director::getInstance()->getTextureCache()->addImage("spile.png");
+    m_unitW = sp->getContentSize().width;
+    sp = NULL;
     
     m_posts = __Array::create();
     m_posts->retain();
@@ -196,7 +198,7 @@ void GameMainHelper::atachLayer(GameMainLayer *layer){
     m_Layer = layer;
     m_Layer->addChild(m_spilesNode);
 }
-CollisionType GameMainHelper::isCollisionPosts(Point prePoint,Point curPoint){
+CollisionType GameMainHelper::isCollisionPosts(Point PreprePoint,Point prePoint,Point curPoint){
     CollisionType c_Type = Collision_None;
     for (int i=0; i<m_posts->count(); i++) {
        
@@ -204,10 +206,17 @@ CollisionType GameMainHelper::isCollisionPosts(Point prePoint,Point curPoint){
         MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
         Size heroSize = m_Hero->getContentSize();
         //如果具体远不做碰撞检测
-        if ((m_curHeroPost->getPositionX() == sp->getPositionX()&& sp->getPositionY() == m_curHeroPost->getPositionY()) ||std::abs(sp->getPositionX()-curPoint.x)>heroSize.width/2) {
+        if ((m_curHeroPost->getPositionX() == sp->getPositionX()
+             && sp->getPositionY() == m_curHeroPost->getPositionY())) {
+            continue;
+        }
+        if (std::abs(sp->getPositionX()-curPoint.x)>sp->getContentSize().width+10) {
             continue;
         }
         c_Type =  sp->getValid(prePoint,curPoint);
+        if (c_Type == Collision_None) {
+            c_Type =  sp->getValid(PreprePoint,curPoint);
+        }
         if(c_Type == Collision_None){
             
         }else {
@@ -382,8 +391,8 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
             
         }
         curPoint = Point(x,y);
-        if (m_heroPaths.size() != 0) {
-             curType=isCollisionPosts(m_heroPaths[m_heroPaths.size()-1], curPoint);
+        if (m_heroPaths.size() >2 ) {
+             curType=isCollisionPosts(m_heroPaths[m_heroPaths.size()-2],m_heroPaths[m_heroPaths.size()-1], curPoint);
         }
        
          m_heroPaths.push_back(curPoint);

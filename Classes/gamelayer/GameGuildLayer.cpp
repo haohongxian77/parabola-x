@@ -34,7 +34,7 @@ void GameGuildLayer::initMenu(){
    
     HMenu* item1 = HMenu::create("hop_1.png", "hop_2.png",CC_CALLBACK_1(GameGuildLayer::startGame, this));
     item1->getNormalImage()->setAnchorPoint(Vec2(0.5f, 0.5f));
-    item1->setPosition(Vec2(size.width/2, item1->getContentSize().height/2));
+    item1->setPosition(Vec2(size.width*6/7, size.height*3/4));
     
     Node* m_menu = Menu::create(item1, nullptr);
     addChild(m_menu);
@@ -46,12 +46,12 @@ void GameGuildLayer::initArrow(){
     Size size = Director::getInstance()->getWinSize();
     Sprite* arrow = Sprite::createWithSpriteFrameName("guild_arrow.png");
     arrow ->setAnchorPoint(Vec2(1,1));
-    arrow->setScale(-1);
-    arrow->setPosition(size.width*11.5/20, size.height/8);
+    arrow->setScale(1);
+    arrow->setPosition(size.width*16/20, size.height*3/4);
     addChild(arrow);
     
-    ScaleTo* scale1 = ScaleTo::create(0.5, -1.5);
-    ScaleTo* scale2 = ScaleTo::create(0.7, -1);
+    ScaleTo* scale1 = ScaleTo::create(0.5, 1.5);
+    ScaleTo* scale2 = ScaleTo::create(0.7, 1);
     Sequence* seq = Sequence::create(scale1,scale2, NULL);
     arrow->runAction(RepeatForever::create(seq));
 }

@@ -130,6 +130,9 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     
     Point highPoint = this->convertTouchToNodeSpace(touch);
     highPoint = getTouchPoint(highPoint, touNode->getCurType());
+    if (highPoint.x<=curPos.x) {
+        return;
+    }
     
     float dtime = 0;
     float gravity ;
