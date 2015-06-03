@@ -19,7 +19,7 @@ using namespace CocosDenshion;
 #define SCREEN_DE_COUNT 8   //屏幕划分的单位
 
 
-#define MAX_TOUCH_W 4
+#define MAX_TOUCH_W 5
 #define MIN_TOUCH_W 2   //抛物线点击点和起始点最大具体和最小具体   以柱子宽为单位
 
 #define MAX_TOUCH_H 7 //  抛物线点得最高点
@@ -65,7 +65,7 @@ void GameMainHelper::initDate(){
     m_unitH = winSize.height/SCREEN_DE_COUNT;
     Sprite* sp = Sprite::createWithSpriteFrameName("game_column1.png");
     //Director::getInstance()->getTextureCache()->addImage("spile.png");
-    m_unitW = sp->getContentSize().width;
+    m_unitW = sp->getContentSize().width*3/4;
     sp = NULL;
     
     m_posts = __Array::create();
@@ -89,7 +89,7 @@ void GameMainHelper::initPosts(){
     float posX = 0.0f;
     Size winSize = Director::getInstance()->getWinSize();
     if (m_posts->count() == 0) {
-        posX = -1*m_Layer->getPositionX()+100;
+        posX = -1*m_Layer->getPositionX()+m_unitW;
     }else{
         Sprite* sp = (Sprite*)m_posts->getLastObject();
         posX = sp->getPositionX();
@@ -119,7 +119,7 @@ Point GameMainHelper::addPosts(float perPointX){
 
     
     if (m_posts->count()==0) {
-        float x = winSize.width/5;
+        float x = m_unitW;
          int Hregion = rand()%(maxHei-minHei+1)+minHei;
         int randHeiInregion = rand()%((int)winSize.height/SCREEN_DE_COUNT); //
          pos= Point(x,randHeiInregion+Hregion*winSize.height/SCREEN_DE_COUNT);
@@ -289,7 +289,7 @@ void GameMainHelper::jumpOver(){
 void GameMainHelper::movingLayer(float speed){
     Size size = Director::getInstance()->getWinSize();
     
-    float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-size.width/5;
+    float dx = m_Hero->getPositionX()+m_Layer->getPositionX()-size.width/20;
     m_Layer->setMoveXDistance(-1*dx,speed);
 }
 void GameMainHelper::managePost(){
@@ -328,7 +328,7 @@ void GameMainHelper::startGame(){
     Size winSize  = Director::getInstance()->getWinSize();
         m_mainScene->startGame();  //主scene准备开始游戏
     m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
-    m_Layer->startGame(m_curHeroPost->getPositionX()-winSize.width/5);
+    m_Layer->startGame(m_curHeroPost->getPositionX()-m_unitW);
     if (m_gameStatus != Tag_None) {
          changePostsSprite();
     }
@@ -425,8 +425,8 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         float dx = endPoint.x-postSize.width - (curPoint.x);
         int totalCount = m_heroPaths.size();
         
-        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
-            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y);
+        for (int i= m_heroPaths.size()-1; i> totalCount; i--) {
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount+1)/totalCount),m_heroPaths[i].y);
         }
         CCLOG("碰柱子死亡");
     }else if(curPoint.y<m_earthH){
