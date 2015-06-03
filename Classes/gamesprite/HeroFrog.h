@@ -46,6 +46,7 @@ private:
     void runStaticAnimation();
 
     void setHeroStatic();
+    void stopAnimation();
     
     
 private:

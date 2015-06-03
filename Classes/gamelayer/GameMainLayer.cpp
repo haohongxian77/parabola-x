@@ -92,7 +92,7 @@ void GameMainLayer::initHeroBeginPoint(){
     }
 }
 bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
-    if (GameMainHelper::getInstance()->getGameStaus() == Tag_GameOver) {
+    if (GameMainHelper::getInstance()->getGameStaus() == Tag_GameOver || params.size()!=0) {
         return false;
     }
     movingPoints.clear();
@@ -131,6 +131,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     Point highPoint = this->convertTouchToNodeSpace(touch);
     highPoint = getTouchPoint(highPoint, touNode->getCurType());
     if (highPoint.x<=curPos.x) {
+        m_hero->setHeroStatus(frogStatic);
         return;
     }
     
