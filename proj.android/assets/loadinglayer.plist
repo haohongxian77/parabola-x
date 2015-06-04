@@ -59,7 +59,7 @@
             <key>hero_load_4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{976,2},{253,210}}</string>
+                <string>{{2,256},{253,210}}</string>
                 <key>offset</key>
                 <string>{3,-21}</string>
                 <key>rotated</key>
@@ -72,7 +72,7 @@
             <key>hero_load_5.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1231,2},{259,240}}</string>
+                <string>{{257,256},{259,240}}</string>
                 <key>offset</key>
                 <string>{0,-6}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>hero_load_6.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1492,2},{255,246}}</string>
+                <string>{{518,256},{255,246}}</string>
                 <key>offset</key>
                 <string>{2,-3}</string>
                 <key>rotated</key>
@@ -98,7 +98,7 @@
             <key>hero_load_7.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1749,2},{257,252}}</string>
+                <string>{{2,504},{257,252}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -111,7 +111,7 @@
             <key>loading_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2008,2},{22,23}}</string>
+                <string>{{261,504},{22,23}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -124,7 +124,7 @@
             <key>loading_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,256},{93,117}}</string>
+                <string>{{285,504},{93,117}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -137,7 +137,7 @@
             <key>loading_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{97,256},{145,113}}</string>
+                <string>{{380,504},{145,113}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -150,7 +150,7 @@
             <key>loading_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{244,256},{71,117}}</string>
+                <string>{{527,504},{71,117}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -160,175 +160,6 @@
                 <key>sourceSize</key>
                 <string>{71,117}</string>
             </dict>
-            <key>loading_word.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{317,256},{613,92}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{613,92}}</string>
-                <key>sourceSize</key>
-                <string>{613,92}</string>
-            </dict>
-            <key>loading_word0.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{932,256},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word1.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1437,256},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word10.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,375},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word11.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{507,375},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word2.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1012,375},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word3.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1517,375},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word4.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,438},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word5.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{507,438},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word6.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1012,438},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word7.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{1517,438},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word8.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{2,501},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
-            <key>loading_word9.png</key>
-            <dict>
-                <key>frame</key>
-                <string>{{507,501},{503,61}}</string>
-                <key>offset</key>
-                <string>{0,0}</string>
-                <key>rotated</key>
-                <false/>
-                <key>sourceColorRect</key>
-                <string>{{0,0},{503,61}}</string>
-                <key>sourceSize</key>
-                <string>{503,61}</string>
-            </dict>
         </dict>
         <key>metadata</key>
         <dict>
@@ -337,9 +168,9 @@
             <key>realTextureFileName</key>
             <string>loadinglayer.png</string>
             <key>size</key>
-            <string>{2048,1024}</string>
+            <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:d1a42c4fa72a011869739f1e2a0eebb9:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:8b3eb1b6cd8cae5a261e5a1f7634fb37:1/1$</string>
             <key>textureFileName</key>
             <string>loadinglayer.png</string>
         </dict>
