@@ -14,7 +14,7 @@ MonsterSpile::~MonsterSpile(){
 }
 std::string MonsterSpile::getspriteFileName(int type){
     
-    return "game_column1.png";
+    return "game_column0.png";
 }
 MonsterSpile* MonsterSpile::create(int spileType){
     std::string fileName = getspriteFileName(spileType);
@@ -29,7 +29,7 @@ MonsterSpile* MonsterSpile::create(int spileType){
     return  sp;
 }
 void MonsterSpile::changeSprite(int bgIndex){
-    __String* str = __String::createWithFormat("game_column%d.png",1);//bgIndex+1);
+    __String* str = __String::createWithFormat("game_column%d.png",bgIndex);//+1);
     SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(str->getCString());
     setDisplayFrame(frame);
 }

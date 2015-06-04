@@ -64,11 +64,11 @@ void GameMainScene::initGameBgBFLayer(){
 void GameMainScene::initGameUIlayer(){
     m_gameUILayer = GameUIlayer::create();
     addChild(m_gameUILayer,GAMEUILAYER);
+    m_gameUILayer->setVisible(false);
 }
 void GameMainScene::initGameGuildLayer(){
     bool guild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
     if (guild) {
-        UserDefault::getInstance()->setBoolForKey(SHOWGUILD, false);
         GameGuildLayer* guild_ = GameGuildLayer::create();
         addChild(guild_,GAMEGuildLAYER);
     }
@@ -113,10 +113,12 @@ void GameMainScene::startGame(){
         m_bgLayer->changeSprite();
         m_bgBfLayer->changeSprite();
     }
+    m_gameUILayer ->setVisible(true);
     
 }
 void GameMainScene::gameOver(){
     unscheduleUpdate();
+    m_gameUILayer ->setVisible(false);
     Sequence* seq = Sequence::create(DelayTime::create(0.5),
     		CallFunc::create(CC_CALLBACK_0(GameMainScene::playGameoverSound, this)),
     		DelayTime::create(1.5),

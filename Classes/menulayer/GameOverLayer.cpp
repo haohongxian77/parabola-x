@@ -28,17 +28,17 @@ void GameOverLayer::initBg(){
 void GameOverLayer::initHeroAni(){
     Sprite* child =dynamic_cast<Sprite*>(this->getChildByTag(101)) ;
     Size contentSize = child->getContentSize();
-
-    Sprite* cryHero = Sprite::createWithSpriteFrameName("hero_cry_0.png");
+    std::string heroAniName = isNewHight?"hero_static_%d.png":"hero_cry_%d.png";
+    Sprite* cryHero = Sprite::createWithSpriteFrameName(__String::createWithFormat(heroAniName.c_str(),0)->getCString());
     cryHero->setAnchorPoint(Vec2(0.5f,0.5f));
     cryHero->setPosition(Vec2(contentSize.width/4,contentSize.height*3/4-10));
     child->addChild(cryHero);
     auto animation = Animation::create();
     for( int i=1;i<8;i++)
     {
-        char szName[100] = {0};
-        sprintf(szName, "hero_cry_%d.png", i);
-        SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(szName);
+//        char szName[100] = {0};
+//        sprintf(szName, "hero_cry_%d.png", i);
+        SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(__String::createWithFormat(heroAniName.c_str(),i)->getCString());
         animation->addSpriteFrame(frame);
     }
     // should last 2.8 seconds. And there are 14 frames.
@@ -50,6 +50,7 @@ void GameOverLayer::initHeroAni(){
     
 }
 void GameOverLayer::initScore(){
+    isNewHight = false;
     Sprite* child =dynamic_cast<Sprite*>(this->getChildByTag(101)) ;
     Size contentSize = child->getContentSize();
     
@@ -62,12 +63,13 @@ void GameOverLayer::initScore(){
             HPlatformHelper::getInstance()->commitScore(curScore);
         }
         highestScore = curScore;
+        isNewHight = true;
         
         UserDefault::getInstance()->setIntegerForKey(Highest, curScore);
     }
     GameMainHelper::getInstance()->setHighest(highestScore);
-     
-   LabelAtlas* m_curscoreLabel = LabelAtlas::create(__String::createWithFormat("%d",curScore)->getCString(), "fonts/game_frontovercom.png",  23.4, 28, '0');
+   std::string highFrontString = isNewHight?"fonts/game_frontoverhigh.png":"fonts/game_frontovercom.png";
+   LabelAtlas* m_curscoreLabel = LabelAtlas::create(__String::createWithFormat("%d",curScore)->getCString(), highFrontString.c_str(),  23.4, 28, '0');
     m_curscoreLabel->setAnchorPoint(Vec2(0.5,0.5));
     m_curscoreLabel->setPosition(Vec2(contentSize.width*3/4+40,contentSize.height*3/4-15));
     child->addChild(m_curscoreLabel);

@@ -18,6 +18,7 @@ private:
     void initBg();
     void initScore();
     void initHeroAni();
+    bool isNewHight ;
 public:
     CREATE_FUNC(GameOverLayer);
 };

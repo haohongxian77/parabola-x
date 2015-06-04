@@ -35,7 +35,7 @@ void SettingNode::initBg(){
     Size size = Director::getInstance()->getWinSize();
     bg = Sprite::create("setting_bg.png");
     bg->setAnchorPoint(Vec2(0.5,0.5f));
-    bg->setPosition(Vec2(size.width/2,size.height*2/5));
+    bg->setPosition(Vec2(size.width/2,size.height*9/20));
     addChild(bg);
     
     Sprite* m_logo = Sprite::create("main_gamename.png");
@@ -85,8 +85,8 @@ void SettingNode::initMenu(){
     
     auto item4 = HMenu::create("home_1.png","home_2.png", CC_CALLBACK_1(SettingNode::menuHome, this));
     Size winSize = Director::getInstance()->getWinSize();
-    item4->setAnchorPoint(Vec2(1,0));
-    item4->setPosition(Vec2(0, size.height));
+    item4->setAnchorPoint(Vec2(0.5,0.5));
+    item4->setPosition(Vec2(-size.width/12, size.height+item4->getContentSize().height));
     
     Menu* m_menu = Menu::create(item1, item2,item3,item4, nullptr);
     bg->addChild(m_menu);

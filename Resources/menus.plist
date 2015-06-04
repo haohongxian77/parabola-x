@@ -7,20 +7,20 @@
             <key>guild_arrow.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{256,186},{111,101}}</string>
+                <string>{{111,821},{134,136}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{0,0},{111,101}}</string>
+                <string>{{0,0},{134,136}}</string>
                 <key>sourceSize</key>
-                <string>{111,101}</string>
+                <string>{134,136}</string>
             </dict>
             <key>home_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{256,289},{103,103}}</string>
+                <string>{{256,311},{103,103}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -33,7 +33,7 @@
             <key>home_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{238,821},{124,124}}</string>
+                <string>{{393,186},{124,124}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +46,7 @@
             <key>hop_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{403,186},{123,123}}</string>
+                <string>{{256,186},{123,123}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -85,7 +85,7 @@
             <key>main_rank1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{111,821},{125,125}}</string>
+                <string>{{247,821},{125,125}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +254,7 @@
             <key>share_fb.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{330,947},{71,71}}</string>
+                <string>{{941,320},{71,71}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +267,7 @@
             <key>share_fb1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{790,262},{85,85}}</string>
+                <string>{{781,262},{85,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>share_qq.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{257,947},{71,71}}</string>
+                <string>{{868,320},{71,71}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +293,7 @@
             <key>share_qq1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{703,262},{85,85}}</string>
+                <string>{{694,262},{85,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +306,7 @@
             <key>share_wx.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{184,948},{71,71}}</string>
+                <string>{{320,948},{71,71}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +319,7 @@
             <key>share_wx1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{616,186},{85,85}}</string>
+                <string>{{607,186},{85,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -332,7 +332,7 @@
             <key>share_xl.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{111,948},{71,72}}</string>
+                <string>{{247,948},{71,72}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -345,7 +345,7 @@
             <key>share_xl1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{528,186},{85,86}}</string>
+                <string>{{519,186},{85,86}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -391,7 +391,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:0b7d9700c38de9674823ee8f080f3c27:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:fe9b243032a9305c9f9bf63432fed80b:1/1$</string>
             <key>textureFileName</key>
             <string>menus.png</string>
         </dict>

@@ -63,7 +63,7 @@ void GameMainHelper::initDate(){
     m_spilesNode->setPosition(Vec2(0, 0));
     
     m_unitH = winSize.height/SCREEN_DE_COUNT;
-    Sprite* sp = Sprite::createWithSpriteFrameName("game_column1.png");
+    Sprite* sp = Sprite::createWithSpriteFrameName("game_column0.png");
     //Director::getInstance()->getTextureCache()->addImage("spile.png");
     m_unitW = sp->getContentSize().width*3/4;
     sp = NULL;

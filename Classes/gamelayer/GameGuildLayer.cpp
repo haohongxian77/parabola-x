@@ -56,5 +56,6 @@ void GameGuildLayer::initArrow(){
     arrow->runAction(RepeatForever::create(seq));
 }
 void GameGuildLayer::startGame(cocos2d::Ref *sender){
+    UserDefault::getInstance()->setBoolForKey("SHOWGUILD", false);
     this->removeFromParentAndCleanup(true);
 }
