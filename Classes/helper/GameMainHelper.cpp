@@ -14,7 +14,7 @@
 #include <time.h>
 #include "audio/include/SimpleAudioEngine.h"
 using namespace CocosDenshion;
-#define minHei 2
+#define minHei 3
 #define maxHei 5
 #define SCREEN_DE_COUNT 8   //屏幕划分的单位
 
@@ -320,6 +320,7 @@ void GameMainHelper::showFullAd(){
     }
 }
 void GameMainHelper::startGame(){
+    SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
     int nextBgIndex = m_curBgIndex;
     while (nextBgIndex == m_curBgIndex) {
         nextBgIndex = rand()%(5);
@@ -413,20 +414,24 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         float dx = endPoint.x - (curPoint.x);
         float dy = endPoint.y - curPoint.y;
         int totalCount = m_heroPaths.size();
-        for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
-            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount/2)/totalCount),m_heroPaths[i].y);
+        for (int i= m_heroPaths.size()-1; i> 0; i--) {
+            float k = (i*1.0f)/(totalCount-1);
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*k),m_heroPaths[i].y);
         }
+        m_heroPaths[m_heroPaths.size()-1].y = m_heroPaths[m_heroPaths.size()-1].y+dy;
         CCLOG("安全掉落");
         
     }else if(curType == Collision_Dead ){
         overStatus =frogDead1;
         Size  postSize = m_curHeroPost->getContentSize();
         Point endPoint = getHeroPostPoint();
-        float dx = endPoint.x-postSize.width - (curPoint.x);
+        float dx = (endPoint.x-postSize.width/2-m_Hero->getContentSize().width/4)-curPoint.x;
+
         int totalCount = m_heroPaths.size();
         
-        for (int i= m_heroPaths.size()-1; i> totalCount; i--) {
-            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*2*(i-totalCount+1)/totalCount),m_heroPaths[i].y);
+        for (int i= m_heroPaths.size()-1; i> 0; i--) {
+            m_heroPaths[i] = Point(m_heroPaths[i].x+(dx*i*1.0f/(totalCount-1)),m_heroPaths[i].y);
+           
         }
         CCLOG("碰柱子死亡");
     }else if(curPoint.y<m_earthH){
@@ -434,8 +439,9 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         float dY = m_earthH-curPoint.y;
         int totalCount = m_heroPaths.size();
         for (int i= m_heroPaths.size()-1; i> totalCount/2; i--) {
-            m_heroPaths[i] = Point(m_heroPaths[i].x,m_heroPaths[i].y+dY*2*(i-totalCount/2)/totalCount);
+            m_heroPaths[i] = Point(m_heroPaths[i].x,m_heroPaths[i].y);
         }
+        m_heroPaths[m_heroPaths.size()-1].y = m_heroPaths[m_heroPaths.size()-1].y+dY;
         CCLOG("落地死亡");
     }
     m_heroPathIndex = 0;

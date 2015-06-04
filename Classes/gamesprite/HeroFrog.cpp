@@ -19,6 +19,7 @@ std::string animaName[7] = {"frogStatic","frogTakeoff",
     "frogFall","frogDead1",
     "frogDead2"};
 #define HEROSTATICMUSIC_TIME 5
+#define DEAD1TAG  1001
 HeroFrog::HeroFrog():m_heroStatus(FrogNone),drawNode(NULL)
 		,m_isLongJump(false),
 		m_dStaticMusicTime(0){
@@ -37,7 +38,7 @@ bool HeroFrog::init(){
 }
 void HeroFrog::initData(){
     Size size = Director::getInstance()->getWinSize();
-    downSpeed = size.height/10;
+    downSpeed = size.height/6;
     drawNode = DrawNode::create();
     addChild(drawNode,2);
 }
@@ -62,7 +63,7 @@ void HeroFrog::initAnimation(){
 }
 void HeroFrog::setCurPosition(Point pos){
     setPosition(pos);
-    if (pos.x == downPoint.x && pos.y == downPoint.y) {
+    if (pos.x - downPoint.x>=0) {
         setHeroStatus(frogJumpDown);
     }
 }
@@ -176,8 +177,10 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             time = dis/downSpeed;
             targetPoint = Point(getPositionX(),y);
             mvTo = MoveTo::create(time,targetPoint);
-            sp = Spawn::create(Repeat::create(ac,10),mvTo, NULL);
-            seq = Sequence::create(DelayTime::create(0.5), sp,NULL);
+            
+            sp = Spawn::create(Repeat::create(ac,(int)(time/(0.2*3))),mvTo, NULL);
+            sp->setTag(DEAD1TAG);
+            seq = Sequence::create(DelayTime::create(0.5), sp,CCCallFunc::create(CC_CALLBACK_0(HeroFrog::stopAnimation, this)), NULL);
      
             runAction(seq);
             break;
@@ -192,6 +195,9 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             runAction(RepeatForever::create(ac));
             break;
     }
+}
+void HeroFrog::stopAnimation(){
+    this->stopActionByTag(DEAD1TAG);
 }
 void HeroFrog::setHeroStatic(){
     setHeroStatus(frogStatic);

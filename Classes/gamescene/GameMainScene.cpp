@@ -126,6 +126,7 @@ void GameMainScene::gameOver(){
 }
 void GameMainScene::playGameoverSound(){
 	GameMainHelper::getInstance()->playSound(GAMEOVER);
+    SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 void GameMainScene::showAlertView(){
     initGameAlertLayer(Tag_GameOver);
