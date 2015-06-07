@@ -74,7 +74,7 @@ void GameOverLayer::initScore(){
     m_curscoreLabel->setPosition(Vec2(contentSize.width*3/4+40,contentSize.height*3/4-15));
     child->addChild(m_curscoreLabel);
     
-    LabelAtlas* m_higestscoreLabel = LabelAtlas::create(__String::createWithFormat("%d",highestScore)->getCString(), "fonts/game_frontoverhigh.png",  23.4, 28, '0');
+    LabelAtlas* m_higestscoreLabel = LabelAtlas::create(__String::createWithFormat("%d",highestScore)->getCString(), "fonts/game_frontovercom.png",  23.4, 28, '0');
     m_higestscoreLabel->setAnchorPoint(Vec2(0.5,0.5));
     m_higestscoreLabel->setPosition(Vec2(contentSize.width*3/4+40,contentSize.height/4-5));
     child->addChild(m_higestscoreLabel);
