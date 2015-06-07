@@ -84,6 +84,7 @@ public:
     HeroFrog* m_Hero;
 private:
     void initDate();
+    void initGameStartData();
     
     
     Point addPosts(float perPointX);
@@ -111,6 +112,7 @@ private:
     //hero 路径
     std::vector<Point> m_heroPaths;
     int m_heroPathIndex = 0;
+    int m_playTimes = -1;
     
     
     
