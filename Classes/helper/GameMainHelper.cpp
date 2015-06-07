@@ -25,7 +25,8 @@ using namespace CocosDenshion;
 #define MAX_TOUCH_H 7 //  抛物线点得最高点
 #define MIN_TOUCH_H 0.5f  //  抛物线点 距离起始点 最小的距离差
 
-
+#define PLAYTIME "playGameTime"
+#define SCOREADDTION  1.5
 GameMainHelper* GameMainHelper::mainHelper = NULL;
 
 GameMainHelper::GameMainHelper():
@@ -293,16 +294,19 @@ void GameMainHelper::movingLayer(float speed){
     m_Layer->setMoveXDistance(-1*dx,speed);
 }
 void GameMainHelper::managePost(){
+    int score_ = 0;
     for (long int i=m_posts->count()-1; i>=0; i--) {
         MonsterSpile* curSp =(MonsterSpile*)m_posts->getObjectAtIndex(i);
         Point postPoint = curSp->getPosition();
         if (postPoint.x<m_curHeroPost->getPositionX()) {
             curSp->moveOver();
             m_posts->removeObject(curSp);
-            m_curScore ++;
+            score_ ++;
         }
         
     }
+    m_curScore = m_curScore+(int)(score_*SCOREADDTION);
+    
     initPosts();
 }
 void GameMainHelper::gameOver(){
@@ -314,18 +318,20 @@ void GameMainHelper::gameOver(){
     showFullAd();
 }
 void GameMainHelper::showFullAd(){
-    int randNum = rand()%(2);
+    
+    int randNum ;
+    if (m_playTimes < 4) {
+        randNum = rand()%(3);
+    }else{
+        randNum = rand()%(2);
+    }
     if (randNum == 0) {
         HPlatformHelper::getInstance()->showFullAd();
     }
 }
 void GameMainHelper::startGame(){
     SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
-    int nextBgIndex = m_curBgIndex;
-    while (nextBgIndex == m_curBgIndex) {
-        nextBgIndex = rand()%(5);
-    }
-    m_curBgIndex = nextBgIndex;
+    
     Size winSize  = Director::getInstance()->getWinSize();
         m_mainScene->startGame();  //主scene准备开始游戏
     m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
@@ -338,6 +344,18 @@ void GameMainHelper::startGame(){
     m_curScore = 0;
     m_mainScene->changeScore();
 
+}
+void GameMainHelper::initGameStartData(){
+    int nextBgIndex = m_curBgIndex;
+    while (nextBgIndex == m_curBgIndex) {
+        nextBgIndex = rand()%(5);
+    }
+    m_curBgIndex = nextBgIndex;
+    if (m_playTimes == -1) {
+        m_playTimes = UserDefault::getInstance()->getIntegerForKey(PLAYTIME, 0);
+        m_playTimes+=1;
+        UserDefault::getInstance()->setIntegerForKey(PLAYTIME, m_playTimes);
+    }
 }
 void GameMainHelper::changePostsSprite(){
     for (int i=0; i<m_posts->count(); i++) {

@@ -135,7 +135,7 @@ void StartLayer::initGWSBig(){
     
     auto s = Director::getInstance()->getWinSize();
     
-    auto to1 = Sequence::createWithTwoActions(ProgressTo::create(2, 100), ProgressTo::create(0, 0));
+    auto to1 = Sequence::createWithTwoActions(ProgressTo::create(1.8, 100), ProgressTo::create(0, 0));
     
     auto left = ProgressTimer::create(Sprite::create("GWS_2.png"));
     left->setType(ProgressTimer::Type::BAR);
@@ -148,7 +148,7 @@ void StartLayer::initGWSBig(){
 }
 void StartLayer::showBackWordPro(){
     Size winSize = Director::getInstance()->getWinSize();
-    auto to2 = Sequence::createWithTwoActions(ProgressTo::create(2, 100), ProgressTo::create(0, 0));
+    auto to2 = Sequence::createWithTwoActions(ProgressTo::create(1.8, 100), ProgressTo::create(0, 0));
     auto right = ProgressTimer::create(Sprite::create("GWS_1.png"));
     right->setType(ProgressTimer::Type::BAR);
     

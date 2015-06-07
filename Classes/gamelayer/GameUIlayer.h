@@ -18,6 +18,7 @@ class GameUIlayer :public Node{
 public:
     CREATE_FUNC(GameUIlayer);
     void changeScore(int curScore);
+    void changeScoreBg();
 private:
     bool init();
     Sprite* m_scoreBg ;

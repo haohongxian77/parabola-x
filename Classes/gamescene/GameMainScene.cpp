@@ -149,6 +149,7 @@ void GameMainScene::changeScore(){
         m_helper->setHighest(0);
         GameMainHelper::getInstance()->playSound(NEWCAREAR);
         Node* par =this->getChildByTag(ParticleSystemXTag);
+        m_gameUILayer->changeScoreBg();
         if (par) {
             ParticleSystemX* p = (ParticleSystemX*)par;
             p->restartParticle();
