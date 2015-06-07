@@ -38,7 +38,7 @@ bool HeroFrog::init(){
 }
 void HeroFrog::initData(){
     Size size = Director::getInstance()->getWinSize();
-    downSpeed = size.height/6;
+    downSpeed = size.height/3;
     drawNode = DrawNode::create();
     addChild(drawNode,2);
 }
