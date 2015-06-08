@@ -14,7 +14,7 @@ typedef enum{
     frogTakeoff,       //主角起跳
     frogJumpUp,        //主角上跳
     frogJumpDown,      //主角下跳
-    frogFall,          //主角落地
+    frogFall =5,          //主角落地
     frogDead1,         //主角死亡碰桩子死亡
     frogDead2,         //主角掉地上死亡
 }FrogStatus;

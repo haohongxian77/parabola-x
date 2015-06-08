@@ -8,14 +8,14 @@
 
 #include "HeroFrog.h"
 #include "helper/GameMainHelper.h"
-int animationCount[7] = {8,4,2,6,2,3,3};
-                   //idel,起跳，上跳，下跳，落地，死亡撞柱子，死亡
-std::string animaFrameName[7] = {"hero_static_%d.png","hero_jpstart_%d.png",
-                            "hero_jpup_%d.png","hero_jpdown_%d.png",
+int animationCount[8] = {8,4,2,4,2,2,3,3};
+                   //idel,起跳，上跳，最高点，下跳，落地，死亡撞柱子，死亡
+std::string animaFrameName[8] = {"hero_static_%d.png","hero_jpstart_%d.png",
+                            "hero_jpup_%d.png","hero_jpdown_%d.png","hero_jpdown1_%d.png",
                             "hero_drop_%d.png","hero_dead2_%d.png",
                             "hero_dead1_%d.png"};
-std::string animaName[7] = {"frogStatic","frogTakeoff",
-    "frogJumpUp","frogJumpDown",
+std::string animaName[8] = {"frogStatic","frogTakeoff",
+    "frogJumpUp","frogJumpDown","frogJumpDown1",
     "frogFall","frogDead1",
     "frogDead2"};
 #define HEROSTATICMUSIC_TIME 5
@@ -43,9 +43,9 @@ void HeroFrog::initData(){
     addChild(drawNode,2);
 }
 void HeroFrog::initAnimation(){
-    for (int i=0; i<7; i++) {
+    for (int i=0; i<8; i++) {
         auto animationStatic = Animation::create();
-        for( int j=1;j<animationCount[i];j++)
+        for( int j=0;j<animationCount[i];j++)
         {
             char szName[100] = {0};
             sprintf(szName, animaFrameName[i].c_str(), j);
@@ -118,6 +118,14 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     this->stopAllActions();
     ani = AnimationCache::getInstance()->getAnimation(animaName[heroStatus].c_str());
     
+    Animation* ani1;
+    Animate* ac1;
+    if (heroStatus == frogJumpDown) {
+        ani1 = AnimationCache::getInstance()->getAnimation(animaName[heroStatus+1].c_str());
+    }
+    
+    
+    
     
     Sequence* seq;
     float y;
@@ -140,22 +148,25 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
         case frogTakeoff:
             ac= Animate::create(ani) ;
             ani->setDelayPerUnit(0.5);
-            runAction(ac);
+            
+            runAction(RepeatForever::create(ac));
             break;
         case frogJumpUp:
         	if(m_isLongJump)
                GameMainHelper::getInstance()->playSound(JUMPSTART_1);
         	else
         		GameMainHelper::getInstance()->playSound(JUMPSTART_0);
-            ani->setDelayPerUnit(2); //--------待计算
+            ani->setDelayPerUnit(0.2); //--------待计算
             ac= Animate::create(ani);
-            runAction(ac);
+            runAction(RepeatForever::create(ac));
             
             break;
         case frogJumpDown:
             ani->setDelayPerUnit(downAnimSpeed); //--------待计算
+            ani1->setDelayPerUnit(0.2);
             ac= Animate::create(ani);
-            runAction(ac);
+            ac1 = Animate::create(ani1);
+            runAction(Sequence::create(ac,Repeat::create(ac1,20), NULL) );
             break;
         case frogFall:
             ani->setDelayPerUnit(downAnimSpeed);

@@ -331,9 +331,9 @@ void GameMainHelper::showFullAd(){
 }
 void GameMainHelper::startGame(){
     SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
-    
+    initGameStartData();
     Size winSize  = Director::getInstance()->getWinSize();
-        m_mainScene->startGame();  //主scene准备开始游戏
+    m_mainScene->startGame();  //主scene准备开始游戏
     m_curHeroPost = dynamic_cast<Sprite*> (m_posts->getObjectAtIndex(0));
     m_Layer->startGame(m_curHeroPost->getPositionX()-m_unitW);
     if (m_gameStatus != Tag_None) {

@@ -104,7 +104,7 @@ void StartLayer::initHero(){
     m_spHero = Sprite::createWithSpriteFrameName("hero_load_0.png");
     
     auto animation = Animation::create();
-    for( int i=1;i<8;i++)
+    for( int i=0;i<8;i++)
     {
         char szName[100] = {0};
         sprintf(szName, "hero_load_%d.png", i);
@@ -118,7 +118,7 @@ void StartLayer::initHero(){
     auto action = Animate::create(animation);
     m_spHero->runAction(RepeatForever::create(action));
 
-    m_spHero ->setPosition(Vec2(winSize.width/2, winSize.height/4+m_spGWS->getContentSize().height/2+m_spHero->getContentSize().height/2));
+    m_spHero ->setPosition(Vec2(winSize.width/2, winSize.height/4+m_spGWS->getContentSize().height/2+m_spHero->getContentSize().height*4/10));
     
     addChild(m_spHero);
 }
