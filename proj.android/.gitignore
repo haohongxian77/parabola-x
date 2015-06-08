@@ -11,4 +11,5 @@
 /cocos/
 /obj/
 /cocos2d/
+/proguard/
 .gitignore.bak
