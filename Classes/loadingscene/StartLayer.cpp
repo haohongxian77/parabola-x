@@ -104,7 +104,7 @@ void StartLayer::initHero(){
     m_spHero = Sprite::createWithSpriteFrameName("hero_load_0.png");
     
     auto animation = Animation::create();
-    for( int i=1;i<8;i++)
+    for( int i=0;i<8;i++)
     {
         char szName[100] = {0};
         sprintf(szName, "hero_load_%d.png", i);
