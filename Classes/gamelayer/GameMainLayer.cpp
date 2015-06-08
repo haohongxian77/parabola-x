@@ -13,7 +13,7 @@
 #define Gravity  1980//9.9
 #define DPixelTo 28
 
-#define LAYERMOVESPEED 480.0
+#define LAYERMOVESPEED 720
 GameMainLayer::GameMainLayer():
 moveXDistance(0)
 {
