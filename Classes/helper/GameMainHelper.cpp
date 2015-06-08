@@ -108,7 +108,7 @@ Sprite* GameMainHelper::getCollectSp(){
         return m_curHeroPost;
 }
 Point GameMainHelper::addPosts(float perPointX){
-    MonsterSpile* monspile = MonsterSpile::create(0);
+    MonsterSpile* monspile = MonsterSpile::create(m_curBgIndex);
   
     monspile->setAnchorPoint(Vec2(0,1));
     //m_Layer->addChild(monspile);
@@ -346,11 +346,15 @@ void GameMainHelper::startGame(){
 
 }
 void GameMainHelper::initGameStartData(){
-    int nextBgIndex = m_curBgIndex;
-    while (nextBgIndex == m_curBgIndex) {
-        nextBgIndex = rand()%(5);
+    if(m_gameStatus  != Tag_None){
+        int nextBgIndex = m_curBgIndex;
+        while (nextBgIndex == m_curBgIndex) {
+            nextBgIndex = rand()%(5);
+        }
+        m_curBgIndex = nextBgIndex;
     }
-    m_curBgIndex = nextBgIndex;
+    
+    
     if (m_playTimes == -1) {
         m_playTimes = UserDefault::getInstance()->getIntegerForKey(PLAYTIME, 0);
         m_playTimes+=1;

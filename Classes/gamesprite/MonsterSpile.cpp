@@ -13,8 +13,9 @@ MonsterSpile::MonsterSpile():drawNode(NULL){
 MonsterSpile::~MonsterSpile(){
 }
 std::string MonsterSpile::getspriteFileName(int type){
-    
-    return "game_column0.png";
+ 
+    __String* str = __String::createWithFormat("game_column%d.png",type);
+    return str->getCString();
 }
 MonsterSpile* MonsterSpile::create(int spileType){
     std::string fileName = getspriteFileName(spileType);
