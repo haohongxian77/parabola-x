@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">GwsJump</string>
+    <string name="app_name">NinjaHopFrog</string>
     <!-- sina  start -->
     <string name="weibosdk_toast_share_success">分享成功</string>
     <string name="weibosdk_toast_share_failed">分享失败</string>
