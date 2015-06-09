@@ -147,7 +147,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
             break;
         case frogTakeoff:
             ac= Animate::create(ani) ;
-            ani->setDelayPerUnit(0.5);
+            ani->setDelayPerUnit(0.2);
             
             runAction(RepeatForever::create(ac));
             break;
