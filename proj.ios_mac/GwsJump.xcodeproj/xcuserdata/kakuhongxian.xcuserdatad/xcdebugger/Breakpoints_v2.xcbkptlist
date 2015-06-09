@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/helper/GameMainHelper.cpp"
-            timestampString = "454148355.537561"
+            timestampString = "455341572.715989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "225"
-            endingLineNumber = "225"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
             landmarkName = "GameMainHelper::updateHelper(float dt)"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "../Classes/gamelayer/GameMainLayer.cpp"
-            timestampString = "454155525.201269"
+            timestampString = "455037270.273599"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "193"
-            endingLineNumber = "193"
+            startingLineNumber = "226"
+            endingLineNumber = "226"
             landmarkName = "GameMainLayer::draw(Renderer *renderer, const Mat4 &amp;transform, uint32_t flags)"
             landmarkType = "5">
             <Locations>
@@ -73,14 +73,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Classes/gamesprite/TouchNode.cpp"
-            timestampString = "454145455.348853"
+            filePath = "../Classes/helper/GameMainHelper.cpp"
+            timestampString = "455470786.217078"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
-            landmarkName = "TouchNode::setPos(Touch * touchPoint, Point heroP)"
-            landmarkType = "5">
+            startingLineNumber = "486"
+            endingLineNumber = "486">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
