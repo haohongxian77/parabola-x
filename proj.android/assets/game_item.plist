@@ -319,7 +319,7 @@
             <key>game_column4.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{1356,1924},{70,566}}</string>
+                <string>{{1356,1852},{70,566}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -508,7 +508,7 @@
             <key>size</key>
             <string>{2048,2048}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:b264547e5df8ed4ff98404b800370cc1:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:902038304be05650acf6a22d41de5a86:1/1$</string>
             <key>textureFileName</key>
             <string>game_item.png</string>
         </dict>

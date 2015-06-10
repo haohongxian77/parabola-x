@@ -32,7 +32,7 @@ using namespace cocos2d;
 #define JUMPSTART_0 "sound/04_0.mp3"
 #define JUMPSTART_1 "sound/04_1.mp3"
 #define JUMPOVER "sound/05.wav"
-#define HEROOVER "sound/06.mp3"
+#define HEROOVER "sound/06.wav"
 #define HEROSTATIC "sound/07.ogg"
 #define GAMEOVER "sound/08.mp3"
 
