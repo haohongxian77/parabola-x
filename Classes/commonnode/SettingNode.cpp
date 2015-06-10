@@ -83,7 +83,7 @@ void SettingNode::initMenu(){
     item3->setAnchorPoint(Vec2(0.49,0.7));
     item3->setPosition(Vec2(size.width/2, size.height/4));
     
-    auto item4 = HMenu::create("home_1.png","home_2.png", CC_CALLBACK_1(SettingNode::menuHome, this));
+    auto item4 = HMenu::create("backbtn_1.png","backbtn_2.png", CC_CALLBACK_1(SettingNode::menuHome, this));
     Size winSize = Director::getInstance()->getWinSize();
     item4->setAnchorPoint(Vec2(0.5,0.5));
     item4->setPosition(Vec2(-size.width/12, size.height+item4->getContentSize().height));

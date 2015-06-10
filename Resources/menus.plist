@@ -4,6 +4,32 @@
     <dict>
         <key>frames</key>
         <dict>
+            <key>backbtn_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{519,311},{103,103}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{103,103}}</string>
+                <key>sourceSize</key>
+                <string>{103,103}</string>
+            </dict>
+            <key>backbtn_2.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{256,186},{124,124}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{124,124}}</string>
+                <key>sourceSize</key>
+                <string>{124,124}</string>
+            </dict>
             <key>guild_arrow.png</key>
             <dict>
                 <key>frame</key>
@@ -20,7 +46,7 @@
             <key>home_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{256,311},{103,103}}</string>
+                <string>{{644,262},{103,103}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -46,7 +72,7 @@
             <key>hop_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{256,186},{123,123}}</string>
+                <string>{{519,186},{123,123}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,7 +280,7 @@
             <key>share_fb.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{941,320},{71,71}}</string>
+                <string>{{822,262},{71,71}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -267,7 +293,7 @@
             <key>share_fb1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{781,262},{85,85}}</string>
+                <string>{{256,399},{85,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +306,7 @@
             <key>share_qq.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{868,320},{71,71}}</string>
+                <string>{{749,262},{71,71}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -293,7 +319,7 @@
             <key>share_qq1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{694,262},{85,85}}</string>
+                <string>{{256,312},{85,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -319,7 +345,7 @@
             <key>share_wx1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{607,186},{85,85}}</string>
+                <string>{{393,399},{85,85}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -345,7 +371,7 @@
             <key>share_xl1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{519,186},{85,86}}</string>
+                <string>{{393,312},{85,86}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -391,7 +417,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:fe9b243032a9305c9f9bf63432fed80b:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:c176834d7e71163e3adbc550b6c9bdf8:1/1$</string>
             <key>textureFileName</key>
             <string>menus.png</string>
         </dict>
