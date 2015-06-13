@@ -7,6 +7,7 @@
 //
 
 #include "ParticleSystemX.h"
+#define acTag 101
 ParticleSystemX::ParticleSystemX(){
 }
 ParticleSystemX::~ParticleSystemX(){
@@ -20,14 +21,22 @@ bool ParticleSystemX::init(){
     }
 }
 void ParticleSystemX::showFristParticle(){
-     emitter1 = ParticleSystemQuad::create("game_pa_highestscore.plist");
-  //  emitter1->setStartColor(Color4F(1,0,0,1));
-    emitter2 = ParticleSystemQuad::create("game_pa_highestscore.plist");
-  //  emitter2->setStartColor(Color4F(0,1,0,1));
-     emitter3 = ParticleSystemQuad::create("game_pa_highestscore.plist");
-   // emitter3->setStartColor(Color4F(0,0,1,1));
-    
     auto s = Director::getInstance()->getWinSize();
+    spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    spFront->setPosition(s.width/2,s.height/1.25);
+    addChild(spFront);
+    FadeOut * ac = FadeOut::create(2);
+    ac->setTag(acTag);
+    spFront->runAction(ac);
+    
+     emitter1 = ParticleSystemQuad::create("game_pa_highestscore.plist");
+    emitter2 = ParticleSystemQuad::create("game_pa_highestscore.plist");
+ 
+     emitter3 = ParticleSystemQuad::create("game_pa_highestscore.plist");
+ 
+    
+    
     
     emitter1->setPosition(Vec2( s.width/1.25f, s.height/1.25));
     emitter2->setPosition(Vec2( s.width/2, s.height/1.25));
@@ -46,6 +55,12 @@ void ParticleSystemX::restartParticle(){
     emitter1->resetSystem();
     emitter2->resetSystem();
     emitter3->resetSystem();
+    
+    spFront->setOpacity(255);
+    spFront->stopActionByTag(acTag);
+    FadeOut * ac = FadeOut::create(2);
+    ac->setTag(acTag);
+    spFront->runAction(ac);
 }
 void ParticleSystemX::showSecParticle(){
 }
