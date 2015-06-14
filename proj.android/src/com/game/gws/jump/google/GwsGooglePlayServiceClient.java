@@ -17,6 +17,7 @@ import com.game.gws.jump.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.plus.Plus;
 import com.google.example.games.basegameutils.BaseGameUtils;
 
@@ -174,6 +175,8 @@ public class GwsGooglePlayServiceClient implements
 				// ToastClient.getInstance().showToastShort(
 				// R.string.signin_other_error);
 			}
+		} else if (resultCode == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
+			mGoogleApiClient.disconnect();
 		}
 	}
 
