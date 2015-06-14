@@ -60,6 +60,7 @@ public class TencentClient {
 	 *            -1,分享本地图片;1,分享截屏图片
 	 */
 	public void shareImg(final int status, final String filePath) {
+
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -98,8 +99,7 @@ public class TencentClient {
 					public void onError(UiError error) {
 						// TODO Auto-generated method stub
 						Toast.makeText(mActivity.getApplicationContext(),
-								"onError:" + error.errorMessage,
-								Toast.LENGTH_SHORT).show();
+								error.errorMessage, Toast.LENGTH_SHORT).show();
 					}
 
 					@Override

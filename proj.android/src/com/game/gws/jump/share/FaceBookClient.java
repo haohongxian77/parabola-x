@@ -8,23 +8,30 @@
  */
 package com.game.gws.jump.share;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.TextUtils;
 import android.util.Log;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.share.ShareApi;
 import com.facebook.share.Sharer;
 import com.facebook.share.Sharer.Result;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.game.gws.jump.R;
-import com.game.gws.jump.system.MyApp;
 
 /**
  * @author czj
@@ -38,10 +45,17 @@ public class FaceBookClient {
 	private Activity mActivity;
 	private CallbackManager callbackManager;
 	private ShareDialog shareDialog;
+	// private PendingAction pendingAction = PendingAction.NONE;
+	private boolean canPresentShareDialog;
 	private boolean canPresentShareDialogWithPhotos;
+	private static final String PERMISSION = "publish_actions";
+	private int curStatus = -10;
+	private String curFilePath;
 
 	public static FaceBookClient getInstance() {
+		Log.e(TAG, "getInstance");
 		if (INSTANCE == null) {
+			Log.e(TAG, "getInstance  new");
 			INSTANCE = new FaceBookClient();
 		}
 		return INSTANCE;
@@ -53,8 +67,9 @@ public class FaceBookClient {
 	}
 
 	public void registerApp(Activity mActivity) {
+		Log.e(TAG, "registerApp");
 		this.mActivity = mActivity;
-		FacebookSdk.sdkInitialize(MyApp.getInstance());
+		FacebookSdk.sdkInitialize(mActivity.getApplicationContext());
 		callbackManager = CallbackManager.Factory.create();
 		shareDialog = new ShareDialog(mActivity);
 		shareDialog.registerCallback(callbackManager,
@@ -63,24 +78,52 @@ public class FaceBookClient {
 					@Override
 					public void onSuccess(Result result) {
 						// TODO Auto-generated method stub
-						Log.d(TAG, "facebook onSuccess" + result.toString());
 					}
 
 					@Override
 					public void onError(FacebookException error) {
 						// TODO Auto-generated method stub
-						Log.d(TAG, "facebook onError" + error.getMessage());
+						ToastClient.getInstance().showToastLongOutUiThread(
+								"facebook error:" + error.getMessage());
 					}
 
 					@Override
 					public void onCancel() {
 						// TODO Auto-generated method stub
-						Log.d(TAG, "facebook onCancel");
+						ToastClient.getInstance().showToastLongOutUiThread(
+								"facebook cancel");
 					}
-				}, 9901);
+				});
 		// Can we present the share dialog for photos?
 		canPresentShareDialogWithPhotos = ShareDialog
 				.canShow(SharePhotoContent.class);
+		LoginManager.getInstance().registerCallback(callbackManager,
+				new FacebookCallback<LoginResult>() {
+
+					@Override
+					public void onSuccess(LoginResult result) {
+						// TODO Auto-generated method stub
+						Log.d(TAG, "facebook login onSuccess");
+						if (curStatus != -10 && !TextUtils.isEmpty(curFilePath)) {
+							shareImg(curStatus, curFilePath);
+						}
+
+					}
+
+					@Override
+					public void onError(FacebookException error) {
+						// TODO Auto-generated method stub
+						ToastClient.getInstance().showToastLongOutUiThread(
+								"facebook login onError");
+					}
+
+					@Override
+					public void onCancel() {
+						// TODO Auto-generated method stub
+						ToastClient.getInstance().showToastLongOutUiThread(
+								"facebook login onCancel");
+					}
+				});
 	}
 
 	/**
@@ -89,31 +132,100 @@ public class FaceBookClient {
 	 * @param imgAbsPath
 	 */
 	public void shareImg(final int status, final String filePath) {
+		Log.e(TAG, "shareImg");
+		// TODO Auto-generated method stub
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Bitmap image;
-				if (status == -1) {
-					image = BitmapFactory.decodeResource(
-							mActivity.getResources(), R.drawable.icon);
-				} else {
-					image = BitmapFactory.decodeFile(filePath);
+				if (!canPresentShareDialogWithPhotos) {
+					ToastClient.getInstance().showToastLongOutUiThread(
+							"Please install lastest version facebook first");
+					return;
 				}
-				// Bitmap image=BitmapFactory.decodeFile(imgAbsPath);
-				SharePhoto photo = new SharePhoto.Builder().setBitmap(image)
-						.build();
-				SharePhotoContent content = new SharePhotoContent.Builder()
-						.addPhoto(photo).build();
-				if (shareDialog.canShow(SharePhotoContent.class)) {
-					shareDialog.show(mActivity, content);
+				AccessToken accessToken = AccessToken.getCurrentAccessToken();
+				if (accessToken != null) {
+					// pendingAction = PendingAction.POST_PHOTO;
+					if (hasPublishPermission()) {
+						// We can do the action right away.
+						startToShare(status, filePath);
+						return;
+					} else {
+						// We need to get new permissions, then complete the
+						// action when
+						// we get called back.
+						LoginManager.getInstance().logInWithPublishPermissions(
+								mActivity, Arrays.asList(PERMISSION));
+						return;
+					}
+				}
+
+				if (canPresentShareDialogWithPhotos) {
+					// pendingAction = PendingAction.POST_PHOTO;
+					startToShare(status, filePath);
 				}
 			}
 		});
 	}
 
+	private boolean hasPublishPermission() {
+		Log.e(TAG, "hasPublishPermission");
+		AccessToken accessToken = AccessToken.getCurrentAccessToken();
+		return accessToken != null
+				&& accessToken.getPermissions().contains("publish_actions");
+	}
+
+	private void startToShare(final int status, final String filePath) {
+		Log.e(TAG, "startToShare");
+		curStatus = status;
+		curFilePath = filePath;
+		Bitmap image;
+		if (status == -1) {
+			image = BitmapFactory.decodeResource(mActivity.getResources(),
+					R.drawable.icon);
+		} else {
+			image = BitmapFactory.decodeFile(filePath);
+		}
+		SharePhoto sharePhoto = new SharePhoto.Builder().setBitmap(image)
+				.build();
+		ArrayList<SharePhoto> photos = new ArrayList<SharePhoto>();
+		photos.add(sharePhoto);
+
+		SharePhotoContent sharePhotoContent = new SharePhotoContent.Builder()
+				.setPhotos(photos).build();
+		if (canPresentShareDialogWithPhotos) {
+			shareDialog.show(sharePhotoContent);
+		} else if (hasPublishPermission()) {
+			ShareApi.share(sharePhotoContent,
+					new FacebookCallback<Sharer.Result>() {
+
+						@Override
+						public void onSuccess(Result result) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onError(FacebookException error) {
+							// TODO Auto-generated method stub
+
+						}
+
+						@Override
+						public void onCancel() {
+							// TODO Auto-generated method stub
+							ToastClient.getInstance().showToastLongOutUiThread(
+									"share cancel");
+						}
+					});
+		} else {
+			// pendingAction = PendingAction.POST_PHOTO;
+		}
+	}
+
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		Log.e(TAG, "onActivityResult");
 		callbackManager.onActivityResult(requestCode, resultCode, data);
 	}
 

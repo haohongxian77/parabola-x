@@ -31,8 +31,8 @@ public class GwsGooglePlayServiceClient implements
 	public static final String TAG = GwsGooglePlayServiceClient.class
 			.getSimpleName();
 	private static GwsGooglePlayServiceClient INSTANCE;
-	private static GoogleApiClient mGoogleApiClient;
-	private static Activity mActivity;
+	private GoogleApiClient mGoogleApiClient;
+	private Activity mActivity;
 	public static int SIGN_IN_REQ = 9001;
 	public static int LEADERBOARDER_SHOW_REQ = 9002;
 	private boolean mResolvingConnectionFailure = false;
@@ -72,16 +72,22 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void connect() {
-		mActivity.runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
-					mGoogleApiClient.connect();
-				}
-			}
-		});
+		Log.d(TAG,
+				"connect :" + mGoogleApiClient + "/"
+						+ !mGoogleApiClient.isConnected());
+		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
+			mGoogleApiClient.connect();
+		}
+		// mActivity.runOnUiThread(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// // TODO Auto-generated method stub
+		// if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
+		// mGoogleApiClient.connect();
+		// }
+		// }
+		// });
 
 	}
 
@@ -107,13 +113,14 @@ public class GwsGooglePlayServiceClient implements
 			public void run() {
 				// TODO Auto-generated method stub
 				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-
+					Log.e(TAG, "commitScore" + score + "/commit");
 					Games.Leaderboards.submitScoreImmediate(
 							mGoogleApiClient,
 							mActivity.getApplicationContext().getString(
 									R.string.leaderboard_worldrank), score);
 					// return true;
 				} else {
+					Log.e(TAG, "commitScore" + score + "/connect");
 					curScore = score;
 					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT;
 					connect();
@@ -163,6 +170,9 @@ public class GwsGooglePlayServiceClient implements
 				// could not be signed in, such as "Unable to sign in."
 				BaseGameUtils.showActivityResultError(mActivity, requestCode,
 						resultCode, R.string.signin_other_error);
+				mGoogleApiClient.disconnect();
+				// ToastClient.getInstance().showToastShort(
+				// R.string.signin_other_error);
 			}
 		}
 	}
@@ -178,8 +188,8 @@ public class GwsGooglePlayServiceClient implements
 		// if the sign-in button was clicked or if auto sign-in is enabled,
 		// launch the sign-in flow
 		if (mSignInClicked || mAutoStartSignInflow) {
-			mAutoStartSignInflow = false;
-			mSignInClicked = false;
+			mAutoStartSignInflow = true;
+			mSignInClicked = true;
 			mResolvingConnectionFailure = true;
 
 			// Attempt to resolve the connection failure using BaseGameUtils.
