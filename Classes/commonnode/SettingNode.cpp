@@ -11,6 +11,7 @@
 #include "gamescene/GameMainScene.h"
 #include "helper/GameMainHelper.h"
 #include "audio/include/SimpleAudioEngine.h"
+#include "helper/HPlatformHelper.h"
 using namespace CocosDenshion;
 
 SettingNode::SettingNode():
@@ -128,6 +129,10 @@ void SettingNode::menuRank(Ref* obj){
     rankVisible->setVisible(!rankVisible->isVisible());
     GameMainHelper::getInstance()->setGoogleServer(rankVisible->isVisible());
     UserDefault::getInstance()->setBoolForKey(RANKKEY, rankVisible->isVisible());
+    if(rankVisible->isVisible()){
+        int hScore = UserDefault::getInstance()->getIntegerForKey(Highest, 0);
+        HPlatformHelper::getInstance()->commitScore(hScore);
+    }
 }
 void SettingNode::menuHome(cocos2d::Ref *obj){
     GameMainHelper::getInstance()->playSound(BTNCLICK);

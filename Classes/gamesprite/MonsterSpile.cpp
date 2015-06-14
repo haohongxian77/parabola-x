@@ -77,10 +77,16 @@ CollisionType MonsterSpile::getValid(Point prePoint,Point curPoint){
         curPoint.x = curPoint.x+1;
     }
     
-    if (Vec2::isSegmentIntersect(prePoint, curPoint, this->getPosition(), Point(this->getPositionX(),this->getPositionY()-this->getContentSize().height)) ) {
+    if (Vec2::isSegmentIntersect(prePoint, curPoint,
+                                 this->getPosition(),
+        Point(this->getPositionX(),
+              this->getPositionY()-this->getContentSize().height)) ) {
         return Collision_Dead;
         
-    }else if(Vec2::isSegmentIntersect(prePoint, curPoint, this->getPosition(), Point(this->getPositionX()+this->getContentSize().width,this->getPositionY())
+    }else if(Vec2::isSegmentIntersect(prePoint, curPoint,
+                                      Point( this->getPositionX()-5,this->getPositionY()),
+    Point(this->getPositionX()+this->getContentSize().width+5,
+          this->getPositionY())
         )
         ){
         return Collision_valid;
