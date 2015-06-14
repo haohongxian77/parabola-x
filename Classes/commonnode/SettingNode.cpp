@@ -86,7 +86,7 @@ void SettingNode::initMenu(){
     auto item4 = HMenu::create("backbtn_1.png","backbtn_2.png", CC_CALLBACK_1(SettingNode::menuHome, this));
     Size winSize = Director::getInstance()->getWinSize();
     item4->setAnchorPoint(Vec2(0.5,0.5));
-    item4->setPosition(Vec2(-size.width/12, size.height+item4->getContentSize().height));
+    item4->setPosition(Vec2(-size.width/12, size.height+item4->getContentSize().height*3/4));
     
     Menu* m_menu = Menu::create(item1, item2,item3,item4, nullptr);
     bg->addChild(m_menu);

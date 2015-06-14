@@ -73,6 +73,22 @@ public class ToastClient {
 
 	}
 
+	public void showToastLongOutUiThread(final String text) {
+		// if (!isTopActivity(mActivity, packageName)) {
+		// return;
+		// }
+		if (toast == null) {
+			if (mActivity != null) {
+				toast = Toast.makeText(mActivity, text, Toast.LENGTH_SHORT);
+			}
+		}
+		toast.setText(text);
+		if (version <= MAX_NEED_CANCEL_VERSION) {
+			toast.cancel();
+		}
+		toast.show();
+	}
+
 	public void showToastShort(final String text) {
 		mActivity.runOnUiThread(new Runnable() {
 
@@ -82,6 +98,49 @@ public class ToastClient {
 				if (!isTopActivity(mActivity, packageName)) {
 					return;
 				}
+				if (toast == null) {
+					if (mActivity != null) {
+						toast = Toast.makeText(mActivity, text,
+								Toast.LENGTH_SHORT);
+					}
+				}
+				toast.setText(text);
+				if (version <= MAX_NEED_CANCEL_VERSION) {
+					toast.cancel();
+				}
+				toast.show();
+			}
+		});
+
+	}
+
+	public void showToastShortOutUiThread(final String text) {
+		if (!isTopActivity(mActivity, packageName)) {
+			return;
+		}
+		if (toast == null) {
+			if (mActivity != null) {
+				toast = Toast.makeText(mActivity, text, Toast.LENGTH_SHORT);
+			}
+		}
+		toast.setText(text);
+		if (version <= MAX_NEED_CANCEL_VERSION) {
+			toast.cancel();
+		}
+		toast.show();
+
+	}
+
+	public void showToastShort(final int textRes) {
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (!isTopActivity(mActivity, packageName)) {
+					return;
+				}
+				String text = mActivity.getResources().getString(textRes);
 				if (toast == null) {
 					if (mActivity != null) {
 						toast = Toast.makeText(mActivity, text,
