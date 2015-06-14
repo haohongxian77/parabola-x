@@ -25,7 +25,7 @@ using namespace CocosDenshion;
 #define MAX_TOUCH_H 7 //  抛物线点得最高点
 #define MIN_TOUCH_H 0.5f  //  抛物线点 距离起始点 最小的距离差
 
-#define PLAYTIME "playGameTime"
+//#define PLAYTIME "playGameTime"
 #define SCOREADDTION  1.5
 GameMainHelper* GameMainHelper::mainHelper = NULL;
 
@@ -72,10 +72,11 @@ void GameMainHelper::initDate(){
     m_posts = __Array::create();
     m_posts->retain();
     
+    m_playTimes = 0;
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
     m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
     m_sound = UserDefault::getInstance()->getBoolForKey(SOUNDKEY, true);
-    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, false);
+    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, true);
     
 }
 void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY){
@@ -315,15 +316,17 @@ void GameMainHelper::gameOver(){
     m_Layer->setMoveXDistance(0,0);
     m_heroPaths.clear();
     m_heroPathIndex = 0;
+    m_playTimes ++;
     showFullAd();
 }
 void GameMainHelper::showFullAd(){
     
+    time_t t= time(NULL);
     int randNum ;
     if (m_playTimes < 4) {
-        randNum = rand()%(3);
+        randNum = 1;
     }else{
-        randNum = rand()%(2);
+        randNum = t%(3);
     }
     if (randNum == 0) {
         HPlatformHelper::getInstance()->showFullAd();
@@ -354,12 +357,6 @@ void GameMainHelper::initGameStartData(){
         m_curBgIndex = nextBgIndex;
     }
     
-    
-    if (m_playTimes == -1) {
-        m_playTimes = UserDefault::getInstance()->getIntegerForKey(PLAYTIME, 0);
-        m_playTimes+=1;
-        UserDefault::getInstance()->setIntegerForKey(PLAYTIME, m_playTimes);
-    }
 }
 void GameMainHelper::changePostsSprite(){
     for (int i=0; i<m_posts->count(); i++) {
