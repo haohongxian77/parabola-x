@@ -27,6 +27,8 @@ public:
     ParticleSystemQuad* emitter1;
     ParticleSystemQuad* emitter2;
     ParticleSystemQuad* emitter3;
+private:
+    Sprite* spFront;
     
 };
 
