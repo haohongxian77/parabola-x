@@ -75,7 +75,7 @@ void MainLayer::onEnter(){
     this->runAction(seq);
 }
 void MainLayer::onExit(){
-    _eventDispatcher->removeEventListenersForTarget(this);
+    
 }
 
 void MainLayer::initBg(){
@@ -133,22 +133,32 @@ void MainLayer::removeThisCallBack(){
     
     this->removeFromParentAndCleanup(true);
 }
+void MainLayer::update(float dt){
+    Size winSize = Director::getInstance()->getWinSize();
+    if (this->getPositionY()>winSize.height/3) {
+        _eventDispatcher->removeEventListenersForTarget(this);
+        unscheduleUpdate();
+    }
+}
 void MainLayer::callback(){
     
     GameMainHelper::getInstance()->startGame();
     this->stopAllActions();
+    
     Size winSize = Director::getInstance()->getWinSize();
     MoveTo* moveTo2 = MoveTo::create(0.2f,
                                      Point(
                                            this->getPositionX(),
                                            -70));
-    MoveTo* moveTo = MoveTo::create(0.5f,
+    MoveTo* moveTo = MoveTo::create(0.4f,
                                     Point(
                                           this->getPositionX(),
-                                          winSize.height));
+                                          winSize.height*7/8));
     EaseSineOut* easeBack = EaseSineOut::create(moveTo);
-    Sequence* seq = Sequence::create(moveTo2,easeBack,DelayTime::create(0.5f),CallFunc::create(CC_CALLBACK_0(MainLayer::removeThisCallBack, this)), NULL);
+    
+    Sequence* seq = Sequence::create(moveTo2,easeBack,DelayTime::create(0.01f),CallFunc::create(CC_CALLBACK_0(MainLayer::removeThisCallBack, this)), NULL);
     this->runAction(seq);
+    scheduleUpdate();
 
     
 }
