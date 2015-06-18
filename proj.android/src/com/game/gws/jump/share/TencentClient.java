@@ -130,9 +130,9 @@ public class TencentClient {
 	 * @param data
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == 0 && resultCode == 0) {
-			ToastClient.getInstance().showToastLong("qq login cancel");
-		}
+		// if (requestCode == 0 && resultCode == 0) {
+		// ToastClient.getInstance().showToastLong("qq login cancel");
+		// }
 		if (null != mTencent) {
 			mTencent.onActivityResult(requestCode, resultCode, data);
 		}

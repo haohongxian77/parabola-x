@@ -124,24 +124,15 @@ public class SinaClient {
 		ClientType.getInstance().setCurType(CurrentType.SINA);
 		curStatus = status;
 		curFilePath = filePath;
-		mActivity.runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-
-				Oauth2AccessToken accessToken = AccessTokenKeeper
-						.readAccessToken(mActivity.getApplicationContext());
-				String token = "";
-				if (accessToken != null && !accessToken.isSessionValid()) {
-					token = accessToken.getToken();
-					start2Share(curStatus, curFilePath, token);
-				} else {
-					mSsoHandler.authorize(new AuthListener());
-				}
-
-			}
-		});
+		Oauth2AccessToken accessToken = AccessTokenKeeper
+				.readAccessToken(mActivity.getApplicationContext());
+		String token = "";
+		if (accessToken != null && accessToken.isSessionValid()) {
+			token = accessToken.getToken();
+			start2Share(curStatus, curFilePath, token);
+		} else {
+			mSsoHandler.authorize(new AuthListener());
+		}
 
 	}
 
@@ -177,7 +168,7 @@ public class SinaClient {
 		// 用transaction唯一标识一个请求
 		request.transaction = String.valueOf(System.currentTimeMillis());
 		request.multiMessage = weiboMessage;
-
+		// mWeiboShareAPI.sendRequest(arg0, arg1, arg2, arg3, arg4)
 		mWeiboShareAPI.sendRequest(mActivity, request, mAuthInfo, token,
 				new WeiboAuthListener() {
 
@@ -192,14 +183,14 @@ public class SinaClient {
 								.parseAccessToken(bundle);
 						AccessTokenKeeper.writeAccessToken(
 								mActivity.getApplicationContext(), newToken);
-						Toast.makeText(
-								mActivity.getApplicationContext(),
-								"onAuthorizeComplete token = "
-										+ newToken.getToken(), 0).show();
+						ToastClient.getInstance().showToastShortOutUiThread(
+								"share success");
 					}
 
 					@Override
 					public void onCancel() {
+						ToastClient.getInstance().showToastShortOutUiThread(
+								"share cancel");
 					}
 				});
 	}
