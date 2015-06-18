@@ -20,6 +20,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.game.gws.jump.R;
+import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.ShareUtil.ScreenShotType;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
@@ -69,6 +70,7 @@ public class WxClient {
 	 * @param imgAbsPath
 	 */
 	public void shareImg(final int status, final String filePath) {
+		ClientType.getInstance().setCurType(CurrentType.WX);
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -191,7 +193,6 @@ public class WxClient {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		return result;
 	}
 

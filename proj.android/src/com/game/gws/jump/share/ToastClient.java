@@ -54,9 +54,9 @@ public class ToastClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if (!isTopActivity(mActivity, packageName)) {
-					return;
-				}
+				// if (!isTopActivity(mActivity, packageName)) {
+				// return;
+				// }
 				if (toast == null) {
 					if (mActivity != null) {
 						toast = Toast.makeText(mActivity, text,
@@ -95,9 +95,9 @@ public class ToastClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if (!isTopActivity(mActivity, packageName)) {
-					return;
-				}
+				// if (!isTopActivity(mActivity, packageName)) {
+				// return;
+				// }
 				if (toast == null) {
 					if (mActivity != null) {
 						toast = Toast.makeText(mActivity, text,
@@ -115,9 +115,9 @@ public class ToastClient {
 	}
 
 	public void showToastShortOutUiThread(final String text) {
-		if (!isTopActivity(mActivity, packageName)) {
-			return;
-		}
+		// if (!isTopActivity(mActivity, packageName)) {
+		// return;
+		// }
 		if (toast == null) {
 			if (mActivity != null) {
 				toast = Toast.makeText(mActivity, text, Toast.LENGTH_SHORT);
@@ -137,9 +137,9 @@ public class ToastClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if (!isTopActivity(mActivity, packageName)) {
-					return;
-				}
+				// if (!isTopActivity(mActivity, packageName)) {
+				// return;
+				// }
 				String text = mActivity.getResources().getString(textRes);
 				if (toast == null) {
 					if (mActivity != null) {

@@ -30,6 +30,7 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -37,6 +38,8 @@ import android.widget.RelativeLayout.LayoutParams;
 import com.facebook.appevents.AppEventsLogger;
 import com.game.gws.jump.google.AdsClient;
 import com.game.gws.jump.google.GwsGooglePlayServiceClient;
+import com.game.gws.jump.share.ClientType;
+import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.FaceBookClient;
 import com.game.gws.jump.share.SinaClient;
 import com.game.gws.jump.share.TencentClient;
@@ -128,30 +131,46 @@ public class AppActivity extends Cocos2dxActivity implements
 	protected void onNewIntent(Intent intent) {
 		// TODO Auto-generated method stub
 		super.onNewIntent(intent);
-		SinaClient.getInstance().handleWeiboResponse(intent, this);
+		if (ClientType.getInstance().getCurType() == CurrentType.SINA) {
+			SinaClient.getInstance().handleWeiboResponse(intent, this);
+		}
+
 	}
 
 	@Override
 	public void onResponse(BaseResponse arg0) {
 		// TODO Auto-generated method stub
-		SinaClient.getInstance().onResponse(arg0);
+		if (ClientType.getInstance().getCurType() == CurrentType.SINA) {
+			SinaClient.getInstance().onResponse(arg0);
+		}
 	}
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
+		Log.e("onActivityResult", "onActivityResult");
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == GwsGooglePlayServiceClient.SIGN_IN_REQ
-				|| requestCode == GwsGooglePlayServiceClient.LEADERBOARDER_SHOW_REQ) {
-			GwsGooglePlayServiceClient.getInstance().onActivityResult(
-					requestCode, resultCode, data);
-		} else {
-			TencentClient.getInstance().onActivityResult(requestCode,
-					resultCode, data);
+		switch (ClientType.getInstance().getCurType()) {
+		case SINA:
+			SinaClient.getInstance().onActivityResult(requestCode, resultCode,
+					data);
+			break;
+		case WX:
+			break;
+		case FACEBOOK:
 			FaceBookClient.getInstance().onActivityResult(requestCode,
 					resultCode, data);
-		}
+			break;
+		case TENCENT:
+			TencentClient.getInstance().onActivityResult(requestCode,
+					resultCode, data);
+			break;
 
+		default:
+			GwsGooglePlayServiceClient.getInstance().onActivityResult(
+					requestCode, resultCode, data);
+			break;
+		}
 	}
 
 	@Override
@@ -171,5 +190,4 @@ public class AppActivity extends Cocos2dxActivity implements
 		// TODO Auto-generated method stub
 		return false;
 	}
-
 }

@@ -366,7 +366,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/commonnode/SettingN
  jni/../../Classes/helper/GameMainHelper.h \
  jni/../../Classes/gamesprite/MonsterSpile.h jni/platform/HHPlatform.h \
  jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h \
- jni/../../cocos2d/cocos/3d/../audio/include/Export.h
+ jni/../../cocos2d/cocos/3d/../audio/include/Export.h \
+ jni/../../Classes/helper/HPlatformHelper.h
 
 jni/../../Classes/commonnode/SettingNode.h:
 
@@ -1103,3 +1104,5 @@ jni/platform/HHPlatform.h:
 jni/../../cocos2d/cocos/3d/../audio/include/SimpleAudioEngine.h:
 
 jni/../../cocos2d/cocos/3d/../audio/include/Export.h:
+
+jni/../../Classes/helper/HPlatformHelper.h:
