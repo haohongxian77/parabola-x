@@ -51,6 +51,7 @@ private:
     
     GameMainLogoLayer* m_logoLayer;
     GameOverLayer* m_gameOverLayer;
+    void update(float dt);
 };
 
 #endif /* defined(__GWPJUMP__MainLayer__) */
