@@ -18,6 +18,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.game.gws.jump.R;
+import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.ShareUtil.ScreenShotType;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
@@ -30,6 +31,7 @@ import com.sina.weibo.sdk.api.share.WeiboShareSDK;
 import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.auth.Oauth2AccessToken;
 import com.sina.weibo.sdk.auth.WeiboAuthListener;
+import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.exception.WeiboException;
 
@@ -43,12 +45,16 @@ public class SinaClient {
 	private static SinaClient INSTANCE;
 	private Activity mActivity;
 	public final String APP_KEY_SINA = "3893042256"; // 应用的APP_KEY
-	public final String REDIRECT_URL_SINA = "http://www.sina.com";// 应用的回调页
+	public final String REDIRECT_URL_SINA = "http://open.weibo.com/apps/3893042256/info/advanced";// 应用的回调页
 	public final String SCOPE_SINA = // 应用申请的高级权限
 	"email,direct_messages_read,direct_messages_write,"
 			+ "friendships_groups_read,friendships_groups_write,statuses_to_me_read,"
 			+ "follow_app_official_microblog," + "invitation_write";
-	private static IWeiboShareAPI mWeiboShareAPI;
+	private IWeiboShareAPI mWeiboShareAPI;
+	private AuthInfo mAuthInfo;
+	private SsoHandler mSsoHandler;
+	private int curStatus;
+	private String curFilePath;
 
 	public static SinaClient getInstance() {
 		if (INSTANCE == null) {
@@ -65,6 +71,9 @@ public class SinaClient {
 		this.mActivity = mActivity;
 		mWeiboShareAPI = WeiboShareSDK.createWeiboAPI(mActivity, APP_KEY_SINA);
 		mWeiboShareAPI.registerApp();
+		mAuthInfo = new AuthInfo(mActivity, APP_KEY_SINA, REDIRECT_URL_SINA,
+				SCOPE_SINA);
+		mSsoHandler = new SsoHandler(mActivity, mAuthInfo);
 	}
 
 	/**
@@ -109,83 +118,125 @@ public class SinaClient {
 	 *            -1,本地图片;1,截屏
 	 * @param content
 	 */
-	public void shareImgAndContent(final int status, final String filePath) {
+	public void shareImgAndContent(int status, String filePath) {
 		Log.e(TAG, "shareImgAndContent  status:" + status);
 		// 1. 初始化微博的分享消息
+		ClientType.getInstance().setCurType(CurrentType.SINA);
+		curStatus = status;
+		curFilePath = filePath;
+		Oauth2AccessToken accessToken = AccessTokenKeeper
+				.readAccessToken(mActivity.getApplicationContext());
+		String token = "";
+		if (accessToken != null && accessToken.isSessionValid()) {
+			token = accessToken.getToken();
+			start2Share(curStatus, curFilePath, token);
+		} else {
+			mSsoHandler.authorize(new AuthListener());
+		}
 
-		mActivity.runOnUiThread(new Runnable() {
+	}
 
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				String content = mActivity.getString(R.string.challenge_me);
-				WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
-				if (!TextUtils.isEmpty(content)) {
-					weiboMessage.textObject = getTextObj(content);
-				}
-				Bitmap bitmap;
-				if (status == -1) {
-					bitmap = BitmapFactory.decodeResource(
-							mActivity.getResources(), R.drawable.icon);
-				} else {
-					bitmap = BitmapFactory.decodeFile(filePath);
-				}
-				boolean flag = ShareUtil.saveScreenShot(
-						status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-								: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
-				if (!flag) {
-					Toast.makeText(mActivity, R.string.share_sdcard_error,
-							Toast.LENGTH_SHORT).show();
-					return;
-				}
-				String imgAbsPath = ShareUtil
-						.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-								: ScreenShotType.SCORE_SCREEN_SHOT);
-				if (!TextUtils.isEmpty(imgAbsPath)) {
-					weiboMessage.imageObject = getImgObj(imgAbsPath);
-				}
-				// 2. 初始化从第三方到微博的消息请求
-				SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
-				// 用transaction唯一标识一个请求
-				request.transaction = String.valueOf(System.currentTimeMillis());
-				request.multiMessage = weiboMessage;
+	private void start2Share(int status, String filePath, String token) {
+		String content = mActivity.getString(R.string.challenge_me);
+		WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
+		if (!TextUtils.isEmpty(content)) {
+			weiboMessage.textObject = getTextObj(content);
+		}
+		Bitmap bitmap;
+		if (status == -1) {
+			bitmap = BitmapFactory.decodeResource(mActivity.getResources(),
+					R.drawable.icon);
+		} else {
+			bitmap = BitmapFactory.decodeFile(filePath);
+		}
+		boolean flag = ShareUtil.saveScreenShot(
+				status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+						: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
+		if (!flag) {
+			Toast.makeText(mActivity, R.string.share_sdcard_error,
+					Toast.LENGTH_SHORT).show();
+			return;
+		}
+		String imgAbsPath = ShareUtil
+				.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+						: ScreenShotType.SCORE_SCREEN_SHOT);
+		if (!TextUtils.isEmpty(imgAbsPath)) {
+			weiboMessage.imageObject = getImgObj(imgAbsPath);
+		}
+		// 2. 初始化从第三方到微博的消息请求
+		SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
+		// 用transaction唯一标识一个请求
+		request.transaction = String.valueOf(System.currentTimeMillis());
+		request.multiMessage = weiboMessage;
+		// mWeiboShareAPI.sendRequest(arg0, arg1, arg2, arg3, arg4)
+		mWeiboShareAPI.sendRequest(mActivity, request, mAuthInfo, token,
+				new WeiboAuthListener() {
 
-				AuthInfo authInfo = new AuthInfo(mActivity, APP_KEY_SINA,
-						REDIRECT_URL_SINA, SCOPE_SINA);
-				Oauth2AccessToken accessToken = AccessTokenKeeper
-						.readAccessToken(mActivity.getApplicationContext());
-				String token = "";
-				if (accessToken != null) {
-					token = accessToken.getToken();
-				}
-				mWeiboShareAPI.sendRequest(mActivity, request, authInfo, token,
-						new WeiboAuthListener() {
+					@Override
+					public void onWeiboException(WeiboException arg0) {
+					}
 
-							@Override
-							public void onWeiboException(WeiboException arg0) {
-							}
+					@Override
+					public void onComplete(Bundle bundle) {
+						// TODO Auto-generated method stub
+						Oauth2AccessToken newToken = Oauth2AccessToken
+								.parseAccessToken(bundle);
+						AccessTokenKeeper.writeAccessToken(
+								mActivity.getApplicationContext(), newToken);
+						ToastClient.getInstance().showToastShortOutUiThread(
+								"share success");
+					}
 
-							@Override
-							public void onComplete(Bundle bundle) {
-								// TODO Auto-generated method stub
-								Oauth2AccessToken newToken = Oauth2AccessToken
-										.parseAccessToken(bundle);
-								AccessTokenKeeper.writeAccessToken(
-										mActivity.getApplicationContext(),
-										newToken);
-								Toast.makeText(
-										mActivity.getApplicationContext(),
-										"onAuthorizeComplete token = "
-												+ newToken.getToken(), 0)
-										.show();
-							}
+					@Override
+					public void onCancel() {
+						ToastClient.getInstance().showToastShortOutUiThread(
+								"share cancel");
+					}
+				});
+	}
 
-							@Override
-							public void onCancel() {
-							}
-						});
-			}
-		});
+	/**
+	 * 当 SSO 授权 Activity 退出时，该函数被调用。
+	 * 
+	 * @see {@link Activity#onActivityResult}
+	 */
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// SSO 授权回调
+		// 重要：发起 SSO 登陆的 Activity 必须重写 onActivityResult
+		if (mSsoHandler != null) {
+			mSsoHandler.authorizeCallBack(requestCode, resultCode, data);
+		}
+	}
+
+	/**
+	 * 微博认证授权回调类。 1. SSO 授权时，需要在 {@link #onActivityResult} 中调用
+	 * {@link SsoHandler#authorizeCallBack} 后， 该回调才会被执行。 2. 非 SSO
+	 * 授权时，当授权结束后，该回调就会被执行。 当授权成功后，请保存该 access_token、expires_in、uid 等信息到
+	 * SharedPreferences 中。
+	 */
+	class AuthListener implements WeiboAuthListener {
+
+		@Override
+		public void onCancel() {
+			// TODO Auto-generated method stub
+			ToastClient.getInstance().showToastShort("新浪授权取消");
+		}
+
+		@Override
+		public void onComplete(Bundle bundle) {
+			// TODO Auto-generated method stub
+			Oauth2AccessToken newToken = Oauth2AccessToken
+					.parseAccessToken(bundle);
+			AccessTokenKeeper.writeAccessToken(
+					mActivity.getApplicationContext(), newToken);
+			start2Share(curStatus, curFilePath, newToken.getToken());
+		}
+
+		@Override
+		public void onWeiboException(WeiboException arg0) {
+			// TODO Auto-generated method stub
+
+		}
 
 	}
 

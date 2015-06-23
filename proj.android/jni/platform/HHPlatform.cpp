@@ -63,11 +63,13 @@ void HHPlatform::setVM(){
 
 	  jclass cls_AD = env->FindClass("com/game/gws/jump/google/AdsClient");
 	  m_ADClient = (jclass) env->NewGlobalRef(cls_AD);
+	  env->DeleteLocalRef(cls_AD);
 
 	  jclass cls_Toast = env->FindClass("com/game/gws/jump/share/ToastClient");
 	  m_Toast = (jclass) env->NewGlobalRef(cls_Toast);
+	  env->DeleteLocalRef(cls_Toast);
 
-	  env->DeleteLocalRef(cls_AD);
+
 
 }
 void HHPlatform::share(int shareType,int shareFrom,std::string filepath){

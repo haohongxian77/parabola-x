@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.game.gws.jump.R;
+import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.ShareUtil.ScreenShotType;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
@@ -60,7 +61,7 @@ public class TencentClient {
 	 *            -1,分享本地图片;1,分享截屏图片
 	 */
 	public void shareImg(final int status, final String filePath) {
-
+		ClientType.getInstance().setCurType(CurrentType.TENCENT);
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -129,6 +130,9 @@ public class TencentClient {
 	 * @param data
 	 */
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// if (requestCode == 0 && resultCode == 0) {
+		// ToastClient.getInstance().showToastLong("qq login cancel");
+		// }
 		if (null != mTencent) {
 			mTencent.onActivityResult(requestCode, resultCode, data);
 		}

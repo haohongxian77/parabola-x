@@ -32,6 +32,7 @@ import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.game.gws.jump.R;
+import com.game.gws.jump.share.ClientType.CurrentType;
 
 /**
  * @author czj
@@ -66,9 +67,11 @@ public class FaceBookClient {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void registerApp(Activity mActivity) {
+	public void registerApp(final Activity mActivity) {
 		Log.e(TAG, "registerApp");
 		this.mActivity = mActivity;
+
+		// TODO Auto-generated method stub
 		FacebookSdk.sdkInitialize(mActivity.getApplicationContext());
 		callbackManager = CallbackManager.Factory.create();
 		shareDialog = new ShareDialog(mActivity);
@@ -78,6 +81,7 @@ public class FaceBookClient {
 					@Override
 					public void onSuccess(Result result) {
 						// TODO Auto-generated method stub
+						Log.e(TAG, "Facebook分享成功返回");
 					}
 
 					@Override
@@ -124,6 +128,7 @@ public class FaceBookClient {
 								"facebook login onCancel");
 					}
 				});
+
 	}
 
 	/**
@@ -134,39 +139,35 @@ public class FaceBookClient {
 	public void shareImg(final int status, final String filePath) {
 		Log.e(TAG, "shareImg");
 		// TODO Auto-generated method stub
-		mActivity.runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (!canPresentShareDialogWithPhotos) {
-					ToastClient.getInstance().showToastLongOutUiThread(
-							"Please install lastest version facebook first");
-					return;
-				}
-				AccessToken accessToken = AccessToken.getCurrentAccessToken();
-				if (accessToken != null) {
-					// pendingAction = PendingAction.POST_PHOTO;
-					if (hasPublishPermission()) {
-						// We can do the action right away.
-						startToShare(status, filePath);
-						return;
-					} else {
-						// We need to get new permissions, then complete the
-						// action when
-						// we get called back.
-						LoginManager.getInstance().logInWithPublishPermissions(
-								mActivity, Arrays.asList(PERMISSION));
-						return;
-					}
-				}
-
-				if (canPresentShareDialogWithPhotos) {
-					// pendingAction = PendingAction.POST_PHOTO;
-					startToShare(status, filePath);
-				}
+		ClientType.getInstance().setCurType(CurrentType.FACEBOOK);
+		// TODO Auto-generated method stub
+		if (!canPresentShareDialogWithPhotos) {
+			ToastClient.getInstance().showToastLongOutUiThread(
+					"Please install lastest version facebook first");
+			return;
+		}
+		AccessToken accessToken = AccessToken.getCurrentAccessToken();
+		if (accessToken != null) {
+			// pendingAction = PendingAction.POST_PHOTO;
+			if (hasPublishPermission()) {
+				// We can do the action right away.
+				startToShare(status, filePath);
+				return;
+			} else {
+				// We need to get new permissions, then complete the
+				// action when
+				// we get called back.
+				LoginManager.getInstance().logInWithPublishPermissions(
+						mActivity, Arrays.asList(PERMISSION));
+				return;
 			}
-		});
+		}
+
+		if (canPresentShareDialogWithPhotos) {
+			// pendingAction = PendingAction.POST_PHOTO;
+			startToShare(status, filePath);
+		}
+
 	}
 
 	private boolean hasPublishPermission() {
@@ -224,9 +225,11 @@ public class FaceBookClient {
 		}
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+	public void onActivityResult(final int requestCode, final int resultCode,
+			final Intent data) {
 		Log.e(TAG, "onActivityResult");
 		callbackManager.onActivityResult(requestCode, resultCode, data);
+
 	}
 
 }
