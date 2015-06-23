@@ -230,7 +230,7 @@ void GameMainLayer::draw(Renderer *renderer, const Mat4 &transform, uint32_t fla
         //Point point2 = movingPoints[i];
 //        DrawPrimitives::drawCircle(point1, 2, 0, 10, false);
 //        drawNode->drawCircle(point1,2, CC_DEGREES_TO_RADIANS(360), 100, true, Color4F(169,39,22,1));
-        drawNode->drawPoint(point1,5,Color4F(169,49,169,0.7));
+        drawNode->drawPoint(point1,3,Color4F(169,49,169,0.7));
     }
     
    
