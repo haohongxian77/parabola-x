@@ -165,10 +165,12 @@ public class AppActivity extends Cocos2dxActivity implements
 			TencentClient.getInstance().onActivityResult(requestCode,
 					resultCode, data);
 			break;
-
-		default:
+		case GOOGLE:
 			GwsGooglePlayServiceClient.getInstance().onActivityResult(
 					requestCode, resultCode, data);
+			break;
+
+		default:
 			break;
 		}
 	}

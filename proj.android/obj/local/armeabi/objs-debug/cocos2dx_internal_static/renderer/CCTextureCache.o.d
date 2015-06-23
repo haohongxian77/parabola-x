@@ -55,8 +55,8 @@ obj/local/armeabi/objs-debug/cocos2dx_internal_static/renderer/CCTextureCache.o:
  D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
  D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
  jni/../../cocos2d/cocos/./platform/CCImage.h \
- D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
  jni/../../cocos2d/cocos/./base/CCDirector.h \
  jni/../../cocos2d/cocos/./base/CCVector.h \
  jni/../../cocos2d/cocos/./2d/CCScene.h \
@@ -194,9 +194,9 @@ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/g
 
 jni/../../cocos2d/cocos/./platform/CCImage.h:
 
-D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
-
 D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack:
+
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
 
 jni/../../cocos2d/cocos/./base/CCDirector.h:
 

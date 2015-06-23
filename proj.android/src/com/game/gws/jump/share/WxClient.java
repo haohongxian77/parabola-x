@@ -40,8 +40,8 @@ public class WxClient {
 	public static final String TAG = WxClient.class.getSimpleName();
 	public static WxClient INSTANCE;
 	private final int THUMB_SIZE = 150;
-	public static final String APP_ID = "wx644a5864a554f4f2";
-	public final String APP_SECRET = "b7a42c91be34da26fd9f2843bf7d6371";
+	public static final String APP_ID = "wxe74c5c136661db09";
+	public final String APP_SECRET = "60b0d0c025bebcd2894c35ed10710160";
 	public final String APP_TRANSATION = "wx_transaction";
 	/** IWXAPI 是第三方app和微信通信的openapi接口 **/
 	private static IWXAPI iwxapi;

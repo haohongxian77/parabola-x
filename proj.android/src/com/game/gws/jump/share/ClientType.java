@@ -15,7 +15,7 @@ package com.game.gws.jump.share;
  */
 public class ClientType {
 	private static ClientType INSTANCE;
-	private CurrentType curType = null;
+	private CurrentType curType = CurrentType.NONE;
 
 	public CurrentType getCurType() {
 		return curType;
@@ -26,7 +26,7 @@ public class ClientType {
 	}
 
 	public enum CurrentType {
-		SINA, TENCENT, WX, FACEBOOK;
+		SINA, TENCENT, WX, FACEBOOK, GOOGLE, NONE;
 	}
 
 	public ClientType() {

@@ -14,6 +14,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.game.gws.jump.R;
+import com.game.gws.jump.share.ClientType;
+import com.game.gws.jump.share.ClientType.CurrentType;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -77,6 +79,7 @@ public class GwsGooglePlayServiceClient implements
 				"connect :" + mGoogleApiClient + "/"
 						+ !mGoogleApiClient.isConnected());
 		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
+			ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 			mGoogleApiClient.connect();
 		}
 		// mActivity.runOnUiThread(new Runnable() {
@@ -108,6 +111,7 @@ public class GwsGooglePlayServiceClient implements
 
 	public void commitScore(final int score) {
 		Log.e(TAG, "commitScore" + score);
+		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -134,6 +138,7 @@ public class GwsGooglePlayServiceClient implements
 
 	public void showLeaderBoards() {
 		Log.e(TAG, "showLeaderBoards------------");
+		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
