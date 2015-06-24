@@ -204,13 +204,15 @@ public class FaceBookClient {
 						@Override
 						public void onSuccess(Result result) {
 							// TODO Auto-generated method stub
-
+							ToastClient.getInstance().showToastLongOutUiThread(
+									"share success");
 						}
 
 						@Override
 						public void onError(FacebookException error) {
 							// TODO Auto-generated method stub
-
+							ToastClient.getInstance().showToastLongOutUiThread(
+									"error：" + error.getMessage());
 						}
 
 						@Override
