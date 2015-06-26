@@ -16,6 +16,7 @@ import android.util.Log;
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType;
 import com.game.gws.jump.share.ClientType.CurrentType;
+import com.game.gws.jump.ui.TransferActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
@@ -123,6 +124,7 @@ public class GwsGooglePlayServiceClient implements
 							mGoogleApiClient,
 							mActivity.getApplicationContext().getString(
 									R.string.leaderboard_worldrank), score);
+					TransferActivity.closeAct();
 					// return true;
 				} else {
 					Log.e(TAG, "commitScore" + score + "/connect");
@@ -155,6 +157,7 @@ public class GwsGooglePlayServiceClient implements
 													.getString(
 															R.string.leaderboard_worldrank)),
 							LEADERBOARDER_SHOW_REQ);
+					TransferActivity.closeAct();
 				} else {
 					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD;
 					connect();
@@ -183,6 +186,7 @@ public class GwsGooglePlayServiceClient implements
 		} else if (resultCode == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
 			mGoogleApiClient.disconnect();
 		}
+		TransferActivity.closeAct();
 	}
 
 	@Override
@@ -214,6 +218,7 @@ public class GwsGooglePlayServiceClient implements
 							.getString(R.string.signin_other_error))) {
 				mResolvingConnectionFailure = false;
 			}
+			TransferActivity.closeAct();
 		}
 
 		// Put code here to display the sign-in button

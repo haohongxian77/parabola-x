@@ -33,6 +33,7 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType.CurrentType;
+import com.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj
@@ -81,21 +82,25 @@ public class FaceBookClient {
 					@Override
 					public void onSuccess(Result result) {
 						// TODO Auto-generated method stub
-						Log.e(TAG, "Facebook分享成功返回");
+						ToastClient.getInstance().showToastShort(
+								R.string.share_success);
+						TransferActivity.closeAct();
 					}
 
 					@Override
 					public void onError(FacebookException error) {
 						// TODO Auto-generated method stub
-						ToastClient.getInstance().showToastLongOutUiThread(
-								"facebook error:" + error.getMessage());
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_fail);
 					}
 
 					@Override
 					public void onCancel() {
 						// TODO Auto-generated method stub
-						ToastClient.getInstance().showToastLongOutUiThread(
-								"facebook cancel");
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_cancel);
 					}
 				});
 		// Can we present the share dialog for photos?
@@ -108,6 +113,7 @@ public class FaceBookClient {
 					public void onSuccess(LoginResult result) {
 						// TODO Auto-generated method stub
 						Log.d(TAG, "facebook login onSuccess");
+
 						if (curStatus != -10 && !TextUtils.isEmpty(curFilePath)) {
 							shareImg(curStatus, curFilePath);
 						}
@@ -117,15 +123,17 @@ public class FaceBookClient {
 					@Override
 					public void onError(FacebookException error) {
 						// TODO Auto-generated method stub
-						ToastClient.getInstance().showToastLongOutUiThread(
-								"facebook login onError");
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_fail);
 					}
 
 					@Override
 					public void onCancel() {
 						// TODO Auto-generated method stub
-						ToastClient.getInstance().showToastLongOutUiThread(
-								"facebook login onCancel");
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_cancel);
 					}
 				});
 
@@ -142,8 +150,7 @@ public class FaceBookClient {
 		ClientType.getInstance().setCurType(CurrentType.FACEBOOK);
 		// TODO Auto-generated method stub
 		if (!canPresentShareDialogWithPhotos) {
-			ToastClient.getInstance().showToastLongOutUiThread(
-					"Please install lastest version facebook first");
+			ToastClient.getInstance().showToastShort(R.string.install_facebook);
 			return;
 		}
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
@@ -204,22 +211,25 @@ public class FaceBookClient {
 						@Override
 						public void onSuccess(Result result) {
 							// TODO Auto-generated method stub
-							ToastClient.getInstance().showToastLongOutUiThread(
-									"share success");
+							ToastClient.getInstance().showToastShort(
+									R.string.share_success);
+							TransferActivity.closeAct();
 						}
 
 						@Override
 						public void onError(FacebookException error) {
 							// TODO Auto-generated method stub
-							ToastClient.getInstance().showToastLongOutUiThread(
-									"error：" + error.getMessage());
+							TransferActivity.closeAct();
+							ToastClient.getInstance().showToastShort(
+									R.string.share_fail);
 						}
 
 						@Override
 						public void onCancel() {
 							// TODO Auto-generated method stub
-							ToastClient.getInstance().showToastLongOutUiThread(
-									"share cancel");
+							TransferActivity.closeAct();
+							ToastClient.getInstance().showToastShort(
+									R.string.share_cancel);
 						}
 					});
 		} else {

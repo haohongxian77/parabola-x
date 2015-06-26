@@ -17,11 +17,11 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.ShareUtil.ScreenShotType;
+import com.game.gws.jump.ui.TransferActivity;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX.Resp;
@@ -78,8 +78,9 @@ public class WxClient {
 				// TODO Auto-generated method stub
 				String content = mActivity.getString(R.string.challenge_me);
 				if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
-					Toast.makeText(mActivity, "请安装最新版微信后重试", Toast.LENGTH_LONG)
-							.show();
+					ToastClient.getInstance().showToastShort(
+							R.string.install_wx);
+					TransferActivity.closeAct();
 					return;
 				}
 				Bitmap bitmap;
@@ -93,8 +94,8 @@ public class WxClient {
 						status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
 								: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
 				if (!flag) {
-					Toast.makeText(mActivity, R.string.share_sdcard_error,
-							Toast.LENGTH_LONG).show();
+					ToastClient.getInstance().showToastShort(
+							R.string.share_sdcard_error);
 					return;
 				}
 				String imgAbsPath = ShareUtil
@@ -149,8 +150,8 @@ public class WxClient {
 	 */
 	public void handleResp(BaseResp resp) {
 		if (null == resp) {// 失败
-			Toast.makeText(mActivity.getApplicationContext(), "分享失败",
-					Toast.LENGTH_LONG).show();
+			ToastClient.getInstance().showToastShort(R.string.share_fail);
+			TransferActivity.closeAct();
 			return;
 		}
 		String transation = resp.transaction;
@@ -162,20 +163,21 @@ public class WxClient {
 
 			switch (resp.errCode) {
 			case BaseResp.ErrCode.ERR_OK:
-				result = R.string.errcode_success;
+				result = R.string.share_success;
 				break;
 			case BaseResp.ErrCode.ERR_USER_CANCEL:
-				result = R.string.errcode_cancel;
+				result = R.string.share_cancel;
 				break;
 			case BaseResp.ErrCode.ERR_AUTH_DENIED:
-				result = R.string.errcode_deny;
+				result = R.string.share_fail;
 				break;
 			default:
 				result = R.string.errcode_unknown;
 				break;
 			}
+			ToastClient.getInstance().showToastShort(result);
+			TransferActivity.closeAct();
 
-			Toast.makeText(mActivity, result, Toast.LENGTH_LONG).show();
 		}
 	}
 
