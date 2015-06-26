@@ -82,8 +82,8 @@ public class FaceBookClient {
 					@Override
 					public void onSuccess(Result result) {
 						// TODO Auto-generated method stub
-						ToastClient.getInstance().showToastShort(
-								R.string.share_success);
+						// ToastClient.getInstance().showToastShort(
+						// R.string.share_success);
 						TransferActivity.closeAct();
 					}
 
@@ -211,8 +211,8 @@ public class FaceBookClient {
 						@Override
 						public void onSuccess(Result result) {
 							// TODO Auto-generated method stub
-							ToastClient.getInstance().showToastShort(
-									R.string.share_success);
+							// ToastClient.getInstance().showToastShort(
+							// R.string.share_success);
 							TransferActivity.closeAct();
 						}
 
