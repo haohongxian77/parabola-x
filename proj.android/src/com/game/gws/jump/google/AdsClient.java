@@ -80,6 +80,21 @@ public class AdsClient {
 		interstitial.setAdUnitId(AD_INSERT_00);
 		interstitial.loadAd(new AdRequest.Builder()
 				.addTestDevice(getDeviceId()).build());
+		interstitial.setAdListener(new AdListener() {
+			@Override
+			public void onAdLoaded() {
+				// TODO Auto-generated method stub
+				super.onAdLoaded();
+			}
+
+			@Override
+			public void onAdClosed() {
+				// TODO Auto-generated method stub
+				super.onAdClosed();
+				interstitial.loadAd(new AdRequest.Builder().addTestDevice(
+						getDeviceId()).build());
+			}
+		});
 	}
 
 	/**
@@ -91,6 +106,7 @@ public class AdsClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
+				Log.e(TAG, "interstitial.isLoaded():" + interstitial.isLoaded());
 				if (interstitial.isLoaded()) {
 					interstitial.show();
 				}

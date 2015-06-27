@@ -64,7 +64,7 @@ void GameMainLayer::inittestSp(){
     addChild(touNode,3);
     
     drawNode = DrawNode::create();
-    addChild(drawNode, 10);
+    addChild(drawNode, 1);
 }
 void GameMainLayer::reloadData(){
     params.clear();

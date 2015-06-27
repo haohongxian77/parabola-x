@@ -137,7 +137,7 @@ Point GameMainHelper::addPosts(float perPointX){
 //     //
 //    Point pos = Vec2(perPointX+x, y- spSize.height);
     monspile->setPosition(pos);
-    CCLOG("x ======%f   y =====%f",pos.x,pos.y);
+//    CCLOG("x ======%f   y =====%f",pos.x,pos.y);
     m_spilesNode->addChild(monspile);
     m_posts->addObject(monspile);
     return pos;
@@ -148,9 +148,9 @@ Point GameMainHelper::getNextPoint(Point perPoint){
     //获取抛物线参数
     std::vector<float> params = CalculateHelper::getPathParametersXABC(Vec2(0,0), Vec2(touPoint.x-perPoint.x,touPoint.y-perPoint.y));
     //下一个点的位置
-    CCLOG("参数＝＝＝＝＝%f＝＝＝%f＝＝＝%f",params[0],params[1],params[2]);
-    CCLOG("触摸点＝＝＝＝＝%f＝＝＝%f",touPoint.x,touPoint.y);
-    CCLOG("前一个点＝＝＝＝＝%f＝＝＝%f",perPoint.x,perPoint.y);
+//    CCLOG("参数＝＝＝＝＝%f＝＝＝%f＝＝＝%f",params[0],params[1],params[2]);
+//    CCLOG("触摸点＝＝＝＝＝%f＝＝＝%f",touPoint.x,touPoint.y);
+//    CCLOG("前一个点＝＝＝＝＝%f＝＝＝%f",perPoint.x,perPoint.y);
     
     float x = getNextPointX(touPoint,perPoint);
     float dy = CalculateHelper::getPathABC(x-perPoint.x, params);
@@ -163,16 +163,16 @@ Point GameMainHelper::getNextPoint(Point perPoint){
                 x = getNextPointX(touPoint, perPoint);
                 dy = CalculateHelper::getPathABC(x-perPoint.x, params);
                 y = dy+perPoint.y;
-                CCLOG("前有两个相同高的点＝＝＝＝＝%f＝＝＝%f===%f",x,y,dy);
+                //CCLOG("前有两个相同高的点＝＝＝＝＝%f＝＝＝%f===%f",x,y,dy);
             }
         }
     }
-    CCLOG("两个点＝＝＝%f＝＝＝%f",x,y);
+    //CCLOG("两个点＝＝＝%f＝＝＝%f",x,y);
     if (y>maxHei*m_unitH||y<minHei*m_unitH) {
-        CCLOG("高出了范围＝＝＝＝＝%f＝＝＝%f",x,y);
+        //CCLOG("高出了范围＝＝＝＝＝%f＝＝＝%f",x,y);
         return getNextPoint(perPoint);
     }
-    CCLOG("正常输出一个***************************%f***********************%f",x,y);
+    //CCLOG("正常输出一个***************************%f***********************%f",x,y);
     return Point(x, y);
 }
 float GameMainHelper::getNextPointX(Point touchPoint, Point perPoint){
@@ -184,7 +184,7 @@ float GameMainHelper::getNextPointX(Point touchPoint, Point perPoint){
     int maxDw = (touchRegion-perRegion)+2*DW;
     
     float dx = rand()%(int)(maxDw*m_unitW-DW*m_unitW+1)+DW*m_unitW;
-    CCLOG("dx====%f   maxDw===%d  DW====%d   m_unitW===%d  m_unitH=%d",dx,maxDw,DW,m_unitW,m_unitH);
+//    CCLOG("dx====%f   maxDw===%d  DW====%d   m_unitW===%d  m_unitH=%d",dx,maxDw,DW,m_unitW,m_unitH);
     return perPoint.x+dx;
 }
 Point GameMainHelper::getTouchPoint(Point perPoint){
@@ -204,7 +204,7 @@ CollisionType GameMainHelper::isCollisionPosts(Point PreprePoint,Point prePoint,
     CollisionType c_Type = Collision_None;
     for (int i=0; i<m_posts->count(); i++) {
        
-        CCLOG("=======================================%d",i);
+//        CCLOG("=======================================%d",i);
         MonsterSpile* sp = (MonsterSpile*) m_posts->getObjectAtIndex(i);
         Size heroSize = m_Hero->getContentSize();
         //如果具体远不做碰撞检测
@@ -321,14 +321,15 @@ void GameMainHelper::gameOver(){
 }
 void GameMainHelper::showFullAd(){
     
-    time_t t= time(NULL);
+    int t= rand();
     int randNum ;
     if (m_playTimes < 4) {
         randNum = 1;
     }else{
         randNum = t%(3);
     }
-    if (randNum == 0) {
+    if (randNum == 1) {
+    	CCLOG("显示全屏广告-----------------------");
         HPlatformHelper::getInstance()->showFullAd();
     }
 }

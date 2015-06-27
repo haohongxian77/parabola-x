@@ -38,6 +38,7 @@ public:
     void menuRank(Ref* sender);
     void menuShare(Ref* sender);
     void menuStart(Ref* sender);
+    void showRank();
     void callback();
     void removeThisCallBack();
     

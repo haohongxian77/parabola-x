@@ -137,7 +137,7 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     MoveTo* mvTo;
     Point targetPoint;
     
-    CCLOG("---------设置hero状态-----------");
+//    CCLOG("---------设置hero状态-----------");
     switch (heroStatus) {
         case frogStatic:
             GameMainHelper::getInstance()->playSound(JUMPOVER);

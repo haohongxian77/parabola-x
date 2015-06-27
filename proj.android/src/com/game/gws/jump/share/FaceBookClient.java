@@ -151,6 +151,7 @@ public class FaceBookClient {
 		// TODO Auto-generated method stub
 		if (!canPresentShareDialogWithPhotos) {
 			ToastClient.getInstance().showToastShort(R.string.install_facebook);
+			TransferActivity.closeAct();
 			return;
 		}
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
