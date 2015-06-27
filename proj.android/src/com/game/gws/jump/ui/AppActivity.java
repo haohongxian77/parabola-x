@@ -30,7 +30,6 @@ import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -40,36 +39,18 @@ import com.game.gws.jump.google.AdsClient;
 import com.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.game.gws.jump.share.ClientType;
 import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.share.FaceBookClient;
-import com.game.gws.jump.share.SinaClient;
-import com.game.gws.jump.share.TencentClient;
 import com.game.gws.jump.share.ToastClient;
-import com.game.gws.jump.share.WxClient;
 import com.game.gws.jump.system.MyApp;
-import com.game.gws.jump.wxapi.WXManager;
-import com.game.gws.jump.wxapi.WXManager.OnWxListener;
-import com.sina.weibo.sdk.api.share.BaseResponse;
-import com.sina.weibo.sdk.api.share.IWeiboHandler;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
 
-public class AppActivity extends Cocos2dxActivity implements
-		IWeiboHandler.Response, OnWxListener {
+public class AppActivity extends Cocos2dxActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		ToastClient.getInstance().registerClient(this, MyApp.PACKAGE_NAME);
-		SinaClient.getInstance().registerApp(this);
-		TencentClient.getInstance().registerApp(this);
-		WxClient.getInstance().registerApp(this);
-		FaceBookClient.getInstance().registerApp(this);
-
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
 		AdsClient.getInstance().initWithActivityOnCreate(this);
-		WXManager.getInstance().registerWxListener(this);
-
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		RelativeLayout containerView = new RelativeLayout(this);
@@ -119,75 +100,20 @@ public class AppActivity extends Cocos2dxActivity implements
 	}
 
 	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (ClientType.getInstance().getCurType() == CurrentType.GOOGLE) {
+			GwsGooglePlayServiceClient.getInstance().onActivityResult(
+					requestCode, resultCode, data);
+		}
+	}
+
+	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		AdsClient.getInstance().onDestroy();
 		GwsGooglePlayServiceClient.getInstance().disConnect();
-		WXManager.getInstance().unRegisterWxListener(this);
-	}
-
-	@Override
-	protected void onNewIntent(Intent intent) {
-		// TODO Auto-generated method stub
-		super.onNewIntent(intent);
-		if (ClientType.getInstance().getCurType() == CurrentType.SINA) {
-			SinaClient.getInstance().handleWeiboResponse(intent, this);
-		}
-
-	}
-
-	@Override
-	public void onResponse(BaseResponse arg0) {
-		// TODO Auto-generated method stub
-		if (ClientType.getInstance().getCurType() == CurrentType.SINA) {
-			SinaClient.getInstance().onResponse(arg0);
-		}
-	}
-
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// TODO Auto-generated method stub
-		Log.e("onActivityResult", "onActivityResult");
-		super.onActivityResult(requestCode, resultCode, data);
-		switch (ClientType.getInstance().getCurType()) {
-		case SINA:
-			SinaClient.getInstance().onActivityResult(requestCode, resultCode,
-					data);
-			break;
-		case WX:
-			break;
-		case FACEBOOK:
-			FaceBookClient.getInstance().onActivityResult(requestCode,
-					resultCode, data);
-			break;
-		case TENCENT:
-			TencentClient.getInstance().onActivityResult(requestCode,
-					resultCode, data);
-			break;
-
-		default:
-			GwsGooglePlayServiceClient.getInstance().onActivityResult(
-					requestCode, resultCode, data);
-			break;
-		}
-	}
-
-	@Override
-	public void onResp(BaseResp resp) {
-		// TODO Auto-generated method stub
-		WxClient.getInstance().handleResp(resp);
-	}
-
-	@Override
-	public void onReq(BaseReq req) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean shouldUnRegisterAfterResp() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 }

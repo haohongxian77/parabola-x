@@ -15,11 +15,12 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.ShareUtil.ScreenShotType;
+import com.game.gws.jump.system.MyApp;
+import com.game.gws.jump.ui.TransferActivity;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
@@ -124,8 +125,8 @@ public class SinaClient {
 		ClientType.getInstance().setCurType(CurrentType.SINA);
 		curStatus = status;
 		curFilePath = filePath;
-		Oauth2AccessToken accessToken = AccessTokenKeeper
-				.readAccessToken(mActivity.getApplicationContext());
+		Oauth2AccessToken accessToken = AccessTokenKeeper.readAccessToken(MyApp
+				.getInstance().getApplicationContext());
 		String token = "";
 		if (accessToken != null && accessToken.isSessionValid()) {
 			token = accessToken.getToken();
@@ -153,8 +154,8 @@ public class SinaClient {
 				status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
 						: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
 		if (!flag) {
-			Toast.makeText(mActivity, R.string.share_sdcard_error,
-					Toast.LENGTH_SHORT).show();
+			ToastClient.getInstance().showToastShort(
+					R.string.share_sdcard_error);
 			return;
 		}
 		String imgAbsPath = ShareUtil
@@ -174,23 +175,31 @@ public class SinaClient {
 
 					@Override
 					public void onWeiboException(WeiboException arg0) {
+						Log.e(TAG, "fail");
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_fail);
 					}
 
 					@Override
 					public void onComplete(Bundle bundle) {
 						// TODO Auto-generated method stub
+						Log.e(TAG, "success");
+						TransferActivity.closeAct();
 						Oauth2AccessToken newToken = Oauth2AccessToken
 								.parseAccessToken(bundle);
-						AccessTokenKeeper.writeAccessToken(
-								mActivity.getApplicationContext(), newToken);
-						ToastClient.getInstance().showToastShortOutUiThread(
-								"share success");
+						AccessTokenKeeper.writeAccessToken(MyApp.getInstance()
+								.getApplicationContext(), newToken);
+						ToastClient.getInstance().showToastShort(
+								R.string.share_success);
 					}
 
 					@Override
 					public void onCancel() {
-						ToastClient.getInstance().showToastShortOutUiThread(
-								"share cancel");
+						Log.e(TAG, "cancel");
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_cancel);
 					}
 				});
 	}
@@ -219,23 +228,28 @@ public class SinaClient {
 		@Override
 		public void onCancel() {
 			// TODO Auto-generated method stub
-			ToastClient.getInstance().showToastShort("新浪授权取消");
+			Log.e(TAG, "cancel");
+			TransferActivity.closeAct();
+			ToastClient.getInstance().showToastShort(R.string.share_cancel);
 		}
 
 		@Override
 		public void onComplete(Bundle bundle) {
 			// TODO Auto-generated method stub
+			Log.e(TAG, "success");
 			Oauth2AccessToken newToken = Oauth2AccessToken
 					.parseAccessToken(bundle);
-			AccessTokenKeeper.writeAccessToken(
-					mActivity.getApplicationContext(), newToken);
+			AccessTokenKeeper.writeAccessToken(MyApp.getInstance()
+					.getApplicationContext(), newToken);
 			start2Share(curStatus, curFilePath, newToken.getToken());
 		}
 
 		@Override
 		public void onWeiboException(WeiboException arg0) {
 			// TODO Auto-generated method stub
-
+			Log.e(TAG, "fail");
+			ToastClient.getInstance().showToastShort(R.string.share_fail);
+			TransferActivity.closeAct();
 		}
 
 	}
@@ -259,22 +273,14 @@ public class SinaClient {
 		if (null != baseResp) {
 			switch (baseResp.errCode) {
 			case WBConstants.ErrorCode.ERR_OK:
-				Toast.makeText(mActivity,
-						R.string.weibosdk_toast_share_success,
-						Toast.LENGTH_LONG).show();
+				ToastClient.getInstance()
+						.showToastShort(R.string.share_success);
 				break;
 			case WBConstants.ErrorCode.ERR_CANCEL:
-				Toast.makeText(mActivity,
-						R.string.weibosdk_toast_share_canceled,
-						Toast.LENGTH_LONG).show();
+				ToastClient.getInstance().showToastShort(R.string.share_cancel);
 				break;
 			case WBConstants.ErrorCode.ERR_FAIL:
-				Toast.makeText(
-						mActivity,
-						mActivity
-								.getString(R.string.weibosdk_toast_share_failed)
-								+ "Error Message: " + baseResp.errMsg,
-						Toast.LENGTH_LONG).show();
+				ToastClient.getInstance().showToastShort(R.string.share_fail);
 				break;
 			}
 		}

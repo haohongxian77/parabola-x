@@ -13,11 +13,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType.CurrentType;
 import com.game.gws.jump.share.ShareUtil.ScreenShotType;
+import com.game.gws.jump.ui.TransferActivity;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
@@ -78,8 +78,8 @@ public class TencentClient {
 						status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
 								: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
 				if (!flag) {
-					Toast.makeText(mActivity, R.string.share_sdcard_error,
-							Toast.LENGTH_LONG).show();
+					ToastClient.getInstance().showToastShort(
+							R.string.share_sdcard_error);
 					return;
 				}
 				String imgAbsPath = ShareUtil
@@ -99,22 +99,25 @@ public class TencentClient {
 					@Override
 					public void onError(UiError error) {
 						// TODO Auto-generated method stub
-						Toast.makeText(mActivity.getApplicationContext(),
-								error.errorMessage, Toast.LENGTH_SHORT).show();
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_fail);
 					}
 
 					@Override
 					public void onComplete(Object arg0) {
 						// TODO Auto-generated method stub
-						Toast.makeText(mActivity.getApplicationContext(),
-								"分享成功", Toast.LENGTH_SHORT).show();
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_success);
 					}
 
 					@Override
 					public void onCancel() {
 						// TODO Auto-generated method stub
-						Toast.makeText(mActivity.getApplicationContext(),
-								"cancel", Toast.LENGTH_SHORT).show();
+						TransferActivity.closeAct();
+						ToastClient.getInstance().showToastShort(
+								R.string.share_cancel);
 					}
 				});
 			}

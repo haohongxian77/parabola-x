@@ -55,7 +55,6 @@ obj/local/armeabi/objs-debug/cocos2dx_internal_static/2d/CCSpriteFrame.o: \
  D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2.h \
  D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/gl2ext.h \
  jni/../../cocos2d/cocos/./platform/CCImage.h \
- D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
  jni/../../cocos2d/cocos/./2d/CCSpriteFrame.h \
  jni/../../cocos2d/cocos/./2d/CCNode.h \
  jni/../../cocos2d/cocos/./base/CCVector.h \
@@ -66,6 +65,7 @@ obj/local/armeabi/objs-debug/cocos2dx_internal_static/2d/CCSpriteFrame.o: \
  jni/../../cocos2d/cocos/./base/CCEventTouch.h \
  jni/../../cocos2d/cocos/./base/CCEvent.h \
  jni/../../cocos2d/cocos/./base/CCEventKeyboard.h \
+ D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list \
  jni/../../cocos2d/cocos/./math/CCAffineTransform.h \
  jni/../../cocos2d/cocos/./base/CCDirector.h \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/stack \
@@ -182,8 +182,6 @@ D:/AndroidTool/android-ndk-r9d/platforms/android-14/arch-arm/usr/include/GLES2/g
 
 jni/../../cocos2d/cocos/./platform/CCImage.h:
 
-D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
-
 jni/../../cocos2d/cocos/./2d/CCSpriteFrame.h:
 
 jni/../../cocos2d/cocos/./2d/CCNode.h:
@@ -203,6 +201,8 @@ jni/../../cocos2d/cocos/./base/CCEventTouch.h:
 jni/../../cocos2d/cocos/./base/CCEvent.h:
 
 jni/../../cocos2d/cocos/./base/CCEventKeyboard.h:
+
+D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/list:
 
 jni/../../cocos2d/cocos/./math/CCAffineTransform.h:
 

@@ -23,6 +23,7 @@ static jclass m_shareFB;
 static jclass m_googleClient;
 static jclass m_ADClient;
 static jclass m_Toast;
+static jclass m_Share;
 
 HHPlatform* HHPlatform::m_pInst;
 
@@ -69,6 +70,10 @@ void HHPlatform::setVM(){
 	  m_Toast = (jclass) env->NewGlobalRef(cls_Toast);
 	  env->DeleteLocalRef(cls_Toast);
 
+	  jclass cls_Share = env->FindClass("com/game/gws/jump/share/ClientType");
+	  	  m_Share = (jclass) env->NewGlobalRef(cls_Share);
+	  	  env->DeleteLocalRef(cls_Share);
+
 
 
 }
@@ -82,46 +87,53 @@ void HHPlatform::share(int shareType,int shareFrom,std::string filepath){
 
 		//jint shareFrom = env->NewStringUTF(absPath.c_str());
 		jstring jstrImagePath = env->NewStringUTF(filepath.c_str());
-       switch(shareType){
-       case Share_SINA:
-    	   construction_id = env->GetStaticMethodID(m_shareSina, "getInstance", "()Lcom/game/gws/jump/share/SinaClient;");
-    	   obj = env->CallStaticObjectMethod(m_shareSina, construction_id);
-//    	   obj =getInstanceObj(env,m_shareSina);
+		construction_id = env->GetStaticMethodID(m_Share, "getInstance", "()Lcom/game/gws/jump/share/ClientType;");
+		obj = env->CallStaticObjectMethod(m_Share, construction_id);
 
-    	   m_shareImage = env->GetMethodID(m_shareSina,
-    	   			         "shareImgAndContent",
-    	   			            "(ILjava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
-    	   break;
-       case Share_QQ:
-    	   construction_id = env->GetStaticMethodID(m_shareQQ, "getInstance", "()Lcom/game/gws/jump/share/TencentClient;");
-    	   obj = env->CallStaticObjectMethod(m_shareQQ, construction_id);
-//    	   obj =getInstanceObj(env,m_shareQQ);
-    	   m_shareImage = env->GetMethodID(m_shareQQ,
-    	      	   			         "shareImg",
-    	      	   			            "(ILjava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
-    	   break;
-       case Share_WX:
-    	   construction_id = env->GetStaticMethodID(m_shareWX, "getInstance", "()Lcom/game/gws/jump/share/WxClient;");
-    	   obj = env->CallStaticObjectMethod(m_shareWX, construction_id);
-//    	   obj =getInstanceObj(env,m_shareWX);
-    	   m_shareImage = env->GetMethodID(m_shareWX,
-    	      	   			         "shareImg",
-    	      	   			            "(ILjava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
-    	   break;
-       case Share_FB:
-    	   construction_id = env->GetStaticMethodID(m_shareFB, "getInstance", "()Lcom/game/gws/jump/share/FaceBookClient;");
-    	   obj = env->CallStaticObjectMethod(m_shareFB, construction_id);
-//    	   obj =getInstanceObj(env,m_shareFB);
-    	   m_shareImage = env->GetMethodID(m_shareFB,
-    	      	   			         "shareImg",
-    	      	   			            "(ILjava/lang/String;)V");
-    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
-    	   break;
-
-       }
+		m_shareImage = env->GetMethodID(m_Share,
+		    	   			         "startShare",
+		    	   			            "(IILjava/lang/String;)V");
+		env->CallVoidMethod(obj, m_shareImage,shareType+1,shareFrom,jstrImagePath);
+//       switch(shareType){
+//       case Share_SINA:
+//    	   construction_id = env->GetStaticMethodID(m_shareSina, "getInstance", "()Lcom/game/gws/jump/share/SinaClient;");
+//    	   obj = env->CallStaticObjectMethod(m_shareSina, construction_id);
+////    	   obj =getInstanceObj(env,m_shareSina);
+//
+//    	   m_shareImage = env->GetMethodID(m_shareSina,
+//    	   			         "shareImgAndContent",
+//    	   			            "(ILjava/lang/String;)V");
+//    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
+//    	   break;
+//       case Share_QQ:
+//    	   construction_id = env->GetStaticMethodID(m_shareQQ, "getInstance", "()Lcom/game/gws/jump/share/TencentClient;");
+//    	   obj = env->CallStaticObjectMethod(m_shareQQ, construction_id);
+////    	   obj =getInstanceObj(env,m_shareQQ);
+//    	   m_shareImage = env->GetMethodID(m_shareQQ,
+//    	      	   			         "shareImg",
+//    	      	   			            "(ILjava/lang/String;)V");
+//    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
+//    	   break;
+//       case Share_WX:
+//    	   construction_id = env->GetStaticMethodID(m_shareWX, "getInstance", "()Lcom/game/gws/jump/share/WxClient;");
+//    	   obj = env->CallStaticObjectMethod(m_shareWX, construction_id);
+////    	   obj =getInstanceObj(env,m_shareWX);
+//    	   m_shareImage = env->GetMethodID(m_shareWX,
+//    	      	   			         "shareImg",
+//    	      	   			            "(ILjava/lang/String;)V");
+//    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
+//    	   break;
+//       case Share_FB:
+//    	   construction_id = env->GetStaticMethodID(m_shareFB, "getInstance", "()Lcom/game/gws/jump/share/FaceBookClient;");
+//    	   obj = env->CallStaticObjectMethod(m_shareFB, construction_id);
+////    	   obj =getInstanceObj(env,m_shareFB);
+//    	   m_shareImage = env->GetMethodID(m_shareFB,
+//    	      	   			         "shareImg",
+//    	      	   			            "(ILjava/lang/String;)V");
+//    	   env->CallVoidMethod(obj, m_shareImage,shareFrom,jstrImagePath);
+//    	   break;
+//
+//       }
 
 
 		env->DeleteLocalRef(jstrImagePath);

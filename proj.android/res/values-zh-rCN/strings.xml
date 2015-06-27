@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">忍者跳跳蛙</string>
+    <string name="share_success">分享成功</string>
+    <string name="share_cancel">分享取消</string>
+    <string name="share_fail">分享失败</string>
+    <string name="challenge_me">不服来战！</string>
+    <string name="install_facebook">请安装最新版本facebook</string>
+    <string name="share_sdcard_error">分享失败,请插入sdcard</string>
+    <string name="install_wx">请安装最新版本微信</string>
+</resources>

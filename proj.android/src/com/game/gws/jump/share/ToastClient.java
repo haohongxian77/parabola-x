@@ -49,6 +49,9 @@ public class ToastClient {
 	}
 
 	public void showToastLong(final String text) {
+		if (null == mActivity) {
+			return;
+		}
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -77,6 +80,9 @@ public class ToastClient {
 		// if (!isTopActivity(mActivity, packageName)) {
 		// return;
 		// }
+		if (null == mActivity) {
+			return;
+		}
 		if (toast == null) {
 			if (mActivity != null) {
 				toast = Toast.makeText(mActivity, text, Toast.LENGTH_SHORT);
@@ -90,6 +96,9 @@ public class ToastClient {
 	}
 
 	public void showToastShort(final String text) {
+		if (null == mActivity) {
+			return;
+		}
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
@@ -118,6 +127,9 @@ public class ToastClient {
 		// if (!isTopActivity(mActivity, packageName)) {
 		// return;
 		// }
+		if (null == mActivity) {
+			return;
+		}
 		if (toast == null) {
 			if (mActivity != null) {
 				toast = Toast.makeText(mActivity, text, Toast.LENGTH_SHORT);
@@ -132,6 +144,9 @@ public class ToastClient {
 	}
 
 	public void showToastShort(final int textRes) {
+		if (null == mActivity) {
+			return;
+		}
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override

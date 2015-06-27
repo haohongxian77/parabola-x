@@ -80,10 +80,7 @@ obj/local/armeabi/objs-debug/cocos2dx_internal_static/renderer/CCTexture2D.o: \
  D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/sstream \
  jni/../../cocos2d/cocos/./deprecated/CCArray.h \
  jni/../../cocos2d/cocos/./base/ccCArray.h \
- jni/../../cocos2d/cocos/./base/CCDataVisitor.h \
- jni/../../cocos2d/cocos/./renderer/CCTextureCache.h \
- D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable \
- D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/queue
+ jni/../../cocos2d/cocos/./base/CCDataVisitor.h
 
 jni/../../cocos2d/cocos/./renderer/CCTexture2D.h:
 
@@ -246,9 +243,3 @@ jni/../../cocos2d/cocos/./deprecated/CCArray.h:
 jni/../../cocos2d/cocos/./base/ccCArray.h:
 
 jni/../../cocos2d/cocos/./base/CCDataVisitor.h:
-
-jni/../../cocos2d/cocos/./renderer/CCTextureCache.h:
-
-D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/condition_variable:
-
-D:/AndroidTool/android-ndk-r9d/sources/cxx-stl/gnu-libstdc++/4.8/include/queue:
