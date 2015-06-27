@@ -8,16 +8,17 @@
 
 #include "HeroFrog.h"
 #include "helper/GameMainHelper.h"
-int animationCount[8] = {8,4,2,4,2,2,3,3};
+int animationCount[9] = {8,4,2,4,2,2,3,3,2};
                    //idel,起跳，上跳，最高点，下跳，落地，死亡撞柱子，死亡
-std::string animaFrameName[8] = {"hero_static_%d.png","hero_jpstart_%d.png",
-                            "hero_jpup_%d.png","hero_jpdown_%d.png","hero_jpdown1_%d.png",
-                            "hero_drop_%d.png","hero_dead2_%d.png",
-                            "hero_dead1_%d.png"};
-std::string animaName[8] = {"frogStatic","frogTakeoff",
+std::string animaFrameName[9] = {"hero_static_%d.png",
+    "hero_jpstart_%d.png","hero_jpup_%d.png",
+    "hero_jpdown_%d.png","hero_jpdown1_%d.png",
+    "hero_drop_%d.png","hero_dead2_%d.png",
+    "hero_dead1_%d.png","hero_jpup_long_%d.png"};
+std::string animaName[9] = {"frogStatic","frogTakeoff",
     "frogJumpUp","frogJumpDown","frogJumpDown1",
     "frogFall","frogDead1",
-    "frogDead2"};
+    "frogDead2","frogJumpUplong"};
 #define HEROSTATICMUSIC_TIME 5
 #define DEAD1TAG  1001
 HeroFrog::HeroFrog():m_heroStatus(FrogNone),drawNode(NULL)
@@ -43,7 +44,7 @@ void HeroFrog::initData(){
     addChild(drawNode,2);
 }
 void HeroFrog::initAnimation(){
-    for (int i=0; i<8; i++) {
+    for (int i=0; i<9; i++) {
         auto animationStatic = Animation::create();
         for( int j=0;j<animationCount[i];j++)
         {
@@ -122,6 +123,9 @@ void HeroFrog::setHeroStatus(FrogStatus heroStatus){
     Animate* ac1;
     if (heroStatus == frogJumpDown) {
         ani1 = AnimationCache::getInstance()->getAnimation(animaName[heroStatus+1].c_str());
+    }else if (heroStatus == frogJumpUp&& m_isLongJump){
+        std::string aniName = animaName[8].c_str();
+        ani = AnimationCache::getInstance()->getAnimation(aniName);
     }
     
     
