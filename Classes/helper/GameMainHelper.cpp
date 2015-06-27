@@ -463,6 +463,11 @@ void GameMainHelper::initPathPoints(std::vector<float> params, float SpeedX,floa
         m_heroPaths[m_heroPaths.size()-1].y = m_heroPaths[m_heroPaths.size()-1].y+dY;
         CCLOG("落地死亡");
     }
+    if(m_heroPaths[m_heroPaths.size()-1].x  - startPoint.x >winSize.width/3){
+       m_Hero->setIsLongJump(true);
+    }else{
+        m_Hero->setIsLongJump(false);
+    }
     m_heroPathIndex = 0;
     m_Hero->setHeroMoveParam(downPoint, aniSpeed, overStatus);
     

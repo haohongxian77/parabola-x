@@ -138,13 +138,15 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     float dtime = 0;
     float gravity ;
     float startSpeedY;
+    FrogStatus heroStatus;
     switch (touNode->getCurType()) {
         case TOUCH_ENABLE_UP:
             dtime = curPos.distance(highPoint)/(winSize.width/2);
             gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
              startSpeedY= gravity*dtime;
             speedX = (highPoint.x-curPos.x)/dtime;
-            m_hero->setHeroStatus(frogJumpUp);
+            heroStatus = frogJumpUp;
+            //m_hero->setHeroStatus();
             break;
         case TOUCH_DISABLE_UP:
             highPoint.y  = curPos.y+TOUCH_DISABLE_DIS;
@@ -152,7 +154,8 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
             startSpeedY= gravity*dtime;
             speedX = (highPoint.x-curPos.x)/dtime;
-            m_hero->setHeroStatus(frogJumpUp);
+            heroStatus = frogJumpUp;
+           // m_hero->setHeroStatus(frogJumpUp);
             break;
         case TOUCH_DISABLE_DOWN:
             highPoint.y  = curPos.y-TOUCH_DISABLE_DIS;
@@ -160,7 +163,8 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             gravity  = 2*(curPos.y-highPoint.y)/dtime/dtime;
             startSpeedY= 0;
             speedX = (highPoint.x-curPos.x)/dtime;
-            m_hero->setHeroStatus(frogJumpDown);
+            heroStatus = frogJumpDown;
+            //m_hero->setHeroStatus(frogJumpDown);
             highestPoint = curPos;
             break;
         case TOUCH_ENALBE_DOWN:
@@ -168,7 +172,8 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             gravity  = 2*(curPos.y-highPoint.y)/dtime/dtime;
             startSpeedY= 0;
             speedX = (highPoint.x-curPos.x)/dtime;
-            m_hero->setHeroStatus(frogJumpDown);
+            heroStatus = frogJumpDown;
+            //m_hero->setHeroStatus(frogJumpDown);
             highestPoint = curPos;
             break;
             
@@ -177,7 +182,6 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     }
     if (params.size()!=0)
         return;
-    m_hero->setIsLongJump((highPoint.x-curPos.x)>(winSize.width/3));
    // gravity = MIN(gravity,1400);
     params.push_back(gravity);
     params.push_back(speedX);
@@ -185,6 +189,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     
     
     GameMainHelper::getInstance()->initJumpDate(params,speedX,highPoint.y,curPos.y);
+    m_hero->setHeroStatus(heroStatus);
     
 }
 Point GameMainLayer::getTouchPoint(Point heightPoint,TouchType touchType){
