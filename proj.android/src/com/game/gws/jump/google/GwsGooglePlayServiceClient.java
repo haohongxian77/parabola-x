@@ -11,7 +11,6 @@ package com.game.gws.jump.google;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType;
@@ -76,9 +75,6 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void connect() {
-		Log.d(TAG,
-				"connect :" + mGoogleApiClient + "/"
-						+ !mGoogleApiClient.isConnected());
 		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
 			ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 			mGoogleApiClient.connect();
@@ -111,7 +107,6 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void commitScore(final int score) {
-		Log.e(TAG, "commitScore" + score);
 		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 		mActivity.runOnUiThread(new Runnable() {
 
@@ -119,7 +114,6 @@ public class GwsGooglePlayServiceClient implements
 			public void run() {
 				// TODO Auto-generated method stub
 				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-					Log.e(TAG, "commitScore" + score + "/commit");
 					Games.Leaderboards.submitScoreImmediate(
 							mGoogleApiClient,
 							mActivity.getApplicationContext().getString(
@@ -127,7 +121,6 @@ public class GwsGooglePlayServiceClient implements
 					TransferActivity.closeAct();
 					// return true;
 				} else {
-					Log.e(TAG, "commitScore" + score + "/connect");
 					curScore = score;
 					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT;
 					connect();
@@ -139,7 +132,6 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void showLeaderBoards() {
-		Log.e(TAG, "showLeaderBoards------------");
 		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 		mActivity.runOnUiThread(new Runnable() {
 

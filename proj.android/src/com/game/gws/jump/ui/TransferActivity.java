@@ -13,7 +13,6 @@ import java.util.Stack;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import com.facebook.appevents.AppEventsLogger;
@@ -45,7 +44,6 @@ public class TransferActivity extends Activity implements
 
 	public static void closeAct() {
 		if (!sActivities.empty()) {
-			Log.e(TAG, "closeAct");
 			for (TransferActivity activity : sActivities) {
 				if (activity != null && !activity.isFinishing())
 					activity.finish();

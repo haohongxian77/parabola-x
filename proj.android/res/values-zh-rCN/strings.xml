@@ -8,4 +8,5 @@
     <string name="install_facebook">请安装最新版本facebook</string>
     <string name="share_sdcard_error">分享失败,请插入sdcard</string>
     <string name="install_wx">请安装最新版本微信</string>
+    <string name="open_rank">请在设置中打开排行榜</string>
 </resources>

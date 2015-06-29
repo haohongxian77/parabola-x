@@ -182,8 +182,8 @@ void HHPlatform::showToast(std::string content){
 	jobject   	   obj = env->CallStaticObjectMethod(m_Toast, construction_id);
 //		jobject obj =getInstanceObj(env,m_googleClient);
 	jmethodID toastShow_id = env->GetMethodID(m_Toast,
-										 "showToastLong",
-											"(Ljava/lang/String;)V");
+										 "showOpenRank",
+											"()V");
    env->CallVoidMethod(obj, toastShow_id,jstrContent);
 
 //	jmethodID toastShow_id = env->GetStaticMethodID(m_Toast, "ToastLong", "(Ljava/lang/String;)V");
