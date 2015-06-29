@@ -6,22 +6,22 @@
  * @date 2015年4月19日 上午11:45:43 
  * @version V1.0.0   
  */
-package com.game.gws.jump.google;
+package com.ych.game.gws.jump.google;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.game.gws.jump.R;
-import com.game.gws.jump.share.ClientType;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.ui.TransferActivity;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.games.Games;
 import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.plus.Plus;
 import com.google.example.games.basegameutils.BaseGameUtils;
+import com.ych.game.gws.jump.R;
+import com.ych.game.gws.jump.share.ClientType;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj

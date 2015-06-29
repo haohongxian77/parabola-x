@@ -6,15 +6,15 @@
  * @date 2015年4月18日 下午3:16:24 
  * @version V1.0.0   
  */
-package com.game.gws.jump.wxapi;
+package com.ych.game.gws.jump.wxapi;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.game.gws.jump.system.MyApp;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.ych.game.gws.jump.system.MyApp;
 
 /**
  * @author czj

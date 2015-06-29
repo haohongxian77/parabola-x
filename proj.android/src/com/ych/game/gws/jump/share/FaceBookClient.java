@@ -6,7 +6,7 @@
  * @date 2015年5月17日 上午10:42:55 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,9 +31,9 @@ import com.facebook.share.Sharer.Result;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
-import com.game.gws.jump.R;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.ui.TransferActivity;
+import com.ych.game.gws.jump.R;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj

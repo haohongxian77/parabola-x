@@ -6,7 +6,7 @@
  * @date 2015年4月18日 上午11:00:50 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import java.io.ByteArrayOutputStream;
 
@@ -17,10 +17,6 @@ import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
 
-import com.game.gws.jump.R;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.share.ShareUtil.ScreenShotType;
-import com.game.gws.jump.ui.TransferActivity;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX.Resp;
@@ -29,6 +25,10 @@ import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.ych.game.gws.jump.R;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.share.ShareUtil.ScreenShotType;
+import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj

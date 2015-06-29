@@ -6,7 +6,7 @@
  * @date 2015年6月24日 下午9:57:34 
  * @version V1.0.0   
  */
-package com.game.gws.jump.ui;
+package com.ych.game.gws.jump.ui;
 
 import java.util.Stack;
 
@@ -16,20 +16,20 @@ import android.os.Bundle;
 import android.view.Window;
 
 import com.facebook.appevents.AppEventsLogger;
-import com.game.gws.jump.R;
-import com.game.gws.jump.share.ClientType;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.share.FaceBookClient;
-import com.game.gws.jump.share.SinaClient;
-import com.game.gws.jump.share.TencentClient;
-import com.game.gws.jump.share.WxClient;
-import com.game.gws.jump.system.MyApp;
-import com.game.gws.jump.wxapi.WXManager;
-import com.game.gws.jump.wxapi.WXManager.OnWxListener;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
+import com.ych.game.gws.jump.R;
+import com.ych.game.gws.jump.share.ClientType;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.share.FaceBookClient;
+import com.ych.game.gws.jump.share.SinaClient;
+import com.ych.game.gws.jump.share.TencentClient;
+import com.ych.game.gws.jump.share.WxClient;
+import com.ych.game.gws.jump.system.MyApp;
+import com.ych.game.gws.jump.wxapi.WXManager;
+import com.ych.game.gws.jump.wxapi.WXManager.OnWxListener;
 
 /**
  * @author czj

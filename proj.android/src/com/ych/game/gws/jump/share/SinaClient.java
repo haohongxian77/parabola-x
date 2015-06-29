@@ -6,7 +6,7 @@
  * @date 2015年4月18日 上午10:59:01 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,11 +15,6 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
 
-import com.game.gws.jump.R;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.share.ShareUtil.ScreenShotType;
-import com.game.gws.jump.system.MyApp;
-import com.game.gws.jump.ui.TransferActivity;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
@@ -34,6 +29,11 @@ import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.exception.WeiboException;
+import com.ych.game.gws.jump.R;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.share.ShareUtil.ScreenShotType;
+import com.ych.game.gws.jump.system.MyApp;
+import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj

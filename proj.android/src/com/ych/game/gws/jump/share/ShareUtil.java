@@ -6,7 +6,7 @@
  * @date 2015年5月9日 下午12:23:06 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import java.io.File;
 import java.io.FileOutputStream;

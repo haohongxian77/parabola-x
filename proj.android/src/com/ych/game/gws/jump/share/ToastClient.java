@@ -6,7 +6,7 @@
  * @date 2015年6月1日 下午10:32:20 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
-import com.game.gws.jump.R;
+import com.ych.game.gws.jump.R;
 
 /**
  * @author czj

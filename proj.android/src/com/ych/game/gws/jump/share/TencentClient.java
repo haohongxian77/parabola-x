@@ -6,7 +6,7 @@
  * @date 2015年4月18日 上午10:59:57 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -14,14 +14,14 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import com.game.gws.jump.R;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.share.ShareUtil.ScreenShotType;
-import com.game.gws.jump.ui.TransferActivity;
 import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+import com.ych.game.gws.jump.R;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.share.ShareUtil.ScreenShotType;
+import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj

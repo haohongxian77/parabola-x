@@ -6,19 +6,19 @@
  * @date 2015年4月18日 下午1:42:02 
  * @version V1.0.0   
  */
-package com.game.gws.jump.wxapi;
+package com.ych.game.gws.jump.wxapi;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
-import com.game.gws.jump.share.WxClient;
 import com.tencent.mm.sdk.modelbase.BaseReq;
 import com.tencent.mm.sdk.modelbase.BaseResp;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.ych.game.gws.jump.share.WxClient;
 
 /**
  * @author czj

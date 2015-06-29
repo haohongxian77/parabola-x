@@ -6,9 +6,9 @@
  * @date 2015年6月18日 下午9:37:44 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
-import com.game.gws.jump.ui.TransferActivity;
+import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj

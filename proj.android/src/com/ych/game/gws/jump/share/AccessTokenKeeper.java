@@ -6,7 +6,7 @@
  * @date 2015年3月18日 下午6:19:52 
  * @version V1.0.0   
  */
-package com.game.gws.jump.share;
+package com.ych.game.gws.jump.share;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -24,7 +24,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  ****************************************************************************/
-package com.game.gws.jump.ui;
+package com.ych.game.gws.jump.ui;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
@@ -35,12 +35,12 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.facebook.appevents.AppEventsLogger;
-import com.game.gws.jump.google.AdsClient;
-import com.game.gws.jump.google.GwsGooglePlayServiceClient;
-import com.game.gws.jump.share.ClientType;
-import com.game.gws.jump.share.ClientType.CurrentType;
-import com.game.gws.jump.share.ToastClient;
-import com.game.gws.jump.system.MyApp;
+import com.ych.game.gws.jump.google.AdsClient;
+import com.ych.game.gws.jump.google.GwsGooglePlayServiceClient;
+import com.ych.game.gws.jump.share.ClientType;
+import com.ych.game.gws.jump.share.ClientType.CurrentType;
+import com.ych.game.gws.jump.share.ToastClient;
+import com.ych.game.gws.jump.system.MyApp;
 
 public class AppActivity extends Cocos2dxActivity {
 	@Override

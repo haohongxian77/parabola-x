@@ -6,7 +6,7 @@
  * @date 2015年4月18日 下午3:21:47 
  * @version V1.0.0   
  */
-package com.game.gws.jump.system;
+package com.ych.game.gws.jump.system;
 
 import android.app.Application;
 import android.os.Handler;

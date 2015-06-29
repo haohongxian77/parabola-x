@@ -6,7 +6,7 @@
  * @date 2015年5月17日 下午2:12:33 
  * @version V1.0.0   
  */
-package com.game.gws.jump.google;
+package com.ych.game.gws.jump.google;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +17,7 @@ import android.util.Log;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
@@ -33,8 +34,8 @@ public class AdsClient {
 	private AdView adView;
 	/** 插页广告 **/
 	private InterstitialAd interstitial;
-	private static final String AD_BANNER_00 = "ca-app-pub-7081761992709780/6152533754";
-	private static final String AD_INSERT_00 = "ca-app-pub-7081761992709780/8315533757";
+	private static final String AD_BANNER_00 = "ca-app-pub-7081761992709780/9220280955";
+	private static final String AD_INSERT_00 = "ca-app-pub-7081761992709780/1697014157";
 
 	public static AdsClient getInstance() {
 		if (null == INSTANCE) {
@@ -52,7 +53,7 @@ public class AdsClient {
 		this.mActivity = mActivity;
 		adView = new AdView(mActivity);
 		adView.setAdUnitId(AD_BANNER_00);
-		adView.setAdSize(com.google.android.gms.ads.AdSize.SMART_BANNER);
+		adView.setAdSize(AdSize.SMART_BANNER);
 
 		AdRequest adRequest = new AdRequest.Builder().build();
 		adView.loadAd(adRequest);
@@ -62,6 +63,7 @@ public class AdsClient {
 				// TODO Auto-generated method stub
 				super.onAdLoaded();
 				if (null != adView.getParent()) {
+					adView.postInvalidate();
 					adView.getParent().requestLayout();
 				}
 
