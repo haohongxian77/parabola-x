@@ -50,7 +50,6 @@ GameMainHelper* GameMainHelper::getInstance(){
     if (!mainHelper) {
         mainHelper = new GameMainHelper();
         mainHelper->initDate();
-        
     }
     return  mainHelper;
 }
@@ -71,7 +70,7 @@ void GameMainHelper::initDate(){
     
     m_posts = __Array::create();
     m_posts->retain();
-    
+    CCLOG("初始化   GameHelper ------------------");
     m_playTimes = 0;
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
     m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
@@ -324,12 +323,13 @@ void GameMainHelper::showFullAd(){
     int t= rand();
     int randNum ;
     if (m_playTimes < 4) {
-        randNum = 1;
+        return;
     }else{
         randNum = t%(3);
     }
+    CCLOG("显示全屏广告-----------------------%d",randNum);
     if (randNum == 1) {
-    	CCLOG("显示全屏广告-----------------------");
+
         HPlatformHelper::getInstance()->showFullAd();
     }
 }
@@ -485,6 +485,12 @@ float GameMainHelper::getCurSpeed(float speed,float totalDis, float curDis){
 void GameMainHelper::playSound(std::string soundName){
 
     SimpleAudioEngine::getInstance()->playEffect(soundName.c_str(),false, 2, 1, 1);
+}
+void GameMainHelper::destory(){
+	if(mainHelper){
+		 delete (mainHelper);
+	}
+	 mainHelper = NULL;
 }
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 void GameMainHelper::share(ShareStatus status){

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
 Google Play game services IDs.
-Save this file as res/values/games-ids.xml in your project.
--->
+<string name="app_id">567991146422</string>
+  <string name="leaderboard_worldrank">CgkItq-k98MQEAIQBg</string>
+Save this file as res/values/games-ids.xml in your project.-->
 <resources>
-  <string name="app_id">636462822918</string>
-  <string name="leaderboard_worldrank">CgkIhuyPgcMSEAIQAQ</string>
+  <string name="app_id">1</string>
+  <string name="leaderboard_worldrank">2</string>
 </resources>

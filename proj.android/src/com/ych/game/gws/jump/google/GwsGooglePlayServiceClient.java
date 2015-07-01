@@ -11,11 +11,14 @@ package com.ych.game.gws.jump.google;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.PendingResult;
+import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.games.Games;
-import com.google.android.gms.games.GamesActivityResultCodes;
+import com.google.android.gms.games.leaderboard.Leaderboards.SubmitScoreResult;
 import com.google.android.gms.plus.Plus;
 import com.google.example.games.basegameutils.BaseGameUtils;
 import com.ych.game.gws.jump.R;
@@ -49,6 +52,8 @@ public class GwsGooglePlayServiceClient implements
 		/** 为提交分数而连接 **/
 		CONNECT_REQUEST_SCORE_COMMIT,
 		/** 为进入排行榜而连接 **/
+		CONNECT_REQUEST_BOARD,
+		/** 提交分数，然后展示排行榜 **/
 		CONNECT_REQUEST_SCORE_BOARD;
 	}
 
@@ -75,21 +80,13 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void connect() {
-		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
+		if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()
+				&& !mGoogleApiClient.isConnecting()) {
+
+			// TODO Auto-generated method stub
 			ClientType.getInstance().setCurType(CurrentType.GOOGLE);
 			mGoogleApiClient.connect();
 		}
-		// mActivity.runOnUiThread(new Runnable() {
-		//
-		// @Override
-		// public void run() {
-		// // TODO Auto-generated method stub
-		// if (null != mGoogleApiClient && !mGoogleApiClient.isConnected()) {
-		// mGoogleApiClient.connect();
-		// }
-		// }
-		// });
-
 	}
 
 	public void disConnect() {
@@ -108,16 +105,22 @@ public class GwsGooglePlayServiceClient implements
 
 	public void commitScore(final int score) {
 		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
+
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-					Games.Leaderboards.submitScoreImmediate(
-							mGoogleApiClient,
-							mActivity.getApplicationContext().getString(
-									R.string.leaderboard_worldrank), score);
+					PendingResult<SubmitScoreResult> result = Games.Leaderboards
+							.submitScoreImmediate(
+									mGoogleApiClient,
+									mActivity
+											.getApplicationContext()
+											.getString(
+													R.string.leaderboard_worldrank),
+									score);
+
 					TransferActivity.closeAct();
 					// return true;
 				} else {
@@ -131,15 +134,59 @@ public class GwsGooglePlayServiceClient implements
 
 	}
 
-	public void showLeaderBoards() {
+	public void commitScore2ShowBoard(final int score) {
+
 		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
+
 		mActivity.runOnUiThread(new Runnable() {
 
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-					mActivity.startActivityForResult(
+					Games.Leaderboards.submitScoreImmediate(
+							mGoogleApiClient,
+							mActivity.getApplicationContext().getString(
+									R.string.leaderboard_worldrank), score)
+							.setResultCallback(
+									new MyLeaderBoardSubmitScoreCallback());
+					TransferActivity.closeAct();
+					// return true;
+				} else {
+					curScore = score;
+					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD;
+					connect();
+					// return false;
+				}
+			}
+		});
+
+	}
+
+	class MyLeaderBoardSubmitScoreCallback implements
+			ResultCallback<SubmitScoreResult> {
+
+		@Override
+		public void onResult(SubmitScoreResult result) {
+			// TODO Auto-generated method stub
+			// if (result.getStatus().getStatusCode() ==
+			// GamesStatusCodes.STATUS_OK) {
+			// showLeaderBoards();
+			// } else {
+			//
+			// }
+			showLeaderBoards();
+		}
+
+	}
+
+	public void showLeaderBoards() {
+		ClientType.getInstance().setCurType(CurrentType.GOOGLE);
+
+		// TODO Auto-generated method stub
+		if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
+			mActivity
+					.startActivityForResult(
 							Games.Leaderboards
 									.getLeaderboardIntent(
 											mGoogleApiClient,
@@ -149,36 +196,35 @@ public class GwsGooglePlayServiceClient implements
 													.getString(
 															R.string.leaderboard_worldrank)),
 							LEADERBOARDER_SHOW_REQ);
-					TransferActivity.closeAct();
-				} else {
-					curRequestType = ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD;
-					connect();
-				}
-			}
-		});
+			TransferActivity.closeAct();
+		} else {
+			curRequestType = ConnectRequestType.CONNECT_REQUEST_BOARD;
+			connect();
+		}
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == SIGN_IN_REQ) {
-			mSignInClicked = false;
-			mResolvingConnectionFailure = false;
-			if (resultCode == Activity.RESULT_OK) {
-				mGoogleApiClient.connect();
-			} else {
-				// Bring up an error dialog to alert the user that sign-in
-				// failed. The R.string.signin_failure should reference an error
-				// string in your strings.xml file that tells the user they
-				// could not be signed in, such as "Unable to sign in."
-				BaseGameUtils.showActivityResultError(mActivity, requestCode,
-						resultCode, R.string.signin_other_error);
-				mGoogleApiClient.disconnect();
-				// ToastClient.getInstance().showToastShort(
-				// R.string.signin_other_error);
-			}
-		} else if (resultCode == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
-			mGoogleApiClient.disconnect();
-		}
-		TransferActivity.closeAct();
+		// if (requestCode == SIGN_IN_REQ) {
+		// mSignInClicked = false;
+		// mResolvingConnectionFailure = false;
+		// if (resultCode == Activity.RESULT_OK) {
+		// mGoogleApiClient.connect();
+		// } else {
+		// // Bring up an error dialog to alert the user that sign-in
+		// // failed. The R.string.signin_failure should reference an error
+		// // string in your strings.xml file that tells the user they
+		// // could not be signed in, such as "Unable to sign in."
+		// BaseGameUtils.showActivityResultError(mActivity, requestCode,
+		// resultCode, R.string.signin_other_error);
+		// mGoogleApiClient.disconnect();
+		// // ToastClient.getInstance().showToastShort(
+		// // R.string.signin_other_error);
+		// }
+		// } else if (resultCode ==
+		// GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
+		// mGoogleApiClient.disconnect();
+		// }
+		// TransferActivity.closeAct();
 	}
 
 	@Override
@@ -220,10 +266,12 @@ public class GwsGooglePlayServiceClient implements
 	@Override
 	public void onConnected(Bundle arg0) {
 		// TODO Auto-generated method stub
-		if (curRequestType == ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD) {
+		if (curRequestType == ConnectRequestType.CONNECT_REQUEST_BOARD) {
 			showLeaderBoards();
 		} else if (curRequestType == ConnectRequestType.CONNECT_REQUEST_SCORE_COMMIT) {
 			commitScore(curScore);
+		} else if (curRequestType == ConnectRequestType.CONNECT_REQUEST_SCORE_BOARD) {
+			commitScore2ShowBoard(curScore);
 		}
 		curRequestType = ConnectRequestType.CONNECT_REQUEST_NULL;
 	}
@@ -231,7 +279,7 @@ public class GwsGooglePlayServiceClient implements
 	@Override
 	public void onConnectionSuspended(int arg0) {
 		// TODO Auto-generated method stub
-
+		Log.e(TAG, "onConnectionSuspended");
 	}
 
 }

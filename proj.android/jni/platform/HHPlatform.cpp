@@ -42,35 +42,35 @@ void HHPlatform::setVM(){
 	    JNIEnv *env;
 	    m_pVM->AttachCurrentThread(&env, NULL);
 
-	    jclass cls_Sina = env->FindClass("com/game/gws/jump/share/SinaClient");
+	    jclass cls_Sina = env->FindClass("com/ych/game/gws/jump/share/SinaClient");
 	    m_shareSina = (jclass) env->NewGlobalRef(cls_Sina);
 	    env->DeleteLocalRef(cls_Sina);
 
-	    jclass cls_QQ = env->FindClass("com/game/gws/jump/share/TencentClient");
+	    jclass cls_QQ = env->FindClass("com/ych/game/gws/jump/share/TencentClient");
 	    m_shareQQ = (jclass) env->NewGlobalRef(cls_QQ);
 	    env->DeleteLocalRef(cls_QQ);
 
-	   jclass cls_WX = env->FindClass("com/game/gws/jump/share/WxClient");
+	   jclass cls_WX = env->FindClass("com/ych/game/gws/jump/share/WxClient");
 	   m_shareWX = (jclass) env->NewGlobalRef(cls_WX);
 	   env->DeleteLocalRef(cls_WX);
 
-	  jclass cls_FB = env->FindClass("com/game/gws/jump/share/FaceBookClient");
+	  jclass cls_FB = env->FindClass("com/ych/game/gws/jump/share/FaceBookClient");
 	  m_shareFB = (jclass) env->NewGlobalRef(cls_FB);
 	  env->DeleteLocalRef(cls_FB);
 
-	  jclass cls_google = env->FindClass("com/game/gws/jump/google/GwsGooglePlayServiceClient");
+	  jclass cls_google = env->FindClass("com/ych/game/gws/jump/google/GwsGooglePlayServiceClient");
 	  m_googleClient = (jclass) env->NewGlobalRef(cls_google);
 	  env->DeleteLocalRef(cls_google);
 
-	  jclass cls_AD = env->FindClass("com/game/gws/jump/google/AdsClient");
+	  jclass cls_AD = env->FindClass("com/ych/game/gws/jump/google/AdsClient");
 	  m_ADClient = (jclass) env->NewGlobalRef(cls_AD);
 	  env->DeleteLocalRef(cls_AD);
 
-	  jclass cls_Toast = env->FindClass("com/game/gws/jump/share/ToastClient");
+	  jclass cls_Toast = env->FindClass("com/ych/game/gws/jump/share/ToastClient");
 	  m_Toast = (jclass) env->NewGlobalRef(cls_Toast);
 	  env->DeleteLocalRef(cls_Toast);
 
-	  jclass cls_Share = env->FindClass("com/game/gws/jump/share/ClientType");
+	  jclass cls_Share = env->FindClass("com/ych/game/gws/jump/share/ClientType");
 	  	  m_Share = (jclass) env->NewGlobalRef(cls_Share);
 	  	  env->DeleteLocalRef(cls_Share);
 
@@ -87,7 +87,7 @@ void HHPlatform::share(int shareType,int shareFrom,std::string filepath){
 
 		//jint shareFrom = env->NewStringUTF(absPath.c_str());
 		jstring jstrImagePath = env->NewStringUTF(filepath.c_str());
-		construction_id = env->GetStaticMethodID(m_Share, "getInstance", "()Lcom/game/gws/jump/share/ClientType;");
+		construction_id = env->GetStaticMethodID(m_Share, "getInstance", "()Lcom/ych/game/gws/jump/share/ClientType;");
 		obj = env->CallStaticObjectMethod(m_Share, construction_id);
 
 		m_shareImage = env->GetMethodID(m_Share,
@@ -143,18 +143,19 @@ void HHPlatform::share(int shareType,int shareFrom,std::string filepath){
 void HHPlatform::showRank(){
 	   JNIEnv *env;
 		m_pVM->AttachCurrentThread(&env, NULL);
-		jmethodID construction_id = env->GetStaticMethodID(m_googleClient, "getInstance", "()Lcom/game/gws/jump/google/GwsGooglePlayServiceClient;");
+		jmethodID construction_id = env->GetStaticMethodID(m_googleClient, "getInstance", "()Lcom/ych/game/gws/jump/google/GwsGooglePlayServiceClient;");
 		jobject   	   obj = env->CallStaticObjectMethod(m_googleClient, construction_id);
 //		jobject obj =getInstanceObj(env,m_googleClient);
 		jmethodID googleRank = env->GetMethodID(m_googleClient,
-		    	      	   			         "showLeaderBoards",
-		    	      	   			            "()V");
+                "showLeaderBoards",
+                   "()V");
+
 	   env->CallVoidMethod(obj, googleRank);
 }
 void HHPlatform::showFullAD(){
 	JNIEnv *env;
 	m_pVM->AttachCurrentThread(&env, NULL);
-	jmethodID construction_id = env->GetStaticMethodID(m_ADClient, "getInstance", "()Lcom/game/gws/jump/google/AdsClient;");
+	jmethodID construction_id = env->GetStaticMethodID(m_ADClient, "getInstance", "()Lcom/ych/game/gws/jump/google/AdsClient;");
 	jobject   	   obj = env->CallStaticObjectMethod(m_ADClient, construction_id);
 	jmethodID adShow = env->GetMethodID(m_ADClient,
 				    	      	   			         "showInsertAd",
@@ -165,7 +166,7 @@ void HHPlatform::showFullAD(){
 void HHPlatform::commitScore(int score){
 	JNIEnv *env;
 	m_pVM->AttachCurrentThread(&env, NULL);
-	jmethodID construction_id = env->GetStaticMethodID(m_googleClient, "getInstance", "()Lcom/game/gws/jump/google/GwsGooglePlayServiceClient;");
+	jmethodID construction_id = env->GetStaticMethodID(m_googleClient, "getInstance", "()Lcom/ych/game/gws/jump/google/GwsGooglePlayServiceClient;");
 	jobject   	   obj = env->CallStaticObjectMethod(m_googleClient, construction_id);
 	//		jobject obj =getInstanceObj(env,m_googleClient);
 	jmethodID googleCommitScore = env->GetMethodID(m_googleClient,
@@ -178,7 +179,7 @@ void HHPlatform::showToast(std::string content){
 	m_pVM->AttachCurrentThread(&env, NULL);
 	jstring jstrContent = env->NewStringUTF(content.c_str());
 
-	jmethodID construction_id = env->GetStaticMethodID(m_Toast, "getInstance", "()Lcom/game/gws/jump/share/ToastClient;");
+	jmethodID construction_id = env->GetStaticMethodID(m_Toast, "getInstance", "()Lcom/ych/game/gws/jump/share/ToastClient;");
 	jobject   	   obj = env->CallStaticObjectMethod(m_Toast, construction_id);
 //		jobject obj =getInstanceObj(env,m_googleClient);
 	jmethodID toastShow_id = env->GetMethodID(m_Toast,

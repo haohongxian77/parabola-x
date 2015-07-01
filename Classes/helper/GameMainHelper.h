@@ -43,6 +43,7 @@ public:
     static GameMainHelper* mainHelper;
     static GameMainHelper* getInstance();
     
+    void initDate();
     void atachLayer(GameMainLayer* layer);
     void atachScene(GameMainScene* scene);
     void setHero(HeroFrog* hero);
@@ -58,6 +59,7 @@ public:
     
     Point getHeroPostPoint();
     void playSound(std::string soundName);
+    void destory();
 public:
     void gameOver();
     void startGame();
@@ -83,7 +85,7 @@ public:
     Node* m_spilesNode;
     HeroFrog* m_Hero;
 private:
-    void initDate();
+
     void initGameStartData();
     
     
@@ -100,6 +102,7 @@ private:
     
     
     
+
 private:
     int m_unitH = 0;
     int m_unitW = 0;

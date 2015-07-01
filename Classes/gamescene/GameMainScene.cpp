@@ -105,6 +105,7 @@ GameMainScene* GameMainScene::create(){
 }
 void GameMainScene::initHelper(){
     m_helper = GameMainHelper::getInstance();
+   // m_helper->initDate();
     m_helper->atachScene(this);
 }
 void GameMainScene::startGame(){
@@ -166,6 +167,7 @@ void GameMainScene::onEnter(){
     Scene::onEnter();
 }
 void GameMainScene::onExit(){
+	GameMainHelper::getInstance()->destory();
     Scene::onExit();
    
 }

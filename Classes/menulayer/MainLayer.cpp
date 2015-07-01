@@ -178,11 +178,11 @@ void MainLayer::menuRank(cocos2d::Ref *sender){
     GameMainHelper::getInstance()->playSound(BTNCLICK);
     if(GameMainHelper::getInstance()->getGoogleServer()){
     	int hScore = UserDefault::getInstance()->getIntegerForKey(Highest);
-       HPlatformHelper::getInstance()->commitScore(hScore);
-       Sequence* seq = Sequence::create(DelayTime::create(1.5),
-    		   CallFunc::create(CC_CALLBACK_0(MainLayer::showRank, this)), NULL);
-       node->stopAllActions();
-       node->runAction(seq);
+       HPlatformHelper::getInstance()->showRank();
+//       Sequence* seq = Sequence::create(DelayTime::create(1.5),
+//    		   CallFunc::create(CC_CALLBACK_0(MainLayer::showRank, this)), NULL);
+//       node->stopAllActions();
+//       node->runAction(seq);
 	   }
     else{
     	HPlatformHelper::getInstance()->showToast("请在设置中打开排行榜！");

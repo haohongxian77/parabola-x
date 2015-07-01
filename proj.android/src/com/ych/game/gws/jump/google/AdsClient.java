@@ -109,7 +109,6 @@ public class AdsClient {
 				}
 			}
 		});
-
 	}
 
 	public AdView getAdView() {
