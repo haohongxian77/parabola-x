@@ -52,10 +52,11 @@ public class AdsClient {
 	public void initWithActivityOnCreate(Activity mActivity) {
 		this.mActivity = mActivity;
 		adView = new AdView(mActivity);
-		adView.setAdUnitId(AD_BANNER_00);
+		adView.setAdUnitId("test");
 		adView.setAdSize(AdSize.SMART_BANNER);
 
-		AdRequest adRequest = new AdRequest.Builder().build();
+		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
+				getDeviceId()).build();
 		adView.loadAd(adRequest);
 		adView.setAdListener(new AdListener() {
 			@Override
@@ -77,8 +78,9 @@ public class AdsClient {
 			}
 		});
 		interstitial = new InterstitialAd(mActivity);
-		interstitial.setAdUnitId(AD_INSERT_00);
-		interstitial.loadAd(new AdRequest.Builder().build());
+		interstitial.setAdUnitId("test01");
+		interstitial.loadAd(new AdRequest.Builder()
+				.addTestDevice(getDeviceId()).build());
 		interstitial.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -90,7 +92,8 @@ public class AdsClient {
 			public void onAdClosed() {
 				// TODO Auto-generated method stub
 				super.onAdClosed();
-				interstitial.loadAd(new AdRequest.Builder().build());
+				interstitial.loadAd(new AdRequest.Builder().addTestDevice(
+						getDeviceId()).build());
 			}
 		});
 	}

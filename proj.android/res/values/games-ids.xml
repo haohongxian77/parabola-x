@@ -5,6 +5,11 @@ Google Play game services IDs.
   <string name="leaderboard_worldrank">CgkItq-k98MQEAIQBg</string>
 Save this file as res/values/games-ids.xml in your project.-->
 <resources>
-  <string name="app_id">1</string>
-  <string name="leaderboard_worldrank">2</string>
+  <string name="app_id">567991146422</string>
+  <string name="achievement_level_one">CgkItq-k98MQEAIQDA</string>
+  <string name="achievement_level_two">CgkItq-k98MQEAIQDQ</string>
+  <string name="achievement_level_three">CgkItq-k98MQEAIQDg</string>
+  <string name="achievement_level_four">CgkItq-k98MQEAIQDw</string>
+  <string name="achievement_level_top">CgkItq-k98MQEAIQEA</string>
+  <string name="leaderboard_worldrank">CgkItq-k98MQEAIQBg</string>
 </resources>

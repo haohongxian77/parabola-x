@@ -140,17 +140,20 @@ void HHPlatform::share(int shareType,int shareFrom,std::string filepath){
 //		env->DeleteLocalRef(jstrContent);
 
 }
-void HHPlatform::showRank(){
+void HHPlatform::showRank(int score){
 	   JNIEnv *env;
 		m_pVM->AttachCurrentThread(&env, NULL);
 		jmethodID construction_id = env->GetStaticMethodID(m_googleClient, "getInstance", "()Lcom/ych/game/gws/jump/google/GwsGooglePlayServiceClient;");
 		jobject   	   obj = env->CallStaticObjectMethod(m_googleClient, construction_id);
 //		jobject obj =getInstanceObj(env,m_googleClient);
+//		jmethodID googleRank = env->GetMethodID(m_googleClient,
+//                "showLeaderBoards",
+//                   "()V");
 		jmethodID googleRank = env->GetMethodID(m_googleClient,
-                "showLeaderBoards",
-                   "()V");
+		                "commitScore2ShowBoard",
+		                   "(I)V");
 
-	   env->CallVoidMethod(obj, googleRank);
+	   env->CallVoidMethod(obj, googleRank,score);
 }
 void HHPlatform::showFullAD(){
 	JNIEnv *env;

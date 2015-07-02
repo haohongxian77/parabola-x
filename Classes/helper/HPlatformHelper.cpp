@@ -28,9 +28,9 @@ void HPlatformHelper::share(int shareType,int shareFrom,std::string path){
 	HHPlatform::GetInstance()->share(shareType,shareFrom,path);
 #endif
 }
-void HPlatformHelper::showRank(){
+void HPlatformHelper::showRank(int score){
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-    HHPlatform::GetInstance()->showRank();
+    HHPlatform::GetInstance()->showRank(score);
 #endif
 }
 void HPlatformHelper::commitScore(int score){

@@ -15,16 +15,15 @@ import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.PendingResult;
 import com.google.android.gms.common.api.ResultCallback;
 import com.google.android.gms.games.Games;
+import com.google.android.gms.games.GamesActivityResultCodes;
 import com.google.android.gms.games.leaderboard.Leaderboards.SubmitScoreResult;
 import com.google.android.gms.plus.Plus;
 import com.google.example.games.basegameutils.BaseGameUtils;
 import com.ych.game.gws.jump.R;
 import com.ych.game.gws.jump.share.ClientType;
 import com.ych.game.gws.jump.share.ClientType.CurrentType;
-import com.ych.game.gws.jump.ui.TransferActivity;
 
 /**
  * @author czj
@@ -49,11 +48,11 @@ public class GwsGooglePlayServiceClient implements
 
 	public enum ConnectRequestType {
 		CONNECT_REQUEST_NULL,
-		/** 为提交分数而连接 **/
+		/** 提交分数 **/
 		CONNECT_REQUEST_SCORE_COMMIT,
-		/** 为进入排行榜而连接 **/
+		/** 展示排行榜 **/
 		CONNECT_REQUEST_BOARD,
-		/** 提交分数，然后展示排行榜 **/
+		/** 分数提交(不管结果)，展示排行榜 **/
 		CONNECT_REQUEST_SCORE_BOARD;
 	}
 
@@ -112,16 +111,11 @@ public class GwsGooglePlayServiceClient implements
 			public void run() {
 				// TODO Auto-generated method stub
 				if (null != mGoogleApiClient && mGoogleApiClient.isConnected()) {
-					PendingResult<SubmitScoreResult> result = Games.Leaderboards
-							.submitScoreImmediate(
-									mGoogleApiClient,
-									mActivity
-											.getApplicationContext()
-											.getString(
-													R.string.leaderboard_worldrank),
-									score);
+					Games.Leaderboards.submitScoreImmediate(
+							mGoogleApiClient,
+							mActivity.getApplicationContext().getString(
+									R.string.leaderboard_worldrank), score);
 
-					TransferActivity.closeAct();
 					// return true;
 				} else {
 					curScore = score;
@@ -147,10 +141,10 @@ public class GwsGooglePlayServiceClient implements
 					Games.Leaderboards.submitScoreImmediate(
 							mGoogleApiClient,
 							mActivity.getApplicationContext().getString(
-									R.string.leaderboard_worldrank), score)
-							.setResultCallback(
-									new MyLeaderBoardSubmitScoreCallback());
-					TransferActivity.closeAct();
+									R.string.leaderboard_worldrank), score);
+					showLeaderBoards();
+					// .setResultCallback(
+					// new MyLeaderBoardSubmitScoreCallback());
 					// return true;
 				} else {
 					curScore = score;
@@ -169,12 +163,7 @@ public class GwsGooglePlayServiceClient implements
 		@Override
 		public void onResult(SubmitScoreResult result) {
 			// TODO Auto-generated method stub
-			// if (result.getStatus().getStatusCode() ==
-			// GamesStatusCodes.STATUS_OK) {
-			// showLeaderBoards();
-			// } else {
-			//
-			// }
+			result.getStatus().getStatusCode();
 			showLeaderBoards();
 		}
 
@@ -196,7 +185,6 @@ public class GwsGooglePlayServiceClient implements
 													.getString(
 															R.string.leaderboard_worldrank)),
 							LEADERBOARDER_SHOW_REQ);
-			TransferActivity.closeAct();
 		} else {
 			curRequestType = ConnectRequestType.CONNECT_REQUEST_BOARD;
 			connect();
@@ -204,27 +192,25 @@ public class GwsGooglePlayServiceClient implements
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		// if (requestCode == SIGN_IN_REQ) {
-		// mSignInClicked = false;
-		// mResolvingConnectionFailure = false;
-		// if (resultCode == Activity.RESULT_OK) {
-		// mGoogleApiClient.connect();
-		// } else {
-		// // Bring up an error dialog to alert the user that sign-in
-		// // failed. The R.string.signin_failure should reference an error
-		// // string in your strings.xml file that tells the user they
-		// // could not be signed in, such as "Unable to sign in."
-		// BaseGameUtils.showActivityResultError(mActivity, requestCode,
-		// resultCode, R.string.signin_other_error);
-		// mGoogleApiClient.disconnect();
-		// // ToastClient.getInstance().showToastShort(
-		// // R.string.signin_other_error);
-		// }
-		// } else if (resultCode ==
-		// GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
-		// mGoogleApiClient.disconnect();
-		// }
-		// TransferActivity.closeAct();
+		if (requestCode == SIGN_IN_REQ) {
+			mSignInClicked = false;
+			mResolvingConnectionFailure = false;
+			if (resultCode == Activity.RESULT_OK) {
+				mGoogleApiClient.connect();
+			} else {
+				// Bring up an error dialog to alert the user that sign-in
+				// failed. The R.string.signin_failure should reference an error
+				// string in your strings.xml file that tells the user they
+				// could not be signed in, such as "Unable to sign in."
+				BaseGameUtils.showActivityResultError(mActivity, requestCode,
+						resultCode, R.string.signin_other_error);
+				mGoogleApiClient.disconnect();
+				// ToastClient.getInstance().showToastShort(
+				// R.string.signin_other_error);
+			}
+		} else if (resultCode == GamesActivityResultCodes.RESULT_RECONNECT_REQUIRED) {
+			mGoogleApiClient.disconnect();
+		}
 	}
 
 	@Override
@@ -256,7 +242,6 @@ public class GwsGooglePlayServiceClient implements
 							.getString(R.string.signin_other_error))) {
 				mResolvingConnectionFailure = false;
 			}
-			TransferActivity.closeAct();
 		}
 
 		// Put code here to display the sign-in button

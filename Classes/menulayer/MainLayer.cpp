@@ -178,7 +178,7 @@ void MainLayer::menuRank(cocos2d::Ref *sender){
     GameMainHelper::getInstance()->playSound(BTNCLICK);
     if(GameMainHelper::getInstance()->getGoogleServer()){
     	int hScore = UserDefault::getInstance()->getIntegerForKey(Highest);
-       HPlatformHelper::getInstance()->showRank();
+       HPlatformHelper::getInstance()->showRank(hScore);
 //       Sequence* seq = Sequence::create(DelayTime::create(1.5),
 //    		   CallFunc::create(CC_CALLBACK_0(MainLayer::showRank, this)), NULL);
 //       node->stopAllActions();
@@ -189,7 +189,7 @@ void MainLayer::menuRank(cocos2d::Ref *sender){
     }
 }
 void MainLayer::showRank(){
-	HPlatformHelper::getInstance()->showRank();
+	//HPlatformHelper::getInstance()->showRank();
 }
 void MainLayer::menuSet(cocos2d::Ref *sender){
     GameMainHelper::getInstance()->playSound(BTNCLICK);

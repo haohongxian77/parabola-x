@@ -18,7 +18,7 @@ public:
     static HPlatformHelper* platfromHelper;
     static HPlatformHelper* getInstance();
     void share(int shareType,int shareFrom,std::string path);
-    void showRank();
+    void showRank(int score);
     void commitScore(int score);
     void showFullAd();
     void showToast(std::string content);

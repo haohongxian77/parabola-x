@@ -61,7 +61,7 @@ public :
 	void setVM();
 
 	void share(int shareType,int shareFrom,std::string filepath);
-	void showRank();
+	void showRank(int score);
 	void commitScore(int score);
 	void showFullAD();
 	void showToast(std::string content);
