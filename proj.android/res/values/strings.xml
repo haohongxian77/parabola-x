@@ -7,6 +7,10 @@
     <string name="install_facebook">Please install lastest version facebook first</string>
     <string name="install_wx">Please install the latest version of WeChat</string>
     <string name="open_rank">Please open the rank in settings</string>
+    <!-- facebook start -->
+    <string name="facebook_app_id">372222629651523</string>
+    <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>
+    <!-- facebook end -->
     <!-- sina  start -->
     <string name="weibosdk_toast_share_success">分享成功</string>
     <string name="weibosdk_toast_share_failed">分享失败</string>
@@ -61,10 +65,6 @@
     <string name="sign_in_to_upload_this_score">Sign in now to upload this score, save your achievements and share your progress with friends.</string>
     <string name="signin_other_error">There was an issue with sign in.  Please try again later.</string>
     <!-- google play service end -->
-    <!-- facebook start -->
-    <string name="facebook_app_id">372222629651523</string>
-    <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>
-    <!-- facebook end -->
     <!-- wx start -->
     <string name="app_back">返回</string>
     <string name="app_ok">确定</string>

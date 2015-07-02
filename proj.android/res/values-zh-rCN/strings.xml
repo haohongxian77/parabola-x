@@ -9,4 +9,8 @@
     <string name="share_sdcard_error">分享失败,请插入sdcard</string>
     <string name="install_wx">请安装最新版本微信</string>
     <string name="open_rank">请在设置中打开排行榜</string>
+    <!-- facebook start -->
+    <string name="facebook_app_id">372222629651523</string>
+    <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>
+    <!-- facebook end -->
 </resources>
