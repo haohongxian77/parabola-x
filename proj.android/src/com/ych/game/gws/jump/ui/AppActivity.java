@@ -26,17 +26,10 @@ THE SOFTWARE.
  ****************************************************************************/
 package com.ych.game.gws.jump.ui;
 
-import java.security.MessageDigest;
-
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
 import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -66,26 +59,26 @@ public class AppActivity extends Cocos2dxActivity {
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		adLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		containerView.addView(AdsClient.getInstance().getAdView(), adLp);
-		getKeyHash();
+		// getKeyHash();
 	}
 
-	public void getKeyHash() {
-
-		// Add code to print out the key hash
-		try {
-			PackageInfo info = this.getPackageManager().getPackageInfo(
-					"com.ych.game.gws.jump", // 替换成你游戏的包名
-					PackageManager.GET_SIGNATURES);
-			for (Signature signature : info.signatures) {
-				MessageDigest md = MessageDigest.getInstance("SHA");
-				md.update(signature.toByteArray());
-				Log.d("KeyHash:",
-						Base64.encodeToString(md.digest(), Base64.DEFAULT));
-			}
-		} catch (Exception e) {
-
-		}
-	}
+	// public void getKeyHash() {
+	//
+	// // Add code to print out the key hash
+	// try {
+	// PackageInfo info = this.getPackageManager().getPackageInfo(
+	// "com.ych.game.gws.jump", // 替换成你游戏的包名
+	// PackageManager.GET_SIGNATURES);
+	// for (Signature signature : info.signatures) {
+	// MessageDigest md = MessageDigest.getInstance("SHA");
+	// md.update(signature.toByteArray());
+	// Log.d("KeyHash:",
+	// Base64.encodeToString(md.digest(), Base64.DEFAULT));
+	// }
+	// } catch (Exception e) {
+	//
+	// }
+	// }
 
 	@Override
 	protected void onStart() {
@@ -121,7 +114,7 @@ public class AppActivity extends Cocos2dxActivity {
 		/**
 		 * facebook end
 		 */
-		// AdsClient.getInstance().onPause();
+		AdsClient.getInstance().onPause();
 
 	}
 

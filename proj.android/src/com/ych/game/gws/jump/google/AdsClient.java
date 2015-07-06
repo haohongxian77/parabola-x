@@ -52,12 +52,10 @@ public class AdsClient {
 	public void initWithActivityOnCreate(Activity mActivity) {
 		this.mActivity = mActivity;
 		adView = new AdView(mActivity);
-		adView.setAdUnitId("test");
-		adView.setAdSize(AdSize.SMART_BANNER);
+		adView.setAdUnitId(AD_BANNER_00);
+		adView.setAdSize(AdSize.FULL_BANNER);
 
-		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
-				getDeviceId()).build();
-		adView.loadAd(adRequest);
+		adView.loadAd(new AdRequest.Builder().build());
 		adView.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -74,13 +72,13 @@ public class AdsClient {
 			public void onAdFailedToLoad(int errorCode) {
 				// TODO Auto-generated method stub
 				super.onAdFailedToLoad(errorCode);
+				adView.loadAd(new AdRequest.Builder().build());
 				Log.e(TAG, "onAdFailedToLoad:" + errorCode);
 			}
 		});
 		interstitial = new InterstitialAd(mActivity);
-		interstitial.setAdUnitId("test01");
-		interstitial.loadAd(new AdRequest.Builder()
-				.addTestDevice(getDeviceId()).build());
+		interstitial.setAdUnitId(AD_INSERT_00);
+		interstitial.loadAd(new AdRequest.Builder().build());
 		interstitial.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -92,8 +90,7 @@ public class AdsClient {
 			public void onAdClosed() {
 				// TODO Auto-generated method stub
 				super.onAdClosed();
-				interstitial.loadAd(new AdRequest.Builder().addTestDevice(
-						getDeviceId()).build());
+				interstitial.loadAd(new AdRequest.Builder().build());
 			}
 		});
 	}

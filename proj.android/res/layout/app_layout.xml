@@ -1,25 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/googleBtn"
-        android:layout_width="wrap_content"
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="google Login" />
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        ads:adSize="SMART_BANNER"
+        ads:adUnitId="@string/ad_boottom_id" >
+    </com.google.android.gms.ads.AdView>
 
-    <Button
-        android:id="@+id/googleBtn01"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="google score" />
-
-    <Button
-        android:id="@+id/googleBtn02"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="google board" />
-
-</LinearLayout>
+</RelativeLayout>
