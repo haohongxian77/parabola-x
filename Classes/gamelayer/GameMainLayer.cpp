@@ -135,9 +135,9 @@ void GameMainLayer::touchGuild(cocos2d::Ref *sender){
     std::vector<Point>* touchPoint  = GameMainHelper::getInstance()->touchGuildPoints;
     GameMainScene* scene = (GameMainScene*)this->getParent();
     if (touchPoint->size() == 0) {
-        scene->showGood();
-    }else{
         scene->showGuildPerfect();
+    }else{
+        scene->showGood();
     }
 }
 void GameMainLayer::reloadData(){
