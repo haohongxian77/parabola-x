@@ -163,6 +163,7 @@ void HHPlatform::showRank(int score){
 }
 void HHPlatform::showFullAD(){
 	JNIEnv *env;
+	CCLOG("显示全屏广告------------------");
 	m_pVM->AttachCurrentThread(&env, NULL);
 	jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
 	jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
@@ -170,6 +171,17 @@ void HHPlatform::showFullAD(){
 				    	      	   			         "showInsertAd",
 				    	      	   			            "()V");
 	env->CallVoidMethod(obj, adShow);
+
+}
+void HHPlatform::showAd(){
+	JNIEnv *env;
+	m_pVM->AttachCurrentThread(&env, NULL);
+		jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
+		jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
+		jmethodID adShow = env->GetMethodID(m_ADChinaClient,
+					    	      	   			         "setAdViewVisibility",
+					    	      	   			            "(I)V");
+		env->CallVoidMethod(obj, adShow,0);
 
 }
 void HHPlatform::commitScore(int score){

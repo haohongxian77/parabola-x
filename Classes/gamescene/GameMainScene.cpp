@@ -217,6 +217,7 @@ void GameMainScene::removeSp(){
 
 void GameMainScene::onEnter(){
     Scene::onEnter();
+    HHPlatform::GetInstance()->showAd();
 }
 void GameMainScene::onExit(){
 	GameMainHelper::getInstance()->destory();

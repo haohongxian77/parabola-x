@@ -65,6 +65,7 @@ public :
 	void commitScore(int score);
 	void showFullAD();
 	void showToast(std::string content);
+	void showAd();
 };
 
 #endif /* defined(__beetalk_msdk__HHPlatform__) */

@@ -142,18 +142,28 @@ public class AdsChinaClient {
 	 * 
 	 * @param visibility
 	 */
-	public void setAdViewVisibility(int visibility) {
-		if (visibility == 0) {
-			if (null != adView) {
-				adView.setVisibility(View.VISIBLE);
-			}
+	public void setAdViewVisibility(final int visibility) {
+		mActivity.runOnUiThread(new Runnable() {
 
-		} else {
-			if (null != adView) {
-				adView.setVisibility(View.INVISIBLE);
-			}
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				if (visibility == 0) {
+					if (null != adView) {
+						adView.setVisibility(View.VISIBLE);
+						adView.invalidate();
+						adView.getParent().requestLayout();
+					}
 
-		}
+				} else {
+					if (null != adView) {
+						adView.setVisibility(View.INVISIBLE);
+					}
+
+				}
+			}
+		});
+
 	}
 
 	/**
