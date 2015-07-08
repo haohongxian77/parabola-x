@@ -35,6 +35,7 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.facebook.appevents.AppEventsLogger;
+import com.ych.game.gws.jump.ads.AdsChinaClient;
 import com.ych.game.gws.jump.google.AdsClient;
 import com.ych.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.ych.game.gws.jump.share.ClientType;
@@ -51,6 +52,7 @@ public class AppActivity extends Cocos2dxActivity {
 		ToastClient.getInstance().registerClient(this, MyApp.PACKAGE_NAME);
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
 		AdsClient.getInstance().initWithActivityOnCreate(this);
+		AdsChinaClient.getInstance().initWithActivityOnCreate(this);
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		RelativeLayout containerView = new RelativeLayout(this);
@@ -58,7 +60,8 @@ public class AppActivity extends Cocos2dxActivity {
 		RelativeLayout.LayoutParams adLp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		adLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-		containerView.addView(AdsClient.getInstance().getAdView(), adLp);
+		containerView.removeAllViews();
+		containerView.addView(AdsChinaClient.getInstance().getAdView(), adLp);
 		// getKeyHash();
 	}
 
@@ -133,6 +136,7 @@ public class AppActivity extends Cocos2dxActivity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		AdsClient.getInstance().onDestroy();
+		AdsChinaClient.getInstance().onDestroy();
 		GwsGooglePlayServiceClient.getInstance().disConnect();
 	}
 }

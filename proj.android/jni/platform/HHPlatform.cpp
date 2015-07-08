@@ -22,6 +22,7 @@ static jclass m_shareSina;
 static jclass m_shareFB;
 static jclass m_googleClient;
 static jclass m_ADClient;
+static jclass m_ADChinaClient;
 static jclass m_Toast;
 static jclass m_Share;
 
@@ -65,6 +66,11 @@ void HHPlatform::setVM(){
 	  jclass cls_AD = env->FindClass("com/ych/game/gws/jump/google/AdsClient");
 	  m_ADClient = (jclass) env->NewGlobalRef(cls_AD);
 	  env->DeleteLocalRef(cls_AD);
+
+	  jclass cls_ADChina = env->FindClass("com/ych/game/gws/jump/ads/AdsChinaClient");
+	  m_ADChinaClient = (jclass) env->NewGlobalRef(cls_ADChina);
+	  env->DeleteLocalRef(cls_ADChina);
+
 
 	  jclass cls_Toast = env->FindClass("com/ych/game/gws/jump/share/ToastClient");
 	  m_Toast = (jclass) env->NewGlobalRef(cls_Toast);
@@ -158,9 +164,9 @@ void HHPlatform::showRank(int score){
 void HHPlatform::showFullAD(){
 	JNIEnv *env;
 	m_pVM->AttachCurrentThread(&env, NULL);
-	jmethodID construction_id = env->GetStaticMethodID(m_ADClient, "getInstance", "()Lcom/ych/game/gws/jump/google/AdsClient;");
-	jobject   	   obj = env->CallStaticObjectMethod(m_ADClient, construction_id);
-	jmethodID adShow = env->GetMethodID(m_ADClient,
+	jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
+	jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
+	jmethodID adShow = env->GetMethodID(m_ADChinaClient,
 				    	      	   			         "showInsertAd",
 				    	      	   			            "()V");
 	env->CallVoidMethod(obj, adShow);
