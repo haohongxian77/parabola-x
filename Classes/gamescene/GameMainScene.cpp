@@ -163,9 +163,9 @@ void GameMainScene::changeScore(){
 }
 void GameMainScene::showGood(){
     Size s = Director::getInstance()->getWinSize();
-    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("tip_good.png");
     spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-    spFront->setPosition(s.width/2,s.height/1.25);
+    spFront->setPosition(s.width/2,s.height/1.5);
     addChild(spFront);
     FadeOut * ac = FadeOut::create(2);
     spFront->setTag(EffectFront);
@@ -174,9 +174,9 @@ void GameMainScene::showGood(){
 }
 void GameMainScene::showPerfect(){
     Size s = Director::getInstance()->getWinSize();
-    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("tip_perfect.png");
     spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-    spFront->setPosition(s.width/2,s.height/1.25);
+    spFront->setPosition(s.width/2,s.height/1.5);
     addChild(spFront);
     spFront->setTag(EffectFront);
     FadeOut * ac = FadeOut::create(2);
@@ -185,9 +185,9 @@ void GameMainScene::showPerfect(){
 }
 void GameMainScene::showGuildPerfect(){
     Size s = Director::getInstance()->getWinSize();
-    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("tip_perfect_guild.png");
     spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-    spFront->setPosition(s.width/2,s.height/1.25);
+    spFront->setPosition(s.width/2,s.height/1.5);
     addChild(spFront);
     spFront->setTag(EffectFront);
     FadeOut * ac = FadeOut::create(2);
@@ -196,13 +196,13 @@ void GameMainScene::showGuildPerfect(){
 }
 void GameMainScene::showIsYouturn(){
     Size s = Director::getInstance()->getWinSize();
-    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("tip_guildover.png");
     spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
-    spFront->setPosition(s.width/2,s.height/1.25);
+    spFront->setPosition(s.width/2,s.height/1.5);
     addChild(spFront);
     spFront->setTag(EffectFront);
     FadeOut * ac = FadeOut::create(3);
-    Sequence* seq = Sequence::create(ac,CallFunc::create(CC_CALLBACK_0(GameMainScene::removeSp, this)),CallFunc::create(CC_CALLBACK_0(GameMainScene::showAlertView, this)), NULL);
+    Sequence* seq = Sequence::create(DelayTime::create(2), ac,CallFunc::create(CC_CALLBACK_0(GameMainScene::removeSp, this)),CallFunc::create(CC_CALLBACK_0(GameMainScene::showAlertView, this)), NULL);
     
     //unscheduleUpdate();
     m_gameUILayer ->setVisible(false);
