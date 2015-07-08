@@ -55,9 +55,7 @@ public class FaceBookClient {
 	private String curFilePath;
 
 	public static FaceBookClient getInstance() {
-		Log.e(TAG, "getInstance");
 		if (INSTANCE == null) {
-			Log.e(TAG, "getInstance  new");
 			INSTANCE = new FaceBookClient();
 		}
 		return INSTANCE;
@@ -112,8 +110,6 @@ public class FaceBookClient {
 					@Override
 					public void onSuccess(LoginResult result) {
 						// TODO Auto-generated method stub
-						Log.d(TAG, "facebook login onSuccess");
-
 						if (curStatus != -10 && !TextUtils.isEmpty(curFilePath)) {
 							shareImg(curStatus, curFilePath);
 						}
@@ -145,7 +141,6 @@ public class FaceBookClient {
 	 * @param imgAbsPath
 	 */
 	public void shareImg(final int status, final String filePath) {
-		Log.e(TAG, "shareImg");
 		// TODO Auto-generated method stub
 		ClientType.getInstance().setCurType(CurrentType.FACEBOOK);
 		// TODO Auto-generated method stub
@@ -179,14 +174,12 @@ public class FaceBookClient {
 	}
 
 	private boolean hasPublishPermission() {
-		Log.e(TAG, "hasPublishPermission");
 		AccessToken accessToken = AccessToken.getCurrentAccessToken();
 		return accessToken != null
 				&& accessToken.getPermissions().contains("publish_actions");
 	}
 
 	private void startToShare(final int status, final String filePath) {
-		Log.e(TAG, "startToShare");
 		curStatus = status;
 		curFilePath = filePath;
 		Bitmap image;
@@ -240,7 +233,6 @@ public class FaceBookClient {
 
 	public void onActivityResult(final int requestCode, final int resultCode,
 			final Intent data) {
-		Log.e(TAG, "onActivityResult");
 		callbackManager.onActivityResult(requestCode, resultCode, data);
 
 	}

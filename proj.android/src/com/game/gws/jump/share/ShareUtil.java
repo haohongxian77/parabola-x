@@ -15,7 +15,6 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.os.Environment;
-import android.util.Log;
 import android.view.View;
 
 /**
@@ -69,22 +68,19 @@ public class ShareUtil {
 				android.os.Environment.MEDIA_MOUNTED)) {
 			return false;
 		}
-		Log.e(TAG, "saveScreenShot  sdcard  MEDIA_MOUNTED");
 		String dirStr = Environment.getExternalStorageDirectory().getPath()
 				+ File.separator + SHOT_NAME_DIR;
 		File fileDir = new File(dirStr);
 		try {
 			if (!fileDir.exists()) {
-				Log.e(TAG, "saveScreenShot mkdirs： " + fileDir.mkdirs());
+				fileDir.mkdirs();
 			}
-			Log.e(TAG, "saveScreenShot  sdcard  MEDIA_MOUNTED");
 			String fileName = "";
 			if (curType == ScreenShotType.GAME_SCREEN_SHOT) {
 				fileName = SHOT_NAME_GAME;
 			} else {
 				fileName = SHOT_NAME_SCORE;
 			}
-			Log.e(TAG, "saveScreenShot：" + fileDir.getAbsolutePath());
 			File shotFile = new File(fileDir, fileName);
 			// 判断文件是否存在，不存在则创建
 			if (!shotFile.exists()) {
@@ -102,7 +98,6 @@ public class ShareUtil {
 			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
-			Log.e(TAG, "saveScreenShot Exception:" + e.getMessage());
 			return false;
 		}
 

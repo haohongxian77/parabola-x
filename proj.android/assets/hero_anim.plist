@@ -163,11 +163,11 @@
             <key>hero_dead2_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{958,740},{55,74}}</string>
+                <string>{{2,560},{55,74}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{55,74}}</string>
                 <key>sourceSize</key>
@@ -202,11 +202,11 @@
             <key>hero_drop_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{164,620},{81,70}}</string>
+                <string>{{2,703},{81,70}}</string>
                 <key>offset</key>
                 <string>{0,-8}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,16},{81,70}}</string>
                 <key>sourceSize</key>
@@ -215,11 +215,11 @@
             <key>hero_drop_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{169,492},{81,86}}</string>
+                <string>{{85,713},{81,86}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,0},{81,86}}</string>
                 <key>sourceSize</key>
@@ -228,7 +228,7 @@
             <key>hero_jpdown1_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{958,584},{82,62}}</string>
+                <string>{{958,671},{82,62}}</string>
                 <key>offset</key>
                 <string>{0,-8}</string>
                 <key>rotated</key>
@@ -241,7 +241,7 @@
             <key>hero_jpdown1_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{90,713},{82,78}}</string>
+                <string>{{166,842},{82,78}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -254,11 +254,11 @@
             <key>hero_jpdown_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{958,668},{61,70}}</string>
+                <string>{{2,775},{61,70}}</string>
                 <key>offset</key>
                 <string>{5,0}</string>
                 <key>rotated</key>
-                <false/>
+                <true/>
                 <key>sourceColorRect</key>
                 <string>{{10,0},{61,70}}</string>
                 <key>sourceSize</key>
@@ -267,7 +267,7 @@
             <key>hero_jpdown_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{236,620},{71,70}}</string>
+                <string>{{171,620},{71,70}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -280,7 +280,7 @@
             <key>hero_jpdown_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{866,703},{90,60}}</string>
+                <string>{{680,641},{90,60}}</string>
                 <key>offset</key>
                 <string>{0,-5}</string>
                 <key>rotated</key>
@@ -293,7 +293,7 @@
             <key>hero_jpdown_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{680,641},{90,70}}</string>
+                <string>{{866,703},{90,70}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -306,7 +306,7 @@
             <key>hero_jpstart_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{91,620},{81,71}}</string>
+                <string>{{173,926},{81,71}}</string>
                 <key>offset</key>
                 <string>{0,-8}</string>
                 <key>rotated</key>
@@ -319,7 +319,7 @@
             <key>hero_jpstart_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{90,816},{81,85}}</string>
+                <string>{{90,930},{81,85}}</string>
                 <key>offset</key>
                 <string>{0,-1}</string>
                 <key>rotated</key>
@@ -332,7 +332,7 @@
             <key>hero_jpstart_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,906},{79,87}}</string>
+                <string>{{80,492},{79,87}}</string>
                 <key>offset</key>
                 <string>{1,0}</string>
                 <key>rotated</key>
@@ -345,7 +345,7 @@
             <key>hero_jpstart_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,560},{81,87}}</string>
+                <string>{{2,620},{81,87}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -358,7 +358,7 @@
             <key>hero_jpup_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,643},{68,78}}</string>
+                <string>{{91,643},{68,78}}</string>
                 <key>offset</key>
                 <string>{3,0}</string>
                 <key>rotated</key>
@@ -371,7 +371,7 @@
             <key>hero_jpup_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{170,713},{74,78}}</string>
+                <string>{{168,713},{74,78}}</string>
                 <key>offset</key>
                 <string>{0,0}</string>
                 <key>rotated</key>
@@ -380,6 +380,32 @@
                 <string>{{0,0},{74,78}}</string>
                 <key>sourceSize</key>
                 <string>{74,78}</string>
+            </dict>
+            <key>hero_jpup_long_0.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{958,755},{85,61}}</string>
+                <key>offset</key>
+                <string>{0,-1}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,2},{85,61}}</string>
+                <key>sourceSize</key>
+                <string>{85,63}</string>
+            </dict>
+            <key>hero_jpup_long_1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{958,584},{85,63}}</string>
+                <key>offset</key>
+                <string>{0,0}</string>
+                <key>rotated</key>
+                <true/>
+                <key>sourceColorRect</key>
+                <string>{{0,0},{85,63}}</string>
+                <key>sourceSize</key>
+                <string>{85,63}</string>
             </dict>
             <key>hero_load_0.png</key>
             <dict>
@@ -488,7 +514,7 @@
             <key>hero_static_0.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{91,492},{86,74}}</string>
+                <string>{{90,842},{86,74}}</string>
                 <key>offset</key>
                 <string>{-2,-7}</string>
                 <key>rotated</key>
@@ -501,11 +527,11 @@
             <key>hero_static_1.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{83,906},{86,84}}</string>
+                <string>{{161,492},{86,84}}</string>
                 <key>offset</key>
                 <string>{-2,-2}</string>
                 <key>rotated</key>
-                <true/>
+                <false/>
                 <key>sourceColorRect</key>
                 <string>{{0,4},{86,84}}</string>
                 <key>sourceSize</key>
@@ -514,7 +540,7 @@
             <key>hero_static_2.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,713},{86,88}}</string>
+                <string>{{2,932},{86,88}}</string>
                 <key>offset</key>
                 <string>{-2,0}</string>
                 <key>rotated</key>
@@ -527,7 +553,7 @@
             <key>hero_static_3.png</key>
             <dict>
                 <key>frame</key>
-                <string>{{2,816},{86,88}}</string>
+                <string>{{2,842},{86,88}}</string>
                 <key>offset</key>
                 <string>{-2,0}</string>
                 <key>rotated</key>
@@ -599,7 +625,7 @@
             <key>size</key>
             <string>{1024,1024}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:8df1da4d97de75318dc497c68ac2b0d7:1/1$</string>
+            <string>$TexturePacker:SmartUpdate:0bd21cf95e2bd06038f130e853bdd664:1/1$</string>
             <key>textureFileName</key>
             <string>hero_anim.png</string>
         </dict>

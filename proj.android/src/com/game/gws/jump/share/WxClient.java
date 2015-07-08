@@ -16,7 +16,6 @@ import android.graphics.Bitmap;
 import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType.CurrentType;
@@ -101,7 +100,6 @@ public class WxClient {
 				String imgAbsPath = ShareUtil
 						.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
 								: ScreenShotType.SCORE_SCREEN_SHOT);
-				Log.e(TAG, "shareImg:" + imgAbsPath);
 				WXImageObject imgObj = new WXImageObject();
 				imgObj.setImagePath(imgAbsPath);
 

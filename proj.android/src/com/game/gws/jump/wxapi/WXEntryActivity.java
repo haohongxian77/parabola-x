@@ -11,7 +11,6 @@ package com.game.gws.jump.wxapi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import com.game.gws.jump.share.WxClient;
@@ -36,7 +35,6 @@ public class WXEntryActivity extends Activity implements IWXAPIEventHandler {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		Log.e(TAG, "onCreate");
 		Intent intent = getIntent();
 		Bundle bundle = null;
 		if (intent != null) {

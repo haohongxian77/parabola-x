@@ -14,7 +14,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.game.gws.jump.R;
 import com.game.gws.jump.share.ClientType.CurrentType;
@@ -120,7 +119,6 @@ public class SinaClient {
 	 * @param content
 	 */
 	public void shareImgAndContent(int status, String filePath) {
-		Log.e(TAG, "shareImgAndContent  status:" + status);
 		// 1. 初始化微博的分享消息
 		ClientType.getInstance().setCurType(CurrentType.SINA);
 		curStatus = status;
@@ -175,7 +173,6 @@ public class SinaClient {
 
 					@Override
 					public void onWeiboException(WeiboException arg0) {
-						Log.e(TAG, "fail");
 						TransferActivity.closeAct();
 						ToastClient.getInstance().showToastShort(
 								R.string.share_fail);
@@ -184,7 +181,6 @@ public class SinaClient {
 					@Override
 					public void onComplete(Bundle bundle) {
 						// TODO Auto-generated method stub
-						Log.e(TAG, "success");
 						TransferActivity.closeAct();
 						Oauth2AccessToken newToken = Oauth2AccessToken
 								.parseAccessToken(bundle);
@@ -196,7 +192,6 @@ public class SinaClient {
 
 					@Override
 					public void onCancel() {
-						Log.e(TAG, "cancel");
 						TransferActivity.closeAct();
 						ToastClient.getInstance().showToastShort(
 								R.string.share_cancel);
@@ -228,7 +223,6 @@ public class SinaClient {
 		@Override
 		public void onCancel() {
 			// TODO Auto-generated method stub
-			Log.e(TAG, "cancel");
 			TransferActivity.closeAct();
 			ToastClient.getInstance().showToastShort(R.string.share_cancel);
 		}
@@ -236,7 +230,6 @@ public class SinaClient {
 		@Override
 		public void onComplete(Bundle bundle) {
 			// TODO Auto-generated method stub
-			Log.e(TAG, "success");
 			Oauth2AccessToken newToken = Oauth2AccessToken
 					.parseAccessToken(bundle);
 			AccessTokenKeeper.writeAccessToken(MyApp.getInstance()
@@ -247,7 +240,6 @@ public class SinaClient {
 		@Override
 		public void onWeiboException(WeiboException arg0) {
 			// TODO Auto-generated method stub
-			Log.e(TAG, "fail");
 			ToastClient.getInstance().showToastShort(R.string.share_fail);
 			TransferActivity.closeAct();
 		}

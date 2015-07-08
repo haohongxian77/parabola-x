@@ -17,6 +17,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.widget.Toast;
 
+import com.game.gws.jump.R;
+
 /**
  * @author czj
  * @Description:
@@ -46,6 +48,10 @@ public class ToastClient {
 	public void registerClient(Activity activity, String packageName) {
 		this.mActivity = activity;
 		this.packageName = packageName;
+	}
+
+	public void showOpenRank() {
+		showToastShort(R.string.open_rank);
 	}
 
 	public void showToastLong(final String text) {

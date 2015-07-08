@@ -54,15 +54,13 @@ public class AdsClient {
 		adView.setAdUnitId(AD_BANNER_00);
 		adView.setAdSize(com.google.android.gms.ads.AdSize.SMART_BANNER);
 
-		AdRequest adRequest = new AdRequest.Builder().addTestDevice(
-				getDeviceId()).build();
+		AdRequest adRequest = new AdRequest.Builder().build();
 		adView.loadAd(adRequest);
 		adView.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
 				// TODO Auto-generated method stub
 				super.onAdLoaded();
-				Log.e(TAG, "onAdLoaded");
 				if (null != adView.getParent()) {
 					adView.getParent().requestLayout();
 				}
@@ -78,8 +76,7 @@ public class AdsClient {
 		});
 		interstitial = new InterstitialAd(mActivity);
 		interstitial.setAdUnitId(AD_INSERT_00);
-		interstitial.loadAd(new AdRequest.Builder()
-				.addTestDevice(getDeviceId()).build());
+		interstitial.loadAd(new AdRequest.Builder().build());
 		interstitial.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -91,8 +88,7 @@ public class AdsClient {
 			public void onAdClosed() {
 				// TODO Auto-generated method stub
 				super.onAdClosed();
-				interstitial.loadAd(new AdRequest.Builder().addTestDevice(
-						getDeviceId()).build());
+				interstitial.loadAd(new AdRequest.Builder().build());
 			}
 		});
 	}
@@ -106,7 +102,6 @@ public class AdsClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				Log.e(TAG, "interstitial.isLoaded():" + interstitial.isLoaded());
 				if (interstitial.isLoaded()) {
 					interstitial.show();
 				}
@@ -157,7 +152,6 @@ public class AdsClient {
 			return hexString.toString();
 
 		} catch (NoSuchAlgorithmException e) {
-			Log.e(TAG, e.getMessage());
 		}
 		return "";
 	}

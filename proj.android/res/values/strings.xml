@@ -5,7 +5,8 @@
     <string name="share_cancel">share cancel</string>
     <string name="share_fail">share fail</string>
     <string name="install_facebook">Please install lastest version facebook first</string>
-    <string name="install_wx">Please install the latest version of 微信</string>
+    <string name="install_wx">Please install the latest version of WeChat</string>
+    <string name="open_rank">Please open the rank in settings</string>
     <!-- sina  start -->
     <string name="weibosdk_toast_share_success">分享成功</string>
     <string name="weibosdk_toast_share_failed">分享失败</string>
