@@ -63,6 +63,11 @@ public:
 //    void share(Node* node,int type);
     std::string cutOff(int shareType);
     void showMenu();
+    void showGood();
+    void showGuildPerfect();
+    void showIsYouturn();
+    void showPerfect();
+    void removeSp();
 private:
     int m_shareType = 0;
 };

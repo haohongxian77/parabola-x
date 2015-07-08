@@ -10,8 +10,11 @@
 //#include "helper/CalculateHelper.h"
 #include "helper/GameMainHelper.h"
 #include "gamesprite/MonsterSpile.h"
+#include "commonnode/HMenu.h"
 #define Gravity  1980//9.9
 #define DPixelTo 28
+#define MENUTAG 10001
+#define ArrowTAG 10002
 
 #define LAYERMOVESPEED 720
 GameMainLayer::GameMainLayer():
@@ -43,6 +46,7 @@ bool GameMainLayer::init(){
     inittestSp();
     initHelper();
     initHeroBeginPoint();
+    //initGuildArrow();
     return true;
 }
 void GameMainLayer::initData(){
@@ -66,6 +70,76 @@ void GameMainLayer::inittestSp(){
     drawNode = DrawNode::create();
     addChild(drawNode, 1);
 }
+void GameMainLayer::initGuildArrow(){
+    Node* menu =  this->getChildByTag(MENUTAG);
+    Node* arrow =  this->getChildByTag(ArrowTAG);
+    if (menu) {
+        menu->removeFromParentAndCleanup(true);
+        menu = NULL;
+    }
+    if (arrow) {
+        arrow->removeFromParentAndCleanup(true);
+        arrow = NULL;
+    }
+    if (GameMainHelper::getInstance()->touchGuildPoints->size() == 0) {
+        return;
+    }
+    
+    std::vector<Point>* touchPoint  = GameMainHelper::getInstance()->touchGuildPoints;
+    Point menuPoint = *(touchPoint->begin());
+    touchPoint->erase(touchPoint->begin());
+    
+    HMenu* item1 = HMenu::create("guide_light_frame.png", "guide_light_frame.png",CC_CALLBACK_1(GameMainLayer::touchGuild, this));
+    item1->getNormalImage()->setAnchorPoint(Vec2(0.5f, 0.5f));
+    item1->setPosition(menuPoint);
+    
+    Node* m_menu = Menu::create(item1, nullptr);
+    addChild(m_menu);
+    m_menu->setTag(MENUTAG);
+    m_menu->setAnchorPoint(Vec2(0, 0));
+    m_menu->setPosition(Vec2(0,0));
+    
+    
+    //箭头-----
+    Sprite* m_arrow = Sprite::createWithSpriteFrameName("guide_hand.png");
+    m_arrow ->setAnchorPoint(Vec2(1,1));
+    m_arrow->setTag(ArrowTAG);
+    m_arrow->setPosition(menuPoint.x+m_arrow->getContentSize().width/2+item1->getContentSize().width/2, menuPoint.y);
+    this->addChild(m_arrow);
+    m_arrow->setScale(0.8);
+//    m_arrow->setScaleX(-1);
+    
+    
+
+    ScaleTo *click_dwon = CCScaleTo::create(1, 1);
+    ScaleTo *click_up = CCScaleTo::create(1, 0.8);
+    FadeOut * ac = FadeOut::create(0.5);
+    
+    ActionInterval *result = (ActionInterval *)CCSequence::create(click_dwon,click_up,NULL);
+    Repeat *repeat_ = Repeat::create(result,1);
+    Sequence* seq = Sequence::create(repeat_,ac,CallFunc::create(CC_CALLBACK_0(GameMainLayer::removeArrow, this)), NULL);
+    
+    m_arrow->runAction(seq);
+}
+void GameMainLayer::removeArrow(){
+    Node* arrow =  this->getChildByTag(ArrowTAG);
+    if (arrow) {
+        arrow->removeFromParentAndCleanup(true);
+        arrow = NULL;
+    }
+
+}
+void GameMainLayer::touchGuild(cocos2d::Ref *sender){
+    Node* node = (Node*)sender;
+    startJump(node->getPosition());
+    std::vector<Point>* touchPoint  = GameMainHelper::getInstance()->touchGuildPoints;
+    GameMainScene* scene = (GameMainScene*)this->getParent();
+    if (touchPoint->size() == 0) {
+        scene->showGood();
+    }else{
+        scene->showGuildPerfect();
+    }
+}
 void GameMainLayer::reloadData(){
     params.clear();
 }
@@ -76,6 +150,7 @@ void GameMainLayer::initHelper(){
     
 }
 void GameMainLayer::startGame(float dx){
+    initGuildArrow();
     reloadData();
     setPositionX(-dx);
     initHeroBeginPoint();
@@ -92,7 +167,9 @@ void GameMainLayer::initHeroBeginPoint(){
     }
 }
 bool GameMainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
-    if (GameMainHelper::getInstance()->getGameStaus() == Tag_GameOver || params.size()!=0) {
+    //Node* menu = this->getChildByTag(MENUTAG);
+    gameStatus status = GameMainHelper::getInstance()->getGameStaus();
+    if ( status == Tag_GameOver || params.size()!=0||status == Tag_Guild) {
         return false;
     }
     movingPoints.clear();
@@ -122,13 +199,15 @@ void GameMainLayer::onTouchMoved(Touch *touch, Event *event){
     
 }
 void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
+    startJump(this->convertTouchToNodeSpace(touch));
+}
+void GameMainLayer::startJump(Point touchPoint){
     Size winSize = Director::getInstance()->getWinSize();
     Point curPos = m_hero->getPosition();
-    //Point heroWord = convertToWorldSpace(curPos);
     
-    touNode->setPos(touch, curPos);
+    //touNode->setPos(touch, curPos);
     
-    Point highPoint = this->convertTouchToNodeSpace(touch);
+    Point highPoint = touchPoint;
     highPoint = getTouchPoint(highPoint, touNode->getCurType());
     if (highPoint.x<=curPos.x) {
         m_hero->setHeroStatus(frogStatic);
@@ -143,7 +222,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
         case TOUCH_ENABLE_UP:
             dtime = curPos.distance(highPoint)/(winSize.width/2);
             gravity  = 2*(highPoint.y- curPos.y)/dtime/dtime;
-             startSpeedY= gravity*dtime;
+            startSpeedY= gravity*dtime;
             speedX = (highPoint.x-curPos.x)/dtime;
             heroStatus = frogJumpUp;
             //m_hero->setHeroStatus();
@@ -155,7 +234,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
             startSpeedY= gravity*dtime;
             speedX = (highPoint.x-curPos.x)/dtime;
             heroStatus = frogJumpUp;
-           // m_hero->setHeroStatus(frogJumpUp);
+            // m_hero->setHeroStatus(frogJumpUp);
             break;
         case TOUCH_DISABLE_DOWN:
             highPoint.y  = curPos.y-TOUCH_DISABLE_DIS;
@@ -182,7 +261,7 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     }
     if (params.size()!=0)
         return;
-   // gravity = MIN(gravity,1400);
+    // gravity = MIN(gravity,1400);
     params.push_back(gravity);
     params.push_back(speedX);
     params.push_back(startSpeedY);
@@ -190,7 +269,6 @@ void GameMainLayer::onTouchEnded(Touch *touch, Event *unused_event){
     
     GameMainHelper::getInstance()->initJumpDate(params,speedX,highPoint.y,curPos.y);
     m_hero->setHeroStatus(heroStatus);
-    
 }
 Point GameMainLayer::getTouchPoint(Point heightPoint,TouchType touchType){
     Node* sp = GameMainHelper::getInstance()->getTouchPosts(heightPoint);

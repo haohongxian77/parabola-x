@@ -35,7 +35,8 @@ bool MainLayer::onTouchBegan(Touch *pTouch, Event *pEvent){
     return  true;
 }
 void MainLayer::initOtherMenu(gameStatus status){
-    if (status == Tag_GameStart||status == Tag_None) {
+    status = GameMainHelper::getInstance()->getGameStaus();
+    if (status == Tag_GameStart||status == Tag_None||status == Tag_Guild) {
         m_logoLayer = GameMainLogoLayer::create();
         this->addChild(m_logoLayer,1);
         
@@ -60,6 +61,15 @@ void MainLayer::onEnter(){
     listener->onTouchBegan = CC_CALLBACK_2(MainLayer::onTouchBegan, this);
     _eventDispatcher->addEventListenerWithSceneGraphPriority  (listener,this );
     
+    if (GameMainHelper::getInstance()->getGameStaus() == Tag_Guild) {
+        GameMainHelper::getInstance()->startGame();
+        removeThisCallBack();
+    }else{
+        initAC();
+    }
+    
+}
+void MainLayer::initAC(){
     Size winSize = Director::getInstance()->getWinSize();
     this->setPositionY(winSize.height);
     MoveTo* moveTo = MoveTo::create(0.5f,
@@ -67,12 +77,13 @@ void MainLayer::onEnter(){
                                           this->getPositionX(),
                                           this->getPositionY() -winSize.height-70));
     MoveTo* moveTo2 = MoveTo::create(0.2f,
-                                    Point(
-                                          this->getPositionX(),
-                                          0));
+                                     Point(
+                                           this->getPositionX(),
+                                           0));
     EaseSineIn* easeBack = EaseSineIn::create(moveTo);
     Sequence* seq = Sequence::create(easeBack,moveTo2, NULL);
     this->runAction(seq);
+
 }
 void MainLayer::onExit(){
     

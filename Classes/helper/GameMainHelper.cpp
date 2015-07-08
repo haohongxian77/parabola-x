@@ -27,12 +27,15 @@ using namespace CocosDenshion;
 
 //#define PLAYTIME "playGameTime"
 #define SCOREADDTION  1.5
+#define GUILDCount  4
+
 GameMainHelper* GameMainHelper::mainHelper = NULL;
 
 GameMainHelper::GameMainHelper():
 m_gameStatus(Tag_None),
 m_curHeroPost(NULL),
 m_curScore(NULL),
+touchGuildPoints(NULL),
 m_curBgIndex(0),
 m_isGoogle(true),
 m_music(true),
@@ -70,12 +73,18 @@ void GameMainHelper::initDate(){
     
     m_posts = __Array::create();
     m_posts->retain();
-    CCLOG("初始化   GameHelper ------------------");
+    
+    touchGuildPoints = new std::vector<Point>();
     m_playTimes = 0;
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
     m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
     m_sound = UserDefault::getInstance()->getBoolForKey(SOUNDKEY, true);
     m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, true);
+    bool isGuild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
+    if (isGuild) {
+        m_gameStatus = Tag_Guild;
+    }
+    
     
 }
 void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float highY , float curY){
@@ -87,6 +96,10 @@ void GameMainHelper::initJumpDate(std::vector<float> param,float SpeedX,float hi
     initPathPoints(param, SpeedX,highY,curY);
 }
 void GameMainHelper::initPosts(){
+    if (m_gameStatus == Tag_Guild&&m_posts->count()==0) {
+            addGuildPost();
+    }
+    
     float posX = 0.0f;
     Size winSize = Director::getInstance()->getWinSize();
     if (m_posts->count() == 0) {
@@ -95,6 +108,7 @@ void GameMainHelper::initPosts(){
         Sprite* sp = (Sprite*)m_posts->getLastObject();
         posX = sp->getPositionX();
     }
+    
     while (posX+m_Layer->getPositionX()<winSize.width*3) {
     //while (m_posts->count()<50) {
         Point curPos = addPosts(posX);
@@ -131,25 +145,50 @@ Point GameMainHelper::addPosts(float perPointX){
         pos = getNextPoint(perSp->getPosition());
         
     }
-//    int randY =rand();
-//    float y = m_minHeight+randY%(m_maxHeight- m_minHeight+1);
-//     //
-//    Point pos = Vec2(perPointX+x, y- spSize.height);
     monspile->setPosition(pos);
-//    CCLOG("x ======%f   y =====%f",pos.x,pos.y);
     m_spilesNode->addChild(monspile);
     m_posts->addObject(monspile);
     return pos;
+}
+void GameMainHelper::addGuildPost(){
+   
+    if (m_gameStatus == Tag_Guild) {
+    Size winSize = Director::getInstance()->getWinSize();
+        for (int i = 0; i<GUILDCount; i++) {
+            MonsterSpile* monspile = MonsterSpile::create(m_curBgIndex);
+            monspile->setAnchorPoint(Vec2(0,1));
+            
+            
+            
+            Point pos;
+            
+            
+            if (m_posts->count()==0) {
+                float x = m_unitW;
+                pos= Point(x,winSize.height/2);
+                
+            }else{
+                float x = m_unitW*2+m_unitW*3*m_posts->count();
+                
+                pos= Point(x,winSize.height/2);
+                
+            }
+            monspile->setPosition(pos);
+            m_spilesNode->addChild(monspile);
+            m_posts->addObject(monspile);
+        }
+    touchGuildPoints->push_back(Vec2(m_unitW*4,winSize.height*3/4)) ;
+    touchGuildPoints->push_back(Vec2(m_unitW*8.5,winSize.height*3/4))  ;
+        
+    }
+    
+
 }
 
 Point GameMainHelper::getNextPoint(Point perPoint){
     Point touPoint = getTouchPoint(perPoint);
     //获取抛物线参数
     std::vector<float> params = CalculateHelper::getPathParametersXABC(Vec2(0,0), Vec2(touPoint.x-perPoint.x,touPoint.y-perPoint.y));
-    //下一个点的位置
-//    CCLOG("参数＝＝＝＝＝%f＝＝＝%f＝＝＝%f",params[0],params[1],params[2]);
-//    CCLOG("触摸点＝＝＝＝＝%f＝＝＝%f",touPoint.x,touPoint.y);
-//    CCLOG("前一个点＝＝＝＝＝%f＝＝＝%f",perPoint.x,perPoint.y);
     
     float x = getNextPointX(touPoint,perPoint);
     float dy = CalculateHelper::getPathABC(x-perPoint.x, params);
@@ -281,11 +320,30 @@ Point GameMainHelper::getHeroPostPoint(){
     return Point(postPoint.x+postSize.width/2,postPoint.y);
 }
 void GameMainHelper::jumpOver(){
+    
      movingLayer(0);
      managePost();
      m_mainScene->changeScore();
     m_heroPathIndex = 0;
     m_heroPaths.clear();
+    GuildOver();
+    
+}
+void GameMainHelper::GuildOver(){
+    if (m_gameStatus == Tag_Guild) {
+        if (touchGuildPoints->size() == 0) {
+            UserDefault::getInstance()->setBoolForKey(SHOWGUILD, false);
+            
+            m_mainScene->showIsYouturn();
+            m_Layer->setMoveXDistance(0,0);
+            m_heroPaths.clear();
+            m_heroPathIndex = 0;
+            m_gameStatus = Tag_None;
+
+        }
+        m_Layer->initGuildArrow();
+          
+    }
 }
 void GameMainHelper::movingLayer(float speed){
     Size size = Director::getInstance()->getWinSize();
@@ -295,17 +353,26 @@ void GameMainHelper::movingLayer(float speed){
 }
 void GameMainHelper::managePost(){
     int score_ = 0;
+    
     for (long int i=m_posts->count()-1; i>=0; i--) {
         MonsterSpile* curSp =(MonsterSpile*)m_posts->getObjectAtIndex(i);
         Point postPoint = curSp->getPosition();
         if (postPoint.x<m_curHeroPost->getPositionX()) {
             curSp->moveOver();
             m_posts->removeObject(curSp);
-            score_ ++;
+                score_ ++;
         }
         
     }
-    m_curScore = m_curScore+(int)(score_*SCOREADDTION);
+    if (m_gameStatus != Tag_Guild) {
+        m_curScore = m_curScore+(int)(score_*SCOREADDTION);
+        if (score_ >=2&&score_<=4) {
+            m_mainScene->showGood();
+        }else if(score_ >4){
+            m_mainScene->showPerfect();
+        }
+    }
+    
     
     initPosts();
 }
@@ -344,7 +411,10 @@ void GameMainHelper::startGame(){
          changePostsSprite();
     }
    
-    setGameStaus(Tag_GameStart);
+    if(m_gameStatus != Tag_Guild){
+        setGameStaus(Tag_GameStart);
+    }
+    
     m_curScore = 0;
     m_mainScene->changeScore();
 
