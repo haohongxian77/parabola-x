@@ -26,6 +26,7 @@ private:
     void initOtherMenu(gameStatus status);
     void initBg();
     void initMenu();
+    void initAC();
     void onEnter();
     void onExit();
     

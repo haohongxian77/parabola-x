@@ -36,11 +36,16 @@ private:
     void initData();
     void inittestSp();
     void initHelper();
+    void startJump(Point touchPoint);
+    
     float moveXDistance;
 public:
+    void initGuildArrow();
     void setMoveXDistance(int distance,float speed);
     void reloadData();
     void startGame(float dx);
+    void touchGuild(cocos2d::Ref *sender);
+    void removeArrow();
 public:
     virtual void onEnter();
     void update(float dt);

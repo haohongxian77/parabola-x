@@ -90,7 +90,7 @@ void HeroFrog::setHeroMoveOver(){
 bool HeroFrog::setHeroFall(){
     if (pathoverStatus == frogFall){
         setHeroStatus(frogFall);
-        GameMainHelper::getInstance()->jumpOver();
+        //GameMainHelper::getInstance()->jumpOver();
         return true;
     }
     return false;

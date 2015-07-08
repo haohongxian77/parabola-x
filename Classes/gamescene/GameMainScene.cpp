@@ -7,7 +7,7 @@
 USING_NS_CC;
 using namespace CocosDenshion;
 #define ParticleSystemXTag 1001
-#define SHOWGUILD "SHOWGUILD"
+#define EffectFront 1002
 GameMainScene::GameMainScene():
 m_gamemainLayer(NULL),
 m_mianMenuLayer(NULL),
@@ -67,11 +67,11 @@ void GameMainScene::initGameUIlayer(){
     m_gameUILayer->setVisible(false);
 }
 void GameMainScene::initGameGuildLayer(){
-    bool guild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
-    if (guild) {
-        GameGuildLayer* guild_ = GameGuildLayer::create();
-        addChild(guild_,GAMEGuildLAYER);
-    }
+//    bool guild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
+//    if (guild) {
+//        GameGuildLayer* guild_ = GameGuildLayer::create();
+//        addChild(guild_,GAMEGuildLAYER);
+//    }
 }
 void GameMainScene::preLoadMusic(){
     if (m_helper->getMusic()) {
@@ -160,6 +160,58 @@ void GameMainScene::changeScore(){
         }
         
     }
+}
+void GameMainScene::showGood(){
+    Size s = Director::getInstance()->getWinSize();
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    spFront->setPosition(s.width/2,s.height/1.25);
+    addChild(spFront);
+    FadeOut * ac = FadeOut::create(2);
+    spFront->setTag(EffectFront);
+    Sequence* seq = Sequence::create(ac,CallFunc::create(CC_CALLBACK_0(GameMainScene::removeSp, this)), NULL);
+    spFront->runAction(seq);
+}
+void GameMainScene::showPerfect(){
+    Size s = Director::getInstance()->getWinSize();
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    spFront->setPosition(s.width/2,s.height/1.25);
+    addChild(spFront);
+    spFront->setTag(EffectFront);
+    FadeOut * ac = FadeOut::create(2);
+    Sequence* seq = Sequence::create(ac,CallFunc::create(CC_CALLBACK_0(GameMainScene::removeSp, this)), NULL);
+    spFront->runAction(seq);
+}
+void GameMainScene::showGuildPerfect(){
+    Size s = Director::getInstance()->getWinSize();
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    spFront->setPosition(s.width/2,s.height/1.25);
+    addChild(spFront);
+    spFront->setTag(EffectFront);
+    FadeOut * ac = FadeOut::create(2);
+     Sequence* seq = Sequence::create(ac,CallFunc::create(CC_CALLBACK_0(GameMainScene::removeSp, this)), NULL);
+    spFront->runAction(seq);
+}
+void GameMainScene::showIsYouturn(){
+    Size s = Director::getInstance()->getWinSize();
+    Sprite*  spFront = Sprite::createWithSpriteFrameName("new_top.png");
+    spFront->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+    spFront->setPosition(s.width/2,s.height/1.25);
+    addChild(spFront);
+    spFront->setTag(EffectFront);
+    FadeOut * ac = FadeOut::create(3);
+    Sequence* seq = Sequence::create(ac,CallFunc::create(CC_CALLBACK_0(GameMainScene::removeSp, this)),CallFunc::create(CC_CALLBACK_0(GameMainScene::showAlertView, this)), NULL);
+    
+    //unscheduleUpdate();
+    m_gameUILayer ->setVisible(false);
+    runAction(seq);
+    spFront->runAction(seq);
+}
+void GameMainScene::removeSp(){
+    Node* node = this->getChildByTag(EffectFront);
+    node->removeFromParentAndCleanup(true);
 }
 
 void GameMainScene::onEnter(){

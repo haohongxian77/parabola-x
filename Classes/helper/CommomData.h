@@ -16,6 +16,7 @@ typedef enum{
     Tag_None,
     Tag_GameStart,
     Tag_GameOver,
+    Tag_Guild,
 }gameStatus;
 class CommomData{
     

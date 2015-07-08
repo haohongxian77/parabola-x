@@ -24,6 +24,7 @@ using namespace cocos2d;
 #define MUSICKEY "MUSICKEY"
 #define SOUNDKEY "SOUNDKEY"
 #define RANKKEY "RANKKEY"
+#define SHOWGUILD "SHOWGUILD"
 
 #define BGMUSIC "sound/01.mp3"
 #define NEWCAREAR "sound/02.wav"
@@ -58,6 +59,7 @@ public:
     
     Point getHeroPostPoint();
     void playSound(std::string soundName);
+    void GuildOver();
 public:
     void gameOver();
     void startGame();
@@ -82,12 +84,15 @@ public:
     GameMainLayer* m_Layer;
     Node* m_spilesNode;
     HeroFrog* m_Hero;
+    
+    std::vector<Point>* touchGuildPoints;
 private:
     void initDate();
     void initGameStartData();
     
     
     Point addPosts(float perPointX);
+    void addGuildPost();
     Point getTouchPoint(Point perPoint);
     float getNextPointX(Point touchPoint,Point perPoint);
     Point getNextPoint(Point perPoint);
@@ -113,6 +118,7 @@ private:
     std::vector<Point> m_heroPaths;
     int m_heroPathIndex = 0;
     int m_playTimes = -1;
+    
     
     
     
