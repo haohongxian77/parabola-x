@@ -32,7 +32,6 @@ public class AdsChinaClient {
 	/** 1104440171 **/
 	private String appId = "1104440171";
 	private InterstitialAd interstitialAd;
-	private boolean isInterstitialAdLoaded;
 
 	public static AdsChinaClient getInstance() {
 		if (null == INSTANCE) {
@@ -95,33 +94,41 @@ public class AdsChinaClient {
 			};
 		});
 		adView.fetchAd(adr);
+
+	}
+
+	/**
+	 * 展示插屏广告
+	 */
+	private void showInterstialAd() {
 		interstitialAd = new InterstitialAd(mActivity, appId,
 				"4010709419016323");
-		interstitialAd.loadAd();
 		interstitialAd.setAdListener(new InterstitialAdListener() {
 			public void onFail() {
 				// 广告出错时的回调
 				Log.e(TAG, "onFail");
-				isInterstitialAdLoaded = false;
 			}
 
 			public void onFail(int errorCode) {
 				// 广告出错时的回调
 				Log.e(TAG, "onFail:" + errorCode);
-				isInterstitialAdLoaded = false;
 			}
 
 			@Override
 			public void onBack() {
 				// 广告关闭时的回调
 				Log.e(TAG, "onBack");
+				interstitialAd.destory();
+				interstitialAd.loadAd();
+				interstitialAd.show();
 			}
 
 			@Override
 			public void onAdReceive() {
 				// 广告数据收到时的回调。在收到广告后可以调用 InterstitialAd.show 方法展示插屏
 				Log.e(TAG, "onAdReceive");
-				isInterstitialAdLoaded = true;
+				interstitialAd.show(mActivity);
+				interstitialAd.destory();
 			}
 
 			public void onExposure() {
@@ -134,7 +141,7 @@ public class AdsChinaClient {
 				Log.e(TAG, "onClicked");
 			}
 		});
-
+		interstitialAd.loadAd();
 	}
 
 	/**
@@ -175,9 +182,7 @@ public class AdsChinaClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				if (isInterstitialAdLoaded) {
-					interstitialAd.show();
-				}
+				showInterstialAd();
 			}
 		});
 	}

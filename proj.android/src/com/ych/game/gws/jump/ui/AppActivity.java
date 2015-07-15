@@ -34,9 +34,8 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import com.facebook.appevents.AppEventsLogger;
-import com.ych.game.gws.jump.ads.AdsChinaClient;
 import com.ych.game.gws.jump.google.AdsClient;
+//import com.ych.game.gws.jump.ads.AdsChinaClient;
 import com.ych.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.ych.game.gws.jump.share.ClientType;
 import com.ych.game.gws.jump.share.ClientType.CurrentType;
@@ -52,7 +51,7 @@ public class AppActivity extends Cocos2dxActivity {
 		ToastClient.getInstance().registerClient(this, MyApp.PACKAGE_NAME);
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
 		AdsClient.getInstance().initWithActivityOnCreate(this);
-		AdsChinaClient.getInstance().initWithActivityOnCreate(this);
+		// AdsChinaClient.getInstance().initWithActivityOnCreate(this);
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		RelativeLayout containerView = new RelativeLayout(this);
@@ -61,7 +60,7 @@ public class AppActivity extends Cocos2dxActivity {
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		adLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		containerView.removeAllViews();
-		containerView.addView(AdsChinaClient.getInstance().getAdView(), adLp);
+		containerView.addView(AdsClient.getInstance().getAdView(), adLp);
 		// getKeyHash();
 	}
 
@@ -98,11 +97,11 @@ public class AppActivity extends Cocos2dxActivity {
 		 * facebook start
 		 */
 		// Logs 'install' and 'app activate' App Events.
-		AppEventsLogger.activateApp(this);
+		// AppEventsLogger.activateApp(this);
 		/**
 		 * facebook end
 		 */
-		AdsClient.getInstance().onResume();
+		// AdsClient.getInstance().onResume();
 	}
 
 	@Override
@@ -113,11 +112,11 @@ public class AppActivity extends Cocos2dxActivity {
 		 * facebook start
 		 */
 		// Logs 'app deactivate' App Event.
-		AppEventsLogger.deactivateApp(this);
+		// AppEventsLogger.deactivateApp(this);
 		/**
 		 * facebook end
 		 */
-		AdsClient.getInstance().onPause();
+		// AdsClient.getInstance().onPause();
 
 	}
 
@@ -135,8 +134,8 @@ public class AppActivity extends Cocos2dxActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		AdsClient.getInstance().onDestroy();
-		AdsChinaClient.getInstance().onDestroy();
+		// AdsClient.getInstance().onDestroy();
+		// AdsChinaClient.getInstance().onDestroy();
 		GwsGooglePlayServiceClient.getInstance().disConnect();
 	}
 }

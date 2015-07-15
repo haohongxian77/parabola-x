@@ -363,7 +363,8 @@ obj/local/armeabi/objs-debug/cocos2dcpp_shared/__/__/Classes/gamelayer/GameMainL
  jni/../../Classes/gamelayer/GameMainLayer.h \
  jni/../../Classes/gamelayer/GameBgLayer.h \
  jni/../../Classes/gamelayer/GameBgBeforeLayer.h \
- jni/../../Classes/gamelayer/GameUIlayer.h jni/platform/HHPlatform.h
+ jni/../../Classes/gamelayer/GameUIlayer.h jni/platform/HHPlatform.h \
+ jni/../../Classes/commonnode/HMenu.h
 
 jni/../../Classes/gamelayer/GameMainLayer.h:
 
@@ -1094,3 +1095,5 @@ jni/../../Classes/gamelayer/GameBgBeforeLayer.h:
 jni/../../Classes/gamelayer/GameUIlayer.h:
 
 jni/platform/HHPlatform.h:
+
+jni/../../Classes/commonnode/HMenu.h:

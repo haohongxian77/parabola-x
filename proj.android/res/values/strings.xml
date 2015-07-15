@@ -7,6 +7,8 @@
     <string name="install_facebook">Please install lastest version facebook first</string>
     <string name="install_wx">Please install the latest version of WeChat</string>
     <string name="open_rank">Please open the rank in settings</string>
+    <string name="permission_not_granted">permission not granted</string>
+    <string name="photo_post">Photo Post</string>
     <!-- facebook start -->
     <string name="facebook_app_id">372222629651523</string>
     <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>

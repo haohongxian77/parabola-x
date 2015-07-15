@@ -366,9 +366,9 @@ void GameMainHelper::managePost(){
     }
     if (m_gameStatus != Tag_Guild) {
         m_curScore = m_curScore+(int)(score_*SCOREADDTION);
-        if (score_ >=2&&score_<=4) {
+        if (score_ >=2&&score_<=3) {
             m_mainScene->showGood();
-        }else if(score_ >4){
+        }else if(score_ >3){
             m_mainScene->showPerfect();
         }
     }
@@ -392,7 +392,7 @@ void GameMainHelper::showFullAd(){
     if (m_playTimes < 4) {
         return;
     }else{
-        randNum = t%(3);
+        randNum = t%(2);
     }
     CCLOG("显示全屏广告-----------------------%d",randNum);
     if (randNum == 1) {

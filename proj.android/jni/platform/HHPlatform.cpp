@@ -165,23 +165,28 @@ void HHPlatform::showFullAD(){
 	JNIEnv *env;
 	CCLOG("显示全屏广告------------------");
 	m_pVM->AttachCurrentThread(&env, NULL);
-	jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
-	jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
-	jmethodID adShow = env->GetMethodID(m_ADChinaClient,
-				    	      	   			         "showInsertAd",
-				    	      	   			            "()V");
+//	jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
+//	jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
+//	jmethodID adShow = env->GetMethodID(m_ADChinaClient,
+//				    	      	   			         "showInsertAd",
+//				    	      	   			            "()V");
+		jmethodID construction_id = env->GetStaticMethodID(m_ADClient, "getInstance", "()Lcom/ych/game/gws/jump/google/AdsClient;");
+		jobject   	   obj = env->CallStaticObjectMethod(m_ADClient, construction_id);
+		jmethodID adShow = env->GetMethodID(m_ADClient,
+					    	      	   			         "showInsertAd",
+					    	      	   			            "()V");
 	env->CallVoidMethod(obj, adShow);
 
 }
 void HHPlatform::showAd(){
-	JNIEnv *env;
-	m_pVM->AttachCurrentThread(&env, NULL);
-		jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
-		jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
-		jmethodID adShow = env->GetMethodID(m_ADChinaClient,
-					    	      	   			         "setAdViewVisibility",
-					    	      	   			            "(I)V");
-		env->CallVoidMethod(obj, adShow,0);
+//	JNIEnv *env;
+//	m_pVM->AttachCurrentThread(&env, NULL);
+//		jmethodID construction_id = env->GetStaticMethodID(m_ADChinaClient, "getInstance", "()Lcom/ych/game/gws/jump/ads/AdsChinaClient;");
+//		jobject   	   obj = env->CallStaticObjectMethod(m_ADChinaClient, construction_id);
+//		jmethodID adShow = env->GetMethodID(m_ADChinaClient,
+//					    	      	   			         "setAdViewVisibility",
+//					    	      	   			            "(I)V");
+//		env->CallVoidMethod(obj, adShow,0);
 
 }
 void HHPlatform::commitScore(int score){

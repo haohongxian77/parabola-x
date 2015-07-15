@@ -15,7 +15,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 
-import com.facebook.appevents.AppEventsLogger;
+import com.facebook.AppEventsLogger;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -69,7 +69,7 @@ public class TransferActivity extends Activity implements
 		SinaClient.getInstance().registerApp(this);
 		TencentClient.getInstance().registerApp(this);
 		WxClient.getInstance().registerApp(this);
-		FaceBookClient.getInstance().registerApp(this);
+		FaceBookClient.getInstance().registerApp(this, savedInstanceState);
 		WXManager.getInstance().registerWxListener(this);
 		switch (ClientType.getInstance().getCurType()) {
 		case SINA:
@@ -120,6 +120,7 @@ public class TransferActivity extends Activity implements
 		 */
 		// Logs 'install' and 'app activate' App Events.
 		AppEventsLogger.activateApp(this);
+		FaceBookClient.getInstance().onResume();
 		/**
 		 * facebook end
 		 */
@@ -137,6 +138,7 @@ public class TransferActivity extends Activity implements
 		 */
 		// Logs 'app deactivate' App Event.
 		AppEventsLogger.deactivateApp(this);
+		FaceBookClient.getInstance().onPause();
 		/**
 		 * facebook end
 		 */
@@ -148,6 +150,7 @@ public class TransferActivity extends Activity implements
 		super.onDestroy();
 
 		WXManager.getInstance().unRegisterWxListener(this);
+		FaceBookClient.getInstance().onDestroy();
 		isTopActivity = true;
 	}
 
