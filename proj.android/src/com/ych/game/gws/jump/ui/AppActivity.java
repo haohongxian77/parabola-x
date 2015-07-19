@@ -34,8 +34,9 @@ import android.view.WindowManager;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
-import com.ych.game.gws.jump.google.AdsClient;
+import com.ych.game.gws.jump.ads.AdsChinaClient;
 //import com.ych.game.gws.jump.ads.AdsChinaClient;
+import com.ych.game.gws.jump.google.AdsClient;
 import com.ych.game.gws.jump.google.GwsGooglePlayServiceClient;
 import com.ych.game.gws.jump.share.ClientType;
 import com.ych.game.gws.jump.share.ClientType.CurrentType;
@@ -43,6 +44,8 @@ import com.ych.game.gws.jump.share.ToastClient;
 import com.ych.game.gws.jump.system.MyApp;
 
 public class AppActivity extends Cocos2dxActivity {
+	private boolean isChina = false;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -50,8 +53,12 @@ public class AppActivity extends Cocos2dxActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		ToastClient.getInstance().registerClient(this, MyApp.PACKAGE_NAME);
 		GwsGooglePlayServiceClient.getInstance().registerApp(this);
-		AdsClient.getInstance().initWithActivityOnCreate(this);
-		// AdsChinaClient.getInstance().initWithActivityOnCreate(this);
+		if (isChina) {
+			AdsChinaClient.getInstance().initWithActivityOnCreate(this);
+
+		} else {
+			AdsClient.getInstance().initWithActivityOnCreate(this);
+		}
 		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		RelativeLayout containerView = new RelativeLayout(this);
@@ -60,7 +67,13 @@ public class AppActivity extends Cocos2dxActivity {
 				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 		adLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 		containerView.removeAllViews();
-		containerView.addView(AdsClient.getInstance().getAdView(), adLp);
+		if (isChina) {
+			containerView.addView(AdsChinaClient.getInstance().getAdView(),
+					adLp);
+		} else {
+			containerView.addView(AdsClient.getInstance().getAdView(), adLp);
+		}
+
 		// getKeyHash();
 	}
 
@@ -134,8 +147,11 @@ public class AppActivity extends Cocos2dxActivity {
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		// AdsClient.getInstance().onDestroy();
-		// AdsChinaClient.getInstance().onDestroy();
+		if (isChina) {
+			AdsChinaClient.getInstance().onDestroy();
+		} else {
+			AdsClient.getInstance().onDestroy();
+		}
 		GwsGooglePlayServiceClient.getInstance().disConnect();
 	}
 }

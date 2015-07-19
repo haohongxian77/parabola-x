@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.ych.game.gws.jump"
-    android:versionCode="3"
+    android:versionCode="4"
     android:versionName="1.0.0" >
 
     <uses-sdk android:minSdkVersion="9" />
@@ -89,7 +89,7 @@
         <!-- qq share end -->
         <!-- wx start -->
         <activity
-            android:name="com.game.gws.jump.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:theme="@android:style/Theme.Black.NoTitleBar" >
         </activity>
@@ -106,7 +106,7 @@
             android:theme="@android:style/Theme.Translucent" />
         <!-- 中间跳转activity -->
         <activity
-            android:name="com.ych.game.gws.jump.ui.TransferActivity"
+            android:name=".ui.TransferActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent"
             android:windowSoftInputMode="adjustResize" >

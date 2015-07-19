@@ -10,7 +10,6 @@ package com.ych.game.gws.jump.ads;
 
 import android.app.Activity;
 import android.util.Log;
-import android.view.View;
 
 import com.qq.e.ads.AdListener;
 import com.qq.e.ads.AdRequest;
@@ -32,6 +31,7 @@ public class AdsChinaClient {
 	/** 1104440171 **/
 	private String appId = "1104440171";
 	private InterstitialAd interstitialAd;
+	private AdRequest adr;
 
 	public static AdsChinaClient getInstance() {
 		if (null == INSTANCE) {
@@ -51,9 +51,8 @@ public class AdsChinaClient {
 
 		// TODO Auto-generated method stub
 		adView = new AdView(mActivity, AdSize.BANNER, appId, "9080205459412342");
-		adView.setVisibility(View.INVISIBLE);
 		// 广告请求数据，可以设置广告轮播时间，默认为30s
-		AdRequest adr = new AdRequest();
+		adr = new AdRequest();
 		// 设置广告刷新时间，为30~120之间的数字，单位为s,0标识不自动刷新
 		adr.setRefresh(30);
 		// 在banner广告上展示关闭按钮
@@ -93,8 +92,6 @@ public class AdsChinaClient {
 				Log.e(TAG, "onAdClicked");
 			};
 		});
-		adView.fetchAd(adr);
-
 	}
 
 	/**
@@ -154,20 +151,7 @@ public class AdsChinaClient {
 
 			@Override
 			public void run() {
-				// TODO Auto-generated method stub
-				if (visibility == 0) {
-					if (null != adView) {
-						adView.setVisibility(View.VISIBLE);
-						adView.invalidate();
-						adView.getParent().requestLayout();
-					}
-
-				} else {
-					if (null != adView) {
-						adView.setVisibility(View.INVISIBLE);
-					}
-
-				}
+				adView.fetchAd(adr);
 			}
 		});
 

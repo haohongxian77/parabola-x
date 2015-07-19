@@ -85,6 +85,11 @@ public class ShareUtil {
 			// 判断文件是否存在，不存在则创建
 			if (!shotFile.exists()) {
 				shotFile.createNewFile();
+			} else {
+				if (curType == ScreenShotType.GAME_SCREEN_SHOT) {
+					return true;
+				}
+
 			}
 			FileOutputStream fos = null;
 			fos = new FileOutputStream(shotFile);

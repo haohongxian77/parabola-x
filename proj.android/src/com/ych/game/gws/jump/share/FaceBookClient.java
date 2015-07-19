@@ -77,7 +77,7 @@ public class FaceBookClient {
 		public void onComplete(FacebookDialog.PendingCall pendingCall,
 				Bundle data) {
 			Log.d("HelloFacebook", "Success!");
-			ToastClient.getInstance().showToastShort(R.string.share_success);
+			// ToastClient.getInstance().showToastShort(R.string.share_success);
 		}
 	};
 
@@ -247,15 +247,19 @@ public class FaceBookClient {
 			public void run() {
 				// TODO Auto-generated method stub
 				Bitmap image;
+				FacebookDialog shareDialog;
 				if (curStatus == -1) {
 					image = BitmapFactory.decodeResource(
 							mActivity.getResources(), R.drawable.icon);
+					// ShareUtil.saveScreenShot(ScreenShotType.GAME_SCREEN_SHOT,
+					// image);
+					shareDialog = createShareDialogBuilderForLink().build();
 				} else {
 					image = BitmapFactory.decodeFile(curFilePath);
+					shareDialog = createShareDialogBuilderForPhoto(image)
+							.build();
 				}
 				if (canPresentShareDialogWithPhotos) {
-					FacebookDialog shareDialog = createShareDialogBuilderForPhoto(
-							image).build();
 					uiHelper.trackPendingDialogCall(shareDialog.present());
 				} else if (hasPublishPermission()) {
 					Request request = Request.newUploadPhotoRequest(
@@ -319,6 +323,18 @@ public class FaceBookClient {
 	private FacebookDialog.PhotoShareDialogBuilder createShareDialogBuilderForPhoto(
 			Bitmap... photos) {
 		return new FacebookDialog.PhotoShareDialogBuilder(mActivity)
-				.addPhotos(Arrays.asList(photos));
+				.setApplicationName("NinjaHopFrog").addPhotos(
+						Arrays.asList(photos));
+	}
+
+	private FacebookDialog.ShareDialogBuilder createShareDialogBuilderForLink() {
+		return new FacebookDialog.ShareDialogBuilder(mActivity)
+				.setLink(
+						"https://play.google.com/store/apps/details?id=com.ych.game.gws.jump")
+				.setApplicationName("NinjaHopFrog")
+				.setName(mActivity.getString(R.string.app_name))
+				.setCaption(mActivity.getString(R.string.challenge_me))
+				.setPicture(
+						"http://chuantu.biz/t2/10/1437234872x-1566638214.png");
 	}
 }

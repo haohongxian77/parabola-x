@@ -22,6 +22,7 @@ import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
 import com.tencent.mm.sdk.modelmsg.SendMessageToWX.Resp;
 import com.tencent.mm.sdk.modelmsg.WXImageObject;
 import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -75,52 +76,93 @@ public class WxClient {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				String content = mActivity.getString(R.string.challenge_me);
+				WXWebpageObject webpage = new WXWebpageObject();
+				webpage.webpageUrl = mActivity.getString(R.string.app_online);
 				if (!iwxapi.isWXAppInstalled() || !iwxapi.isWXAppSupportAPI()) {
 					ToastClient.getInstance().showToastShort(
 							R.string.install_wx);
 					TransferActivity.closeAct();
 					return;
 				}
+				WXMediaMessage msg;
 				Bitmap bitmap;
 				if (status == -1) {
+					msg = new WXMediaMessage(webpage);
+					msg.title = mActivity.getString(R.string.app_name);
+					msg.description = mActivity
+							.getString(R.string.challenge_me);
 					bitmap = BitmapFactory.decodeResource(
 							mActivity.getResources(), R.drawable.icon);
+					msg.setThumbImage(bitmap);
 				} else {
+					msg = new WXMediaMessage();
 					bitmap = BitmapFactory.decodeFile(filePath);
-				}
-				boolean flag = ShareUtil.saveScreenShot(
-						status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-								: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
-				if (!flag) {
-					ToastClient.getInstance().showToastShort(
-							R.string.share_sdcard_error);
-					return;
-				}
-				String imgAbsPath = ShareUtil
-						.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
-								: ScreenShotType.SCORE_SCREEN_SHOT);
-				WXImageObject imgObj = new WXImageObject();
-				imgObj.setImagePath(imgAbsPath);
+					boolean flag = ShareUtil.saveScreenShot(
+							status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+									: ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
+					if (!flag) {
+						ToastClient.getInstance().showToastShort(
+								R.string.share_sdcard_error);
+						return;
+					}
 
-				WXMediaMessage msg = new WXMediaMessage();
-				msg.mediaObject = imgObj;
-				msg.description = content;
+					String imgAbsPath = ShareUtil
+							.getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+									: ScreenShotType.SCORE_SCREEN_SHOT);
+					WXImageObject imgObj = new WXImageObject();
+					imgObj.setImagePath(imgAbsPath);
 
-				Bitmap bmp = BitmapFactory.decodeFile(imgAbsPath);
-				Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
-						THUMB_SIZE, true);
-				bmp.recycle();
-				msg.thumbData = bmpToByteArray(thumbBmp, true);
+					msg.mediaObject = imgObj;
+
+					Bitmap bmp = BitmapFactory.decodeFile(imgAbsPath);
+					Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp,
+							THUMB_SIZE, THUMB_SIZE, true);
+					bmp.recycle();
+					msg.thumbData = bmpToByteArray(thumbBmp, true);
+				}
 
 				SendMessageToWX.Req req = new SendMessageToWX.Req();
-				req.transaction = APP_TRANSATION;
+				req.transaction = String.valueOf(System.currentTimeMillis());
 				req.message = msg;
-				req.scene = SendMessageToWX.Req.WXSceneTimeline;
+				/** 0:分享到微信好友，1：分享到微信朋友圈 **/
+				int sceneFlag = 1;
+				req.scene = sceneFlag == 0 ? SendMessageToWX.Req.WXSceneSession
+						: SendMessageToWX.Req.WXSceneTimeline;
 				if (null == iwxapi) {
 					return;
 				}
 				iwxapi.sendReq(req);
+				// boolean flag = ShareUtil.saveScreenShot(
+				// status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+				// : ScreenShotType.SCORE_SCREEN_SHOT, bitmap);
+				// if (!flag) {
+				// ToastClient.getInstance().showToastShort(
+				// R.string.share_sdcard_error);
+				// return;
+				// }
+				// String imgAbsPath = ShareUtil
+				// .getAbsPath(status == -1 ? ScreenShotType.GAME_SCREEN_SHOT
+				// : ScreenShotType.SCORE_SCREEN_SHOT);
+				// WXImageObject imgObj = new WXImageObject();
+				// imgObj.setImagePath(imgAbsPath);
+				//
+				// WXMediaMessage msg = new WXMediaMessage();
+				// msg.mediaObject = imgObj;
+				//
+				// Bitmap bmp = BitmapFactory.decodeFile(imgAbsPath);
+				// Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE,
+				// THUMB_SIZE, true);
+				// bmp.recycle();
+				// msg.thumbData = bmpToByteArray(thumbBmp, true);
+
+				// SendMessageToWX.Req req = new SendMessageToWX.Req();
+				// req.transaction = APP_TRANSATION;
+				// req.message = msg;
+				// req.scene = SendMessageToWX.Req.WXSceneTimeline;
+				// if (null == iwxapi) {
+				// return;
+				// }
+				// iwxapi.sendReq(req);
 			}
 		});
 

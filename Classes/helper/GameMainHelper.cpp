@@ -13,6 +13,9 @@
 #include <stdlib.h>
 #include <time.h>
 #include "audio/include/SimpleAudioEngine.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "platform/HHPlatform.h"
+#endif
 using namespace CocosDenshion;
 #define minHei 3
 #define maxHei 5
@@ -79,7 +82,7 @@ void GameMainHelper::initDate(){
     m_HighstScore = UserDefault::getInstance()->getIntegerForKey(Highest);
     m_music = UserDefault::getInstance()->getBoolForKey(MUSICKEY, true);
     m_sound = UserDefault::getInstance()->getBoolForKey(SOUNDKEY, true);
-    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, true);
+    m_isGoogle = UserDefault::getInstance()->getBoolForKey(RANKKEY, !isChina);
     bool isGuild = UserDefault::getInstance()->getBoolForKey(SHOWGUILD, true);
     if (isGuild) {
         m_gameStatus = Tag_Guild;

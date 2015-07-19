@@ -30,6 +30,7 @@ JNIEXPORT void JNICALL Java_com_game_korea_tstore_HHPayClientActivity_OnPurchase
 
 using namespace cocos2d;
 using  std::set;
+static bool isChina = false;
 class HHIAPServiceDelegate {
 public:
 	HHIAPServiceDelegate() {}

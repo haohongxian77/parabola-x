@@ -54,8 +54,6 @@ public class AdsClient {
 		adView = new AdView(mActivity);
 		adView.setAdUnitId(AD_BANNER_00);
 		adView.setAdSize(AdSize.FULL_BANNER);
-
-		adView.loadAd(new AdRequest.Builder().build());
 		adView.setAdListener(new AdListener() {
 			@Override
 			public void onAdLoaded() {
@@ -93,6 +91,18 @@ public class AdsClient {
 				interstitial.loadAd(new AdRequest.Builder().build());
 			}
 		});
+	}
+
+	public void setAdViewVisibility(final int visibility) {
+		mActivity.runOnUiThread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				adView.loadAd(new AdRequest.Builder().build());
+			}
+		});
+
 	}
 
 	/**

@@ -17,6 +17,7 @@ import android.text.TextUtils;
 
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
+import com.sina.weibo.sdk.api.WebpageObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 import com.sina.weibo.sdk.api.share.BaseResponse;
 import com.sina.weibo.sdk.api.share.IWeiboHandler.Response;
@@ -29,6 +30,7 @@ import com.sina.weibo.sdk.auth.WeiboAuthListener;
 import com.sina.weibo.sdk.auth.sso.SsoHandler;
 import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.exception.WeiboException;
+import com.sina.weibo.sdk.utils.Utility;
 import com.ych.game.gws.jump.R;
 import com.ych.game.gws.jump.share.ClientType.CurrentType;
 import com.ych.game.gws.jump.share.ShareUtil.ScreenShotType;
@@ -84,6 +86,7 @@ public class SinaClient {
 	private TextObject getTextObj(String shareText) {
 		TextObject textObject = new TextObject();
 		textObject.text = shareText;
+		textObject.actionUrl = mActivity.getString(R.string.app_online);
 		return textObject;
 	}
 
@@ -97,6 +100,20 @@ public class SinaClient {
 		ImageObject imageObject = new ImageObject();
 		imageObject.setImageObject(BitmapFactory.decodeFile(absPath));
 		return imageObject;
+	}
+
+	private WebpageObject getWebpageObj() {
+		WebpageObject mediaObject = new WebpageObject();
+		mediaObject.identify = Utility.generateGUID();
+		mediaObject.title = mActivity.getString(R.string.app_name);
+		mediaObject.description = mActivity.getString(R.string.challenge_me);
+
+		// 设置 Bitmap 类型的图片到视频对象里
+		mediaObject.setThumbImage(BitmapFactory.decodeResource(
+				mActivity.getResources(), R.drawable.icon));
+		mediaObject.actionUrl = mActivity.getString(R.string.app_online);
+		mediaObject.defaultText = mActivity.getString(R.string.challenge_me);
+		return mediaObject;
 	}
 
 	// /**
@@ -162,6 +179,7 @@ public class SinaClient {
 		if (!TextUtils.isEmpty(imgAbsPath)) {
 			weiboMessage.imageObject = getImgObj(imgAbsPath);
 		}
+		weiboMessage.mediaObject = getWebpageObj();
 		// 2. 初始化从第三方到微博的消息请求
 		SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
 		// 用transaction唯一标识一个请求

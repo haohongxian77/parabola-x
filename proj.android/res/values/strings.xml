@@ -9,6 +9,8 @@
     <string name="open_rank">Please open the rank in settings</string>
     <string name="permission_not_granted">permission not granted</string>
     <string name="photo_post">Photo Post</string>
+    <string name="app_online">https://play.google.com/store/apps/details?id=com.ych.game.gws.jump</string>
+    <string name="app_icon_online">http://chuantu.biz/t2/10/1437234872x-1566638214.png</string>
     <!-- facebook start -->
     <string name="facebook_app_id">372222629651523</string>
     <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>

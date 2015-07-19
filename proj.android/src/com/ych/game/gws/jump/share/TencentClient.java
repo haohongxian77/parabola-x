@@ -33,7 +33,6 @@ public class TencentClient {
 	public static TencentClient INSTANCE;
 	private final String APP_ID = "1104440171";
 	private final String APP_KEY = "xVJqmHS1g1orgU8g";
-	private final String APP_NAME = "完美抛物线";
 	private Activity mActivity;
 	private Tencent mTencent;
 
@@ -91,7 +90,10 @@ public class TencentClient {
 						QQShare.SHARE_TO_QQ_TYPE_IMAGE);
 				params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL,
 						imgAbsPath);
-				params.putString(QQShare.SHARE_TO_QQ_APP_NAME, APP_NAME);
+				params.putString(QQShare.SHARE_TO_QQ_TARGET_URL,
+						mActivity.getString(R.string.app_online));
+				params.putString(QQShare.SHARE_TO_QQ_APP_NAME,
+						mActivity.getString(R.string.app_name));
 				params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,
 						QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
 				mTencent.shareToQQ(mActivity, params, new IUiListener() {

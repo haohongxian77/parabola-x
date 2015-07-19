@@ -11,6 +11,7 @@
     <string name="open_rank">请在设置中打开排行榜</string>
     <string name="permission_not_granted">请授予权限</string>
     <string name="photo_post">图片上传</string>
+    <string name="app_online">http://android.myapp.com/myapp/detail.htm?apkName=com.ych.game.gws.jump</string>
     <!-- facebook start -->
     <string name="facebook_app_id">372222629651523</string>
     <string name="facebook_app_secret">c4677c79565e81c889c6cbc88d22670d</string>
