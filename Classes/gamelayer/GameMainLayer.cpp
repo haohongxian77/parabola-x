@@ -130,7 +130,10 @@ void GameMainLayer::removeArrow(){
 
 }
 void GameMainLayer::touchGuild(cocos2d::Ref *sender){
-    Node* node = (Node*)sender;
+    HMenu* node = (HMenu*)sender;
+    if(m_hero->getHeroStatus() != frogStatic){
+    	return;
+    }
     startJump(node->getPosition());
     std::vector<Point>* touchPoint  = GameMainHelper::getInstance()->touchGuildPoints;
     GameMainScene* scene = (GameMainScene*)this->getParent();
